@@ -36,3 +36,8 @@ project(LeonardOS LANGUAGES ASM)
     set_target_properties(bootloader PROPERTIES
                             LINK_FLAGS "-nostdlib -T${LINKER_SCRIPT}")
 
+    # Add a custom target to create the binary image
+    add_custom_target(create_image ALL
+        COMMAND ${CMAKE_OBJCOPY} -O binary $<TARGET_FILE:bootloader> ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/bootloader.img
+        DEPENDS bootloader
+        COMMENT "Converting ELF to binary image")
