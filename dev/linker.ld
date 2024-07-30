@@ -8,7 +8,7 @@ SECTIONS
     /* Place all the code sections into the .text section */
     .text :
     {
-        *(.text*)
+        *(.text*)              /* Include all .text sections (including main) */
     }
 
     .rodata :
