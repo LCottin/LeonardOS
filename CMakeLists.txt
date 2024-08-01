@@ -18,41 +18,13 @@ set(CMAKE_C_FLAGS   "-target aarch64-none-elf -ffreestanding -nostdlib")
 
 # Output directory for binaries
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
-set(EXECUTABLE_NAME "LeonardOS")
+set(KERNEL_NAME "LeonardOS")
 
 # Project name and version
-project(LeonardOS LANGUAGES ASM C)
+project(${KERNEL_NAME} LANGUAGES ASM C)
 
     # Define directories
-    set(DEV_DIR ${CMAKE_SOURCE_DIR}/dev)
+    set(CORE_DIR ${CMAKE_SOURCE_DIR}/dev/core)
 
-    # Linker script file path
-    set(LINKER_SCRIPT ${DEV_DIR}/linker.ld)
-
-    # Specify the source file
-    set(SOURCES
-        ${DEV_DIR}/bootloader/src/boot.s
-        ${DEV_DIR}/kernelPrint/src/kernelPrint.c
-        ${DEV_DIR}/UART/src/UART.c
-        ${DEV_DIR}/main.c)
-
-    # Specify the public header file
-    set(HEADERS
-        ${DEV_DIR}/kernelPrint/include
-        ${DEV_DIR}/UART/include)
-
-    # Add an executable target
-    add_executable(${EXECUTABLE_NAME} ${SOURCES})
-
-    # Link header file
-    target_include_directories(${EXECUTABLE_NAME} PRIVATE ${HEADERS})
-
-    # Set custom assembler and linker flags
-    set_target_properties(${EXECUTABLE_NAME} PROPERTIES
-                            LINK_FLAGS "-T${LINKER_SCRIPT}")
-
-    # Add a custom target to create the binary image
-    add_custom_target(elf_to_bin ALL
-        COMMAND ${CMAKE_OBJCOPY} -O binary $<TARGET_FILE:${EXECUTABLE_NAME}> ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${EXECUTABLE_NAME}.img
-        DEPENDS ${EXECUTABLE_NAME}
-        COMMENT "Converting ELF to binary image")
+    # Call subdirectories cmake
+    add_subdirectory(${CORE_DIR})
