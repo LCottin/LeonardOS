@@ -1,23 +1,40 @@
+# Ensure objcopy is found and set for binary conversion
+find_program(CMAKE_OBJCOPY aarch64-none-elf-objcopy REQUIRED)
+
 # Linker script file path
 set(LINKER_SCRIPT ${CORE_DIR}/linker.ld)
 
 # Specify the source file
-set(SOURCES
+set(CORE_SOURCES
     ${CORE_DIR}/bootloader/src/boot.s
     ${CORE_DIR}/kernelPrint/src/kernelPrint.c
     ${CORE_DIR}/UART/src/UART.c
     ${CORE_DIR}/main.c)
 
-# Specify the public header file
-set(HEADERS
+set(CORE_HEADERS
+    ${CORE_DIR}/kernelPrint/include/kernelPrint.h
+    ${CORE_DIR}/UART/include/UART.h)
+
+# Specify the public header directory
+set(CORE_INCLUDE
     ${CORE_DIR}/kernelPrint/include
     ${CORE_DIR}/UART/include)
 
 # Add an executable target
-add_executable(${KERNEL_NAME} ${SOURCES})
+add_executable(${KERNEL_NAME} ${CORE_SOURCES})
 
-# Link header file
-target_include_directories(${KERNEL_NAME} PRIVATE ${HEADERS})
+# Link header files
+foreach(INCLUDE_DIR ${CORE_INCLUDE})
+    target_include_directories(${KERNEL_NAME} PRIVATE ${INCLUDE_DIR})
+endforeach()
+
+# Ensure the executable is built after the library
+add_dependencies(${KERNEL_NAME} ${LIB_COMMON_NAME})
+
+target_sources(${KERNEL_NAME} PRIVATE ${CORE_SOURCES} ${CORE_HEADERS})
+
+# Link the common library
+target_link_libraries(${KERNEL_NAME} -Wl,--whole-archive ${LIB_COMMON_NAME} -Wl,--no-whole-archive -lc)
 
 # Set custom assembler and linker flags
 set_target_properties(${KERNEL_NAME} PROPERTIES

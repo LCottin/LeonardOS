@@ -1,13 +1,5 @@
 #include "kernelPrint.h"
-
-void memcpy(void *dest, const void *src, int size)
-{
-    unsigned char *d       = (unsigned char *)dest;
-    const unsigned char *s = (const unsigned char *)src;
-
-    while(size--)
-        *d++ = *s++;
-}
+#include "memory.h"
 
 void main(void)
 {

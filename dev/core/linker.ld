@@ -53,6 +53,7 @@ SECTIONS
     } > RAM
     . = ALIGN(8);              /* Ensure alignment after .bss section */
 
+    /* Reserve space for the stack */
     .stack :
     {
         _stack_start = .;
