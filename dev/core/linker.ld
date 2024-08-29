@@ -14,7 +14,7 @@ SECTIONS
     . = ORIGIN(RAM);
 
     /* Ensure starting alignment */
-    . = ALIGN(8);
+    . = ALIGN(16);
 
     /* Define stack top (RAM end) */
     _stack_top = ORIGIN(RAM) + LENGTH(RAM);
@@ -25,7 +25,7 @@ SECTIONS
         *(.text*)              /* Include all .text sections (including main) */
         _etext = .;            /* Mark the end of the .text section */
     } > RAM
-    . = ALIGN(8);              /* Ensure alignment after .text section */
+    . = ALIGN(16);              /* Ensure alignment after .text section */
 
     .rodata :
     {
@@ -33,7 +33,7 @@ SECTIONS
         *(.rodata.*)           /* Collect .rodata.* sections */
         _erodata = .;          /* End of rodata section */
     } > RAM
-    . = ALIGN(8);              /* Ensure alignment after .rodata section */
+    . = ALIGN(16);              /* Ensure alignment after .rodata section */
 
     /* Place all the initialized data sections into the .data section */
     .data : AT(_erodata)
@@ -42,7 +42,7 @@ SECTIONS
         *(.data*)              /* Place all .data sections */
         _data_end = .;         /* Set the symbol _data_end to the current location counter */
     } > RAM
-    . = ALIGN(8);              /* Ensure alignment after .data section */
+    . = ALIGN(16);              /* Ensure alignment after .data section */
 
     /* Place all the uninitialized data sections into the .bss section */
     .bss :
@@ -51,7 +51,7 @@ SECTIONS
         *(.bss*)               /* Place all the uninitialized data sections into the .bss section */
         _bss_end = .;          /* Set the symbol _bss_end to the current location counter */
     } > RAM
-    . = ALIGN(8);              /* Ensure alignment after .bss section */
+    . = ALIGN(16);              /* Ensure alignment after .bss section */
 
     /* Reserve space for the stack */
     .stack :
@@ -60,5 +60,5 @@ SECTIONS
         . = . + 0x10000; /* Reserve 64KB for stack */
         _stack_end = .;
     } > RAM
-    . = ALIGN(8);              /* Ensure alignment after .stack section */
+    . = ALIGN(16);              /* Ensure alignment after .stack section */
 }

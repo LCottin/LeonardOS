@@ -1,5 +1,4 @@
 #include "kernelPrint.h"
-#include "memory.h"
 
 void main(void)
 {

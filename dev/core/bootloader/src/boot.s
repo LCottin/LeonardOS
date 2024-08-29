@@ -6,6 +6,7 @@ _start:
     /* This function initializes the stack pointer to the top of the stack. */
     /* The stack is used to store local variables, function parameters, and return addresses. */
     ldr x0, =_stack_top
+    and x0, x0, #0xFFFFFFFFFFFFFFF0  /* Align to 16 bytes */
     mov sp, x0
 
     /* Copy .data section */
@@ -19,8 +20,8 @@ copy_data:
     /* Loop through the .data section and copy each word */
     cmp x2, x3
     bcs done_copy_data
-    ldr x4, [x1], #8
-    str x4, [x2], #8
+    ldr x4, [x1], #16
+    str x4, [x2], #16
     b copy_data
 
 done_copy_data:
@@ -35,7 +36,7 @@ zero_bss:
     /* Loop through the .bss section and zero each word */
     cmp x1, x2
     bge done_zero_bss
-    str x3, [x1], #8
+    str x3, [x1], #16
     b zero_bss
 
 done_zero_bss:
