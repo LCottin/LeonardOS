@@ -4,7 +4,8 @@ ENTRY(_start)
 MEMORY
 {
     /* RAM region with read, write, and execute permissions */
-    RAM (rwx) : ORIGIN = 0x40000000, LENGTH = 256K
+    RAM (rx)  : ORIGIN = 0x40000000, LENGTH = 256K
+    DATA (rw) : ORIGIN = 0x50000000, LENGTH = 256K
 }
 
 /* Define the sections and their placement in memory */
@@ -23,6 +24,7 @@ SECTIONS
     .text :
     {
         *(.text*)              /* Include all .text sections (including main) */
+        *(.text.*)             /* Include all .text sections (including main) */
         _etext = .;            /* Mark the end of the .text section */
     } > RAM
     . = ALIGN(16);              /* Ensure alignment after .text section */
@@ -36,12 +38,12 @@ SECTIONS
     . = ALIGN(16);              /* Ensure alignment after .rodata section */
 
     /* Place all the initialized data sections into the .data section */
-    .data : AT(_erodata)
+    .data :
     {
         _data_start = .;       /* Set the symbol _data_start to the current location counter */
         *(.data*)              /* Place all .data sections */
         _data_end = .;         /* Set the symbol _data_end to the current location counter */
-    } > RAM
+    } > DATA
     . = ALIGN(16);              /* Ensure alignment after .data section */
 
     /* Place all the uninitialized data sections into the .bss section */
@@ -50,7 +52,7 @@ SECTIONS
         _bss_start = .;        /* Set the symbol _bss_start to the current location counter */
         *(.bss*)               /* Place all the uninitialized data sections into the .bss section */
         _bss_end = .;          /* Set the symbol _bss_end to the current location counter */
-    } > RAM
+    } > DATA
     . = ALIGN(16);              /* Ensure alignment after .bss section */
 
     /* Reserve space for the stack */
@@ -59,6 +61,6 @@ SECTIONS
         _stack_start = .;
         . = . + 0x10000; /* Reserve 64KB for stack */
         _stack_end = .;
-    } > RAM
+    } > DATA
     . = ALIGN(16);              /* Ensure alignment after .stack section */
 }
