@@ -10,8 +10,15 @@ set(CMAKE_ASM_COMPILER clang)
 set(CMAKE_C_COMPILER   clang)
 
 # Specify the flags for Clang
-set(CMAKE_ASM_FLAGS "-target aarch64-none-elf -march=armv8-a")
-set(CMAKE_C_FLAGS   "-target aarch64-none-elf -std=c17 -ffreestanding -nostdlib")
+set(CMAKE_ASM_FLAGS "-target aarch64-none-elf -march=armv8-a -mtune=cortex-a53")
+set(CMAKE_C_FLAGS   "-target aarch64-none-elf -march=armv8-a -mtune=cortex-a53 -std=c17 -ffreestanding -nostdlib")
+
+# Specify the linker
+set(CMAKE_LINKER aarch64-none-elf-ld)
+
+# Use the appropriate archiver and ranlib for ARM64
+set(CMAKE_AR aarch64-none-elf-ar)
+set(CMAKE_RANLIB aarch64-none-elf-ranlib)
 
 # Output directory for binaries
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)

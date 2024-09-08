@@ -1,16 +1,5 @@
 # LeonardOS
 
-## Build the OS
-
-    mkdir build
-    cd build
-    cmake ..
-    make
-
-## Run the OS using QEMU
-
-qemu-system-aarch64 -M virt -cpu cortex-a53 -nographic -kernel bin/LeonardOS -serial mon:stdio
-
 ## License
 
 This repository is under the [MIT License](https://opensource.org/licenses/MIT).
