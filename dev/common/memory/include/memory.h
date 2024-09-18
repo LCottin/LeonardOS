@@ -1,6 +1,8 @@
 #ifndef __MEMORY_H__
 #define __MEMORY_H__
 
+#include "types.h"
+
 /**
  * @brief Copies 'size' bytes from the memory area pointed to by 'src' to the memory area pointed to by 'dest'.
  *
@@ -13,7 +15,7 @@
  *
  * @return Pointer to the destination memory area.
  */
-extern void *memcpy(void *dest, const void *src, const int size);
+extern ptr_t memcpy(ptr_t dest, cptr_t src, const size_t size);
 
 /**
  * @brief Fills the memory block pointed to by 'dest' with the specified 'value'.
@@ -28,6 +30,6 @@ extern void *memcpy(void *dest, const void *src, const int size);
  *
  * @return Pointer to the destination memory area.
  */
-extern void *memset(void *dest, const int value, const int size);
+extern ptr_t memset(ptr_t dest, const int32_t value, const size_t size);
 
 #endif /* __MEMORY_H__ */
