@@ -1,5 +1,6 @@
 #include "kernelPrint.h"
 #include "string.h"
+#include "stdlib.h"
 
 void main(void)
 {
