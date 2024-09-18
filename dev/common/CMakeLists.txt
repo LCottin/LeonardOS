@@ -1,10 +1,12 @@
 # Specify the source file
 set(COMMON_SOURCES
-    ${COMMON_DIR}/memory/src/memory.c)
+    ${COMMON_DIR}/memory/src/memory.c
+    ${COMMON_DIR}/string/src/string.c)
 
 # Specify the public header file
 set(COMMON_DIR
-    ${COMMON_DIR}/memory/include/)
+    ${COMMON_DIR}/memory/include/
+    ${COMMON_DIR}/string/include/)
 
 # Add a library target
 add_library(${LIB_COMMON_NAME} STATIC ${COMMON_SOURCES})
