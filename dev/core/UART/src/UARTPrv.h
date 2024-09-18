@@ -1,5 +1,5 @@
-#ifndef __UARTPRV_H__
-#define __UARTPRV_H__
+#ifndef __UART_PRV_H__
+#define __UART_PRV_H__
 
 #define QEMU_UART_ADDR 0x09000000
 

@@ -1,7 +1,7 @@
 #include "UARTPrv.h"
 #include "UART.h"
 
-void UARTSendByte(const char c)
+void UARTSendByte(const char_t c)
 {
-    *((volatile unsigned int *)QEMU_UART_ADDR) = c;
+    *((volatile uint32_t *)QEMU_UART_ADDR) = c;
 }

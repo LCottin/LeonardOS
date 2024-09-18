@@ -1,6 +1,8 @@
 #ifndef __UART_H__
 #define __UART_H__
 
+#include "types.h"
+
 /**
  * @brief This function sends a single character to the UART.
  *
@@ -8,6 +10,6 @@
  *
  * @return None.
  */
-extern void UARTSendByte(const char c);
+extern void UARTSendByte(const char_t c);
 
 #endif /* __UART_H__ */

@@ -1,6 +1,8 @@
 #ifndef __STRING_H__
 #define __STRING_H__
 
+#include "types.h"
+
 /**
  * @brief Converts an integer to a string in a specified base.
  *
@@ -14,6 +16,6 @@
  *
  * @return A pointer to the character array 'string' containing the converted string.
  */
-extern char *itoa(const int num, char *str, const int base);
+extern int8_t *itoa(const int32_t num, int8_t *str, const int32_t base);
 
 #endif

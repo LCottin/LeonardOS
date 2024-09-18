@@ -1,10 +1,10 @@
 #include "memory.h"
 
-void *memcpy(void *dest, const void *src, const int size)
+ptr_t memcpy(ptr_t dest, cptr_t src, const size_t size)
 {
-    unsigned char *d       = (unsigned char *)dest;
-    const unsigned char *s = (const unsigned char *)src;
-    int sizeToCopy         = size;
+    uint8_t *d        = (uint8_t *)dest;
+    const uint8_t *s  = (const uint8_t *)src;
+    size_t sizeToCopy = size;
 
     while(sizeToCopy--)
     {
@@ -14,14 +14,14 @@ void *memcpy(void *dest, const void *src, const int size)
     return dest;
 }
 
-void *memset(void *dest, const int value, const int size)
+ptr_t memset(ptr_t dest, const int32_t value, const size_t size)
 {
-    unsigned char *d = (unsigned char *)dest;
-    int sizeToFill   = size;
+    uint8_t *d       = (uint8_t *)dest;
+    size_t sizeToFill = size;
 
     while(sizeToFill--)
     {
-        *d++ = (unsigned char)value;
+        *d++ = (uint8_t)value;
     }
 
     return dest;
