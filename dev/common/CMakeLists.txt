@@ -6,7 +6,8 @@ set(COMMON_SOURCES
 # Specify the public header file
 set(COMMON_DIR
     ${COMMON_DIR}/memory/include/
-    ${COMMON_DIR}/string/include/)
+    ${COMMON_DIR}/string/include/
+    ${COMMON_DIR}/types/include/)
 
 # Add a library target
 add_library(${LIB_COMMON_NAME} STATIC ${COMMON_SOURCES})
