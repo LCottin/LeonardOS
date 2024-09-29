@@ -9,15 +9,21 @@ set(CORE_SOURCES
     ${CORE_DIR}/bootloader/src/boot.s
     ${CORE_DIR}/kernelPrint/src/kernelPrint.c
     ${CORE_DIR}/UART/src/UART.c
+    ${CORE_DIR}/paging/src/pagingData.c
+    ${CORE_DIR}/paging/src/pagingEnableMMU.c
+    ${CORE_DIR}/paging/src/pagingMapPage.c
+    ${CORE_DIR}/paging/src/pagingMMUConfig.c
     ${CORE_DIR}/main.c)
 
-set(CORE_HEADERS
+    set(CORE_HEADERS
     ${CORE_DIR}/kernelPrint/include/kernelPrint.h
+    ${CORE_DIR}/paging/include/paging.h
     ${CORE_DIR}/UART/include/UART.h)
 
-# Specify the public header directory
-set(CORE_INCLUDE
+    # Specify the public header directory
+    set(CORE_INCLUDE
     ${CORE_DIR}/kernelPrint/include
+    ${CORE_DIR}/paging/include
     ${CORE_DIR}/UART/include)
 
 # Add an executable target

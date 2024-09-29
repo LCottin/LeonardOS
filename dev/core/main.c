@@ -1,9 +1,12 @@
 #include "kernelPrint.h"
 #include "string.h"
 #include "stdlib.h"
+#include "paging.h"
 
 void main(void)
 {
+    pagingMMUConfig();
+    
     const char str[64] = "[MAIN] Hello World!\n";
     kernelPrint(str);
 
