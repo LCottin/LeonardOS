@@ -34,7 +34,7 @@ add_dependencies(${KERNEL_NAME} ${LIB_COMMON_NAME})
 target_sources(${KERNEL_NAME} PRIVATE ${CORE_SOURCES} ${CORE_HEADERS})
 
 # Link the common library
-target_link_libraries(${KERNEL_NAME} -Wl,--whole-archive ${LIB_COMMON_NAME} -Wl,--no-whole-archive -lc)
+target_link_libraries(${KERNEL_NAME} -Wl,--whole-archive ${LIB_COMMON_NAME})
 
 # Set custom assembler and linker flags
 set_target_properties(${KERNEL_NAME} PROPERTIES

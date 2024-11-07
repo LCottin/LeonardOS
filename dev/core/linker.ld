@@ -4,8 +4,9 @@ ENTRY(_start)
 MEMORY
 {
     /* RAM region with read, write, and execute permissions */
-    RAM (rx)  : ORIGIN = 0x40000000, LENGTH = 256K
-    DATA (rw) : ORIGIN = 0x50000000, LENGTH = 256K
+    STACK (rw)  : ORIGIN = 0x40000000, LENGTH = 64K
+    RAM (rx)    : ORIGIN = 0x40020000, LENGTH = 256K
+    DATA (rw)   : ORIGIN = 0x50000000, LENGTH = 256K
 }
 
 /* Define the sections and their placement in memory */
@@ -16,9 +17,6 @@ SECTIONS
 
     /* Ensure starting alignment */
     . = ALIGN(16);
-
-    /* Define stack top (RAM end) */
-    _stack_top = ORIGIN(RAM) + LENGTH(RAM);
 
     /* Place all the code sections into the .text section */
     .text :
@@ -61,6 +59,6 @@ SECTIONS
         _stack_start = .;
         . = . + 0x10000; /* Reserve 64KB for stack */
         _stack_end = .;
-    } > DATA
+    } > STACK
     . = ALIGN(16);              /* Ensure alignment after .stack section */
 }

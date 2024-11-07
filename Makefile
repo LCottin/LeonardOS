@@ -35,4 +35,18 @@ run: build
 		echo "Error: qemu-system-aarch64 not found."; \
 		exit 1; \
 	fi
-	@qemu-system-aarch64 -M virt -cpu cortex-a53 -nographic -kernel $(KERNEL_IMG) -serial mon:stdio
+	@qemu-system-aarch64 -M virt -cpu cortex-a53 -nographic -m 512 -kernel $(KERNEL_IMG) -serial mon:stdio
+
+run_el2: build
+	@if ! command -v qemu-system-aarch64 >/dev/null 2>&1; then \
+		echo "Error: qemu-system-aarch64 not found."; \
+		exit 1; \
+	fi
+	@qemu-system-aarch64 -M virt -cpu cortex-a53 -nographic -m 512 -kernel $(KERNEL_IMG) -serial mon:stdio -machine virtualization=on
+
+run_el3: build
+	@if ! command -v qemu-system-aarch64 >/dev/null 2>&1; then \
+		echo "Error: qemu-system-aarch64 not found."; \
+		exit 1; \
+	fi
+	@qemu-system-aarch64 -M virt -cpu cortex-a53 -nographic -m 512 -kernel $(KERNEL_IMG) -serial mon:stdio -machine virtualization=on -machine secure=on

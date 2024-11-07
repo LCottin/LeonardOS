@@ -5,9 +5,9 @@
 void main(void)
 {
     const char str[64] = "[MAIN] Hello World!\n";
-    kernelPrint(str);
-
     char str_2[64];
+
+    kernelPrint(str);
 
     kernelPrint("Sizeof(int) = ");
     kernelPrint(itoa(sizeof(int), str_2, 10U));
