@@ -36,9 +36,10 @@ target_sources(${KERNEL_NAME} PRIVATE ${CORE_SOURCES} ${CORE_HEADERS})
 # Link the common library
 target_link_libraries(${KERNEL_NAME} -Wl,--whole-archive ${LIB_COMMON_NAME})
 
-# Set custom assembler and linker flags
-set_target_properties(${KERNEL_NAME} PROPERTIES
-                        LINK_FLAGS "-T${LINKER_SCRIPT}")
+# Set custom linker options, including the generation of the .map file
+target_link_options(${KERNEL_NAME} PRIVATE
+                    "-T${LINKER_SCRIPT}"
+                    "-Wl,-Map,${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${KERNEL_NAME}.map")
 
 # Add a custom target to create the binary image
 add_custom_target(elf_to_bin ALL

@@ -3,7 +3,7 @@ BUILD_DIR  = build
 KERNEL_IMG = $(BUILD_DIR)/bin/LeonardOS
 
 # Targets that don't represent real files
-.PHONY: all build clean deep_clean run install
+.PHONY: all build prepare clean deep_clean install debug run_debug run run_el1 run_el2 run_el3
 
 # Install dependencies
 install:
@@ -13,11 +13,11 @@ install:
 all: clean build
 
 # Create the build directory, configure, and build the project
-build: $(BUILD_DIR)/Makefile
+build: prepare
 	@$(MAKE) -C $(BUILD_DIR)
 
 # Configure the project (run CMake if necessary)
-$(BUILD_DIR)/Makefile:
+prepare:
 	@mkdir -p $(BUILD_DIR)
 	@cmake -S . -B $(BUILD_DIR)
 
@@ -29,24 +29,47 @@ clean:
 deep_clean:
 	@rm -rf $(BUILD_DIR)
 
-# Run the OS using QEMU
-run: build
+# Launch GDB to debug the system
+debug:
+	@if ! command -v aarch64-none-elf-gdb >/dev/null 2>&1; then \
+		echo "Error: aarch64-none-elf-gdb not found."; \
+		exit 1; \
+	fi
+	aarch64-none-elf-gdb $(KERNEL_IMG)
+
+# Run the OS using QEMU in debug mode
+run_debug: build
 	@if ! command -v qemu-system-aarch64 >/dev/null 2>&1; then \
 		echo "Error: qemu-system-aarch64 not found."; \
 		exit 1; \
 	fi
-	@qemu-system-aarch64 -M virt -cpu cortex-a53 -nographic -m 512 -kernel $(KERNEL_IMG) -serial mon:stdio
+	@qemu-system-aarch64 -M virt -m 512M -cpu cortex-a53 -nographic -kernel $(KERNEL_IMG) -serial mon:stdio  -s -S -d int &
+
+# Run the OS using QEMU
+run:
+	@make run_el1
+
+run_el1: build
+	@if ! command -v qemu-system-aarch64 >/dev/null 2>&1; then \
+		echo "Error: qemu-system-aarch64 not found."; \
+		exit 1; \
+	fi
+	@qemu-system-aarch64 -M virt -m 512M -cpu cortex-a53 -nographic -kernel $(KERNEL_IMG) -serial mon:stdio &
 
 run_el2: build
 	@if ! command -v qemu-system-aarch64 >/dev/null 2>&1; then \
 		echo "Error: qemu-system-aarch64 not found."; \
 		exit 1; \
 	fi
-	@qemu-system-aarch64 -M virt -cpu cortex-a53 -nographic -m 512 -kernel $(KERNEL_IMG) -serial mon:stdio -machine virtualization=on
+	@qemu-system-aarch64 -M virt -m 512M -cpu cortex-a53 -nographic -kernel $(KERNEL_IMG) -serial mon:stdio -machine virtualization=on &
 
 run_el3: build
 	@if ! command -v qemu-system-aarch64 >/dev/null 2>&1; then \
 		echo "Error: qemu-system-aarch64 not found."; \
 		exit 1; \
 	fi
-	@qemu-system-aarch64 -M virt -cpu cortex-a53 -nographic -m 512 -kernel $(KERNEL_IMG) -serial mon:stdio -machine virtualization=on -machine secure=on
+	@qemu-system-aarch64 -M virt -m 512M -cpu cortex-a53 -nographic -kernel $(KERNEL_IMG) -serial mon:stdio -machine virtualization=on -machine secure=on &
+
+# Kill all QEMU instances
+kill:
+	@pkill -9 qemu

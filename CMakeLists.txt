@@ -19,10 +19,8 @@ ENDIF(CMAKE_HOST_SYSTEM_NAME MATCHES "Linux")
 
 message("-- OS: ${VAR_OS}")
 
-
 # Minimum CMake version required
 cmake_minimum_required(VERSION 3.13)
-
 
 # Set the target architecture
 set(CMAKE_SYSTEM_NAME Generic)
