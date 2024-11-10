@@ -4,63 +4,79 @@ ENTRY(_start)
 MEMORY
 {
     /* RAM region with read, write, and execute permissions */
-    RAM (rx)  : ORIGIN = 0x40000000, LENGTH = 256K
-    DATA (rw) : ORIGIN = 0x50000000, LENGTH = 256K
+    STACK (rw)  : ORIGIN = 0x40000000, LENGTH = 64K
+    RAM (rx)    : ORIGIN = 0x40020000, LENGTH = 256K
+    DATA (rw)   : ORIGIN = 0x50000000, LENGTH = 256K
 }
 
 /* Define the sections and their placement in memory */
 SECTIONS
 {
+    /* Set the starting address of the sections to the start of STACK */
+    . = ORIGIN(STACK);
+
+    /* Ensure starting alignment */
+    . = ALIGN(16);
+
+    /* Place the stack section into the RAM */
+    __stack_size = LENGTH(STACK);             /* Size of stack section */
+    .stack ALIGN(16):
+    {
+        __stack_start = .;                    /* Start of the stack section */
+        . = . + LENGTH(STACK);
+        __stack_end = .;                      /* End of stack section */
+    } > STACK
+
     /* Set the starting address of the sections to the start of RAM */
     . = ORIGIN(RAM);
 
     /* Ensure starting alignment */
     . = ALIGN(16);
 
-    /* Define stack top (RAM end) */
-    _stack_top = ORIGIN(RAM) + LENGTH(RAM);
-
     /* Place all the code sections into the .text section */
-    .text :
+    .text ALIGN(16):
     {
-        *(.text*)              /* Include all .text sections (including main) */
-        *(.text.*)             /* Include all .text sections (including main) */
-        _etext = .;            /* Mark the end of the .text section */
+        __text_start = .;       /* Start of the text section */
+        *(.text*)               /* Include all .text sections */
+        *(.text.*)              /* Include all .text sections */
+        . = ALIGN(16);          /* Ensure alignment after .text section */
+        __text_end = .;         /* End of text section */
     } > RAM
-    . = ALIGN(16);              /* Ensure alignment after .text section */
 
-    .rodata :
+    /* Place all read only section into the .rodata section */
+    .rodata ALIGN(16):
     {
-        *(.rodata*)            /* Collect all read-only data sections */
-        *(.rodata.*)           /* Collect .rodata.* sections */
-        _erodata = .;          /* End of rodata section */
+        __rodata_start = .;     /* Start of rodata section */
+        *(.rodata*)             /* Collect all read-only data sections */
+        *(.rodata.*)            /* Collect all read-only data sections */
+        . = ALIGN(16);          /* Ensure alignment after .rodata section */
+        __rodata_end = .;       /* End of rodata section */
     } > RAM
-    . = ALIGN(16);              /* Ensure alignment after .rodata section */
+
+    /* Set the starting address of the sections to the start of DATA */
+    . = ORIGIN(DATA);
+
+    /* Ensure starting alignment */
+    . = ALIGN(16);
 
     /* Place all the initialized data sections into the .data section */
-    .data :
+    .data ALIGN(16):
     {
-        _data_start = .;       /* Set the symbol _data_start to the current location counter */
-        *(.data*)              /* Place all .data sections */
-        _data_end = .;         /* Set the symbol _data_end to the current location counter */
+        __data_start = .;       /* Start of data section */
+        *(.data*)               /* Place all .data sections */
+        *(.data.*)              /* Place all .data sections */
+        . = ALIGN(16);          /* Ensure alignment after .data section */
+        __data_end = .;         /* End of data section */
     } > DATA
-    . = ALIGN(16);              /* Ensure alignment after .data section */
 
     /* Place all the uninitialized data sections into the .bss section */
-    .bss :
+    .bss ALIGN(16):
     {
-        _bss_start = .;        /* Set the symbol _bss_start to the current location counter */
-        *(.bss*)               /* Place all the uninitialized data sections into the .bss section */
-        _bss_end = .;          /* Set the symbol _bss_end to the current location counter */
+        __bss_start = .;        /* Start of bss section */
+        *(.bss*)                /* Place all .bss sections */
+        *(.bss.*)               /* Place all .bss sections */
+        *(COMMON)               /* Place all .bss sections */
+        . = ALIGN(16);          /* Ensure alignment after .bss section */
+        __bss_end = .;          /* End of bss section */
     } > DATA
-    . = ALIGN(16);              /* Ensure alignment after .bss section */
-
-    /* Reserve space for the stack */
-    .stack :
-    {
-        _stack_start = .;
-        . = . + 0x10000; /* Reserve 64KB for stack */
-        _stack_end = .;
-    } > DATA
-    . = ALIGN(16);              /* Ensure alignment after .stack section */
 }
