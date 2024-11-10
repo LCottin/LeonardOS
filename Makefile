@@ -14,19 +14,24 @@ all: clean build
 
 # Create the build directory, configure, and build the project
 build: prepare
+	@echo "Building project ..."
 	@$(MAKE) -C $(BUILD_DIR)
 
 # Configure the project (run CMake if necessary)
 prepare:
+	@echo "Configuring project ..."
 	@mkdir -p $(BUILD_DIR)
 	@cmake -S . -B $(BUILD_DIR)
 
 # Clean only the compiled objects in the build directory
 clean:
+	@echo "Cleaning binaries ..."
 	@$(MAKE) -C $(BUILD_DIR) clean
+	@rm -rf $(BUILD_DIR)/bin/*
 
 # Completely remove the build directory
 deep_clean:
+	@echo "Removing build directory ..."
 	@rm -rf $(BUILD_DIR)
 
 # Launch GDB to debug the system
@@ -72,4 +77,5 @@ run_el3: build
 
 # Kill all QEMU instances
 kill:
+	@echo "Killing all QEMU instances ..."
 	@pkill -9 qemu
