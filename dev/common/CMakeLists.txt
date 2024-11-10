@@ -2,6 +2,7 @@
 set(COMMON_SOURCES
     ${COMMON_DIR}/memory/src/memory.c
     ${COMMON_DIR}/stdlib/src/stdlib.c
+    ${COMMON_DIR}/memAllocator/src/memAllocator.c
     ${COMMON_DIR}/string/src/string.c)
 
 # Specify the public header file
@@ -9,6 +10,7 @@ set(COMMON_DIR
     ${COMMON_DIR}/memory/include/
     ${COMMON_DIR}/stdlib/include/
     ${COMMON_DIR}/string/include/
+    ${COMMON_DIR}/memAllocator/include/
     ${COMMON_DIR}/types/include/)
 
 # Add a library target

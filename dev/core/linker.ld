@@ -5,6 +5,7 @@ MEMORY
 {
     /* RAM region with read, write, and execute permissions */
     STACK (rw)  : ORIGIN = 0x40000000, LENGTH = 64K
+    HEAP (rw)   : ORIGIN = 0x40010000, LENGTH = 64K
     RAM (rx)    : ORIGIN = 0x40020000, LENGTH = 256K
     DATA (rw)   : ORIGIN = 0x50000000, LENGTH = 256K
 }
@@ -24,8 +25,25 @@ SECTIONS
     {
         __stack_start = .;                    /* Start of the stack section */
         . = . + LENGTH(STACK);
+        . = ALIGN(16);
         __stack_end = .;                      /* End of stack section */
     } > STACK
+
+    /* Set the starting address of the sections to the start of HEAP */
+    . = ORIGIN(HEAP);
+
+    /* Ensure starting alignment */
+    . = ALIGN(16);
+
+    /* Place the heap section into the RAM */
+    __heap_size = LENGTH(HEAP);              /* Size of heap section */
+    .heap ALIGN(16):
+    {
+        __heap_start = .;                    /* Start of the heap section */
+        . = . + LENGTH(HEAP);
+        . = ALIGN(16);
+        __heap_end = .;                      /* End of heap section */
+    } > HEAP
 
     /* Set the starting address of the sections to the start of RAM */
     . = ORIGIN(RAM);

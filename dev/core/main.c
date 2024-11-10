@@ -2,10 +2,14 @@
 #include "string.h"
 #include "stdlib.h"
 #include "memory.h"
+#include "memAllocator.h"
 
 extern unsigned long int __stack_start;
 extern unsigned long int __stack_end;
 extern unsigned long int __stack_size;
+extern unsigned long int __heap_start;
+extern unsigned long int __heap_end;
+extern unsigned long int __heap_size;
 extern unsigned long int __bss_start;
 extern unsigned long int __bss_end;
 extern unsigned long int __data_start;
@@ -17,9 +21,23 @@ extern unsigned long int __rodata_end;
 
 void main(void)
 {
+    initHeap();
+
     const char str[64] = "[MAIN] Hello World!\n";
 
     kernelPrint(str);
+
+    char *ptr_alloc = (char *)memInitAlloc(sizeof(byte_t) * 64, 0);
+    if (ptr_alloc != NULL)
+    {
+        memcpy(ptr_alloc, "[MAIN] Hello World from allocated buffer!\n", 42);
+        kernelPrint(ptr_alloc);
+        memFree(ptr_alloc);
+    }
+    else
+    {
+        kernelPrint("[MAIN] Allocate memory failed\n");
+    }
 
     char str_2[64];
 
@@ -75,6 +93,21 @@ void main(void)
 
     kernelPrint("_stack_size =   0x");
     kernelPrint(itoa((uint64_t)&__stack_size, str_2, 16U));
+    kernelPrint("\n");
+    memset(str_2, 0, sizeof(str_2));
+
+    kernelPrint("_heap_start =   0x");
+    kernelPrint(itoa((uint64_t)&__heap_start, str_2, 16U));
+    kernelPrint("\n");
+    memset(str_2, 0, sizeof(str_2));
+
+    kernelPrint("_heap_end =     0x");
+    kernelPrint(itoa((uint64_t)&__heap_end, str_2, 16U));
+    kernelPrint("\n");
+    memset(str_2, 0, sizeof(str_2));
+
+    kernelPrint("_heap_size =    0x");
+    kernelPrint(itoa((uint64_t)&__heap_size, str_2, 16U));
     kernelPrint("\n");
     memset(str_2, 0, sizeof(str_2));
 

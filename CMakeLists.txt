@@ -31,8 +31,8 @@ set(CMAKE_ASM_COMPILER clang)
 set(CMAKE_C_COMPILER   clang)
 
 # Specify the flags for Clang
-set(CMAKE_ASM_FLAGS "-target aarch64-none-elf -march=armv8-a -mtune=cortex-a53")
-set(CMAKE_C_FLAGS   "-target aarch64-none-elf -march=armv8-a -mtune=cortex-a53 -std=c17 -ffreestanding -nostdlib")
+set(CMAKE_ASM_FLAGS "-target aarch64-none-elf -g -march=armv8-a -mtune=cortex-a53")
+set(CMAKE_C_FLAGS   "-target aarch64-none-elf -g -march=armv8-a -mtune=cortex-a53 -std=c17 -ffreestanding -nostdlib")
 
 IF(CMAKE_HOST_SYSTEM_NAME MATCHES "Linux")
     IF(VAR_OS MATCHES "ubuntu")
