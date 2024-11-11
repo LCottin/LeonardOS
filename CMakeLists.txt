@@ -62,15 +62,16 @@ ENDIF(CMAKE_HOST_SYSTEM_NAME MATCHES "Linux")
 # Output directory for binaries
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 set(KERNEL_NAME     "LeonardOS")
-set(LIB_COMMON_NAME "Common")
+set(LIB_MEMORY_NAME "Memory")
+set(LIB_STRING_NAME "String")
 
 # Project name and version
 project(${KERNEL_NAME} LANGUAGES ASM C)
 
     # Define directories
-    set(CORE_DIR   ${CMAKE_SOURCE_DIR}/dev/core)
-    set(COMMON_DIR ${CMAKE_SOURCE_DIR}/dev/common)
+    set(CORE_DIR ${CMAKE_SOURCE_DIR}/dev/kernel/core)
+    set(LIB_DIR  ${CMAKE_SOURCE_DIR}/dev/kernel/lib)
 
     # Call subdirectories cmake
-    add_subdirectory(${COMMON_DIR})
+    add_subdirectory(${LIB_DIR})
     add_subdirectory(${CORE_DIR})

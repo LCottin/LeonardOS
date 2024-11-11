@@ -29,12 +29,13 @@ foreach(INCLUDE_DIR ${CORE_INCLUDE})
 endforeach()
 
 # Ensure the executable is built after the library
-add_dependencies(${KERNEL_NAME} ${LIB_COMMON_NAME})
+add_dependencies(${KERNEL_NAME} ${LIB_MEMORY_NAME})
+add_dependencies(${KERNEL_NAME} ${LIB_STRING_NAME})
 
 target_sources(${KERNEL_NAME} PRIVATE ${CORE_SOURCES} ${CORE_HEADERS})
 
 # Link the common library
-target_link_libraries(${KERNEL_NAME} -Wl,--whole-archive ${LIB_COMMON_NAME})
+target_link_libraries(${KERNEL_NAME} -Wl,--whole-archive ${LIB_MEMORY_NAME} ${LIB_STRING_NAME})
 
 # Set custom linker options, including the generation of the .map file
 target_link_options(${KERNEL_NAME} PRIVATE
