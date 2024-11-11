@@ -1,5 +1,25 @@
 # LeonardOS
 
+## Overview
+
+This project is a bare-metal operating system developed from scratch, aimed at running on ARM64 architecture and simulated on QEMU. The OS is designed to be lightweight and modular while providing core functionalities such as memory management, process control, and a command-line interface (CLI) for user applications.
+
+## Development goals
+
+### Learn and implement core OS concepts
+
+From kernel design and memory management to process scheduling and file systems.
+
+### Build a functional and scalable OS
+
+The OS should be capable of running user applications and providing a foundational environment for further expansion.
+
+### To get started with building and testing the OS
+
+1. Set up QEMU: Configure QEMU for ARM64 to simulate the OS on an ARM Cortex-A53 core.
+2. Compile the OS using CMake and generate a bootable image.
+3. Load the compiled image into QEMU and run to test core functionalities.
+
 ## License
 
 This repository is under the [MIT License](https://opensource.org/licenses/MIT).
