@@ -1,5 +1,5 @@
-#ifndef __STDLIB_H__
-#define __STDLIB_H__
+#ifndef __STRING_UTILS_H__
+#define __STRING_UTILS_H__
 
 #include "types.h"
 
@@ -16,6 +16,16 @@
  *
  * @return A pointer to the character array 'string' containing the converted string.
  */
-extern int8_t *itoa(const int32_t num, int8_t *str, const int32_t base);
+extern char_t *string_utils_itoa(const int32_t num, char_t *str, const int32_t base);
 
-#endif
+/**
+ * @brief Reverse a string in place.
+ *
+ * @param str A pointer to the string to be reversed.
+ * @param length Size of the string to be reversed.
+ *
+ * @return None.
+ */
+extern void string_utils_reverse(char_t *str, const size_t length);
+
+#endif /* __STRING_UTILS_H__ */

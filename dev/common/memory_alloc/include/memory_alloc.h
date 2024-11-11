@@ -1,5 +1,5 @@
-#ifndef __MEM_ALLOCATOR_H__
-#define __MEM_ALLOCATOR_H__
+#ifndef __MEMORY_ALLOC_H__
+#define __MEMORY_ALLOC_H__
 
 #include "types.h"
 
@@ -12,7 +12,7 @@
  * @param size The size of the memory block to allocate in bytes.
  * @return A pointer to the beginning of the allocated memory block. If the allocation fails, returns a null pointer.
  */
-extern ptr_t memAlloc(const size_t size);
+extern ptr_t memory_alloc(const size_t size);
 
 /**
  * @brief Allocates a block of memory of the specified size and initializes it to the given value.
@@ -24,7 +24,7 @@ extern ptr_t memAlloc(const size_t size);
  * @param value The value to initialize the memory block with.
  * @return A pointer to the beginning of the allocated memory block. If the allocation fails, returns a null pointer.
  */
-extern ptr_t memInitAlloc(const size_t size, const int8_t value);
+extern ptr_t memory_alloc_and_init(const size_t size, const int8_t value);
 
 /**
  * @brief Frees the memory block pointed to by the given pointer.
@@ -35,7 +35,7 @@ extern ptr_t memInitAlloc(const size_t size, const int8_t value);
  * @param ptr A pointer to the beginning of the memory block to free.
  * @return None.
  */
-extern void memFree(ptr_t ptr);
+extern void memory_free(ptr_t ptr);
 
 /**
  * @brief Initializes the heap for memory allocation.
@@ -46,6 +46,6 @@ extern void memFree(ptr_t ptr);
  * @param None.
  * @return None.
  */
-extern void initHeap(void);
+extern void memory_init_heap(void);
 
-#endif
+#endif /* __MEMORY_ALLOC_H__ */

@@ -45,4 +45,4 @@ typedef enum
 #define INT64_MAX  0x7FFFFFFFFFFFFFFFLL
 #define UINT64_MAX 0xFFFFFFFFFFFFFFFFULL
 
-#endif
+#endif /* __TYPES_H__ */

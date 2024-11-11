@@ -1,5 +1,5 @@
-#ifndef __MEMORY_H__
-#define __MEMORY_H__
+#ifndef __MEMORY_OPS_H__
+#define __MEMORY_OPS_H__
 
 #include "types.h"
 
@@ -15,7 +15,7 @@
  *
  * @return Pointer to the destination memory area.
  */
-extern ptr_t memcpy(ptr_t dest, cptr_t src, const size_t size);
+extern ptr_t memory_ops_copy(ptr_t dest, cptr_t src, const size_t size);
 
 /**
  * @brief Fills the memory block pointed to by 'dest' with the specified 'value'.
@@ -30,6 +30,6 @@ extern ptr_t memcpy(ptr_t dest, cptr_t src, const size_t size);
  *
  * @return Pointer to the destination memory area.
  */
-extern ptr_t memset(ptr_t dest, const int32_t value, const size_t size);
+extern ptr_t memory_ops_set(ptr_t dest, const int32_t value, const size_t size);
 
-#endif /* __MEMORY_H__ */
+#endif /* __MEMORY_OPS_H__ */
