@@ -1,7 +1,7 @@
-#include "kernel_print.h"
+#include "serial_print.h"
 #include "UART.h"
 
-void kernel_print_string(const char_t *str)
+void serial_print_string(const char_t *str)
 {
     /* Loop until end of string */
     while (*str)

@@ -1,5 +1,5 @@
-#ifndef __KERNEL_PRINT_H__
-#define __KERNEL_PRINT_H__
+#ifndef __SERIAL_PRINT_H__
+#define __SERIAL_PRINT_H__
 
 #include "types.h"
 
@@ -10,6 +10,6 @@
  *
  * @return None.
  */
-extern void kernel_print_string(const char_t *str);
+extern void serial_print_string(const char_t *str);
 
-#endif /* __KERNEL_PRINT_H__ */
+#endif /* __SERIAL_PRINT_H__ */
