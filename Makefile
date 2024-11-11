@@ -32,7 +32,7 @@ clean:
 # Completely remove the build directory
 deep_clean:
 	@echo "Removing build directory ..."
-	@rm -rf $(BUILD_DIR)
+	@rm -rf $(BUILD_DIR)/*
 
 # Launch GDB to debug the system
 debug:
