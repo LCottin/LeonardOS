@@ -6,18 +6,18 @@ set(LINKER_SCRIPT ${CORE_DIR}/linker.ld)
 
 # Specify the source file
 set(CORE_SOURCES
-    ${CORE_DIR}/bootloader/src/boot.s
-    ${CORE_DIR}/kernelPrint/src/kernelPrint.c
+    ${CORE_DIR}/boot/src/boot.s
+    ${CORE_DIR}/kernel_print/src/kernel_print.c
     ${CORE_DIR}/UART/src/UART.c
     ${CORE_DIR}/main.c)
 
 set(CORE_HEADERS
-    ${CORE_DIR}/kernelPrint/include/kernelPrint.h
+    ${CORE_DIR}/kernel_print/include/kernel_print.h
     ${CORE_DIR}/UART/include/UART.h)
 
 # Specify the public header directory
 set(CORE_INCLUDE
-    ${CORE_DIR}/kernelPrint/include
+    ${CORE_DIR}/kernel_print/include
     ${CORE_DIR}/UART/include)
 
 # Add an executable target

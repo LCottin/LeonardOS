@@ -10,6 +10,6 @@
  *
  * @return None.
  */
-extern void UARTSendByte(const char_t c);
+extern void UART_write_byte(const char_t c);
 
 #endif /* __UART_H__ */

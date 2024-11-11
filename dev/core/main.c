@@ -1,148 +1,148 @@
-#include "kernelPrint.h"
-#include "string.h"
-#include "stdlib.h"
-#include "memory.h"
-#include "memAllocator.h"
+#include "kernel_print.h"
+#include "string_ops.h"
+#include "string_utils.h"
+#include "memory_ops.h"
+#include "memory_alloc.h"
 
-extern unsigned long int __stack_start;
-extern unsigned long int __stack_end;
-extern unsigned long int __stack_size;
-extern unsigned long int __heap_start;
-extern unsigned long int __heap_end;
-extern unsigned long int __heap_size;
-extern unsigned long int __bss_start;
-extern unsigned long int __bss_end;
-extern unsigned long int __data_start;
-extern unsigned long int __data_end;
-extern unsigned long int __text_start;
-extern unsigned long int __text_end;
-extern unsigned long int __rodata_start;
-extern unsigned long int __rodata_end;
+extern addr_t __stack_start;
+extern addr_t __stack_end;
+extern addr_t __stack_size;
+extern addr_t __heap_start;
+extern addr_t __heap_end;
+extern addr_t __heap_size;
+extern addr_t __bss_start;
+extern addr_t __bss_end;
+extern addr_t __data_start;
+extern addr_t __data_end;
+extern addr_t __text_start;
+extern addr_t __text_end;
+extern addr_t __rodata_start;
+extern addr_t __rodata_end;
 
 void main(void)
 {
-    initHeap();
+    memory_init_heap();
 
-    const char str[64] = "[MAIN] Hello World!\n";
+    const char_t str[64] = "[MAIN] Hello World!\n";
 
-    kernelPrint(str);
+    kernel_print_string(str);
 
-    char *ptr_alloc = (char *)memInitAlloc(sizeof(byte_t) * 64, 0);
+    char_t *ptr_alloc = (char_t *)memory_alloc_and_init(sizeof(char_t) * 64, 0);
     if (ptr_alloc != NULL)
     {
-        memcpy(ptr_alloc, "[MAIN] Hello World from allocated buffer!\n", 42);
-        kernelPrint(ptr_alloc);
-        memFree(ptr_alloc);
+        memory_ops_copy(ptr_alloc, "[MAIN] Hello World from allocated buffer!\n", 64);
+        kernel_print_string(ptr_alloc);
+        memory_free(ptr_alloc);
     }
     else
     {
-        kernelPrint("[MAIN] Allocate memory failed\n");
+        kernel_print_string("[MAIN] Allocate memory failed\n");
     }
 
-    char str_2[64];
+    char_t str_2[64];
 
-    kernelPrint("_text_start =   0x");
-    kernelPrint(itoa((uint64_t)&__text_start, str_2, 16U));
-    kernelPrint("\n");
-    memset(str_2, 0, sizeof(str_2));
+    kernel_print_string("_text_start =   0x");
+    kernel_print_string(string_utils_itoa((uint64_t)&__text_start, str_2, 16U));
+    kernel_print_string("\n");
+    memory_ops_set(str_2, 0, sizeof(str_2));
 
-    kernelPrint("_text_end =     0x");
-    kernelPrint(itoa((uint64_t)&__text_end, str_2, 16U));
-    kernelPrint("\n");
-    memset(str_2, 0, sizeof(str_2));
+    kernel_print_string("_text_end =     0x");
+    kernel_print_string(string_utils_itoa((uint64_t)&__text_end, str_2, 16U));
+    kernel_print_string("\n");
+    memory_ops_set(str_2, 0, sizeof(str_2));
 
-    kernelPrint("_rodata_start = 0x");
-    kernelPrint(itoa((uint64_t)&__rodata_start, str_2, 16U));
-    kernelPrint("\n");
-    memset(str_2, 0, sizeof(str_2));
+    kernel_print_string("_rodata_start = 0x");
+    kernel_print_string(string_utils_itoa((uint64_t)&__rodata_start, str_2, 16U));
+    kernel_print_string("\n");
+    memory_ops_set(str_2, 0, sizeof(str_2));
 
-    kernelPrint("_rodata_end =   0x");
-    kernelPrint(itoa((uint64_t)&__rodata_end, str_2, 16U));
-    kernelPrint("\n");
-    memset(str_2, 0, sizeof(str_2));
+    kernel_print_string("_rodata_end =   0x");
+    kernel_print_string(string_utils_itoa((uint64_t)&__rodata_end, str_2, 16U));
+    kernel_print_string("\n");
+    memory_ops_set(str_2, 0, sizeof(str_2));
 
-    kernelPrint("_data_start =   0x");
-    kernelPrint(itoa((uint64_t)&__data_start, str_2, 16U));
-    kernelPrint("\n");
-    memset(str_2, 0, sizeof(str_2));
+    kernel_print_string("_data_start =   0x");
+    kernel_print_string(string_utils_itoa((uint64_t)&__data_start, str_2, 16U));
+    kernel_print_string("\n");
+    memory_ops_set(str_2, 0, sizeof(str_2));
 
-    kernelPrint("_data_end =     0x");
-    kernelPrint(itoa((uint64_t)&__data_end, str_2, 16U));
-    kernelPrint("\n");
-    memset(str_2, 0, sizeof(str_2));
+    kernel_print_string("_data_end =     0x");
+    kernel_print_string(string_utils_itoa((uint64_t)&__data_end, str_2, 16U));
+    kernel_print_string("\n");
+    memory_ops_set(str_2, 0, sizeof(str_2));
 
-    kernelPrint("_bss_start =    0x");
-    kernelPrint(itoa((uint64_t)&__bss_start, str_2, 16U));
-    kernelPrint("\n");
-    memset(str_2, 0, sizeof(str_2));
+    kernel_print_string("_bss_start =    0x");
+    kernel_print_string(string_utils_itoa((uint64_t)&__bss_start, str_2, 16U));
+    kernel_print_string("\n");
+    memory_ops_set(str_2, 0, sizeof(str_2));
 
-    kernelPrint("_bss_end =      0x");
-    kernelPrint(itoa((uint64_t)&__bss_end, str_2, 16U));
-    kernelPrint("\n");
-    memset(str_2, 0, sizeof(str_2));
+    kernel_print_string("_bss_end =      0x");
+    kernel_print_string(string_utils_itoa((uint64_t)&__bss_end, str_2, 16U));
+    kernel_print_string("\n");
+    memory_ops_set(str_2, 0, sizeof(str_2));
 
-    kernelPrint("_stack_start =  0x");
-    kernelPrint(itoa((uint64_t)&__stack_start, str_2, 16U));
-    kernelPrint("\n");
-    memset(str_2, 0, sizeof(str_2));
+    kernel_print_string("_stack_start =  0x");
+    kernel_print_string(string_utils_itoa((uint64_t)&__stack_start, str_2, 16U));
+    kernel_print_string("\n");
+    memory_ops_set(str_2, 0, sizeof(str_2));
 
-    kernelPrint("_stack_end =    0x");
-    kernelPrint(itoa((uint64_t)&__stack_end, str_2, 16U));
-    kernelPrint("\n");
-    memset(str_2, 0, sizeof(str_2));
+    kernel_print_string("_stack_end =    0x");
+    kernel_print_string(string_utils_itoa((uint64_t)&__stack_end, str_2, 16U));
+    kernel_print_string("\n");
+    memory_ops_set(str_2, 0, sizeof(str_2));
 
-    kernelPrint("_stack_size =   0x");
-    kernelPrint(itoa((uint64_t)&__stack_size, str_2, 16U));
-    kernelPrint("\n");
-    memset(str_2, 0, sizeof(str_2));
+    kernel_print_string("_stack_size =   0x");
+    kernel_print_string(string_utils_itoa((uint64_t)&__stack_size, str_2, 16U));
+    kernel_print_string("\n");
+    memory_ops_set(str_2, 0, sizeof(str_2));
 
-    kernelPrint("_heap_start =   0x");
-    kernelPrint(itoa((uint64_t)&__heap_start, str_2, 16U));
-    kernelPrint("\n");
-    memset(str_2, 0, sizeof(str_2));
+    kernel_print_string("_heap_start =   0x");
+    kernel_print_string(string_utils_itoa((uint64_t)&__heap_start, str_2, 16U));
+    kernel_print_string("\n");
+    memory_ops_set(str_2, 0, sizeof(str_2));
 
-    kernelPrint("_heap_end =     0x");
-    kernelPrint(itoa((uint64_t)&__heap_end, str_2, 16U));
-    kernelPrint("\n");
-    memset(str_2, 0, sizeof(str_2));
+    kernel_print_string("_heap_end =     0x");
+    kernel_print_string(string_utils_itoa((uint64_t)&__heap_end, str_2, 16U));
+    kernel_print_string("\n");
+    memory_ops_set(str_2, 0, sizeof(str_2));
 
-    kernelPrint("_heap_size =    0x");
-    kernelPrint(itoa((uint64_t)&__heap_size, str_2, 16U));
-    kernelPrint("\n");
-    memset(str_2, 0, sizeof(str_2));
+    kernel_print_string("_heap_size =    0x");
+    kernel_print_string(string_utils_itoa((uint64_t)&__heap_size, str_2, 16U));
+    kernel_print_string("\n");
+    memory_ops_set(str_2, 0, sizeof(str_2));
 
-    kernelPrint("Sizeof(int) = ");
-    kernelPrint(itoa(sizeof(int), str_2, 10U));
-    kernelPrint("\n");
+    kernel_print_string("Sizeof(int) = ");
+    kernel_print_string(string_utils_itoa(sizeof(int), str_2, 10U));
+    kernel_print_string("\n");
 
-    kernelPrint("Sizeof(short) = ");
-    kernelPrint(itoa(sizeof(short), str_2, 10U));
-    kernelPrint("\n");
+    kernel_print_string("Sizeof(short) = ");
+    kernel_print_string(string_utils_itoa(sizeof(short), str_2, 10U));
+    kernel_print_string("\n");
 
-    kernelPrint("Sizeof(long long) = ");
-    kernelPrint(itoa(sizeof(long long), str_2, 10U));
-    kernelPrint("\n");
+    kernel_print_string("Sizeof(long long) = ");
+    kernel_print_string(string_utils_itoa(sizeof(long long), str_2, 10U));
+    kernel_print_string("\n");
 
-    kernelPrint("Sizeof(long) = ");
-    kernelPrint(itoa(sizeof(long), str_2, 10U));
-    kernelPrint("\n");
+    kernel_print_string("Sizeof(long) = ");
+    kernel_print_string(string_utils_itoa(sizeof(long), str_2, 10U));
+    kernel_print_string("\n");
 
-    kernelPrint("Sizeof(float) = ");
-    kernelPrint(itoa(sizeof(float), str_2, 10U));
-    kernelPrint("\n");
+    kernel_print_string("Sizeof(float) = ");
+    kernel_print_string(string_utils_itoa(sizeof(float), str_2, 10U));
+    kernel_print_string("\n");
 
-    kernelPrint("Sizeof(double) = ");
-    kernelPrint(itoa(sizeof(double), str_2, 10U));
-    kernelPrint("\n");
+    kernel_print_string("Sizeof(double) = ");
+    kernel_print_string(string_utils_itoa(sizeof(double), str_2, 10U));
+    kernel_print_string("\n");
 
-    kernelPrint("Sizeof(void *) = ");
-    kernelPrint(itoa(sizeof(void *), str_2, 10U));
-    kernelPrint("\n");
+    kernel_print_string("Sizeof(void *) = ");
+    kernel_print_string(string_utils_itoa(sizeof(void *), str_2, 10U));
+    kernel_print_string("\n");
 
-    kernelPrint("Sizeof(char) = ");
-    kernelPrint(itoa(sizeof(char), str_2, 10U));
-    kernelPrint("\n");
+    kernel_print_string("Sizeof(char) = ");
+    kernel_print_string(string_utils_itoa(sizeof(char), str_2, 10U));
+    kernel_print_string("\n");
 
-    kernelPrint("[MAIN] Going to infinite loop ... ");
+    kernel_print_string("[MAIN] Going to infinite loop ... ");
     while(1) ;
 }
