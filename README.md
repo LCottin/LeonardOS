@@ -20,6 +20,11 @@ The OS should be capable of running user applications and providing a foundation
 2. Compile the OS using CMake and generate a bootable image.
 3. Load the compiled image into QEMU and run to test core functionalities.
 
+## Coding Standard
+
+To ensure consistency and clarity throughout this development, I aim to follow this coding standard.
+See [Coding standard](coding_standard.md).
+
 ## License
 
 This repository is under the [MIT License](https://opensource.org/licenses/MIT).
