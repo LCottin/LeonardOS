@@ -1,5 +1,5 @@
-#ifndef __SERIAL_PRINT_H__
-#define __SERIAL_PRINT_H__
+#ifndef __SERIAL_H__
+#define __SERIAL_H__
 
 #include "types.h"
 
@@ -12,4 +12,4 @@
  */
 extern void serial_print_string(const char_t *str);
 
-#endif /* __SERIAL_PRINT_H__ */
+#endif /* __SERIAL_H__ */

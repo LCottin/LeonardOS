@@ -7,17 +7,17 @@ set(LINKER_SCRIPT ${CORE_DIR}/linker.ld)
 # Specify the source file
 set(CORE_SOURCES
     ${CORE_DIR}/boot/src/boot.s
-    ${CORE_DIR}/serial_print/src/serial_print.c
+    ${CORE_DIR}/serial/src/serial.c
     ${CORE_DIR}/UART/src/UART.c
     ${CORE_DIR}/main.c)
 
 set(CORE_HEADERS
-    ${CORE_DIR}/serial_print/include/serial_print.h
+    ${CORE_DIR}/serial/include/serial.h
     ${CORE_DIR}/UART/include/UART.h)
 
 # Specify the public header directory
 set(CORE_INCLUDE
-    ${CORE_DIR}/serial_print/include
+    ${CORE_DIR}/serial/include
     ${CORE_DIR}/UART/include)
 
 # Add an executable target
