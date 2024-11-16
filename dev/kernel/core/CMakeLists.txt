@@ -7,16 +7,28 @@ set(LINKER_SCRIPT ${CORE_DIR}/linker.ld)
 # Specify the source file
 set(CORE_SOURCES
     ${CORE_DIR}/boot/src/boot.s
+    ${CORE_DIR}/MMIO/io8/src/MMIO_io8.c
+    ${CORE_DIR}/MMIO/io16/src/MMIO_io16.c
+    ${CORE_DIR}/MMIO/io32/src/MMIO_io32.c
+    ${CORE_DIR}/MMIO/io64/src/MMIO_io64.c
     ${CORE_DIR}/serial/src/serial.c
     ${CORE_DIR}/UART/src/UART.c
     ${CORE_DIR}/main.c)
 
 set(CORE_HEADERS
+    ${CORE_DIR}/MMIO/io8/include/MMIO_io8.h
+    ${CORE_DIR}/MMIO/io16/include/MMIO_io16.h
+    ${CORE_DIR}/MMIO/io32/include/MMIO_io32.h
+    ${CORE_DIR}/MMIO/io64/include/MMIO_io64.h
     ${CORE_DIR}/serial/include/serial.h
     ${CORE_DIR}/UART/include/UART.h)
 
 # Specify the public header directory
 set(CORE_INCLUDE
+    ${CORE_DIR}/MMIO/io8/include
+    ${CORE_DIR}/MMIO/io16/include
+    ${CORE_DIR}/MMIO/io32/include
+    ${CORE_DIR}/MMIO/io64/include
     ${CORE_DIR}/serial/include
     ${CORE_DIR}/UART/include)
 
