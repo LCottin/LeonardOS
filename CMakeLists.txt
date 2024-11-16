@@ -61,9 +61,10 @@ ENDIF(CMAKE_HOST_SYSTEM_NAME MATCHES "Linux")
 
 # Output directory for binaries
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
-set(KERNEL_NAME     "LeonardOS")
-set(LIB_MEMORY_NAME "Memory")
-set(LIB_STRING_NAME "String")
+set(KERNEL_NAME      "LeonardOS")
+set(LIB_MEMORY_NAME  "Memory")
+set(LIB_STRING_NAME  "String")
+set(LIB_SYSCALL_NAME "Syscall")
 
 # Project name and version
 project(${KERNEL_NAME} LANGUAGES ASM C)
@@ -75,3 +76,9 @@ project(${KERNEL_NAME} LANGUAGES ASM C)
     # Call subdirectories cmake
     add_subdirectory(${LIB_DIR})
     add_subdirectory(${CORE_DIR})
+
+    # Add a custom target to create the binary image
+    add_custom_target(elf_to_bin ALL
+    COMMAND ${CMAKE_OBJCOPY} -O binary $<TARGET_FILE:${KERNEL_NAME}> ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${KERNEL_NAME}.img
+    DEPENDS ${LIB_SYSCALL_NAME} ${KERNEL_NAME}
+    COMMENT "Converting ELF to binary image")
