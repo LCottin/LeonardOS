@@ -1,1 +1,1 @@
-# This directory intend to provide syscalls to user applications
+# This directory intends to provide syscalls to user applications

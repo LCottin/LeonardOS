@@ -1,1 +1,1 @@
-# This directory intend to provide standard functions
+# This directory intends to provide standard functions

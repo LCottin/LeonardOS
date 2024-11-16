@@ -1,1 +1,1 @@
-# This directory intend to provide functions to print data on the serial console
+# This directory intends to provide functions to print data on the serial console
