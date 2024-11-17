@@ -4,10 +4,8 @@
 #include "types.h"
 #include "memory_alloc_lib.h"
 
-#define MEM_BLOCK_SIZE sizeof(MemBlock_t)
+#define MEM_BLOCK_SIZE (sizeof(MemBlock_t))
 
-/* Define alignment to 8 bytes */
-#define ALIGNMENT 8
 #define ALIGN(size) (((size) + (ALIGNMENT - 1)) & ~(ALIGNMENT - 1))
 
 /**
