@@ -1,5 +1,5 @@
-#ifndef __STRING_OPS_H__
-#define __STRING_OPS_H__
+#ifndef __STRING_OPS_LIB_H__
+#define __STRING_OPS_LIB_H__
 
 #include "types.h"
 

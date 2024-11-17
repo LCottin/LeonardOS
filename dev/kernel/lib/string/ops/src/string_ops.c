@@ -1,4 +1,4 @@
-#include "string_ops.h"
+#include "string_ops_lib.h"
 
 size_t string_ops_len(const char_t *str)
 {

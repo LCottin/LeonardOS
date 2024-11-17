@@ -1,4 +1,4 @@
-#include "string_utils.h"
+#include "string_utils_lib.h"
 
 char_t *string_utils_itoa(const int32_t num, char_t *str, const int32_t base)
 {

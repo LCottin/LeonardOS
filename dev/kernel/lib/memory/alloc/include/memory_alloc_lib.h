@@ -1,7 +1,10 @@
-#ifndef __MEMORY_ALLOC_H__
-#define __MEMORY_ALLOC_H__
+#ifndef __MEMORY_ALLOC_LIB_H__
+#define __MEMORY_ALLOC_LIB_H__
 
 #include "types.h"
+
+/* Define alignment to 8 bytes */
+#define ALIGNMENT (sizeof(ptr_t))
 
 /**
  * @brief Allocates a block of memory of the specified size.
@@ -48,4 +51,4 @@ extern void memory_free(ptr_t ptr);
  */
 extern void memory_init_heap(void);
 
-#endif /* __MEMORY_ALLOC_H__ */
+#endif /* __MEMORY_ALLOC_LIB_H__ */

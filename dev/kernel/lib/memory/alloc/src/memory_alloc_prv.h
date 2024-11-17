@@ -2,6 +2,7 @@
 #define __MEMORY_ALLOC_PRV_H__
 
 #include "types.h"
+#include "memory_alloc_lib.h"
 
 #define MEM_BLOCK_SIZE sizeof(MemBlock_t)
 

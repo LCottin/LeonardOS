@@ -1,6 +1,6 @@
-#include "memory_alloc.h"
+#include "memory_alloc_lib.h"
 #include "memory_alloc_prv.h"
-#include "memory_ops.h"
+#include "memory_ops_lib.h"
 
 /* Pointer to the free list (head of heap) */
 static MemBlock_t *g_p_free_list = NULL;

@@ -1,8 +1,8 @@
 #include "serial.h"
-#include "string_ops.h"
-#include "string_utils.h"
-#include "memory_ops.h"
-#include "memory_alloc.h"
+#include "string_ops_lib.h"
+#include "string_utils_lib.h"
+#include "memory_ops_lib.h"
+#include "memory_alloc_lib.h"
 
 extern addr_t __stack_start;
 extern addr_t __stack_end;
