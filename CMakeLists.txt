@@ -61,9 +61,10 @@ ENDIF(CMAKE_HOST_SYSTEM_NAME MATCHES "Linux")
 
 # Output directory for binaries
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
-set(KERNEL_NAME     "LeonardOS")
-set(LIB_MEMORY_NAME "Memory")
-set(LIB_STRING_NAME "String")
+set(KERNEL_NAME         "LeonardOS")
+set(LIB_MEMORY_NAME     "Memory")
+set(LIB_STRING_NAME     "String")
+set(LIB_CONTAINERS_NAME "Containers")
 
 # Project name and version
 project(${KERNEL_NAME} LANGUAGES ASM C)
