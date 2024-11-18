@@ -1,1 +1,1 @@
-# This directory intend to provide functions to use UART communication
+# This directory intends to provide functions to use UART communication

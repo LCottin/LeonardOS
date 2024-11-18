@@ -1,1 +1,1 @@
-# This directory intend to provide functions to operate around registers
+# This directory intends to provide functions to operate around registers
