@@ -1,6 +1,7 @@
 # Compiler and build settings
 BUILD_DIR  = build
-KERNEL_IMG = $(BUILD_DIR)/bin/LeonardOS
+BIN_DIR    = $(BUILD_DIR)/bin
+KERNEL_IMG = $(BIN_DIR)/core
 
 # Targets that don't represent real files
 .PHONY: all build prepare clean deep_clean install debug run_debug run run_el1 run_el2 run_el3
@@ -27,7 +28,7 @@ prepare:
 clean:
 	@echo "Cleaning binaries ..."
 	@$(MAKE) -C $(BUILD_DIR) clean
-	@rm -rf $(BUILD_DIR)/bin/*
+	@rm -rf $(BIN_DIR)/*
 
 # Completely remove the build directory
 deep_clean:
