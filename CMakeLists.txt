@@ -62,6 +62,9 @@ ENDIF(CMAKE_HOST_SYSTEM_NAME MATCHES "Linux")
 # Output directory for binaries
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 
+# Find tool to convert elf to binary
+find_program(CMAKE_OBJCOPY aarch64-none-elf-objcopy REQUIRED)
+
 # Project name and version
 project(${IMG_NAME} LANGUAGES ASM C)
 

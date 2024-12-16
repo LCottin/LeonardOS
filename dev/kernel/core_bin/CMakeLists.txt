@@ -1,5 +1,14 @@
+# Set the output directory of the executable
+SET(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${CORE_NAME})
+
 # Linker script file path
 set(CORE_LINKER_SCRIPT ${CORE_BIN_DIR}/linker.ld)
+
+# Set the name of the executable
+SET(CORE_NAME_ELF      ${CORE_NAME}.elf)
+SET(CORE_NAME_BIN      ${CORE_NAME}.bin)
+SET(CORE_NAME_MAP      ${CORE_NAME}.map)
+SET(CORE_NAME_STRIPPED ${CORE_NAME}.elf.stripped)
 
 # Specify the source file
 set(CORE_SOURCES
@@ -37,23 +46,34 @@ set(CORE_INCLUDE_PRV
 )
 
 # Add an executable target
-add_executable(${CORE_NAME} ${CORE_SOURCES})
+add_executable(${CORE_NAME_ELF} ${CORE_SOURCES})
 
 # Link header files
-target_include_directories(${CORE_NAME}
+target_include_directories(${CORE_NAME_ELF}
     PUBLIC ${CORE_INCLUDE}
     PRIVATE ${CORE_INCLUDE_PRV}
 )
 
 # Ensure the executable is built after the library
-add_dependencies(${CORE_NAME} ${LIB_MEMORY_NAME})
-add_dependencies(${CORE_NAME} ${LIB_STRING_NAME})
+add_dependencies(${CORE_NAME_ELF} ${LIB_MEMORY_NAME})
+add_dependencies(${CORE_NAME_ELF} ${LIB_STRING_NAME})
 
 # Link the common library
-target_link_libraries(${CORE_NAME} -Wl,--whole-archive ${LIB_MEMORY_NAME} ${LIB_STRING_NAME})
+target_link_libraries(${CORE_NAME_ELF} -Wl,--whole-archive ${LIB_MEMORY_NAME} ${LIB_STRING_NAME})
 
 # Set custom linker options, including the generation of the .map file
-target_link_options(${CORE_NAME} PRIVATE
+target_link_options(${CORE_NAME_ELF} PRIVATE
                     "-T${CORE_LINKER_SCRIPT}"
-                    "-Wl,-Map,${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${CORE_NAME}.map")
+                    "-Wl,-Map,${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${CORE_NAME_MAP}")
 
+# Generate .bin, .elf.stripped and .map files
+add_custom_command(
+    TARGET ${CORE_NAME_ELF}
+    POST_BUILD
+
+    # Generate .elf.stripped file
+    COMMAND ${CMAKE_OBJCOPY} --strip-all $<TARGET_FILE:${CORE_NAME_ELF}> ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${CORE_NAME_STRIPPED}
+
+    # Generate .bin file
+    COMMAND ${CMAKE_OBJCOPY} -O binary $<TARGET_FILE:${CORE_NAME_ELF}> ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${CORE_NAME_BIN}
+)
