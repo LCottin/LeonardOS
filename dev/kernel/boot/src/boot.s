@@ -54,7 +54,7 @@ print_loop:
 
 done_print_loop:
     /* Jump to main program entry point */
-    ldr x0, =main
+    ldr x0, =core_main
     blr x0
 
 done:

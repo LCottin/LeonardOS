@@ -10,7 +10,7 @@ set(CORE_SOURCES
     ${KERNEL_DIR}/MMIO/io64/src/MMIO_io64.c
     ${KERNEL_DIR}/serial/src/serial.c
     ${KERNEL_DIR}/UART/src/UART.c
-    ${CORE_DIR}/main.c
+    ${CORE_DIR}/core_main.c
 )
 
 set(CORE_HEADERS

@@ -4,7 +4,7 @@
 #include "memory_ops.h"
 #include "memory_alloc.h"
 
-void main(void)
+void core_main(void)
 {
     memory_init_heap();
 
