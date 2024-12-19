@@ -1,13 +1,12 @@
 #ifndef __MEMORY_ALLOC_PRV_H__
 #define __MEMORY_ALLOC_PRV_H__
 
+#include "memory_alloc.h"
 #include "types.h"
 
-#define MEM_BLOCK_SIZE sizeof(MemBlock_t)
+#define MEMORY_BLOCK_SIZE (sizeof(MemoryBlock_t))
 
-/* Define alignment to 8 bytes */
-#define ALIGNMENT 8
-#define ALIGN(size) (((size) + (ALIGNMENT - 1)) & ~(ALIGNMENT - 1))
+#define MEMORY_ALIGN(size) (((size) + (MEMORY_ALIGNMENT - 1)) & ~(MEMORY_ALIGNMENT - 1))
 
 /**
  * @brief Defines the memory block
@@ -18,9 +17,9 @@ typedef struct MemBlock
     size_t size;
     bool_t is_free;
     struct MemBlock *next;
-} MemBlock_t;
+} MemoryBlock_t;
 
 extern addr_t __heap_start;
 extern addr_t __heap_size;
 
-#endif
+#endif /* __MEMORY_ALLOC_PRV_H__ */

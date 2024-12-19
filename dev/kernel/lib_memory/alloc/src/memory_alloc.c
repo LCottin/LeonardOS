@@ -3,7 +3,7 @@
 #include "memory_ops.h"
 
 /* Pointer to the free list (head of heap) */
-static MemBlock_t *g_p_free_list = NULL;
+static MemoryBlock_t *g_p_free_list = NULL;
 
 /* Indicates whether the heap is initialized */
 static bool_t g_is_heap_initialized = FALSE;
@@ -11,7 +11,7 @@ static bool_t g_is_heap_initialized = FALSE;
 void memory_init_heap(void)
 {
     /* Set pointer to the beginning of the heap */
-    g_p_free_list = (MemBlock_t *)&__heap_start;
+    g_p_free_list = (MemoryBlock_t *)&__heap_start;
 
     /* Initializes the first block of the heap */
     g_p_free_list->size    = (size_t)((addr_t)&__heap_size);
@@ -34,8 +34,8 @@ ptr_t memory_alloc(const size_t size)
     if (size > 0)
     {
         /* Aligns the requested size */
-        size_t aligned_size       = ALIGN(size);
-        MemBlock_t *current_block = g_p_free_list;
+        size_t aligned_size          = MEMORY_ALIGN(size);
+        MemoryBlock_t *current_block = g_p_free_list;
 
         /* Traverse the free list to find a suitable block */
         while (current_block != NULL)
@@ -43,13 +43,13 @@ ptr_t memory_alloc(const size_t size)
             if ((current_block->is_free == TRUE) && (current_block->size >= aligned_size))
             {
                 /* Check if we can split the block */
-                if (current_block->size > (aligned_size + MEM_BLOCK_SIZE))
+                if (current_block->size > (aligned_size + MEMORY_BLOCK_SIZE))
                 {
                     /* Split the block */
-                    MemBlock_t *new_block = (MemBlock_t *)((byte_t *)current_block + MEM_BLOCK_SIZE + aligned_size);
-                    new_block->size       = current_block->size - aligned_size - MEM_BLOCK_SIZE;
-                    new_block->is_free    = TRUE;
-                    new_block->next       = current_block->next;
+                    MemoryBlock_t *new_block = (MemoryBlock_t *)((byte_t *)current_block + MEMORY_BLOCK_SIZE + aligned_size);
+                    new_block->size          = current_block->size - aligned_size - MEMORY_BLOCK_SIZE;
+                    new_block->is_free       = TRUE;
+                    new_block->next          = current_block->next;
 
                     current_block->size = aligned_size;
                     current_block->next = new_block;
@@ -59,7 +59,7 @@ ptr_t memory_alloc(const size_t size)
                 current_block->is_free = FALSE;
 
                 /* Set return pointer */
-                ptr = (ptr_t)((byte_t *)current_block + MEM_BLOCK_SIZE);
+                ptr = (ptr_t)((byte_t *)current_block + MEMORY_BLOCK_SIZE);
 
                 break;
             }
@@ -89,17 +89,17 @@ void memory_free(ptr_t ptr)
 {
     if (ptr != NULL)
     {
-        MemBlock_t *block = (MemBlock_t *)((byte_t *)ptr - MEM_BLOCK_SIZE);
-        block->is_free    = TRUE;
+        MemoryBlock_t *block = (MemoryBlock_t *)((byte_t *)ptr - MEMORY_BLOCK_SIZE);
+        block->is_free       = TRUE;
 
         /* Merge adjacent free blocks */
-        MemBlock_t *current_block = g_p_free_list;
+        MemoryBlock_t *current_block = g_p_free_list;
         while (current_block != NULL)
         {
             /* If the current block and the next one are both free, merge them */
             if ((current_block->next != NULL) && (current_block->is_free == TRUE) && (current_block->next->is_free == TRUE))
             {
-                current_block->size += current_block->next->size + MEM_BLOCK_SIZE;
+                current_block->size += current_block->next->size + MEMORY_BLOCK_SIZE;
                 current_block->next  = current_block->next->next;
             }
             else

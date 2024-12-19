@@ -3,6 +3,9 @@
 
 #include "types.h"
 
+/* Define alignment to ptr size */
+#define MEMORY_ALIGNMENT (sizeof(ptr_t))
+
 /**
  * @brief Allocates a block of memory of the specified size.
  *
