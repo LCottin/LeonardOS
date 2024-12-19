@@ -1,6 +1,7 @@
 # Compiler and build settings
-BUILD_DIR  = build
-KERNEL_IMG = $(BUILD_DIR)/bin/LeonardOS
+BUILD_DIR = build
+BIN_DIR   = $(BUILD_DIR)/bin
+CORE_ELF  = $(BIN_DIR)/core/core.elf
 
 # Targets that don't represent real files
 .PHONY: all build prepare clean deep_clean install debug run_debug run run_el1 run_el2 run_el3
@@ -27,7 +28,7 @@ prepare:
 clean:
 	@echo "Cleaning binaries ..."
 	@$(MAKE) -C $(BUILD_DIR) clean
-	@rm -rf $(BUILD_DIR)/bin/*
+	@rm -rf $(BIN_DIR)/*
 
 # Completely remove the build directory
 deep_clean:
@@ -40,7 +41,7 @@ debug:
 		echo "Error: aarch64-none-elf-gdb not found."; \
 		exit 1; \
 	fi
-	aarch64-none-elf-gdb $(KERNEL_IMG)
+	aarch64-none-elf-gdb $(CORE_ELF)
 
 # Run the OS using QEMU in debug mode
 run_debug: build
@@ -48,7 +49,7 @@ run_debug: build
 		echo "Error: qemu-system-aarch64 not found."; \
 		exit 1; \
 	fi
-	@qemu-system-aarch64 -M virt -m 512M -cpu cortex-a53 -nographic -kernel $(KERNEL_IMG) -serial mon:stdio  -s -S -d int &
+	@qemu-system-aarch64 -M virt -m 512M -cpu cortex-a53 -nographic -kernel $(CORE_ELF) -serial mon:stdio  -s -S -d int &
 
 # Run the OS using QEMU
 run:
@@ -59,21 +60,21 @@ run_el1: build
 		echo "Error: qemu-system-aarch64 not found."; \
 		exit 1; \
 	fi
-	@qemu-system-aarch64 -M virt -m 512M -cpu cortex-a53 -nographic -kernel $(KERNEL_IMG) -serial mon:stdio &
+	@qemu-system-aarch64 -M virt -m 512M -cpu cortex-a53 -nographic -kernel $(CORE_ELF) -serial mon:stdio &
 
 run_el2: build
 	@if ! command -v qemu-system-aarch64 >/dev/null 2>&1; then \
 		echo "Error: qemu-system-aarch64 not found."; \
 		exit 1; \
 	fi
-	@qemu-system-aarch64 -M virt -m 512M -cpu cortex-a53 -nographic -kernel $(KERNEL_IMG) -serial mon:stdio -machine virtualization=on &
+	@qemu-system-aarch64 -M virt -m 512M -cpu cortex-a53 -nographic -kernel $(CORE_ELF) -serial mon:stdio -machine virtualization=on &
 
 run_el3: build
 	@if ! command -v qemu-system-aarch64 >/dev/null 2>&1; then \
 		echo "Error: qemu-system-aarch64 not found."; \
 		exit 1; \
 	fi
-	@qemu-system-aarch64 -M virt -m 512M -cpu cortex-a53 -nographic -kernel $(KERNEL_IMG) -serial mon:stdio -machine virtualization=on -machine secure=on &
+	@qemu-system-aarch64 -M virt -m 512M -cpu cortex-a53 -nographic -kernel $(CORE_ELF) -serial mon:stdio -machine virtualization=on -machine secure=on &
 
 # Kill all QEMU instances
 kill:
