@@ -57,7 +57,7 @@ ptr_t containers_fifo_dequeue(containers_fifo_t *queue)
         /* Update the head of the queue */
         queue->head = node_to_free->next;
 
-        if (queue->size == 1)
+        if (queue->size == 1U)
         {
             queue->tail = NULL;
         }
