@@ -1,7 +1,7 @@
 #include "syscall.h"
 #include "serial.h"
 
-void syscall_handler(const SyscallNumbers_t number, cptr_t arg)
+void syscall_handler(const syscall_numbers_t number, cptr_t arg)
 {
     switch (number)
     {

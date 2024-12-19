@@ -3,13 +3,13 @@
 
 #include "types.h"
 
-typedef enum SyscallNumbers
+typedef enum syscall_numbers
 {
     SYSCALL_PRINT_STRING = 0,
 
     SYSCALL_TOTAL
-} SyscallNumbers_t;
+} syscall_numbers_t;
 
-extern void syscall_handler(const SyscallNumbers_t number, cptr_t arg);
+extern void syscall_handler(const syscall_numbers_t number, cptr_t arg);
 
 #endif /* __SYSCALL_H__ */

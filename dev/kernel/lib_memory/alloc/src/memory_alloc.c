@@ -3,7 +3,7 @@
 #include "memory_ops.h"
 
 /* Pointer to the free list (head of heap) */
-static MemoryBlock_t *g_p_free_list = NULL;
+static memory_block_t *g_p_free_list = NULL;
 
 /* Indicates whether the heap is initialized */
 static bool_t g_is_heap_initialized = FALSE;
@@ -11,7 +11,7 @@ static bool_t g_is_heap_initialized = FALSE;
 void memory_init_heap(void)
 {
     /* Set pointer to the beginning of the heap */
-    g_p_free_list = (MemoryBlock_t *)&__heap_start;
+    g_p_free_list = (memory_block_t *)&__heap_start;
 
     /* Initializes the first block of the heap */
     g_p_free_list->size    = (size_t)((addr_t)&__heap_size);
@@ -35,7 +35,7 @@ ptr_t memory_alloc(const size_t size)
     {
         /* Aligns the requested size */
         size_t aligned_size          = MEMORY_ALIGN(size);
-        MemoryBlock_t *current_block = g_p_free_list;
+        memory_block_t *current_block = g_p_free_list;
 
         /* Traverse the free list to find a suitable block */
         while (current_block != NULL)
@@ -46,7 +46,7 @@ ptr_t memory_alloc(const size_t size)
                 if (current_block->size > (aligned_size + MEMORY_BLOCK_SIZE))
                 {
                     /* Split the block */
-                    MemoryBlock_t *new_block = (MemoryBlock_t *)((byte_t *)current_block + MEMORY_BLOCK_SIZE + aligned_size);
+                    memory_block_t *new_block = (memory_block_t *)((byte_t *)current_block + MEMORY_BLOCK_SIZE + aligned_size);
                     new_block->size          = current_block->size - aligned_size - MEMORY_BLOCK_SIZE;
                     new_block->is_free       = TRUE;
                     new_block->next          = current_block->next;
@@ -89,11 +89,11 @@ void memory_free(ptr_t ptr)
 {
     if (ptr != NULL)
     {
-        MemoryBlock_t *block = (MemoryBlock_t *)((byte_t *)ptr - MEMORY_BLOCK_SIZE);
+        memory_block_t *block = (memory_block_t *)((byte_t *)ptr - MEMORY_BLOCK_SIZE);
         block->is_free       = TRUE;
 
         /* Merge adjacent free blocks */
-        MemoryBlock_t *current_block = g_p_free_list;
+        memory_block_t *current_block = g_p_free_list;
         while (current_block != NULL)
         {
             /* If the current block and the next one are both free, merge them */
