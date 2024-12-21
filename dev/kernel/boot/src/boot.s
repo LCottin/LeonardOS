@@ -1,7 +1,7 @@
 .section .text
-.global _start
+.global _core_start
 
-_start:
+_core_start:
     /* Set the stack pointer */
     /* This function initializes the stack pointer to the top of the stack. */
     /* The stack is used to store local variables, function parameters, and return addresses. */

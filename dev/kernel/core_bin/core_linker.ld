@@ -4,6 +4,10 @@ ENTRY(_core_start)
 /* Define the memory regions and their attributes */
 MEMORY
 {
+    ROM_TEXT(rx)   : ORIGIN = 0x00050000, LENGTH = 0xC0000
+    ROM_RODATA(r)  : ORIGIN = 0x00110000, LENGTH = 0x10000
+    ROM_DATA(rw)   : ORIGIN = 0x00120000, LENGTH = 0x20000
+
     RAM_TEXT(rx)   : ORIGIN = 0x45000000, LENGTH = 0x10000
     RAM_RODATA(rx) : ORIGIN = 0x45010000, LENGTH = 0x40000
     RAM_DATA(rw)   : ORIGIN = 0x45050000, LENGTH = 0x40000
@@ -20,42 +24,42 @@ SECTIONS
     . = ALIGN(16);
 
     /* Place all the code sections into the .text section */
+    __text_load = LOADADDR(.text);       /* Load address of text section */
     .text ALIGN(16):
     {
         __text_start = .;                /* Start of the text section */
         *(.text*)                        /* Include all .text sections */
-        *(.text.*)                        /* Include all .text sections */
         . = ALIGN(16);                   /* Ensure alignment after .text section */
         __text_end = .;                  /* End of text section */
-    } > RAM_TEXT
+    } > RAM_TEXT AT > ROM_TEXT
 
     /* Set the starting address and alignment of the section */
     . = ORIGIN(RAM_RODATA);
     . = ALIGN(16);
 
     /* Place all read only section into the .rodata section */
+    __rodata_load = LOADADDR(.rodata);   /* Load address of rodata section */
     .rodata ALIGN(16):
     {
         __rodata_start = .;              /* Start of rodata section */
         *(.rodata*)                      /* Collect all read-only data sections */
-        *(.rodata.*)                      /* Collect all read-only data sections */
         . = ALIGN(16);                   /* Ensure alignment after .rodata section */
         __rodata_end = .;                /* End of rodata section */
-    } > RAM_RODATA
+    } > RAM_RODATA AT > ROM_RODATA
 
     /* Set the starting address and alignment of the section */
     . = ORIGIN(RAM_DATA);
     . = ALIGN(16);
 
     /* Place all the initialized data sections into the .data section */
+    __data_load = LOADADDR(.data);       /* Load address of data section */
     .data ALIGN(16):
     {
         __data_start = .;                /* Start of data section */
         *(.data*)                        /* Place all .data sections */
-        *(.data.*)                        /* Place all .data sections */
         . = ALIGN(16);                   /* Ensure alignment after .data section */
         __data_end = .;                  /* End of data section */
-    } > RAM_DATA
+    } > RAM_DATA AT > ROM_DATA
 
     /* Set the starting address and alignment of the section */
     . = ORIGIN(RAM_BSS);
@@ -66,7 +70,6 @@ SECTIONS
     {
         __bss_start = .;                 /* Start of bss section */
         *(.bss*)                         /* Place all .bss sections */
-        *(.bss.*)                         /* Place all .bss sections */
         . = ALIGN(16);                   /* Ensure alignment after .bss section */
         __bss_end = .;                   /* End of bss section */
     } > RAM_BSS
@@ -77,7 +80,7 @@ SECTIONS
 
     /* Place the stack section into the RAM */
     __stack_size = LENGTH(RAM_STACK);    /* Size of stack section */
-    .stack (NOLOAD):
+    .stack(NOLOAD):
     {
         __stack_start = .;               /* Start of the stack section */
         . = . + LENGTH(RAM_STACK);
