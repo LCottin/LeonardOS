@@ -4,7 +4,7 @@ BIN_DIR   = $(BUILD_DIR)/bin
 CORE_ELF  = $(BIN_DIR)/core/core.elf
 
 # Targets that don't represent real files
-.PHONY: all build prepare clean deep_clean install debug run_debug run run_el1 run_el2 run_el3
+.PHONY: all build prepare clean deep_clean install debug run_debug run run_el1 run_el2 run_el3 memory_mapping
 
 # Install dependencies
 install:
@@ -23,6 +23,7 @@ prepare:
 	@echo "Configuring project ..."
 	@mkdir -p $(BUILD_DIR)
 	@cmake -S . -B $(BUILD_DIR)
+	@make memory_mapping
 
 # Clean only the compiled objects in the build directory
 clean:
@@ -35,13 +36,18 @@ deep_clean:
 	@echo "Removing build directory ..."
 	@rm -rf $(BUILD_DIR)/*
 
+# Generate the memory mapping
+memory_mapping:
+	@echo "Generating memory mapping ..."
+	@python3 memory_mapping/generate_memory_mapping.py
+
 # Launch GDB to debug the system
 debug:
 	@if ! command -v aarch64-none-elf-gdb >/dev/null 2>&1; then \
 		echo "Error: aarch64-none-elf-gdb not found."; \
 		exit 1; \
 	fi
-	aarch64-none-elf-gdb $(CORE_ELF)
+	@aarch64-none-elf-gdb -ex "target remote localhost:1234" $(CORE_ELF)
 
 # Run the OS using QEMU in debug mode
 run_debug: build

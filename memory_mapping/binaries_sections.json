@@ -1,0 +1,69 @@
+{
+    "Bootloader (ROM)":
+    {
+        "name"         : "Bootloader (ROM)",
+        "base_address" : "0x00000000",
+        "type"         : "bin",
+        "description"  : "Bootloader binary",
+        "sections":
+        [
+            {"name": "Text",    "size": "0x20000", "description": "Executable code"},
+            {"name": "RO data", "size": "0x10000", "description": "Read only data"},
+            {"name": "Data",    "size": "0x10000", "description": "Initialized data"}
+        ]
+    },
+
+    "Kernel (ROM)":
+    {
+        "name"         : "Kernel (ROM)",
+        "base_address" : "0x00050000",
+        "type"         : "elf",
+        "description"  : "Kernel elf",
+        "sections": [
+            {"name": "Text",    "size": "0xC0000", "description": "Executable code"},
+            {"name": "RO data", "size": "0x10000", "description": "Read only data"},
+            {"name": "Data",    "size": "0x20000", "description": "Initialized data"}
+        ]
+    },
+
+    "Bootloader (RAM)":
+    {
+        "name"         : "Bootloader (RAM)",
+        "base_address" : "0x40000000",
+        "type"         : "load",
+        "description"  : "Bootloader loaded in ram",
+        "sections":
+        [
+            {"name": "Data",  "size":  "0x8000", "description": "Initialized data"},
+            {"name": "BSS",   "size": "0x10000", "description": "Uninitialized data"},
+            {"name": "Stack", "size": "0x10000", "description": "Stack"}
+        ]
+    },
+
+    "Kernel (RAM)":
+    {
+        "name"         : "Kernel (RAM)",
+        "base_address" : "0x45000000",
+        "type"         : "load",
+        "description"  : "Kernel loaded in ram",
+        "sections": [
+            {"name": "Text",    "size": "0x10000", "description": "Executable code"},
+            {"name": "RO data", "size": "0x40000", "description": "Read only data"},
+            {"name": "Data",    "size": "0x40000", "description": "Initialized data"},
+            {"name": "BSS",     "size": "0x40000", "description": "Uninitialized data"},
+            {"name": "Stack",   "size": "0x10000", "description": "Stack"},
+            {"name": "Heap",    "size": "0x10000", "description": "Heap"}
+        ]
+    },
+
+    "UART Registers":
+    {
+        "name"         : "UART Registers",
+        "base_address" : "0x09000000",
+        "type"         : "io",
+        "description"  : "UART device for serial I/O",
+        "sections": [
+            {"name": "Registers", "size": "0x10000", "description": "UART registers to print messages"}
+        ]
+    }
+}
