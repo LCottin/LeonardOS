@@ -4,7 +4,7 @@ BIN_DIR   = $(BUILD_DIR)/bin
 CORE_ELF  = $(BIN_DIR)/core/core.elf
 
 # Targets that don't represent real files
-.PHONY: all build prepare clean deep_clean install debug run_debug run run_el1 run_el2 run_el3
+.PHONY: all build prepare clean deep_clean install debug run_debug run run_el1 run_el2 run_el3 memory_mapping
 
 # Install dependencies
 install:
@@ -34,6 +34,10 @@ clean:
 deep_clean:
 	@echo "Removing build directory ..."
 	@rm -rf $(BUILD_DIR)/*
+
+# Generate the memory mapping
+memory_mapping:
+	@python3 memory_mapping/generate_memory_mapping.py
 
 # Launch GDB to debug the system
 debug:

@@ -1,0 +1,28 @@
+{
+    "Bootloader":
+    {
+        "name"         : "Bootloader (ROM)",
+        "base_address" : "0x00000000",
+        "type"         : "bin",
+        "description"  : "Bootloader binary",
+        "sections":
+        [
+            {"name": "Text", "size": "0x1000", "description": "Executable code"},
+            {"name": "Data", "size": "0x1000", "description": "Initialized data"},
+            {"name": "BSS",  "size": "0x1000", "description": "Uninitialized data"}
+        ]
+    },
+
+    "Kernel":
+    {
+        "name"         : "Kernel (ROM)",
+        "base_address" : "0x00010000",
+        "type"         : "elf",
+        "description"  : "Kernel binary",
+        "sections": [
+            {"name": "Text", "size": "0x1000", "description": "Executable code"},
+            {"name": "Data", "size": "0x1000", "description": "Initialized data"},
+            {"name": "BSS",  "size": "0x1000", "description": "Uninitialized data"}
+        ]
+    }
+}
