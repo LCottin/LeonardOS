@@ -14,6 +14,6 @@ def main(input_file: str, output_file: str) -> None:
 
 if __name__ == "__main__":
     input_file  = "memory_mapping/binaries_sections.json"
-    output_file = "memory_mapping/memory_map.md"
+    output_file = "memory_mapping/memory_mapping.md"
 
     main(input_file, output_file)
