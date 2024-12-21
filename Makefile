@@ -23,6 +23,7 @@ prepare:
 	@echo "Configuring project ..."
 	@mkdir -p $(BUILD_DIR)
 	@cmake -S . -B $(BUILD_DIR)
+	@make memory_mapping
 
 # Clean only the compiled objects in the build directory
 clean:
@@ -37,6 +38,7 @@ deep_clean:
 
 # Generate the memory mapping
 memory_mapping:
+	@echo "Generating memory mapping ..."
 	@python3 memory_mapping/generate_memory_mapping.py
 
 # Launch GDB to debug the system
@@ -45,7 +47,7 @@ debug:
 		echo "Error: aarch64-none-elf-gdb not found."; \
 		exit 1; \
 	fi
-	aarch64-none-elf-gdb $(CORE_ELF)
+	@aarch64-none-elf-gdb -ex "target remote localhost:1234" $(CORE_ELF)
 
 # Run the OS using QEMU in debug mode
 run_debug: build
