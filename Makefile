@@ -1,7 +1,9 @@
 # Compiler and build settings
-BUILD_DIR = build
-BIN_DIR   = $(BUILD_DIR)/bin
-CORE_ELF  = $(BIN_DIR)/core/core.elf
+BUILD_DIR  = build
+BIN_DIR    = $(BUILD_DIR)/bin
+BOOT_BIN   = $(BIN_DIR)/boot/boot.bin
+CORE_ELF   = $(BIN_DIR)/core/core.elf
+LEONARD_OS_IMG = $(BIN_DIR)/LeonardOS.img
 
 # Targets that don't represent real files
 .PHONY: all build prepare clean deep_clean install debug run_debug run run_el1 run_el2 run_el3 memory_mapping
@@ -17,6 +19,12 @@ all: clean build
 build: prepare
 	@echo "Building project ..."
 	@$(MAKE) -C $(BUILD_DIR)
+
+image: build
+	@rm -f $(LEONARD_OS_IMG)
+	@dd if=/dev/zero of=$(LEONARD_OS_IMG) bs=512 count=32768
+	@dd if=$(BOOT_BIN) of=$(LEONARD_OS_IMG) bs=1 seek=0 conv=notrunc
+	@dd if=$(CORE_ELF) of=$(LEONARD_OS_IMG) bs=1 seek=0x50000 conv=notrunc
 
 # Configure the project (run CMake if necessary)
 prepare:
@@ -55,27 +63,27 @@ run_debug: build
 		echo "Error: qemu-system-aarch64 not found."; \
 		exit 1; \
 	fi
-	@qemu-system-aarch64 -M virt -m 512M -cpu cortex-a53 -nographic -kernel $(CORE_ELF) -serial mon:stdio  -s -S -d int &
+	@qemu-system-aarch64 -M virt -m 512M -cpu cortex-a53 -nographic -kernel $(CORE_ELF) -serial mon:stdio -s -S -d int,unimp,guest_errors &
 
 # Run the OS using QEMU
 run:
 	@make run_el1
 
-run_el1: build
+run_el1:
 	@if ! command -v qemu-system-aarch64 >/dev/null 2>&1; then \
 		echo "Error: qemu-system-aarch64 not found."; \
 		exit 1; \
 	fi
 	@qemu-system-aarch64 -M virt -m 512M -cpu cortex-a53 -nographic -kernel $(CORE_ELF) -serial mon:stdio &
 
-run_el2: build
+run_el2:
 	@if ! command -v qemu-system-aarch64 >/dev/null 2>&1; then \
 		echo "Error: qemu-system-aarch64 not found."; \
 		exit 1; \
 	fi
 	@qemu-system-aarch64 -M virt -m 512M -cpu cortex-a53 -nographic -kernel $(CORE_ELF) -serial mon:stdio -machine virtualization=on &
 
-run_el3: build
+run_el3:
 	@if ! command -v qemu-system-aarch64 >/dev/null 2>&1; then \
 		echo "Error: qemu-system-aarch64 not found."; \
 		exit 1; \
