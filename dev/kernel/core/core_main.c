@@ -2,7 +2,7 @@
 #include "string_ops.h"
 #include "string_utils.h"
 #include "memory_ops.h"
-#include "memory_alloc.h"
+#include "memory.h"
 #include "FPU.h"
 #include "clock.h"
 

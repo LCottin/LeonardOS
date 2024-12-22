@@ -25,6 +25,7 @@ set(CORE_SOURCES
     ${KERNEL_DIR}/clock/src/clock_init.c
     ${KERNEL_DIR}/clock/src/clock_get_time.c
     ${KERNEL_DIR}/clock/src/clock_data.c
+    ${KERNEL_DIR}/memory/src/memory.c
     ${CORE_DIR}/core_main.c
 )
 
@@ -37,6 +38,7 @@ set(CORE_HEADERS
     ${KERNEL_DIR}/UART/include/UART.h
     ${KERNEL_DIR}/FPU/include/FPU.h
     ${KERNEL_DIR}/clock/include/clock.h
+    ${KERNEL_DIR}/memory/include/memory.h
 )
 
 # Specify the public header directory
@@ -49,6 +51,7 @@ set(CORE_INCLUDE
     ${KERNEL_DIR}/UART/include
     ${KERNEL_DIR}/FPU/include
     ${KERNEL_DIR}/clock/include
+    ${KERNEL_DIR}/memory/include
 )
 
 set(CORE_INCLUDE_PRV

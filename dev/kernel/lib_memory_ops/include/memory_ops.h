@@ -3,6 +3,13 @@
 
 #include "types.h"
 
+#define MEMORY_BLOCK_SIZE (sizeof(memory_block_t))
+
+/* Define alignment to ptr size */
+#define MEMORY_ALIGNMENT (sizeof(ptr_t))
+
+#define MEMORY_ALIGN(size) (((size) + (MEMORY_ALIGNMENT - 1)) & ~(MEMORY_ALIGNMENT - 1))
+
 /**
  * @brief Copies 'size' bytes from the memory area pointed to by 'src' to the memory area pointed to by 'dest'.
  *

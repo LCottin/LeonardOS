@@ -1,7 +1,7 @@
-#ifndef __MEMORY_ALLOC_PRV_H__
-#define __MEMORY_ALLOC_PRV_H__
+#ifndef __MEMORY_PRV_H__
+#define __MEMORY_PRV_H__
 
-#include "memory_alloc.h"
+#include "memory.h"
 #include "types.h"
 
 /**
@@ -41,4 +41,4 @@ extern addr_t __heap_start;
  */
 extern addr_t __heap_size;
 
-#endif /* __MEMORY_ALLOC_PRV_H__ */
+#endif /* __MEMORY_PRV_H__ */

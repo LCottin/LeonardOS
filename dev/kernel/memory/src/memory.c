@@ -1,5 +1,5 @@
-#include "memory_alloc.h"
-#include "memory_alloc_prv.h"
+#include "memory.h"
+#include "memory_prv.h"
 #include "memory_ops.h"
 
 /* Pointer to the free list (head of heap) */

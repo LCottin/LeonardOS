@@ -1,5 +1,4 @@
 #include "containers_linked_chain.h"
-#include "memory_alloc.h"
 
 void containers_linked_chain_init(containers_linked_chain_t *chain)
 {
@@ -12,15 +11,12 @@ bool_t containers_linked_chain_is_empty(const containers_linked_chain_t *chain)
     return (bool_t)(chain->size == 0);
 }
 
-ptr_t containers_linked_chain_insert(containers_linked_chain_t *chain, ptr_t data, const size_t index)
+ptr_t containers_linked_chain_insert(containers_linked_chain_t *chain, containers_linked_chain_node_t *new_node, ptr_t data, const size_t index)
 {
     ptr_t ptr_to_return = NULL;
 
     if (chain != NULL && (index < chain->size))
     {
-        /* Allocate a new node to insert in chain */
-        containers_linked_chain_node_t *new_node = (containers_linked_chain_node_t *)memory_alloc(sizeof(containers_linked_chain_node_t));
-
         if (new_node!= NULL)
         {
             new_node->data = data;
@@ -64,12 +60,12 @@ ptr_t containers_linked_chain_remove(containers_linked_chain_t *chain, const siz
     if ((chain != NULL) && (index < chain->size))
     {
         /* Get node to free */
-        containers_linked_chain_node_t *node_to_free;
+        containers_linked_chain_node_t *node_to_remove;
 
         if (index == 0)
         {
-            chain->head  = node_to_free->next;
-            node_to_free = chain->head;
+            chain->head    = node_to_remove->next;
+            node_to_remove = chain->head;
         }
         else
         {
@@ -82,15 +78,12 @@ ptr_t containers_linked_chain_remove(containers_linked_chain_t *chain, const siz
                 current_index++;
             }
 
-            node_to_free       = current_node->next;
-            current_node->next = node_to_free->next;
+            node_to_remove     = current_node->next;
+            current_node->next = node_to_remove->next;
         }
 
-        /* Free the node */
-        memory_free(node_to_free);
-
         chain->size--;
-        ptr_to_return = node_to_free->data;
+        ptr_to_return = node_to_remove->data;
     }
 
     return ptr_to_return;
@@ -131,9 +124,8 @@ void containers_linked_chain_destroy(containers_linked_chain_t *chain)
     {
         while (chain->head != NULL)
         {
-            containers_linked_chain_node_t *node_to_free = chain->head;
-            chain->head                                  = node_to_free->next;
-            memory_free(node_to_free);
+            containers_linked_chain_node_t *node_to_remove = chain->head;
+            chain->head                                    = node_to_remove->next;
         }
 
         chain->size = 0;

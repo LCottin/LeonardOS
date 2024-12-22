@@ -1,5 +1,4 @@
 #include "memory_ops.h"
-#include "memory_alloc.h"
 
 void *memcpy(void *dest, const void *src, size_t n) __attribute__((alias("memory_ops_copy")));
 

@@ -1,5 +1,4 @@
 #include "containers_fifo.h"
-#include "memory_alloc.h"
 
 void containers_fifo_init(containers_fifo_t *queue)
 {
@@ -13,15 +12,12 @@ bool_t containers_fifo_is_empty(const containers_fifo_t *queue)
     return (bool_t)(queue->size == 0);
 }
 
-ptr_t containers_fifo_enqueue(containers_fifo_t *queue, ptr_t data)
+ptr_t containers_fifo_enqueue(containers_fifo_t *queue, containers_fifo_node_t *new_node, ptr_t data)
 {
     ptr_t ptr_to_return = NULL;
 
     if (queue != NULL)
     {
-        /* Allocate a new node to insert in fifo */
-        containers_fifo_node_t *new_node = (containers_fifo_node_t *)memory_alloc(sizeof(containers_fifo_node_t));
-
         if (new_node != NULL)
         {
             new_node->data = data;
@@ -51,19 +47,16 @@ ptr_t containers_fifo_dequeue(containers_fifo_t *queue)
 
     if ((queue != NULL) && (queue->size > 0))
     {
-        /* Get the node to free */
-        containers_fifo_node_t *node_to_free = queue->head;
+        /* Get the node to remove */
+        containers_fifo_node_t *node_to_remove = queue->head;
 
         /* Update the head of the queue */
-        queue->head = node_to_free->next;
+        queue->head = node_to_remove->next;
 
         if (queue->size == 1U)
         {
             queue->tail = NULL;
         }
-
-        /* Free the node */
-        memory_free(node_to_free);
 
         queue->size--;
         ptr_to_return = queue->head;

@@ -7,7 +7,7 @@ set(CORE_DIR ${KERNEL_DIR}/${CORE_NAME})
 set(CORE_BIN_DIR ${CORE_DIR}_bin)
 
 set(LIB_MEMORY_NAME  "Memory")
-set(LIB_MEMORY_DIR ${KERNEL_DIR}/lib_memory)
+set(LIB_MEMORY_DIR ${KERNEL_DIR}/lib_memory_ops)
 
 set(LIB_STRING_NAME  "String")
 set(LIB_STRING_DIR ${KERNEL_DIR}/lib_string)
