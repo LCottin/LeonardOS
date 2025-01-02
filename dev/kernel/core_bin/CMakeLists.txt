@@ -20,6 +20,11 @@ set(CORE_SOURCES
     ${KERNEL_DIR}/serial/src/serial.c
     ${KERNEL_DIR}/UART/src/UART.c
     ${KERNEL_DIR}/FPU/src/FPU_init.s
+    ${KERNEL_DIR}/clock/src/clock_get_cycle_count.s
+    ${KERNEL_DIR}/clock/src/clock_get_frequency.s
+    ${KERNEL_DIR}/clock/src/clock_init.c
+    ${KERNEL_DIR}/clock/src/clock_get_time.c
+    ${KERNEL_DIR}/clock/src/clock_data.c
     ${CORE_DIR}/core_main.c
 )
 
@@ -31,6 +36,7 @@ set(CORE_HEADERS
     ${KERNEL_DIR}/serial/include/serial.h
     ${KERNEL_DIR}/UART/include/UART.h
     ${KERNEL_DIR}/FPU/include/FPU.h
+    ${KERNEL_DIR}/clock/include/clock.h
 )
 
 # Specify the public header directory
@@ -42,10 +48,12 @@ set(CORE_INCLUDE
     ${KERNEL_DIR}/serial/include
     ${KERNEL_DIR}/UART/include
     ${KERNEL_DIR}/FPU/include
+    ${KERNEL_DIR}/clock/include
 )
 
 set(CORE_INCLUDE_PRV
     ${KERNEL_DIR}/UART/src
+    ${KERNEL_DIR}/clock/src
 )
 
 # Add an executable target
