@@ -19,6 +19,7 @@ set(CORE_SOURCES
     ${KERNEL_DIR}/MMIO/io64/src/MMIO_io64.c
     ${KERNEL_DIR}/serial/src/serial.c
     ${KERNEL_DIR}/UART/src/UART.c
+    ${KERNEL_DIR}/FPU/src/FPU_init.s
     ${CORE_DIR}/core_main.c
 )
 
@@ -29,6 +30,7 @@ set(CORE_HEADERS
     ${KERNEL_DIR}/MMIO/io64/include/MMIO_io64.h
     ${KERNEL_DIR}/serial/include/serial.h
     ${KERNEL_DIR}/UART/include/UART.h
+    ${KERNEL_DIR}/FPU/include/FPU.h
 )
 
 # Specify the public header directory
@@ -39,6 +41,7 @@ set(CORE_INCLUDE
     ${KERNEL_DIR}/MMIO/io64/include
     ${KERNEL_DIR}/serial/include
     ${KERNEL_DIR}/UART/include
+    ${KERNEL_DIR}/FPU/include
 )
 
 set(CORE_INCLUDE_PRV

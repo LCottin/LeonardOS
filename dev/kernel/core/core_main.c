@@ -3,10 +3,12 @@
 #include "string_utils.h"
 #include "memory_ops.h"
 #include "memory_alloc.h"
+#include "FPU.h"
 
 void core_main(void)
 {
     memory_init_heap();
+    FPU_init();
 
     const char_t str[64] = "[MAIN] Hello World!\n";
 
