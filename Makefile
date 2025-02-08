@@ -1,9 +1,12 @@
 # Compiler and build settings
-BUILD_DIR  = build
-BIN_DIR    = $(BUILD_DIR)/bin
-BOOT_BIN   = $(BIN_DIR)/boot/boot.bin
-CORE_ELF   = $(BIN_DIR)/core/core.elf
+BUILD_DIR      = build
+DEBUG_DIR      = debug
+
+BIN_DIR        = $(BUILD_DIR)/bin
+BOOT_BIN       = $(BIN_DIR)/boot/boot.bin
+CORE_ELF       = $(BIN_DIR)/core/core.elf
 LEONARD_OS_IMG = $(BIN_DIR)/LeonardOS.img
+DEBUG_SCRIPT   = $(DEBUG_DIR)/run_debug.gdb
 
 # Targets that don't represent real files
 .PHONY: all build prepare clean deep_clean install debug run_debug run run_el1 run_el2 run_el3 memory_mapping
@@ -18,7 +21,7 @@ all: clean build
 # Create the build directory, configure, and build the project
 build: prepare
 	@echo "Building project ..."
-	@$(MAKE) -C $(BUILD_DIR)
+	@$(MAKE) -C $(BUILD_DIR) --no-print-directory
 
 image: build
 	@rm -f $(LEONARD_OS_IMG)
@@ -36,7 +39,7 @@ prepare:
 # Clean only the compiled objects in the build directory
 clean:
 	@echo "Cleaning binaries ..."
-	@$(MAKE) -C $(BUILD_DIR) clean
+	@$(MAKE) -C $(BUILD_DIR) clean --no-print-directory
 	@rm -rf $(BIN_DIR)/*
 
 # Completely remove the build directory
@@ -55,7 +58,9 @@ debug:
 		echo "Error: aarch64-none-elf-gdb not found."; \
 		exit 1; \
 	fi
-	@aarch64-none-elf-gdb -ex "target remote localhost:1234" $(CORE_ELF)
+	@aarch64-none-elf-gdb 			\
+		-ex "file $(CORE_ELF)" 		\
+		-ex "source $(DEBUG_SCRIPT)"
 
 # Run the OS using QEMU in debug mode
 run_debug: build
@@ -63,7 +68,16 @@ run_debug: build
 		echo "Error: qemu-system-aarch64 not found."; \
 		exit 1; \
 	fi
-	@qemu-system-aarch64 -M virt -m 512M -cpu cortex-a53 -nographic -kernel $(CORE_ELF) -serial mon:stdio -s -S -d int,unimp,guest_errors &
+	@qemu-system-aarch64 	\
+		-M virt				\
+		-m 512M				\
+		-cpu cortex-a53 	\
+		-nographic			\
+		-kernel $(CORE_ELF)	\
+		-serial mon:stdio	\
+		-s					\
+		-S					\
+		-d int,unimp,guest_errors &
 
 # Run the OS using QEMU
 run:
@@ -74,23 +88,44 @@ run_el1:
 		echo "Error: qemu-system-aarch64 not found."; \
 		exit 1; \
 	fi
-	@qemu-system-aarch64 -M virt -m 512M -cpu cortex-a53 -nographic -kernel $(CORE_ELF) -serial mon:stdio &
+	@qemu-system-aarch64 	\
+		-M virt 			\
+		-m 512M 			\
+		-cpu cortex-a53 	\
+		-nographic 			\
+		-kernel $(CORE_ELF) \
+		-serial mon:stdio &
 
 run_el2:
 	@if ! command -v qemu-system-aarch64 >/dev/null 2>&1; then \
 		echo "Error: qemu-system-aarch64 not found."; \
 		exit 1; \
 	fi
-	@qemu-system-aarch64 -M virt -m 512M -cpu cortex-a53 -nographic -kernel $(CORE_ELF) -serial mon:stdio -machine virtualization=on &
+	@qemu-system-aarch64	\
+		-M virt 			\
+		-m 512M 			\
+		-cpu cortex-a53 	\
+		-nographic 			\
+		-kernel $(CORE_ELF) \
+		-serial mon:stdio 	\
+		-machine virtualization=on &
 
 run_el3:
 	@if ! command -v qemu-system-aarch64 >/dev/null 2>&1; then \
 		echo "Error: qemu-system-aarch64 not found."; \
 		exit 1; \
 	fi
-	@qemu-system-aarch64 -M virt -m 512M -cpu cortex-a53 -nographic -kernel $(CORE_ELF) -serial mon:stdio -machine virtualization=on -machine secure=on &
+	@qemu-system-aarch64 			\
+		-M virt 					\
+		-m 512M 					\
+		-cpu cortex-a53 			\
+		-nographic					\
+		-kernel $(CORE_ELF) 		\
+		-serial mon:stdio 			\
+		-machine virtualization=on	\
+		-machine secure=on &
 
 # Kill all QEMU instances
 kill:
 	@echo "Killing all QEMU instances ..."
-	@pkill -9 qemu
+	@pkill -9 qemu || true
