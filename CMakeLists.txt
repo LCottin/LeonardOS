@@ -34,30 +34,12 @@ set(CMAKE_C_COMPILER   clang)
 set(CMAKE_ASM_FLAGS "-target aarch64-none-elf -g -march=armv8-a -mtune=cortex-a53 -nostdlib")
 set(CMAKE_C_FLAGS   "-target aarch64-none-elf -g -march=armv8-a -mtune=cortex-a53 -std=c17 -ffreestanding -nostdlib")
 
-IF(CMAKE_HOST_SYSTEM_NAME MATCHES "Linux")
-    IF(VAR_OS MATCHES "ubuntu")
-        # Specify the linker
-        set(CMAKE_LINKER arm-none-eabi-ld)
+# Specify the linker
+set(CMAKE_LINKER aarch64-none-elf-ld)
 
-        # Use the appropriate archiver and ranlib for ARM64
-        set(CMAKE_AR arm-none-eabi-ar)
-        set(CMAKE_RANLIB arm-none-eabi-ranlib)
-    ELSE()
-        # Specify the linker
-        set(CMAKE_LINKER aarch64-none-elf-ld)
-
-        # Use the appropriate archiver and ranlib for ARM64
-        set(CMAKE_AR aarch64-none-elf-ar)
-        set(CMAKE_RANLIB aarch64-none-elf-ranlib)
-    ENDIF(VAR_OS MATCHES "ubuntu")
-ELSEIF(CMAKE_HOST_SYSTEM_NAME MATCHES "mac")
-    # Specify the linker
-    set(CMAKE_LINKER aarch64-none-elf-ld)
-
-    # Use the appropriate archiver and ranlib for ARM64
-    set(CMAKE_AR aarch64-none-elf-ar)
-    set(CMAKE_RANLIB aarch64-none-elf-ranlib)
-ENDIF(CMAKE_HOST_SYSTEM_NAME MATCHES "Linux")
+# Use the appropriate archiver and ranlib for ARM64
+set(CMAKE_AR aarch64-none-elf-ar)
+set(CMAKE_RANLIB aarch64-none-elf-ranlib)
 
 # Output directory for binaries
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
@@ -68,9 +50,10 @@ find_program(CMAKE_OBJCOPY aarch64-none-elf-objcopy REQUIRED)
 # Project name and version
 project(${IMG_NAME} LANGUAGES ASM C)
 
+    enable_language(ASM)
+
     # Define directories
     set(KERNEL_DIR ${CMAKE_SOURCE_DIR}/dev/kernel)
 
     # Call subdirectories cmake
     add_subdirectory(${KERNEL_DIR})
-
