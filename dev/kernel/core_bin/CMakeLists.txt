@@ -2,7 +2,7 @@
 SET(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${CORE_NAME})
 
 # Linker script file path
-set(CORE_LINKER_SCRIPT ${CORE_BIN_DIR}/linker.ld)
+set(CORE_LINKER_SCRIPT ${CORE_BIN_DIR}/core_linker.ld)
 
 # Set the name of the executable
 SET(CORE_NAME_ELF      ${CORE_NAME}.elf)
@@ -12,7 +12,6 @@ SET(CORE_NAME_STRIPPED ${CORE_NAME}.elf.stripped)
 
 # Specify the source file
 set(CORE_SOURCES
-    ${KERNEL_DIR}/boot/src/boot.s
     ${KERNEL_DIR}/MMIO/io8/src/MMIO_io8.c
     ${KERNEL_DIR}/MMIO/io16/src/MMIO_io16.c
     ${KERNEL_DIR}/MMIO/io32/src/MMIO_io32.c

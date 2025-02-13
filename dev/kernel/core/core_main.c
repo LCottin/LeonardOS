@@ -6,7 +6,7 @@
 #include "FPU.h"
 #include "clock.h"
 
-void core_main(void)
+void _core_entry(void)
 {
     memory_init_heap();
     FPU_init();
