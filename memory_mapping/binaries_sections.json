@@ -70,6 +70,18 @@
         ]
     },
 
+    "BMT (RAM)":
+    {
+        "name"         : "BMT",
+        "base_address" : "0x4F000000",
+        "type"         : "global variable",
+        "description"  : "Binary Metadata Table",
+        "sections":
+        [
+            {"name": "BMT", "size": "0x10000", "description": "Binary Metadata Table Address"}
+        ]
+    },
+
     "UART Registers":
     {
         "name"         : "UART Registers",

@@ -17,6 +17,7 @@ The following table shows the memory mapping of the OS.
 |------------------------|-----------------|-------------|--------------|------------|-------------|--------------------------------------|
 | Kernel (ROM)           | elf             |             |              |            |             | Kernel elf                           |
 |                        |                 | Header      | 0x00500000   | 0x00001000 | 0x00500fff  |   ELF header                         |
+|                        |                 | Metadata    | 0x00501000   | 0x00001000 | 0x00501fff  |   Store binary symbols               |
 |                        |                 | Code        | 0x00502000   | 0x00080000 | 0x00581fff  |   Executable code and read only data |
 |                        |                 | Data        | 0x00582000   | 0x00080000 | 0x00601fff  |   Initialized and uninitialized data |
 |------------------------|-----------------|-------------|--------------|------------|-------------|--------------------------------------|
@@ -34,4 +35,7 @@ The following table shows the memory mapping of the OS.
 |                        |                 | Stack       | 0x45100000   | 0x00010000 | 0x4510ffff  |   Stack                              |
 |                        |                 | Guard       | 0x45110000   | 0x00010000 | 0x4511ffff  |   Protection against stack overflow  |
 |                        |                 | Heap        | 0x45120000   | 0x00010000 | 0x4512ffff  |   Heap                               |
+|------------------------|-----------------|-------------|--------------|------------|-------------|--------------------------------------|
+| BMT                    | global variable |             |              |            |             | Binary Metadata Table                |
+|                        |                 | BMT         | 0x4f000000   | 0x00010000 | 0x4f00ffff  |   Binary Metadata Table Address      |
 |------------------------|-----------------|-------------|--------------|------------|-------------|--------------------------------------|
