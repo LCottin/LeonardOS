@@ -1,1 +1,2 @@
-break zero_bss
+break BMT_get_kernel_entry
+break BMT_copy_binaries
