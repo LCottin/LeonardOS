@@ -12,20 +12,38 @@ SET(BOOT_NAME_STRIPPED ${BOOT_NAME}.elf.stripped)
 
 # Specify the source file
 set(BOOT_SOURCES
-    ${BOOT_DIR}/src/boot_main.s
+    ${BOOT_DIR}/src/boot_main.S
+    ${BOOT_DIR}/src/boot_data.S
+    ${BOOT_DIR}/src/boot_parse_memory.S
+    ${BOOT_DIR}/src/boot_print.S
+    ${BOOT_DIR}/src/boot_print_addr.S
+    ${KERNEL_DIR}/BMT/src/BMT_print_table.c
+    ${KERNEL_DIR}/BMT/src/BMT_init.c
+    ${KERNEL_DIR}/BMT/src/BMT_add_elf.c
+    ${KERNEL_DIR}/BMT/src/BMT_build_table.c
+    ${KERNEL_DIR}/BMT/src/BMT_get_kernel_entry.c
+    ${KERNEL_DIR}/BMT/src/BMT_data.c
+    ${KERNEL_DIR}/BMT/src/BMT_copy_binaries.c
+    ${KERNEL_DIR}/ELF/src/ELF.c
 )
 
 set(BOOT_HEADERS
-    ${BOOT_DIR}/include/boot.h
+    ${KERNEL_DIR}/BMT/include/BMT.h
+    ${KERNEL_DIR}/ELF/include/ELF.h
 )
 
 # Specify the public header directory
 set(BOOT_INCLUDE
-    ${BOOT_DIR}/include
+    ${KERNEL_DIR}/BMT/include
+    ${KERNEL_DIR}/types/include
+    ${KERNEL_DIR}/ELF/include
 )
 
 # Specify the private header directory
 set(BOOT_INCLUDE_PRV
+    ${BOOT_DIR}/src
+    ${KERNEL_DIR}/BMT/src
+    ${KERNEL_DIR}/ELF/src
 )
 
 # Add an executable target
@@ -36,6 +54,13 @@ target_include_directories(${BOOT_NAME_ELF}
     PUBLIC ${BOOT_INCLUDE}
     PRIVATE ${BOOT_INCLUDE_PRV}
 )
+
+# Ensure the executable is built after the library
+add_dependencies(${BOOT_NAME_ELF} ${LIB_MEMORY_NAME})
+add_dependencies(${BOOT_NAME_ELF} ${LIB_STRING_NAME})
+
+# Link the common library
+target_link_libraries(${BOOT_NAME_ELF} -Wl,--whole-archive ${LIB_MEMORY_NAME} ${LIB_STRING_NAME})
 
 # Set custom linker options, including the generation of the .map file
 target_link_options(${BOOT_NAME_ELF} PRIVATE
