@@ -41,16 +41,20 @@ class Memory_Table:
     """ Generate an overview table of the sections in the binaries. """
     def generate_overview_table(self) -> str:
         self._markdown += "## Memory mapping overview\n\n"
-        self._markdown += f"| Binary           | Type | Section     | Base Address | Size     | End Address | Description                          |\n"
-        self._markdown += f"|------------------|------|-------------|--------------|----------|-------------|--------------------------------------|\n"
+        self._markdown += f"|------------------------|-----------------|-------------|--------------|------------|-------------|--------------------------------------|\n"
+        self._markdown += f"| Binary                 | Type            | Section     | Base Address | Size       | End Address | Description                          |\n"
+        self._markdown += f"|------------------------|-----------------|-------------|--------------|------------|-------------|--------------------------------------|\n"
 
         for binary in self._binaries:
-            self._markdown += (f"| {binary.get_name():<16} | {binary.get_type():<4} |             |              |          |             | {binary.get_description():<36} |\n")
+            self._markdown += (f"| {binary.get_name():<22} | {binary.get_type():<15} |             |              |            |             | {binary.get_description():<36} |\n")
             binary.compute_base_addresses()
             binary.check_for_overlaps()
 
             for section in binary.get_sections():
-                end_address     = section.compute_end_address()
-                self._markdown += (f"|                  |      | {section.get_name():<11} | {section.get_base_address():<12} | {section.get_size():<8} | {end_address:<11} |   {section.get_description():<34} |\n")
+                end_address  = '0x' + section.compute_end_address()[2:].zfill(8)
+                base_address = '0x' + section.get_base_address()[2:].zfill(8)
+                size         = '0x' + section.get_size()[2:].zfill(8)
 
-            self._markdown += f"|------------------|------|-------------|--------------|----------|-------------|--------------------------------------|\n"
+                self._markdown += (f"|                        |                 | {section.get_name():<11} | {base_address:<12} | {size:<10} | {end_address:<11} |   {section.get_description():<34} |\n")
+
+            self._markdown += f"|------------------------|-----------------|-------------|--------------|------------|-------------|--------------------------------------|\n"
