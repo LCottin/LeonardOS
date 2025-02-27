@@ -8,7 +8,7 @@ ENTRY(_core_entry)
 /* Define memory regions */
 MEMORY
 {
-    ROM_TEXT(rx)   : ORIGIN = 0x00050000, LENGTH = 0xC0000
+    ROM_METADATA(r) : ORIGIN = 0x00501000, LENGTH = 0x1000
     ROM_CODE(r)     : ORIGIN = 0x00502000, LENGTH = 0x20000
     ROM_DATA(r)     : ORIGIN = 0x00582000, LENGTH = 0x10000
 
@@ -22,6 +22,32 @@ MEMORY
 /* Define the sections and their placement in memory */
 SECTIONS
 {
+    /* Metadata Section */
+    . = ORIGIN(ROM_METADATA);
+    .metadata ALIGN(16):
+    {
+        /* METADATA in string format */
+        BYTE(0x4D) BYTE(0x45) BYTE(0x54) BYTE(0x41)
+        BYTE(0x44) BYTE(0x41) BYTE(0x54) BYTE(0x41)
+
+        /* KERN in string format */
+        BYTE(0x4B) BYTE(0x45) BYTE(0x52) BYTE(0x4E)
+
+        /* Tag = 0x01, Data = Stack top address */
+        LONG(0x01); LONG(ABSOLUTE(__stack_top));
+
+        /* Tag = 0x02, Data = Stack size */
+        LONG(0x02); LONG(ABSOLUTE(__stack_size));
+
+        /* Tag = 0x03, Data = Heap start address */
+        LONG(0x03); LONG(ABSOLUTE(__heap_start));
+
+        /* Tag = 0x04, Data = Heap size */
+        LONG(0x04); LONG(ABSOLUTE(__heap_size));
+
+        . = ALIGN(16);  /* Ensure alignment after .metadata section */
+    } > ROM_METADATA
+
     /* Code + Read-Only Data */
     . = ORIGIN(RAM_CODE);
     .code ALIGN(16):
@@ -42,12 +68,12 @@ SECTIONS
 
     /* Stack */
     . = ORIGIN(RAM_STACK);
+    __stack_size = LENGTH(RAM_STACK);    /* Size of stack section */
     .stack (NOLOAD):
     {
-        __stack_start = .;
         . = . + LENGTH(RAM_STACK);
         . = ALIGN(16);
-        __stack_end = .;
+        __stack_top = .;
     } > RAM_STACK
 
     /* Heap */
@@ -58,6 +84,5 @@ SECTIONS
         __heap_start = .;
         . = . + LENGTH(RAM_HEAP);
         . = ALIGN(16);
-        __heap_end = .;
     } > RAM_HEAP
 }
