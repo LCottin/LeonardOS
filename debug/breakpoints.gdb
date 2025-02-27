@@ -1,2 +1,1 @@
-break BMT_get_kernel_entry
-break BMT_copy_binaries
+# break boot_jump_to_kernel
