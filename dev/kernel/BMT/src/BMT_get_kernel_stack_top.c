@@ -1,8 +1,8 @@
 #include "BMT.h"
 
-addr_t BMT_get_kernel_entry(void)
+addr_t BMT_get_kernel_stack_top(void)
 {
-    addr_t entry_point = NULL_ADDR;
+    addr_t stack_top = NULL_ADDR;
 
     for (uint32_t idx = 0; idx < g_p_bmt_table->binaries_count; idx++)
     {
@@ -10,9 +10,9 @@ addr_t BMT_get_kernel_entry(void)
 
         if (p_binary->type == ELF64_FILE_KERNEL)
         {
-            entry_point = p_binary->entry_point;
+            stack_top = p_binary->memory_info.stack_top;
         }
     }
 
-    return entry_point;
+    return stack_top;
 }

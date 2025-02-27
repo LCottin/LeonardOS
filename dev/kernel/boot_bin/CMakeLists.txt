@@ -22,6 +22,7 @@ set(BOOT_SOURCES
     ${KERNEL_DIR}/BMT/src/BMT_add_elf.c
     ${KERNEL_DIR}/BMT/src/BMT_build_table.c
     ${KERNEL_DIR}/BMT/src/BMT_get_kernel_entry.c
+    ${KERNEL_DIR}/BMT/src/BMT_get_kernel_stack_top.c
     ${KERNEL_DIR}/BMT/src/BMT_data.c
     ${KERNEL_DIR}/BMT/src/BMT_copy_binaries.c
     ${KERNEL_DIR}/ELF/src/ELF.c

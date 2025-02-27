@@ -59,4 +59,11 @@ extern void BMT_print_table(void);
  */
 extern addr_t BMT_get_kernel_entry(void);
 
+/**
+ * @brief Retrieves the kernel stack top address.
+ *
+ * @return The kernel stack top address.
+ */
+extern addr_t BMT_get_kernel_stack_top(void);
+
 #endif /* __BMT_H__ */
