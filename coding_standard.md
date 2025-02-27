@@ -56,6 +56,19 @@ Typedef Naming: When creating new types with typedef, the type name should end w
 - Switch Statements: Always use braces for case blocks, include all possible cases, and provide a default case.
 - Goto, Continue, and Break: Minimize the use of goto, continue, and break statements for cleaner control flow.
 
+## Assembly coding conventions
+
+When using General-Purpose Registers (x0-x30 for 64 bits or w0-w30 for 32 bits), follow these conventions:
+
+- x0-x7: Used for function arguments and return values (volatile).
+- x8: Indirect result or temporary register (volatile).
+- x9-x15: Temporary or scratch registers (volatile).
+- x16, x17: Intra-procedure call registers (used for PLT/branching).
+- x18: Platform register (OS/platform-specific, sometimes reserved).
+- x19-x28: Callee-saved registers (non-volatile, must be preserved across function calls).
+- x29: Frame pointer (non-volatile, used for stack frames).
+- x30: Link register (return address for function calls).
+
 ## Best practices
 
 - Prefer Enumerations to Defines: Use enum to represent constant values rather than #define, as this improves type safety and clarity.

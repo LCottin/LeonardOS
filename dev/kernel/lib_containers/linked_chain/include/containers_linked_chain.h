@@ -53,11 +53,12 @@ extern bool_t containers_linked_chain_is_empty(const containers_linked_chain_t *
  * This function inserts a new element with the given data at the specified index in the linked chain.
  *
  * @param chain Pointer to the linked chain container.
+ * @param new_node Pointer to the node to be inserted.
  * @param data Pointer to the data to be inserted.
  * @param index The index at which to insert the new element.
  * @return Pointer to the inserted data on success, or NULL on failure.
  */
-extern ptr_t containers_linked_chain_insert(containers_linked_chain_t *chain, ptr_t data, const size_t index);
+extern ptr_t containers_linked_chain_insert(containers_linked_chain_t *chain, containers_linked_chain_node_t *new_node, ptr_t data, const size_t index);
 
 /**
  * @brief Removes an element from the linked chain at the specified index.

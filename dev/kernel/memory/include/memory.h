@@ -1,5 +1,5 @@
-#ifndef __MEMORY_ALLOC_H__
-#define __MEMORY_ALLOC_H__
+#ifndef __MEMORY_H__
+#define __MEMORY_H__
 
 #include "types.h"
 
@@ -51,4 +51,4 @@ extern void memory_free(ptr_t ptr);
  */
 extern void memory_init_heap(void);
 
-#endif /* __MEMORY_ALLOC_H__ */
+#endif /* __MEMORY_H__ */

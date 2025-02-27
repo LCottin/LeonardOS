@@ -56,10 +56,11 @@ extern bool_t containers_fifo_is_empty(const containers_fifo_t *queue);
  * This function adds a new element to the tail of the FIFO container.
  *
  * @param queue Pointer to the FIFO container.
+ * @param new_node Pointer to the node to be added to the FIFO.
  * @param data Pointer to the data to be added to the FIFO.
  * @return ptr_t Pointer to the element added, or NULL if the fifo is not allocated.
  */
-extern ptr_t containers_fifo_enqueue(containers_fifo_t *queue, ptr_t data);
+extern ptr_t containers_fifo_enqueue(containers_fifo_t *queue, containers_fifo_node_t *new_node, ptr_t data);
 
 /**
  * @brief Removes and returns the first element from the FIFO container.

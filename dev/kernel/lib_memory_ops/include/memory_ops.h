@@ -3,6 +3,13 @@
 
 #include "types.h"
 
+#define MEMORY_BLOCK_SIZE (sizeof(memory_block_t))
+
+/* Define alignment to ptr size */
+#define MEMORY_ALIGNMENT (sizeof(ptr_t))
+
+#define MEMORY_ALIGN(size) (((size) + (MEMORY_ALIGNMENT - 1)) & ~(MEMORY_ALIGNMENT - 1))
+
 /**
  * @brief Copies 'size' bytes from the memory area pointed to by 'src' to the memory area pointed to by 'dest'.
  *
@@ -31,5 +38,21 @@ extern ptr_t memory_ops_copy(ptr_t dest, cptr_t src, const size_t size);
  * @return Pointer to the destination memory area.
  */
 extern ptr_t memory_ops_set(ptr_t dest, const int32_t value, const size_t size);
+
+/**
+ * @brief Compares two memory areas byte by byte.
+ *
+ * This function compares the first 'size' bytes of the memory areas pointed to by 'src1' and 'src2'.
+ *
+ * @param src1 Pointer to the first memory area to be compared.
+ * @param src2 Pointer to the second memory area to be compared.
+ * @param size Number of bytes to compare.
+ *
+ * @return A value indicating the result of the comparison:
+ *         - 0 if the contents of both memory areas are equal
+ *         - A negative value if the first differing byte in src1 is less than the corresponding byte in src2
+ *         - A positive value if the first differing byte in src1 is greater than the corresponding byte in src2
+ */
+extern int32_t memory_ops_cmp(cptr_t src1, cptr_t src2, const size_t size);
 
 #endif /* __MEMORY_OPS_H__ */

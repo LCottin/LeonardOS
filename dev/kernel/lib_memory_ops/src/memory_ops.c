@@ -1,5 +1,4 @@
 #include "memory_ops.h"
-#include "memory_alloc.h"
 
 void *memcpy(void *dest, const void *src, size_t n) __attribute__((alias("memory_ops_copy")));
 
@@ -88,4 +87,32 @@ ptr_t memory_ops_set(ptr_t dest, const int32_t value, const size_t size)
     }
 
     return dest;
+}
+
+int32_t memory_ops_cmp(cptr_t src1, cptr_t src2, const size_t size)
+{
+    size_t  length = 0;
+    int32_t to_return;
+
+    const byte_t *ptr1 = src1;
+    const byte_t *ptr2 = src2;
+
+    /* Loop until maximum size is reached or a byte differs */
+    while ((length < size) && (*ptr1 == *ptr2))
+    {
+        ptr1++;
+        ptr2++;
+        length++;
+    }
+
+    if (length == size)
+    {
+        to_return = 0;
+    }
+    else
+    {
+        to_return = (uint8_t)*ptr1 - (uint8_t)*ptr2;
+    }
+
+    return to_return;
 }

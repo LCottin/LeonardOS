@@ -2,7 +2,7 @@
 SET(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${CORE_NAME})
 
 # Linker script file path
-set(CORE_LINKER_SCRIPT ${CORE_BIN_DIR}/linker.ld)
+set(CORE_LINKER_SCRIPT ${CORE_BIN_DIR}/core_linker.ld)
 
 # Set the name of the executable
 SET(CORE_NAME_ELF      ${CORE_NAME}.elf)
@@ -12,7 +12,6 @@ SET(CORE_NAME_STRIPPED ${CORE_NAME}.elf.stripped)
 
 # Specify the source file
 set(CORE_SOURCES
-    ${KERNEL_DIR}/boot/src/boot.s
     ${KERNEL_DIR}/MMIO/io8/src/MMIO_io8.c
     ${KERNEL_DIR}/MMIO/io16/src/MMIO_io16.c
     ${KERNEL_DIR}/MMIO/io32/src/MMIO_io32.c
@@ -25,6 +24,7 @@ set(CORE_SOURCES
     ${KERNEL_DIR}/clock/src/clock_init.c
     ${KERNEL_DIR}/clock/src/clock_get_time.c
     ${KERNEL_DIR}/clock/src/clock_data.c
+    ${KERNEL_DIR}/memory/src/memory.c
     ${CORE_DIR}/core_main.c
 )
 
@@ -37,6 +37,7 @@ set(CORE_HEADERS
     ${KERNEL_DIR}/UART/include/UART.h
     ${KERNEL_DIR}/FPU/include/FPU.h
     ${KERNEL_DIR}/clock/include/clock.h
+    ${KERNEL_DIR}/memory/include/memory.h
 )
 
 # Specify the public header directory
@@ -49,6 +50,7 @@ set(CORE_INCLUDE
     ${KERNEL_DIR}/UART/include
     ${KERNEL_DIR}/FPU/include
     ${KERNEL_DIR}/clock/include
+    ${KERNEL_DIR}/memory/include
 )
 
 set(CORE_INCLUDE_PRV
