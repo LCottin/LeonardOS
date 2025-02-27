@@ -39,9 +39,12 @@ _boot_entry:
         bl      BMT_get_kernel_entry                    /* Get kernel entry point */
         mov     x19, x0                                 /* Save kernel entry point in non volatile register */
         bl      BMT_get_kernel_stack_top                /* Get kernel stack pointer */
+        mov     x20, x0                                 /* Save kernel stack top in non volatile register */
 
     /* Jump to kernel entry point */
     boot_jump_to_kernel:
+        ldr     x0, =K_BOOT_MAIN_BRANCH_KERNEL          /* Address of message */
+        bl      boot_print                              /* Print message */
         mov     sp, x0                                  /* Set stack pointer */
         br      x19                                     /* Jump to kernel entry point */
 
@@ -55,10 +58,13 @@ K_BOOT_MAIN_HELLO_MSG:
     .asciz "\n[BOOT] Hello World!\n"
 
 K_BOOT_MAIN_BUILD_BMT_MSG:
-    .asciz "\n[BOOT] Building BMT table...\n"
+    .asciz "[BOOT] Building BMT table...\n"
 
 K_BOOT_MAIN_COPY_BINARIES_MSG:
-    .asciz "\n[BOOT] Copying binaries to RAM...\n"
+    .asciz "[BOOT] Copying binaries to RAM...\n"
 
 K_BOOT_MAIN_DONE_MSG:
-    .asciz "\n[BOOT] Done!\n"
+    .asciz "[BOOT] Done!\n"
+
+K_BOOT_MAIN_BRANCH_KERNEL:
+    .asciz "[BOOT] Launching kernel ...\n"

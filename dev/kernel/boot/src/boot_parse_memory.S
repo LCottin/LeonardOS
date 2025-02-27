@@ -69,4 +69,4 @@ K_BOOT_PARSE_MEMORY_MSG_START_PARSING:
     .asciz "\n[BOOT] Parsing memory for ELF ... "
 
 K_BOOT_PARSE_MEMORY_MSG_DONE_PARSING:
-    .asciz "\n[BOOT] Done parsing memory for ELF\n"
+    .asciz "\n[BOOT] Done parsing memory for ELF\n\n"
