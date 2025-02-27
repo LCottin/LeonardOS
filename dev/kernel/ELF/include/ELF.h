@@ -18,12 +18,12 @@
  */
 typedef enum
 {
-    ELF_TYPE_NONE   = 0,      /* No file type */
-    ELF_FILE_BOOT   = 1,      /* Boot file */
-    ELF_FILE_KERNEL = 2,      /* Kernel file */
-    ELF_FILE_USER   = 3,      /* User file */
-    ELF_FILE_MAX
-} ELF_file_type_t;
+    ELF64_FILE_UNKNOWN = 0,      /* No file type */
+    ELF64_FILE_BOOT    = 1,      /* Boot file */
+    ELF64_FILE_KERNEL  = 2,      /* Kernel file */
+    ELF64_FILE_USER    = 3,      /* User file */
+    ELF64_FILE_MAX
+} ELF64_file_type_t;
 
 /**
  * @brief Structure to hold custom information about an ELF segment.
@@ -40,6 +40,16 @@ typedef struct
     addr_t   file_offset;                     /* Offset in file */
 } ELF64_custom_segment_t;
 
+/**
+ * @brief Structure to hold memory information about a binary.
+ */
+typedef struct
+{
+    addr_t stack_top;                         /* Stack top address */
+    addr_t heap_start;                        /* Heap start address */
+    size_t stack_size;                        /* Stack size */
+    size_t heap_size;                         /* Heap size */
+} ELF64_memory_info_t;
 
 /**
  * @brief Structure to hold information about an ELF binary.
@@ -87,16 +97,6 @@ addr_t elf_get_entry_point(const addr_t elf_addr);
 bool_t elf_is_compatible(const addr_t elf_addr);
 
 /**
- * @brief Retrieves the size of an ELF binary.
- *
- * This function reads the size of the ELF binary from the ELF header.
- *
- * @param elf_addr The address of the ELF binary in memory.
- * @return size_t The size of the ELF binary.
- */
-size_t elf_get_size(const addr_t elf_addr);
-
-/**
  * @brief Retrieves the number of segments in an ELF binary.
  *
  * This function reads the number of segments from the ELF header.
@@ -113,20 +113,35 @@ uint32_t elf_get_nb_segments(const addr_t elf_addr);
  * segment structure with the relevant data.
  *
  * @param elf_addr The address of the ELF binary in memory.
- * @param segment_data Pointer to the custom segment structure to fill.
- * @param segment_idx The index of the segment to extract information from.
+ * @param p_bin_info Pointer to the binary information structure to fill.
  * @return None.
  */
-void elf_fill_segment_info(const addr_t elf_addr, ELF64_custom_segment_t *segment_data, const uint32_t segment_idx);
+void elf_fill_segment_info(const addr_t elf_addr, ELF64_binary_info_t *p_bin_info);
 
 /**
- * @brief Retrieves the type of an ELF binary.
+ * @brief Checks if a segment is a metadata segment.
  *
- * This function reads the type of the ELF binary from the ELF header.
+ * This function checks if a segment is a metadata segment by reading the first
+ * 64-bit word of the segment and comparing it to a known magic number.
  *
  * @param elf_addr The address of the ELF binary in memory.
- * @return ELF_file_type_t The type of the ELF binary.
+ * @param segment_idx The index of the segment to check.
+ * @return bool_t Returns TRUE if the segment is a metadata segment, FALSE otherwise.
  */
-ELF_file_type_t elf_get_type(const addr_t elf_addr);
+bool_t elf_is_segment_metadata(const addr_t elf_addr, const uint32_t segment_idx);
+
+/**
+ * @brief Fills a memory information structure with metadata from an ELF segment.
+ *
+ * This function reads metadata from an ELF segment and fills a memory information
+ * structure with the relevant data.
+ *
+ * @param elf_addr The address of the ELF binary in memory.
+ * @param segment_idx The index of the segment to extract metadata from.
+ * @param p_memory_info Pointer to the memory information structure to fill.
+ * @param p_elf_type Pointer to the ELF file type to fill.
+ * @return None.
+ */
+void elf_fill_meta_info(const addr_t elf_addr, const uint32_t segment_idx, ELF64_memory_info_t *p_memory_info, ELF64_file_type_t *p_elf_type);
 
 #endif /* __ELF_H__ */

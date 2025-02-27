@@ -3,23 +3,7 @@
 
 #include "types.h"
 
-#define K_ELF_MAGIC 0x464C457FU       /* "\x7FELF" in little-endian */
-#define K_ELF_IDENT_SIZE     16       /* ELF identification size */
-
-#define K_ELF_IDENT_CLASS_OFF       4    /* ELF Class */
-#define K_ELF_IDENT_DATA_OFF        5    /* Data Encoding */
-#define K_ELF_IDENT_VERSION_OFF     6    /* ELF Version */
-#define K_ELF_IDENT_OSABI_OFF       7    /* OS/ABI */
-#define K_ELF_IDENT_ABIVERSION_OFF  8    /* ABI Version */
-
-#define K_ELF_IDENT_CLASS_VAL 2    /* 64-bit ELF */
-#define K_ELF_IDENT_DATA_VAL  1    /* Little-endian */
-#define K_ELF_IDENT_VERSION_VAL 1  /* Current ELF version */
-#define K_ELF_IDENT_OSABI_VAL  0  /* System V ABI */
-#define K_ELF_IDENT_ABIVERSION_VAL 0  /* ABI Version */
-
-#define K_ELF_MACHINE_AARCH64 183  /* ARM64 */
-#define K_ELF_TYPE_EXEC       2    /* Executable file */
+#define K_ELF_IDENT_SIZE     16                    /* ELF identification size */
 
 /**
  * @brief ELF header structure for 64-bit ELF files.
@@ -63,5 +47,39 @@ typedef struct __attribute__((packed))
     uint64_t mem_size;      /* Size of segment in memory */
     uint64_t align;         /* Alignment */
 } ELF64_segment_hdr_t;
+
+/**
+ * @brief Magic numbers for 64-bit ELF files.
+ */
+typedef enum
+{
+    ELF_FILE_BOOT_MAGIC    = 0x544F4F42U, /* "BOOT" */
+    ELF_FILE_KERNEL_MAGIC  = 0x4E52454BU, /* "KERN" */
+    ELF_FILE_USER_MAGIC    = 0x52455355U, /* "USER" */
+} ELF64_file_magic_t;
+
+/**
+ * @brief Metadata tags for ELF segments.
+ */
+typedef enum
+{
+    K_ELF_METADATA_STACK_TOP   = 1, /* Stack start address */
+    K_ELF_METADATA_STACK_SIZE  = 2, /* Stack stop address */
+    K_ELF_METADATA_HEAP_START  = 3, /* Heap start address */
+    K_ELF_METADATA_HEAP_SIZE   = 4, /* Heap stop address */
+    K_ELF_METADATA_NB_ENTRIES
+} ELF64_metadata_tag_t;
+
+/**
+ * @brief Metadata structure for 64-bit ELF files.
+ *
+ * This structure represents a metadata entry in a 64-bit ELF file, containing
+ * a tag and data pair.
+ */
+typedef struct
+{
+    ELF64_metadata_tag_t tag;   /* Metadata tag */
+    uint32_t            data;   /* Metadata data */
+} ELF64_metadata_t;
 
 #endif /* __ELF_PRV_H__ */
