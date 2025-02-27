@@ -4,19 +4,9 @@
 #include "types.h"
 
 /**
- * @brief Maximum length of a section name.
- */
-#define K_ELF_MAX_NAME_LEN 32U
-
-/**
  * @brief Maximum number of segments in an ELF file.
  */
 #define K_ELF_MAX_SEGMENTS 10U
-
-/**
- * @brief Default segment name if no section header is available.
- */
-#define K_ELF_DEFAULT_SEGMENT_NAME "UNKNOWN_SEGMENT"
 
 /**
  * @brief Segment type for LOAD segments.
@@ -40,7 +30,6 @@ typedef enum
  */
 typedef struct
 {
-    char_t   name[K_ELF_MAX_NAME_LEN];        /* Segment name */
     addr_t   hdr_addr;                        /* Segment header address */
     addr_t   virt_addr;                       /* Virtual address */
     addr_t   phy_addr;                        /* Physical address */
@@ -49,9 +38,22 @@ typedef struct
     size_t   mem_size;                        /* Size in memory */
     size_t   file_size;                       /* Size in file */
     addr_t   file_offset;                     /* Offset in file */
-    uint64_t align;                           /* Alignment */
 } ELF64_custom_segment_t;
 
+
+/**
+ * @brief Structure to hold information about an ELF binary.
+ */
+typedef struct
+{
+    ELF64_file_type_t       type;                               /* Binary type */
+    addr_t                  entry_point;                        /* Entry point address */
+    addr_t                  load_address;                       /* Physical load address */
+    ELF64_custom_segment_t  segments[K_ELF_MAX_SEGMENTS];       /* Segment information */
+    uint32_t                segments_count;                     /* Number of loadable segments */
+    bool_t                  is_compatible;                      /* Compatibility status */
+    ELF64_memory_info_t     memory_info;                        /* Memory information */
+} ELF64_binary_info_t;
 
 /**
  * @brief Validates an ELF header to ensure it's a valid ELF file.

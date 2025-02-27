@@ -16,11 +16,7 @@ void BMT_build_table()
             /* Get binary entry point */
             g_p_bmt_table->binaries[idx].entry_point = elf_get_entry_point(elf_addr);
 
-            /* Get binary type */
-            g_p_bmt_table->binaries[idx].type = elf_get_type(elf_addr);
 
-            /* Get binary size */
-            g_p_bmt_table->binaries[idx].binary_size = elf_get_size(elf_addr);
 
             /* Get number of segments */
             g_p_bmt_table->binaries[idx].segments_count = elf_get_nb_segments(elf_addr);
