@@ -1,16 +1,16 @@
 #include "MMIO_io16.h"
 
-void mmio_io16_write(cptr_t addr, const uint16_t value)
+void mmio_io16_write(ptr_t addr, const uint16_t value)
 {
     *((volatile uint16_t *)addr) = value;
 }
 
 uint16_t mmio_io16_read(cptr_t addr)
 {
-    return *((volatile uint16_t *)addr);
+    return *((volatile const uint16_t *)addr);
 }
 
-void mmio_io16_set_bit(cptr_t addr, const uint16_t bit)
+void mmio_io16_set_bit(ptr_t addr, const uint16_t bit)
 {
     if (bit < 16U)
     {
@@ -20,7 +20,7 @@ void mmio_io16_set_bit(cptr_t addr, const uint16_t bit)
     }
 }
 
-void mmio_io16_clear_bit(cptr_t addr, const uint16_t bit)
+void mmio_io16_clear_bit(ptr_t addr, const uint16_t bit)
 {
     if (bit < 16U)
     {
@@ -30,7 +30,7 @@ void mmio_io16_clear_bit(cptr_t addr, const uint16_t bit)
     }
 }
 
-void mmio_io16_toggle_bit(cptr_t addr, const uint16_t bit)
+void mmio_io16_toggle_bit(ptr_t addr, const uint16_t bit)
 {
     if (bit < 16U)
     {

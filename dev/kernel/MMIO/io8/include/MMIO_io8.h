@@ -12,7 +12,7 @@
  * @param value The 8-bit value to write to the specified MMIO address.
  * @return None.
  */
-extern void mmio_io8_write(cptr_t addr, const uint8_t value);
+extern void mmio_io8_write(ptr_t addr, const uint8_t value);
 
 /**
  * @brief Reads a 8-bit value from a specified memory-mapped I/O (MMIO) address.
@@ -32,7 +32,7 @@ extern uint8_t mmio_io8_read(cptr_t addr);
  *
  * @return This function does not return a value.
  */
-extern void mmio_io8_set_bit(cptr_t addr, const uint8_t bit);
+extern void mmio_io8_set_bit(ptr_t addr, const uint8_t bit);
 
 /**
  * @brief Clears a specific bit in an 8-bit memory-mapped I/O register.
@@ -42,7 +42,7 @@ extern void mmio_io8_set_bit(cptr_t addr, const uint8_t bit);
  *
  * @return This function does not return a value.
  */
-extern void mmio_io8_clear_bit(cptr_t addr, const uint8_t bit);
+extern void mmio_io8_clear_bit(ptr_t addr, const uint8_t bit);
 
 /**
  * @brief Toggles a specific bit in an 8-bit memory-mapped I/O register.
@@ -52,6 +52,6 @@ extern void mmio_io8_clear_bit(cptr_t addr, const uint8_t bit);
  *
  * @return This function does not return a value.
  */
-extern void mmio_io8_toggle_bit(cptr_t addr, const uint8_t bit);
+extern void mmio_io8_toggle_bit(ptr_t addr, const uint8_t bit);
 
 #endif /* __MMIO_IO8_H__ */

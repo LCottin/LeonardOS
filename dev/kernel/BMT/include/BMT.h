@@ -16,6 +16,7 @@ typedef struct
 {
     ELF64_binary_info_t binaries[K_BMT_MAX_ELF_BINARIES];    /* ELF binary data */
     uint32_t            binaries_count;                      /* Number of ELF binaries */
+    uint8_t             padding[4];                          /* Padding */
 } BMT_table_t;
 
 /**
@@ -65,5 +66,12 @@ extern addr_t BMT_get_kernel_entry(void);
  * @return The kernel stack top address.
  */
 extern addr_t BMT_get_kernel_stack_top(void);
+
+/**
+ * @brief Initializes the BMT module.
+ *
+ * @return None.
+ */
+extern void BMT_init(void);
 
 #endif /* __BMT_H__ */

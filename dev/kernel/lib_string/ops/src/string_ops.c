@@ -107,8 +107,6 @@ char_t *string_ops_cat_n(char_t *dest, const char_t *src, const size_t size)
 
 int32_t string_ops_cmp(const char_t *str1, const char_t *str2)
 {
-    int32_t cmp;
-
     /* Loop until end of one string or until a character differs */
     while ((*str1 != '\0') && (*str1 == *str2))
     {

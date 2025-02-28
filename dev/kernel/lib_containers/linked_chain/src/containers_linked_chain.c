@@ -60,7 +60,7 @@ ptr_t containers_linked_chain_remove(containers_linked_chain_t *chain, const siz
     if ((chain != NULL) && (index < chain->size))
     {
         /* Get node to free */
-        containers_linked_chain_node_t *node_to_remove;
+        containers_linked_chain_node_t *node_to_remove = chain->head;
 
         if (index == 0)
         {

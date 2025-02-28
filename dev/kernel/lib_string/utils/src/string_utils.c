@@ -32,7 +32,7 @@ char_t *string_utils_itoa(const int32_t num, char_t *str, const int32_t base)
         do
         {
             int32_t remainder = number % base;
-            str[length++] = (remainder > 9) ? (remainder - 10) + 'a' : remainder + '0';
+            str[length++] = (remainder > 9) ? (char_t)((remainder - 10) + (int32_t)'a') : (char_t)(remainder + (int32_t)'0');
             number /= base;
         } while (number != 0);
 

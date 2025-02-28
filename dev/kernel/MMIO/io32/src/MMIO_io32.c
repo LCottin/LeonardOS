@@ -1,16 +1,16 @@
 #include "MMIO_io32.h"
 
-void mmio_io32_write(cptr_t addr, const uint32_t value)
+void mmio_io32_write(ptr_t addr, const uint32_t value)
 {
     *((volatile uint32_t *)addr) = value;
 }
 
 uint32_t mmio_io32_read(cptr_t addr)
 {
-    return *((volatile uint32_t *)addr);
+    return *((volatile const uint32_t *)addr);
 }
 
-void mmio_io32_set_bit(cptr_t addr, const uint32_t bit)
+void mmio_io32_set_bit(ptr_t addr, const uint32_t bit)
 {
     if (bit < 32U)
     {
@@ -20,7 +20,7 @@ void mmio_io32_set_bit(cptr_t addr, const uint32_t bit)
     }
 }
 
-void mmio_io32_clear_bit(cptr_t addr, const uint32_t bit)
+void mmio_io32_clear_bit(ptr_t addr, const uint32_t bit)
 {
     if (bit < 32U)
     {
@@ -30,7 +30,7 @@ void mmio_io32_clear_bit(cptr_t addr, const uint32_t bit)
     }
 }
 
-void mmio_io32_toggle_bit(cptr_t addr, const uint32_t bit)
+void mmio_io32_toggle_bit(ptr_t addr, const uint32_t bit)
 {
     if (bit < 32U)
     {

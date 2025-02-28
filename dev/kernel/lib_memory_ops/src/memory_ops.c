@@ -9,8 +9,8 @@ ptr_t memory_ops_copy(ptr_t dest, cptr_t src, const size_t size)
         size_t remaining_size = size;
 
         /* Convert to byte pointers */
-        byte_t *d = (byte_t *)dest;
-        byte_t *s = (byte_t *)src;
+        byte_t *d       = (byte_t *)dest;
+        const byte_t *s = (const byte_t *)src;
 
         /* Align both source and destination */
         while (((((addr_t)d & (MEMORY_ALIGNMENT - 1U)) != 0) || ((addr_t)s & (MEMORY_ALIGNMENT - 1U)) != 0) && (remaining_size > 0))
@@ -22,8 +22,8 @@ ptr_t memory_ops_copy(ptr_t dest, cptr_t src, const size_t size)
         /* Bulk copy only when both addresses are aligned */
         if ((((addr_t)d & (MEMORY_ALIGNMENT - 1U)) == 0) && (((addr_t)s & (MEMORY_ALIGNMENT - 1U)) == 0))
         {
-            uint64_t *d_chunk = (uint64_t *)d;
-            uint64_t *s_chunk = (uint64_t *)s;
+            uint64_t *d_chunk       = (uint64_t *)d;
+            const uint64_t *s_chunk = (const uint64_t *)s;
 
             while (remaining_size >= MEMORY_ALIGNMENT)
             {
@@ -32,8 +32,8 @@ ptr_t memory_ops_copy(ptr_t dest, cptr_t src, const size_t size)
             }
 
             /* Update pointers for remaining data */
-            d = (byte_t *)d_chunk;
-            s = (byte_t *)s_chunk;
+            d       = (byte_t *)d_chunk;
+            s = (const byte_t *)s_chunk;
         }
 
         /* Copy any remaining bytes one by one */

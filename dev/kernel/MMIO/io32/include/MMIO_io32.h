@@ -12,7 +12,7 @@
  * @param value The 32-bit value to write to the specified MMIO address.
  * @return None.
  */
-extern void mmio_io32_write(cptr_t addr, const uint32_t value);
+extern void mmio_io32_write(ptr_t addr, const uint32_t value);
 
 /**
  * @brief Reads a 32-bit value from a specified memory-mapped I/O (MMIO) address.
@@ -32,7 +32,7 @@ extern uint32_t mmio_io32_read(cptr_t addr);
  *
  * @return This function does not return a value.
  */
-extern void mmio_io32_set_bit(cptr_t addr, const uint32_t bit);
+extern void mmio_io32_set_bit(ptr_t addr, const uint32_t bit);
 
 /**
  * @brief Clears a specific bit in an 32-bit memory-mapped I/O register.
@@ -42,7 +42,7 @@ extern void mmio_io32_set_bit(cptr_t addr, const uint32_t bit);
  *
  * @return This function does not return a value.
  */
-extern void mmio_io32_clear_bit(cptr_t addr, const uint32_t bit);
+extern void mmio_io32_clear_bit(ptr_t addr, const uint32_t bit);
 
 /**
  * @brief Toggles a specific bit in an 32-bit memory-mapped I/O register.
@@ -52,6 +52,6 @@ extern void mmio_io32_clear_bit(cptr_t addr, const uint32_t bit);
  *
  * @return This function does not return a value.
  */
-extern void mmio_io32_toggle_bit(cptr_t addr, const uint32_t bit);
+extern void mmio_io32_toggle_bit(ptr_t addr, const uint32_t bit);
 
 #endif /* __MMIO_IO32_H__ */

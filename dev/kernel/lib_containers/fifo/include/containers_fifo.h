@@ -24,9 +24,10 @@ typedef struct containers_fifo_node
  */
 typedef struct containers_fifo
 {
-    containers_fifo_node_t *head; /* Pointer to the first node in the FIFO */
-    containers_fifo_node_t *tail; /* Pointer to the last node in the FIFO */
-    size_t size;                  /* Number of elements currently in the FIFO */
+    containers_fifo_node_t *head;           /* Pointer to the first node in the FIFO */
+    containers_fifo_node_t *tail;           /* Pointer to the last node in the FIFO */
+    size_t                  size;           /* Number of elements currently in the FIFO */
+    uint8_t                 padding[4];     /* Padding */
 } containers_fifo_t;
 
 /**

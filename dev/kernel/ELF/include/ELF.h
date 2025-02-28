@@ -57,12 +57,13 @@ typedef struct
 typedef struct
 {
     ELF64_file_type_t       type;                               /* Binary type */
+    uint32_t                segments_count;                     /* Number of loadable segments */
     addr_t                  entry_point;                        /* Entry point address */
     addr_t                  load_address;                       /* Physical load address */
     ELF64_custom_segment_t  segments[K_ELF_MAX_SEGMENTS];       /* Segment information */
-    uint32_t                segments_count;                     /* Number of loadable segments */
-    bool_t                  is_compatible;                      /* Compatibility status */
     ELF64_memory_info_t     memory_info;                        /* Memory information */
+    bool_t                  is_compatible;                      /* Compatibility status */
+    uint8_t                 padding[4];                         /* Padding */
 } ELF64_binary_info_t;
 
 /**

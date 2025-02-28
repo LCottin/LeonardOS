@@ -25,6 +25,7 @@ typedef struct containers_linked_chain
 {
     containers_linked_chain_node_t *head; /* Pointer to the first node in the linked_chain */
     size_t size;                          /* Number of elements currently in the linked_chain */
+    uint8_t padding[4];                   /* Padding */
 } containers_linked_chain_t;
 
 /**

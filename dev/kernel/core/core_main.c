@@ -5,6 +5,7 @@
 #include "memory.h"
 #include "FPU.h"
 #include "clock.h"
+#include "core_main_prv.h"
 
 void _core_entry(void)
 {
