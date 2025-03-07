@@ -1,0 +1,12 @@
+# ==============================================================================
+# Library only creation
+# ==============================================================================
+add_library(lib_name INTERFACE)
+
+# ==============================================================================
+# Expose headers only needed by lib_name and seeable to the user
+# ==============================================================================
+target_link_libraries(lib_name
+    INTERFACE
+        component_usr_lib   # Link with component_usr library
+)
