@@ -1,12 +1,13 @@
-#include "BMT.h"
-#include "memory_ops.h"
+#include "bmt_krn.h"
+#include "bmt_ctx.h"
+#include "memory_ops_usr.h"
 
-void BMT_copy_binaries(void)
+void bmt_build_copy_binaries(void)
 {
-    /* Loop through all the binaries in the BMT table */
-    for (uint32_t bin_idx = 0; bin_idx < g_p_bmt_table->binaries_count; bin_idx++)
+    /* Loop through all the binaries in the bmt table */
+    for (uint32_t bin_idx = 0; bin_idx < g_p_bmt_ctx_table->binaries_count; bin_idx++)
     {
-        const ELF64_binary_info_t *p_binary = &g_p_bmt_table->binaries[bin_idx];
+        const ELF64_binary_info_t *p_binary = &g_p_bmt_ctx_table->binaries[bin_idx];
 
         /* Loop through all the segments in the binary */
         for (uint32_t seg_idx = 0; seg_idx < p_binary->segments_count; seg_idx++)
