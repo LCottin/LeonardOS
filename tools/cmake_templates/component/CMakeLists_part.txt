@@ -5,9 +5,8 @@ set(COMPONENT_PART_DIR
     ${CMAKE_CURRENT_SOURCE_DIR}/PART
 )
 
-set(COMPONENT_PART_SOURCE
+set(COMPONENT_PART_SOURCES
     # Add the path to each source file here
-    ${COMPONENT_PART_DIR}/src/
 )
 
 set (COMPONENT_PART_HEADERS
