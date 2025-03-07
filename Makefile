@@ -1,6 +1,7 @@
 # Compiler and build settings
 BUILD_DIR = build
 DEBUG_DIR = debug
+TOOLS_DIR = tools
 
 BIN_DIR        = $(BUILD_DIR)/bin
 BOOT_BIN       = $(BIN_DIR)/boot/boot.bin
@@ -10,8 +11,7 @@ CORE_ELF       = $(BIN_DIR)/core/core.elf
 LEONARD_OS_IMG = $(BIN_DIR)/LeonardOS.img
 DEBUG_SCRIPT   = $(DEBUG_DIR)/run_debug.gdb
 
-# Targets that don't represent real files
-.PHONY: all build prepare clean deep_clean install debug run_debug run run_el1 run_el2 run_el3 memory_mapping rebuild image kill
+SCRIPTS_DIR = $(TOOLS_DIR)/scripts
 
 # Install dependencies
 install:
@@ -57,7 +57,7 @@ deep_clean:
 # Generate the memory mapping
 memory_mapping:
 	@echo "Generating memory mapping ..."
-	@python3 memory_mapping/generate_memory_mapping.py
+	@python3 $(SCRIPTS_DIR)/generate_memory_mapping.py
 
 # Launch GDB to debug the system
 debug:
