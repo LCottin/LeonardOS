@@ -1,1 +1,1 @@
-# This directory is the core driver of the OS
+# This element intends to provide the core of the OS.
