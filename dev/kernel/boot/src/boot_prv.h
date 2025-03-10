@@ -1,7 +1,7 @@
 #ifndef __BOOT_PRV_H__
 #define __BOOT_PRV_H__
 
-#include "types.h"
+#include "types_usr.h"
 
 /**
  * @brief The start address of the stack.

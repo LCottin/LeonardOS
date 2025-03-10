@@ -1,7 +1,7 @@
 #ifndef __MMIO_KRN_H__
 #define __MMIO_KRN_H__
 
-#include "types.h"
+#include "types_usr.h"
 
 /**********************************************************************
  * @brief Writes a 8-bit value to a specified memory-mapped I/O (MMIO) address.

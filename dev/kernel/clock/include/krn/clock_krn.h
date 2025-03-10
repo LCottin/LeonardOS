@@ -1,7 +1,7 @@
 #ifndef __CLOCK_KRN_H__
 #define __CLOCK_KRN_H__
 
-#include "types.h"
+#include "types_usr.h"
 
 /**********************************************************************
  * @brief Initializes the time management system.

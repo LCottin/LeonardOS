@@ -1,7 +1,7 @@
 #ifndef __CONTAINERS_FIFO_H__
 #define __CONTAINERS_FIFO_H__
 
-#include "types.h"
+#include "types_usr.h"
 
 /**
  * @brief Represents a node in a FIFO (First-In-First-Out) container.

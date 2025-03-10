@@ -1,7 +1,7 @@
 #ifndef __CONTAINERS_LINKED_CHAIN_H__
 #define __CONTAINERS_LINKED_CHAIN_H__
 
-#include "types.h"
+#include "types_usr.h"
 
 /**
  * @brief Defines a node structure for a linked chain container.

@@ -1,7 +1,7 @@
 #ifndef __BMT_CTX_H__
 #define __BMT_CTX_H__
 
-#include "types.h"
+#include "types_usr.h"
 #include "ELF.h"
 
 /**********************************************************************

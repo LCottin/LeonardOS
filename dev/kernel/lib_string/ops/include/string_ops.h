@@ -1,7 +1,7 @@
 #ifndef __STRING_OPS_H__
 #define __STRING_OPS_H__
 
-#include "types.h"
+#include "types_usr.h"
 
 /**
  * @brief Calculates the length of a null-terminated string.

@@ -2,7 +2,7 @@
 #define __MEMORY_PRV_H__
 
 #include "memory.h"
-#include "types.h"
+#include "types_usr.h"
 
 /**
  * @brief Size of a memory block structure.

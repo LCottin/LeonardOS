@@ -1,7 +1,7 @@
 #ifndef __UART_KRN_H__
 #define __UART_KRN_H__
 
-#include "types.h"
+#include "types_usr.h"
 
 /**********************************************************************
  * @brief This function sends a single character to the UART.

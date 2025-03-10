@@ -1,7 +1,7 @@
 #ifndef __ELF_H__
 #define __ELF_H__
 
-#include "types.h"
+#include "types_usr.h"
 
 /**
  * @brief Maximum number of segments in an ELF file.

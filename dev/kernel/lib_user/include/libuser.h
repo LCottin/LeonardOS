@@ -1,7 +1,7 @@
 #ifndef __LIBUSER_H__
 #define __LIBUSER_H__
 
-#include "types.h"
+#include "types_usr.h"
 #include "syscall.h"
 
 /**

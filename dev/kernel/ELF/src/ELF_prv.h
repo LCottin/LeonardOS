@@ -1,7 +1,7 @@
 #ifndef __ELF_PRV_H__
 #define __ELF_PRV_H__
 
-#include "types.h"
+#include "types_usr.h"
 
 #define K_ELF_IDENT_SIZE     16                    /* ELF identification size */
 

@@ -1,7 +1,7 @@
 #ifndef __SERIAL_KRN_H__
 #define __SERIAL_KRN_H__
 
-#include "types.h"
+#include "types_usr.h"
 
 /**********************************************************************
  * @brief Prints a null-terminated string.

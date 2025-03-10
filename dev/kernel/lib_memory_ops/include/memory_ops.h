@@ -1,7 +1,7 @@
 #ifndef __MEMORY_OPS_H__
 #define __MEMORY_OPS_H__
 
-#include "types.h"
+#include "types_usr.h"
 
 #define MEMORY_BLOCK_SIZE (sizeof(memory_block_t))
 

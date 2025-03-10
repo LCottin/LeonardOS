@@ -1,7 +1,7 @@
 #ifndef __CLOCK_CTX_H__
 #define __CLOCK_CTX_H__
 
-#include "types.h"
+#include "types_usr.h"
 
 /**********************************************************************
  * @brief The frequency of the time source.

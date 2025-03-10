@@ -1,7 +1,7 @@
 #ifndef __CORE_MAIN_PRV_H__
 #define __CORE_MAIN_PRV_H__
 
-#include "types.h"
+#include "types_usr.h"
 
 /**********************************************************************
  * @brief Kernel entry point.

@@ -4,7 +4,7 @@ SET(LIB_SYSCALL_SOURCE
 
 SET(LIB_SYSCALL_HEADERS
     ${LIB_SYSCALL_DIR}/include
-    ${KERNEL_DIR}/types/include
+    ${KERNEL_DIR}/types/include/usr
 )
 
 SET(LIB_SYSCALL_PRIVATE

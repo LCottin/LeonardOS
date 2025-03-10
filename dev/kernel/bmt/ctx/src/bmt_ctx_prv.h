@@ -1,7 +1,7 @@
 #ifndef __BMT_CTX_PRV_H__
 #define __BMT_CTX_PRV_H__
 
-#include "types.h"
+#include "types_usr.h"
 
 /**********************************************************************
  * @brief Start address of the BMT segment.

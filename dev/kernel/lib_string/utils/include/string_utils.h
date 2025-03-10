@@ -1,7 +1,7 @@
 #ifndef __STRING_UTILS_H__
 #define __STRING_UTILS_H__
 
-#include "types.h"
+#include "types_usr.h"
 
 /**
  * @brief Converts an integer to a string in a specified base.

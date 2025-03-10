@@ -1,7 +1,7 @@
 #ifndef __SYSCALL_H__
 #define __SYSCALL_H__
 
-#include "types.h"
+#include "types_usr.h"
 
 /**
  * @brief Enumeration of system call numbers.

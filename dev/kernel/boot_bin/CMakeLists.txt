@@ -36,7 +36,7 @@ set(BOOT_HEADERS
 # Specify the public header directory
 set(BOOT_INCLUDE
     ${KERNEL_DIR}/BMT/include
-    ${KERNEL_DIR}/types/include
+    ${KERNEL_DIR}/types/include/usr
     ${KERNEL_DIR}/ELF/include
 )
 

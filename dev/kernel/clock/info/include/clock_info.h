@@ -1,7 +1,7 @@
 #ifndef __CLOCK_INFO_H__
 #define __CLOCK_INFO_H__
 
-#include "types.h"
+#include "types_usr.h"
 
 /**********************************************************************
  * @brief Gets the frequency of the time source.

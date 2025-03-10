@@ -1,7 +1,7 @@
 #ifndef __MEMORY_H__
 #define __MEMORY_H__
 
-#include "types.h"
+#include "types_usr.h"
 
 /* Define alignment to ptr size */
 #define MEMORY_ALIGNMENT (sizeof(ptr_t))

@@ -5,7 +5,7 @@ set(COMMON_SOURCES
 
 # Add public header directory
 set(COMMON_PUBLIC_HEADERS
-    ${KERNEL_DIR}/types/include
+    ${KERNEL_DIR}/types/include/usr
     ${LIB_MEMORY_DIR}/include
 )
 
