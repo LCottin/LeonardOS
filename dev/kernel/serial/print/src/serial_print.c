@@ -1,4 +1,4 @@
-#include "serial.h"
+#include "serial_krn.h"
 #include "UART.h"
 
 void serial_print_string(const char_t *str)
