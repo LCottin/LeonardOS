@@ -1,6 +1,7 @@
 # Compile each component and library
 set (COMPONENTS_DIR
     # Add the path to each component here
+    "strings"
     "containers"
     "types"
     "uart"
