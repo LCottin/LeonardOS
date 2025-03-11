@@ -2,7 +2,7 @@
 #define __BMT_KRN_H__
 
 #include "types_usr.h"
-#include "ELF.h"
+#include "elf_krn.h"
 
 /**********************************************************************
  * @brief Adds an ELF binary to the bmt table.

@@ -2,7 +2,7 @@
 #define __BMT_CTX_H__
 
 #include "types_usr.h"
-#include "ELF.h"
+#include "elf_krn.h"
 
 /**********************************************************************
  * @brief Maximum number of ELF binaries in the bmt table.

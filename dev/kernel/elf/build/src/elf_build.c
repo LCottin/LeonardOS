@@ -1,65 +1,7 @@
-#include "ELF.h"
-#include "ELF_prv.h"
-#include "memory_ops.h"
-#include "string_ops.h"
-
-#define K_ELF_MAGIC             0x464C457FU             /* "\x7FELF" in little-endian */
-#define K_ELF_METADATA_MAGIC    0x415441444154454DULL   /* "METADATA" */
-
-#define K_ELF_IDENT_CLASS_OFF       4U       /* ELF Class */
-#define K_ELF_IDENT_DATA_OFF        5U       /* Data Encoding */
-#define K_ELF_IDENT_VERSION_OFF     6U       /* ELF Version */
-#define K_ELF_IDENT_OSABI_OFF       7U       /* OS/ABI */
-#define K_ELF_IDENT_ABIVERSION_OFF  8U       /* ABI Version */
-
-#define K_ELF_IDENT_CLASS_VAL       2U       /* 64-bit ELF */
-#define K_ELF_IDENT_DATA_VAL        1U       /* Little-endian */
-#define K_ELF_IDENT_VERSION_VAL     1U       /* Current ELF version */
-#define K_ELF_IDENT_OSABI_VAL       0U       /* System V ABI */
-#define K_ELF_IDENT_ABIVERSION_VAL  0U       /* ABI Version */
-
-#define K_ELF_MACHINE_AARCH64 183U           /* ARM64 */
-#define K_ELF_TYPE_EXEC         2U           /* Executable file */
-
-bool_t elf_match_magic(const addr_t elf_addr)
-{
-    const ELF64_elf_hdr_t *p_header = (const ELF64_elf_hdr_t *)elf_addr;
-    const uint32_t magic          = *(const uint32_t *)p_header->ident;
-
-    return (magic == K_ELF_MAGIC);
-}
-
-addr_t elf_get_entry_point(const addr_t elf_addr)
-{
-    const ELF64_elf_hdr_t *p_header = (const ELF64_elf_hdr_t *)elf_addr;
-
-    return p_header->entry_point;
-}
-
-bool_t elf_is_compatible(const addr_t elf_addr)
-{
-    const ELF64_elf_hdr_t *p_header = (const ELF64_elf_hdr_t *)elf_addr;
-    bool_t is_compatible            = TRUE;
-
-    is_compatible &= (p_header->type    == K_ELF_TYPE_EXEC);
-    is_compatible &= (p_header->machine == K_ELF_MACHINE_AARCH64);
-
-    is_compatible &= (p_header->elhdr_size                        == sizeof(ELF64_elf_hdr_t));
-    is_compatible &= (p_header->ident[K_ELF_IDENT_CLASS_OFF]      == K_ELF_IDENT_CLASS_VAL);
-    is_compatible &= (p_header->ident[K_ELF_IDENT_DATA_OFF]       == K_ELF_IDENT_DATA_VAL);
-    is_compatible &= (p_header->ident[K_ELF_IDENT_VERSION_OFF]    == K_ELF_IDENT_VERSION_VAL);
-    is_compatible &= (p_header->ident[K_ELF_IDENT_OSABI_OFF]      == K_ELF_IDENT_OSABI_VAL);
-    is_compatible &= (p_header->ident[K_ELF_IDENT_ABIVERSION_OFF] == K_ELF_IDENT_ABIVERSION_VAL);
-
-    return is_compatible;
-}
-
-uint32_t elf_get_nb_segments(const addr_t elf_addr)
-{
-    const ELF64_elf_hdr_t *p_header = (const ELF64_elf_hdr_t *)elf_addr;
-
-    return p_header->segm_hdr_nb_entry;
-}
+#include "elf_krn.h"
+#include "elf_build.h"
+#include "elf_build_prv.h"
+#include "elf_check.h"
 
 void elf_fill_segment_info(const addr_t elf_addr, ELF64_binary_info_t *p_bin_info)
 {
@@ -91,15 +33,6 @@ void elf_fill_segment_info(const addr_t elf_addr, ELF64_binary_info_t *p_bin_inf
             /* This segment is not metadata, nothing more to do */
         }
     }
-}
-
-bool_t elf_is_segment_metadata(const addr_t elf_addr, const uint32_t segment_idx)
-{
-    const ELF64_elf_hdr_t *p_elf_header      = (const ELF64_elf_hdr_t *)elf_addr;
-    const ELF64_segment_hdr_t *p_segment_hdr = (const ELF64_segment_hdr_t *)(elf_addr + p_elf_header->segm_hdr_off + segment_idx * p_elf_header->segm_hdr_ent_size);
-
-    /* Metadata magic is found at the physical address of the segment start */
-    return (*(addr_t *)(p_segment_hdr->phy_addr) == K_ELF_METADATA_MAGIC);
 }
 
 void elf_fill_meta_info(const addr_t elf_addr, const uint32_t segment_idx, ELF64_memory_info_t *p_memory_info, ELF64_file_type_t *p_elf_type)

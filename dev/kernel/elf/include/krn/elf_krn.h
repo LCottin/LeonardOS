@@ -1,5 +1,5 @@
-#ifndef __ELF_H__
-#define __ELF_H__
+#ifndef __ELF_KRN_H__
+#define __ELF_KRN_H__
 
 #include "types_usr.h"
 
@@ -145,4 +145,9 @@ bool_t elf_is_segment_metadata(const addr_t elf_addr, const uint32_t segment_idx
  */
 void elf_fill_meta_info(const addr_t elf_addr, const uint32_t segment_idx, ELF64_memory_info_t *p_memory_info, ELF64_file_type_t *p_elf_type);
 
-#endif /* __ELF_H__ */
+
+
+
+
+
+#endif /* __ELF_KRN_H__ */
