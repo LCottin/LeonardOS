@@ -3,7 +3,7 @@ OUTPUT_FORMAT("elf64-littleaarch64")
 OUTPUT_ARCH("aarch64")
 
 /* Binary entry point */
-ENTRY(_core_entry)
+ENTRY(_core_main_entry)
 
 /* Define memory regions */
 MEMORY

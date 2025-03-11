@@ -1,1 +1,1 @@
-# This directory generates the core executable
+# Generation of binary core_bin

@@ -7,8 +7,8 @@ VERBOSE?=0
 BIN_DIR        = $(BUILD_DIR)/bin
 BOOT_BIN       = $(BIN_DIR)/boot/boot.bin
 BOOT_ELF       = $(BIN_DIR)/boot/boot.elf
-CORE_BIN       = $(BIN_DIR)/core/core.bin
-CORE_ELF       = $(BIN_DIR)/core/core.elf
+CORE_BIN       = $(BIN_DIR)/core_bin/core_bin.bin
+CORE_ELF       = $(BIN_DIR)/core_bin/core_bin.elf
 LEONARD_OS_IMG = $(BIN_DIR)/LeonardOS.img
 DEBUG_SCRIPT   = $(DEBUG_DIR)/run_debug.gdb
 
