@@ -2,8 +2,10 @@
 .global  boot_print_addr
 .type    boot_print_addr, %function
 
+#include "boot_print_prv.h"
+
 boot_print_addr:
-    ldr     x15, =K_BOOT_PRV_QEMU_UART_ADDR      /* Load UART base address */
+    ldr     x15, =K_BOOT_CTX_QEMU_UART_ADDR      /* Load UART base address */
     mov     x1, x0                               /* Copy the register value to x1 */
     mov     x2, 16                               /* Set loop counter for 16 hex digits */
 

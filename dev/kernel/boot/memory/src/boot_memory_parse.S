@@ -2,17 +2,18 @@
 .global  boot_parse_memory
 .type    boot_parse_memory, %function
 
+#include "boot_memory_prv.h"
+
 boot_parse_memory:
 
     stp lr, x30, [sp, #-16]!                                /* Save lr on stack */
 
     ldr     x9,  =0x00101000                                /* Start address to parse in ROM, avoiding boot itself */
     ldr     x10, =0x00FFFFFF                                /* End of ROM */
-    ldr     w11, =K_BOOT_PRV_ELF_MAGIC                      /* Load ELF magic constant */
-    ldr     x12, =K_BOOT_PRV_PAGE_SIZE                      /* Load page size */
+    ldr     x12, =K_BOOT_MEMORY_PAGE_SIZE                   /* Load page size */
 
     ldr     x0, =K_BOOT_PARSE_MEMORY_MSG_START_PARSING      /* Load message address */
-    bl      boot_print                                      /* Print message */
+    bl      boot_print_msg                                  /* Print message */
 
     boot_parse_memory_loop:
         cmp     x9, x10                                     /* Ensure address is still in ROM region */
@@ -35,7 +36,7 @@ boot_parse_memory:
 
     boot_parse_memory_match:
         ldr     x0, =K_BOOT_PARSE_MEMORY_MSG_ELF_FOUND      /* Load message address */
-        bl      boot_print                                  /* Print message */
+        bl      boot_print_msg                              /* Print message */
 
         mov     x0, x9                                      /* Load ELF address */
         bl      boot_print_addr                             /* Print address */
@@ -44,7 +45,7 @@ boot_parse_memory:
             stp     x9,  x10, [sp, #-16]!                   /* Save x9 and x10 on stack */
             stp     x11, x12, [sp, #-16]!                   /* Save x11 and x12 on stack */
 
-        bl      BMT_add_elf                                 /* Add ELF address to BMT table */
+        bl      bmt_build_add_elf                                 /* Add ELF address to BMT table */
 
         boot_parse_memory_restore_working_registers:
             ldp     x11, x12, [sp], #16                     /* Restore x11 and x12 from stack */
@@ -54,7 +55,7 @@ boot_parse_memory:
 
     boot_parse_memory_end:
         ldr     x0, =K_BOOT_PARSE_MEMORY_MSG_DONE_PARSING   /* Load message address */
-        bl      boot_print                                  /* Print message */
+        bl      boot_print_msg                              /* Print message */
 
         ldp     lr, x30, [sp], #16                          /* Restore lr from stack */
         br      lr                                          /* Return from subroutine */
