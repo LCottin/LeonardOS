@@ -35,6 +35,12 @@ sub_component:
 	@echo "Creating new sub component ..."
 	@python3 $(SCRIPTS_DIR)/SubComponent.py $(VERBOSE)
 
+# Create a new binary
+.PHONY: binary
+binary:
+	@echo "Creating new binary ..."
+	@python3 $(SCRIPTS_DIR)/Executable.py $(VERBOSE)
+
 # Create the build directory, configure, and build the project
 .PHONY: build
 build: prepare

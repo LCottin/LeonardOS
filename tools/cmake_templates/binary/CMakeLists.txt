@@ -4,25 +4,26 @@
 set(BIN_NAME "bin_name")
 SET(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${BIN_NAME})
 
+set(DUMMY_SOURCE "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/dummy.c")
+file(WRITE ${DUMMY_SOURCE} "")
+
 # ==============================================================================
 # Linker script file path
 # ==============================================================================
-set(LINKER_SCRIPT linker.ld)
+set(LINKER_SCRIPT ${CMAKE_CURRENT_SOURCE_DIR}/linker.ld)
 
 # ==============================================================================
 # Create executable target
 # ==============================================================================
-add_executable(${BIN_NAME}.elf
-    # Add other source files here
-)
+add_executable(${BIN_NAME}.elf ${DUMMY_SOURCE})
 
 # ==============================================================================
 # Link with the component libraries
 # ==============================================================================
-target_link_libraries(${BIN_NAME}.elf -Wl
+target_link_libraries(${BIN_NAME}.elf
     PRIVATE
+    -Wl
         # Add component libraries here
-        component_impl
 )
 
 # ==============================================================================
