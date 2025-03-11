@@ -1,5 +1,5 @@
-#include "syscall.h"
-#include "serial.h"
+#include "syscall_krn.h"
+#include "serial_krn.h"
 
 void syscall_handler(const syscall_numbers_t number, cptr_t arg)
 {
