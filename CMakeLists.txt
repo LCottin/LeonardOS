@@ -87,6 +87,8 @@ project(${IMG_NAME} LANGUAGES ASM C)
 
     # Define directories
     set(KERNEL_DIR ${CMAKE_SOURCE_DIR}/dev/kernel)
+    set(USER_DIR   ${CMAKE_SOURCE_DIR}/dev/user)
 
     # Call subdirectories cmake
     add_subdirectory(${KERNEL_DIR})
+    add_subdirectory(${USER_DIR})

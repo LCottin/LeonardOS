@@ -41,6 +41,12 @@ binary:
 	@echo "Creating new binary ..."
 	@python3 $(SCRIPTS_DIR)/Executable.py $(VERBOSE)
 
+# Create a new application
+.PHONY: application
+application:
+	@echo "Creating new application ..."
+	@python3 $(SCRIPTS_DIR)/Application.py $(VERBOSE)
+
 # Create the build directory, configure, and build the project
 .PHONY: build
 build: prepare
