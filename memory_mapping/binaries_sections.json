@@ -40,6 +40,21 @@
         ]
     },
 
+    "APP_1 (ROM)":
+    {
+        "name"         : "APP_1 (ROM)",
+        "base_address" : "0x00700000",
+        "type"         : "elf",
+        "description"  : "App elf",
+        "sections":
+        [
+            {"name": "Header",   "size": "0x1000", "description": "ELF header"},
+            {"name": "Metadata", "size": "0x1000", "description": "Store binary symbols"},
+            {"name": "Code",     "size": "0x8000", "description": "Executable code and read only data"},
+            {"name": "Data",     "size": "0x8000", "description": "Initialized and uninitialized data"}
+        ]
+    },
+
     "Bootloader (RAM)":
     {
         "name"         : "Bootloader (RAM)",
@@ -67,6 +82,22 @@
             {"name": "Stack",   "size": "0x10000", "description": "Stack"},
             {"name": "Guard",   "size": "0x10000", "description": "Protection against stack overflow"},
             {"name": "Heap",    "size": "0x10000", "description": "Heap"}
+        ]
+    },
+
+    "APP_1 (RAM)":
+    {
+        "name"         : "App (RAM)",
+        "base_address" : "0x45200000",
+        "type"         : "loaded",
+        "description"  : "App loaded in ram",
+        "sections":
+        [
+            {"name": "Code",    "size": "0x8000", "description": "Executable code and read only data"},
+            {"name": "Data",    "size": "0x8000", "description": "Initialized and uninitialized data"},
+            {"name": "Stack",   "size": "0x1000", "description": "Stack"},
+            {"name": "Guard",   "size": "0x1000", "description": "Protection against stack overflow"},
+            {"name": "Heap",    "size": "0x1000", "description": "Heap"}
         ]
     },
 
