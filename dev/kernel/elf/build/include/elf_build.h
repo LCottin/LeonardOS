@@ -5,13 +5,13 @@
 
 #define K_ELF_IDENT_SIZE     16                    /* ELF identification size */
 
-/**
+/**********************************************************************
  * @brief ELF header structure for 64-bit ELF files.
  *
  * This structure represents the header of a 64-bit ELF file, containing
  * metadata about the file such as its type, entry point, and offsets to
  * segment and section headers.
- */
+ **********************************************************************/
 typedef struct __attribute__((packed))
 {
     uint8_t  ident[K_ELF_IDENT_SIZE]; /* ELF identification */
@@ -30,13 +30,14 @@ typedef struct __attribute__((packed))
     uint16_t sect_str_idx;            /* Section name string table index */
 } ELF64_elf_hdr_t;
 
-/**
+
+/**********************************************************************
  * @brief Segment header structure for 64-bit ELF files.
  *
  * This structure represents a segment header in a 64-bit ELF file, containing
  * information about a segment to be loaded into memory, such as its type,
  * virtual address, and size.
- */
+ **********************************************************************/
 typedef struct __attribute__((packed))
 {
     uint32_t type;          /* Segment type */
@@ -48,5 +49,6 @@ typedef struct __attribute__((packed))
     uint64_t mem_size;      /* Size of segment in memory */
     uint64_t align;         /* Alignment */
 } ELF64_segment_hdr_t;
+
 
 #endif /* __ELF_BUILD_H__ */

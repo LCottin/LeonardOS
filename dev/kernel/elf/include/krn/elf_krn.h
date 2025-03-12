@@ -3,19 +3,21 @@
 
 #include "types_usr.h"
 
-/**
+/**********************************************************************
  * @brief Maximum number of segments in an ELF file.
- */
+ **********************************************************************/
 #define K_ELF_MAX_SEGMENTS 10U
 
-/**
+
+/**********************************************************************
  * @brief Segment type for LOAD segments.
- */
+ **********************************************************************/
 #define K_ELF_PT_LOAD            1U       /* Program header type: LOAD */
 
-/**
+
+/**********************************************************************
  * @brief ELF file types.
- */
+ **********************************************************************/
 typedef enum
 {
     ELF64_FILE_UNKNOWN = 0,      /* No file type */
@@ -25,9 +27,10 @@ typedef enum
     ELF64_FILE_MAX
 } ELF64_file_type_t;
 
-/**
+
+/**********************************************************************
  * @brief Structure to hold custom information about an ELF segment.
- */
+ **********************************************************************/
 typedef struct
 {
     addr_t   hdr_addr;                        /* Segment header address */
@@ -40,9 +43,10 @@ typedef struct
     addr_t   file_offset;                     /* Offset in file */
 } ELF64_custom_segment_t;
 
-/**
+
+/**********************************************************************
  * @brief Structure to hold memory information about a binary.
- */
+ **********************************************************************/
 typedef struct
 {
     addr_t stack_top;                         /* Stack top address */
@@ -51,9 +55,10 @@ typedef struct
     size_t heap_size;                         /* Heap size */
 } ELF64_memory_info_t;
 
-/**
+
+/**********************************************************************
  * @brief Structure to hold information about an ELF binary.
- */
+ **********************************************************************/
 typedef struct
 {
     ELF64_file_type_t       type;                               /* Binary type */
@@ -66,7 +71,8 @@ typedef struct
     uint8_t                 padding[4];                         /* Padding */
 } ELF64_binary_info_t;
 
-/**
+
+/**********************************************************************
  * @brief Validates an ELF header to ensure it's a valid ELF file.
  *
  * This function checks the ELF header for correct magic number
@@ -74,40 +80,44 @@ typedef struct
  *
  * @param elf_addr The address of the ELF header in memory.
  * @return bool_t Returns TRUE if the ELF header is valid, FALSE otherwise.
- */
-bool_t elf_match_magic(const addr_t elf_addr);
+ **********************************************************************/
+bool_t elf_check_match_magic(const addr_t elf_addr);
 
-/**
+
+/**********************************************************************
  * @brief Retrieves the entry point of an ELF binary.
  *
  * This function reads the entry point address from the ELF header.
  *
  * @param elf_addr The address of the ELF binary in memory.
  * @return addr_t The entry point address of the ELF binary.
- */
-addr_t elf_get_entry_point(const addr_t elf_addr);
+ **********************************************************************/
+addr_t elf_info_get_entry_point(const addr_t elf_addr);
 
-/**
+
+/**********************************************************************
  * @brief Checks if an ELF binary is compatible with the system.
  *
  * This function checks the ELF binary for compatibility with the system.
  *
  * @param elf_addr The address of the ELF binary in memory.
  * @return bool_t Returns TRUE if the ELF binary is compatible, FALSE otherwise.
- */
-bool_t elf_is_compatible(const addr_t elf_addr);
+ **********************************************************************/
+bool_t elf_check_is_compatible(const addr_t elf_addr);
 
-/**
+
+/**********************************************************************
  * @brief Retrieves the number of segments in an ELF binary.
  *
  * This function reads the number of segments from the ELF header.
  *
  * @param elf_addr The address of the ELF binary in memory.
  * @return uint32_t The number of segments in the ELF binary.
- */
-uint32_t elf_get_nb_segments(const addr_t elf_addr);
+ **********************************************************************/
+uint32_t elf_info_get_nb_segments(const addr_t elf_addr);
 
-/**
+
+/**********************************************************************
  * @brief Fills a custom segment structure with information from an ELF segment.
  *
  * This function extracts information from an ELF segment header and fills a custom
@@ -116,10 +126,11 @@ uint32_t elf_get_nb_segments(const addr_t elf_addr);
  * @param elf_addr The address of the ELF binary in memory.
  * @param p_bin_info Pointer to the binary information structure to fill.
  * @return None.
- */
-void elf_fill_segment_info(const addr_t elf_addr, ELF64_binary_info_t *p_bin_info);
+ **********************************************************************/
+void elf_build_segment_info(const addr_t elf_addr, ELF64_binary_info_t *p_bin_info);
 
-/**
+
+/**********************************************************************
  * @brief Checks if a segment is a metadata segment.
  *
  * This function checks if a segment is a metadata segment by reading the first
@@ -128,26 +139,8 @@ void elf_fill_segment_info(const addr_t elf_addr, ELF64_binary_info_t *p_bin_inf
  * @param elf_addr The address of the ELF binary in memory.
  * @param segment_idx The index of the segment to check.
  * @return bool_t Returns TRUE if the segment is a metadata segment, FALSE otherwise.
- */
-bool_t elf_is_segment_metadata(const addr_t elf_addr, const uint32_t segment_idx);
-
-/**
- * @brief Fills a memory information structure with metadata from an ELF segment.
- *
- * This function reads metadata from an ELF segment and fills a memory information
- * structure with the relevant data.
- *
- * @param elf_addr The address of the ELF binary in memory.
- * @param segment_idx The index of the segment to extract metadata from.
- * @param p_memory_info Pointer to the memory information structure to fill.
- * @param p_elf_type Pointer to the ELF file type to fill.
- * @return None.
- */
-void elf_fill_meta_info(const addr_t elf_addr, const uint32_t segment_idx, ELF64_memory_info_t *p_memory_info, ELF64_file_type_t *p_elf_type);
-
-
-
-
+ **********************************************************************/
+bool_t elf_check_is_segment_metadata(const addr_t elf_addr, const uint32_t segment_idx);
 
 
 #endif /* __ELF_KRN_H__ */

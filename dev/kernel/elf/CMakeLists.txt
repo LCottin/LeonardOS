@@ -7,7 +7,9 @@ set(ELF_CHECK_DIR
 
 set(ELF_CHECK_SOURCES
     # Add the path to each source file here
-    ${ELF_CHECK_DIR}/src/elf_check.c
+    ${ELF_CHECK_DIR}/src/elf_check_is_compatible.c
+    ${ELF_CHECK_DIR}/src/elf_check_is_segment_metadata.c
+    ${ELF_CHECK_DIR}/src/elf_check_match_magic.c
 )
 
 set (ELF_CHECK_HEADERS
@@ -23,7 +25,8 @@ set(ELF_BUILD_DIR
 
 set(ELF_BUILD_SOURCES
     # Add the path to each source file here
-    ${ELF_BUILD_DIR}/src/elf_build.c
+    ${ELF_BUILD_DIR}/src/elf_build_meta_info.c
+    ${ELF_BUILD_DIR}/src/elf_build_segment_info.c
 )
 
 set (ELF_BUILD_HEADERS
@@ -39,7 +42,8 @@ set(ELF_INFO_DIR
 
 set(ELF_INFO_SOURCES
     # Add the path to each source file here
-    ${ELF_INFO_DIR}/src/elf_info.c
+    ${ELF_INFO_DIR}/src/elf_info_get_entry_point.c
+    ${ELF_INFO_DIR}/src/elf_info_get_nb_segments.c
 )
 
 set (ELF_INFO_HEADERS

@@ -23,7 +23,7 @@ boot_parse_memory:
         stp     x9,  x10, [sp, #-16]!                       /* Save x9 and x10 on stack */
         stp     x11, x12, [sp, #-16]!                       /* Save x11 and x12 on stack */
 
-        bl      elf_match_magic                                /* Call function to check if ELF is valid */
+        bl      elf_check_match_magic                       /* Call function to check if ELF is valid */
         ldp     x11, x12, [sp], #16                         /* Restore x11 and x12 from stack */
         ldp     x9,  x10, [sp], #16                         /* Restore x9 and x10 from stack */
 
