@@ -1,0 +1,15 @@
+# ==============================================================================
+# Create source and header for PART
+# ==============================================================================
+set(COMPONENT_PART_DIR
+    ${CMAKE_CURRENT_SOURCE_DIR}/PART
+)
+
+set(COMPONENT_PART_SOURCES
+    # Add the path to each source file here
+)
+
+set (COMPONENT_PART_HEADERS
+    ${COMPONENT_PART_DIR}/include
+)
+

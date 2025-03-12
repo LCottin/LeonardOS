@@ -1,1 +1,1 @@
-# This directory generates the bootloader binary
+# Generation of binary boot_bin

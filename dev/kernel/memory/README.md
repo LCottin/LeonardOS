@@ -1,1 +1,1 @@
-# This directory intends to provide functions to manage dynamic memory allocations
+# This element intends to provide dynamic memory allocation.

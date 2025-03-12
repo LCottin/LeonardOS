@@ -1,1 +1,1 @@
-# This directory intends to boot the OS
+# This element intends to boot the OS.

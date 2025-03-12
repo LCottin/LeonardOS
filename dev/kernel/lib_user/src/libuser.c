@@ -1,6 +1,0 @@
-#include "libuser.h"
-
-void user_print_string(const char_t *str)
-{
-    syscall_handler(SYSCALL_PRINT_STRING, (cptr_t)str);
-}

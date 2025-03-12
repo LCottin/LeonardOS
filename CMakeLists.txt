@@ -31,8 +31,41 @@ set(CMAKE_ASM_COMPILER clang)
 set(CMAKE_C_COMPILER   clang)
 
 # Specify the flags for Clang
-set(CMAKE_ASM_FLAGS "-target aarch64-none-elf -g -march=armv8-a -mtune=cortex-a53 -nostdlib")
-set(CMAKE_C_FLAGS   "-target aarch64-none-elf -g -march=armv8-a -mtune=cortex-a53 -std=c17 -ffreestanding -nostdlib")
+set(COMMON_COMPILATION_FLAG
+    "   -target aarch64-none-elf        \
+        -Wall                           \
+        -Wextra                         \
+        -g                              \
+        -march=armv8-a                  \
+        -mtune=cortex-a53               \
+        -Wnested-externs                \
+        -Wmissing-prototypes            \
+        -Wpointer-arith                 \
+        -Wcast-qual                     \
+        -Wwrite-strings                 \
+        -Wshadow                        \
+        -Wdeprecated                    \
+        -Wundef                         \
+        -Wredundant-decls               \
+        -Wconversion                    \
+        -Wsign-conversion               \
+        -Wpadded"
+)
+set(CMAKE_ASM_FLAGS
+    "   ${COMMON_COMPILATION_FLAG}"
+)
+set(CMAKE_C_FLAGS
+    "   ${COMMON_COMPILATION_FLAG}      \
+        -std=c17                        \
+        -ffreestanding                  \
+        -nostdlib                       \
+        -fno-builtin                    \
+        -fno-common                     \
+        -fno-short-enums                \
+        -fno-strict-aliasing            \
+        -fno-strict-overflow            \
+        -fno-delete-null-pointer-checks"
+)
 
 # Specify the linker
 set(CMAKE_LINKER aarch64-none-elf-ld)
