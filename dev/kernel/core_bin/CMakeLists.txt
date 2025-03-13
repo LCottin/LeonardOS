@@ -23,7 +23,7 @@ add_executable(${BIN_NAME}.elf ${DUMMY_SOURCE})
 target_link_libraries(${BIN_NAME}.elf
     PRIVATE "-Wl,--whole-archive"
         # Add component libraries here
-        ${CORE_LIB_NAME}
+        ${CORE_LIB_NAME}_krn
     "-Wl,--no-whole-archive"
 )
 

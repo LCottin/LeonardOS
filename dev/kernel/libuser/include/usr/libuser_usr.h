@@ -2,7 +2,6 @@
 #define __LIBUSER_USR_H__
 
 #include "types_usr.h"
-#include "syscall_krn.h"
 
 /**********************************************************************
  * @brief Prints a string to the console.

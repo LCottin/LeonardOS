@@ -15,19 +15,19 @@ set (UART_WRITE_HEADERS
 )
 
 # ==============================================================================
-# Create library target for UART
+# Create library kernel target for UART
 # ==============================================================================
-set (LIB_NAME ${UART_LIB_NAME})
-add_library(${LIB_NAME}
+set (LIB_NAME_KRN ${UART_LIB_NAME}_krn)
+add_library(${LIB_NAME_KRN}
     STATIC
         # Add the path to each source file here
         ${UART_WRITE_SOURCES}
 )
 
 # ==============================================================================
-# Add include directories for the library
+# Add include directories for the library kernel
 # ==============================================================================
-target_include_directories(${LIB_NAME}
+target_include_directories(${LIB_NAME_KRN}
     PRIVATE
         # Add the path to each header directory here
         ${UART_WRITE_HEADERS}
@@ -37,12 +37,12 @@ target_include_directories(${LIB_NAME}
 )
 
 # ==============================================================================
-# Add library dependencies
+# Add library kernel dependencies
 # ==============================================================================
-target_link_libraries(${LIB_NAME}
+target_link_libraries(${LIB_NAME_KRN}
     PRIVATE "-Wl,--whole-archive"
         # Add the path to library of other folder here
-        ${TYPES_LIB_NAME}
-        ${MMIO_LIB_NAME}
+        ${TYPES_LIB_NAME}_krn
+        ${MMIO_LIB_NAME}_krn
     "-Wl,--no-whole-archive"
 )
