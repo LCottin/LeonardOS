@@ -75,6 +75,7 @@ class Component:
                 if self._verbosity:
                     logging.info(f"Renamed {file} to {new_name}")
 
+
     def replace_component_file_content(self):
         """
         Replace the content inside the new component's files with the appropriate name.
@@ -122,7 +123,7 @@ class Component:
 
     def setup_component(self, component_name: str) -> None:
         """
-        Setup the new component by creating the directory, renaming files, replacing content, and adding it to the kernel.
+        Setup the new component by creating the directory, renaming files, replacing content, and adding it to the kernel cmake.
         """
 
         if self.create_component_dir(component_name):

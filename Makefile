@@ -4,13 +4,12 @@ DEBUG_DIR = debug
 TOOLS_DIR = tools
 VERBOSE?=0
 
-BIN_DIR        = $(BUILD_DIR)/bin
-BOOT_BIN       = $(BIN_DIR)/boot_bin/boot_bin.bin
-BOOT_ELF       = $(BIN_DIR)/boot_bin/boot_bin.elf
-CORE_BIN       = $(BIN_DIR)/core_bin/core_bin.bin
-CORE_ELF       = $(BIN_DIR)/core_bin/core_bin.elf
-LEONARD_OS_IMG = $(BIN_DIR)/LeonardOS.img
-DEBUG_SCRIPT   = $(DEBUG_DIR)/run_debug.gdb
+BIN_DIR         = $(BUILD_DIR)/bin
+BOOT_ELF        = $(BIN_DIR)/boot_bin/boot_bin.elf
+CORE_ELF        = $(BIN_DIR)/core_bin/core_bin.elf
+HELLO_WORLD_ELF = $(BIN_DIR)/hello_world/hello_world.elf
+LEONARD_OS_IMG  = $(BIN_DIR)/LeonardOS.img
+DEBUG_SCRIPT    = $(DEBUG_DIR)/run_debug.gdb
 
 SCRIPTS_DIR = $(TOOLS_DIR)/scripts
 
@@ -41,6 +40,12 @@ binary:
 	@echo "Creating new binary ..."
 	@python3 $(SCRIPTS_DIR)/Executable.py $(VERBOSE)
 
+# Create a new application
+.PHONY: application
+application:
+	@echo "Creating new application ..."
+	@python3 $(SCRIPTS_DIR)/Application.py $(VERBOSE)
+
 # Create the build directory, configure, and build the project
 .PHONY: build
 build: prepare
@@ -57,8 +62,9 @@ rebuild:
 .PHONY: image
 image: build
 	@rm -f $(LEONARD_OS_IMG)
-	@dd if=/dev/zero of=$(LEONARD_OS_IMG) bs=512 count=32768
-	@dd if=$(CORE_ELF) of=$(LEONARD_OS_IMG) bs=1 seek=5242880 conv=notrunc
+	@dd if=/dev/zero          of=$(LEONARD_OS_IMG) bs=512 count=32768
+	@dd if=$(CORE_ELF)        of=$(LEONARD_OS_IMG) bs=1   seek=5242880 conv=notrunc
+	@dd if=$(HELLO_WORLD_ELF) of=$(LEONARD_OS_IMG) bs=1   seek=6291456 conv=notrunc
 
 # Configure the project (run CMake if necessary)
 .PHONY: prepare

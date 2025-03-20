@@ -1,4 +1,5 @@
 #include "libuser_usr.h"
+#include "syscall_krn.h"
 
 void user_print_string(const char_t *str)
 {

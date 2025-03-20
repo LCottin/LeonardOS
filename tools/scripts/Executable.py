@@ -107,7 +107,7 @@ class Executable:
 
     def setup_binary(self, binary_name: str) -> None:
         """
-        Setup the new binary by creating the directory, renaming files, replacing content, and adding it to the kernel.
+        Setup the new binary by creating the directory, renaming files, replacing content, and adding it to the kernel cmake.
         """
 
         if self.create_binary_dir(binary_name):
@@ -118,6 +118,6 @@ class Executable:
 
 
 if __name__ == "__main__":
-    verbosity  = True# if str(sys.argv[1]) != "0" else False
+    verbosity  = True if str(sys.argv[1]) != "0" else False
     executable = Executable(verbosity)
     executable.setup_binary("")

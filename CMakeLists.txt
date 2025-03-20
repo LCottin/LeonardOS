@@ -86,7 +86,7 @@ project(${IMG_NAME} LANGUAGES ASM C)
     enable_language(ASM)
 
     # Define directories
-    set(KERNEL_DIR ${CMAKE_SOURCE_DIR}/dev/kernel)
+    set(DEV_DIR ${CMAKE_SOURCE_DIR}/dev)
 
     # Call subdirectories cmake
-    add_subdirectory(${KERNEL_DIR})
+    add_subdirectory(${DEV_DIR})

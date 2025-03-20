@@ -1,11 +1,8 @@
 # ==============================================================================
 # Set the output directory of the executable
 # ==============================================================================
-set(BIN_NAME "core_bin")
-SET(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${BIN_NAME})
-
-set(DUMMY_SOURCE "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/dummy.c")
-file(WRITE ${DUMMY_SOURCE} "")
+set(APP_NAME "appli_name")
+SET(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${APP_NAME})
 
 # ==============================================================================
 # Linker script file path
@@ -13,27 +10,51 @@ file(WRITE ${DUMMY_SOURCE} "")
 set(LINKER_SCRIPT ${CMAKE_CURRENT_SOURCE_DIR}/linker.ld)
 
 # ==============================================================================
-# Create executable target
+# Create source and header for PART
 # ==============================================================================
-add_executable(${BIN_NAME}.elf ${DUMMY_SOURCE})
+set(APP_DIR
+    ${CMAKE_CURRENT_SOURCE_DIR}
+)
+
+set(APP_SOURCES
+    ${APP_DIR}/src/appli.c
+)
+
+set(APP_HEADERS
+    ${APP_DIR}/include/appli.h
+)
 
 # ==============================================================================
-# Link with the component libraries
+# Create executable target
 # ==============================================================================
-target_link_libraries(${BIN_NAME}.elf
+add_executable(${APP_NAME}.elf ${APP_SOURCES})
+
+# ==============================================================================
+# Add include directories for the library
+# ==============================================================================
+target_include_directories(${APP_NAME}.elf
+    PRIVATE
+        # Add the path to each header directory here
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/
+)
+
+# ==============================================================================
+# Add library dependencies
+# ==============================================================================
+target_link_libraries(${APP_NAME}.elf
     PRIVATE "-Wl,--whole-archive"
-        # Add component libraries here
-        ${CORE_LIB_NAME}_krn
+        # Add the path to library of other folder here
+        ${TYPES_LIB_NAME}
     "-Wl,--no-whole-archive"
 )
 
 # ==============================================================================
 # Set custom linker options, including the generation of the .map file
 # ==============================================================================
-target_link_options(${BIN_NAME}.elf
+target_link_options(${APP_NAME}.elf
     PRIVATE
         "-T${LINKER_SCRIPT}"
-        "-Wl,-Map,${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${BIN_NAME}.map"
+        "-Wl,-Map,${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${APP_NAME}.map"
 )
 
 # ==============================================================================
@@ -41,12 +62,13 @@ target_link_options(${BIN_NAME}.elf
 # ==============================================================================
 add_custom_command(
     TARGET
-    ${BIN_NAME}.elf
+    ${APP_NAME}.elf
     POST_BUILD
 
     # Generate .elf.stripped file
-    COMMAND ${CMAKE_OBJCOPY} --strip-all $<TARGET_FILE:${BIN_NAME}.elf> ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${BIN_NAME}.elf.stripped
+    COMMAND ${CMAKE_OBJCOPY} --strip-all $<TARGET_FILE:${APP_NAME}.elf> ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${APP_NAME}.elf.stripped
 
     # Generate .bin file
-    COMMAND ${CMAKE_OBJCOPY} -O binary $<TARGET_FILE:${BIN_NAME}.elf> ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${BIN_NAME}.bin
+    COMMAND ${CMAKE_OBJCOPY} -O binary $<TARGET_FILE:${APP_NAME}.elf> ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${APP_NAME}.bin
 )
+

@@ -21,9 +21,9 @@ add_executable(${BIN_NAME}.elf ${DUMMY_SOURCE})
 # Link with the component libraries
 # ==============================================================================
 target_link_libraries(${BIN_NAME}.elf
-    PRIVATE
-    -Wl
-        # Add component libraries here
+    PRIVATE "-Wl,--whole-archive"
+        # Add the path to library of other folder here
+    "-Wl,--no-whole-archive"
 )
 
 # ==============================================================================

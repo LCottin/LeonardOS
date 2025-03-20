@@ -51,10 +51,10 @@ set (ELF_INFO_HEADERS
 )
 
 # ==============================================================================
-# Create library target for ELF
+# Create library kernel target for ELF
 # ==============================================================================
-set (LIB_NAME ${ELF_LIB_NAME})
-add_library(${LIB_NAME}
+set (LIB_NAME_KRN ${ELF_LIB_NAME}_krn)
+add_library(${LIB_NAME_KRN}
     STATIC
         # Add the path to each source file here
         ${ELF_CHECK_SOURCES}
@@ -63,9 +63,9 @@ add_library(${LIB_NAME}
 )
 
 # ==============================================================================
-# Add include directories for the library
+# Add include directories for the library kernel
 # ==============================================================================
-target_include_directories(${LIB_NAME}
+target_include_directories(${LIB_NAME_KRN}
     PRIVATE
         # Add the path to each header directory here
         ${ELF_CHECK_HEADERS}
@@ -77,11 +77,11 @@ target_include_directories(${LIB_NAME}
 )
 
 # ==============================================================================
-# Add library dependencies
+# Add library kernel dependencies
 # ==============================================================================
-target_link_libraries(${LIB_NAME}
+target_link_libraries(${LIB_NAME_KRN}
     PRIVATE "-Wl,--whole-archive"
         # Add the path to library of other folder here
-        ${TYPES_LIB_NAME}
+        ${TYPES_LIB_NAME}_krn
     "-Wl,--no-whole-archive"
 )
