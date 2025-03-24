@@ -76,11 +76,6 @@ void bmt_info_print_table(void)
             serial_print_string(string_utils_itoa((int32_t)p_segment->mem_size, str, 16));
             memory_ops_set(str, 0, 32);
             serial_print_string("\n");
-
-            serial_print_string("\t Flags:                  ");
-            serial_print_string(string_utils_itoa((int32_t)p_segment->flags, str, 16));
-            memory_ops_set(str, 0, 32);
-            serial_print_string("\n\n");
         }
     }
 }

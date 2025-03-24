@@ -16,7 +16,6 @@ void elf_build_segment_info(const addr_t elf_addr, ELF64_binary_info_t *p_bin_in
         p_bin_info->segments[idx].hdr_addr    = (addr_t)segment_hdr;
         p_bin_info->segments[idx].virt_addr   = segment_hdr->virt_addr;
         p_bin_info->segments[idx].phy_addr    = segment_hdr->phy_addr;
-        p_bin_info->segments[idx].flags       = segment_hdr->flags;
         p_bin_info->segments[idx].type        = segment_hdr->type;
         p_bin_info->segments[idx].mem_size    = (size_t)segment_hdr->mem_size;
         p_bin_info->segments[idx].file_size   = (size_t)segment_hdr->file_size;
