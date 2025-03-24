@@ -5,6 +5,12 @@
 #include "elf_krn.h"
 
 /**********************************************************************
+ * @brief Maximum number of ELF binaries in the bmt table.
+ **********************************************************************/
+#define K_BMT_MAX_ELF_BINARIES 5U
+
+
+/**********************************************************************
  * @brief Adds an ELF binary to the bmt table.
  *
  * @param elf_addr The address of the ELF binary.

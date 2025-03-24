@@ -1,4 +1,5 @@
 # Define library names for dependencies
+set (PCB_LIB_NAME           "_pcb")
 set (LIBUSER_LIB_NAME       "_libuser")
 set (TYPES_LIB_NAME         "_types")
 set (ELF_LIB_NAME           "_elf")
