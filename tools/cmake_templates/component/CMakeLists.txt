@@ -2,7 +2,7 @@
 # Create library kernel target for COMPONENT
 # ==============================================================================
 set (LIB_NAME_KRN ${COMPONENT_LIB_NAME}_krn)
-add_library(${LIB_NAME}
+add_library(${LIB_NAME_KRN}
     STATIC
         # Add the path to each source file here
 )
