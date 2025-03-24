@@ -27,6 +27,7 @@ typedef int8_t   char_t;
 typedef int8_t   byte_t;
 typedef uint64_t addr_t;
 typedef int64_t  time_t;
+typedef uint64_t reg_t;
 
 /* Boolean type */
 typedef enum
