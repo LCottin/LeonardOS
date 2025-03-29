@@ -25,7 +25,10 @@ set(BMT_BUILD_DIR
 set(BMT_BUILD_SOURCES
     # Add the path to each source file here
     ${BMT_BUILD_DIR}/src/bmt_build_add_elf.c
+    ${BMT_BUILD_DIR}/src/bmt_build_add_app_elf.c
+    ${BMT_BUILD_DIR}/src/bmt_build_add_krn_elf.c
     ${BMT_BUILD_DIR}/src/bmt_build_copy_binaries.c
+    ${BMT_BUILD_DIR}/src/bmt_build_load_segment.c
     ${BMT_BUILD_DIR}/src/bmt_build_table.c
 )
 
@@ -44,6 +47,8 @@ set(BMT_INFO_SOURCES
     # Add the path to each source file here
     ${BMT_INFO_DIR}/src/bmt_info_get_kernel_entry.c
     ${BMT_INFO_DIR}/src/bmt_info_get_kernel_stack_top.c
+    ${BMT_INFO_DIR}/src/bmt_info_get_app_entry.c
+    ${BMT_INFO_DIR}/src/bmt_info_get_app_stack_top.c
     ${BMT_INFO_DIR}/src/bmt_info_print_table.c
 )
 

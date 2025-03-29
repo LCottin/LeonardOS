@@ -96,6 +96,15 @@ addr_t elf_info_get_entry_point(const addr_t elf_addr);
 
 
 /**********************************************************************
+ * @brief Retrieves the load type of an ELF binary.
+ *
+ * @param elf_addr The address of the ELF binary in memory.
+ * @return ELF64_file_type_t The type of the ELF binary.
+ **********************************************************************/
+ELF64_file_type_t elf_info_get_type(const addr_t elf_addr);
+
+
+/**********************************************************************
  * @brief Checks if an ELF binary is compatible with the system.
  *
  * This function checks the ELF binary for compatibility with the system.

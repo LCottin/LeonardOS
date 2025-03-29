@@ -51,4 +51,24 @@ typedef struct __attribute__((packed))
 } ELF64_segment_hdr_t;
 
 
+/**********************************************************************
+ * @brief Magic numbers for 64-bit ELF files.
+ **********************************************************************/
+typedef enum
+{
+    ELF_FILE_BOOT_MAGIC   = 0x544F4F42U, /* "BOOT" in little endian */
+    ELF_FILE_KERNEL_MAGIC = 0x4E52454BU, /* "KERN" in little endian */
+    ELF_FILE_USER_MAGIC   = 0x52455355U, /* "USER" in little endian */
+} ELF64_file_magic_t;
+
+
+/**********************************************************************
+ * @brief Convert ELF magic number to ELF file type.
+ *
+ * @param elf_magic The ELF magic number to convert.
+ * @return ELF64_file_type_t The corresponding ELF file type.
+ **********************************************************************/
+extern ELF64_file_type_t elf_build_convert_magic_to_type(const ELF64_file_magic_t elf_magic);
+
+
 #endif /* __ELF_BUILD_H__ */

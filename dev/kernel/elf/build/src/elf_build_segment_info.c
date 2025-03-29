@@ -4,13 +4,13 @@
 
 void elf_build_segment_info(const addr_t elf_addr, ELF64_binary_info_t *p_bin_info)
 {
-    const ELF64_elf_hdr_t *elf_header = (const ELF64_elf_hdr_t *)elf_addr;
+    const ELF64_elf_hdr_t *p_elf_header = (const ELF64_elf_hdr_t *)elf_addr;
 
     p_bin_info->segments_count = elf_info_get_nb_segments(elf_addr);
 
     for (uint32_t idx = 0; idx < p_bin_info->segments_count; idx++)
     {
-        const ELF64_segment_hdr_t *segment_hdr = (const ELF64_segment_hdr_t *)(elf_addr + elf_header->segm_hdr_off + idx * elf_header->segm_hdr_ent_size);
+        const ELF64_segment_hdr_t *segment_hdr = (const ELF64_segment_hdr_t *)(elf_addr + p_elf_header->segm_hdr_off + (idx * p_elf_header->segm_hdr_ent_size));
         const bool_t is_segment_metadata       = elf_check_is_segment_metadata(elf_addr, idx);
 
         p_bin_info->segments[idx].hdr_addr    = (addr_t)segment_hdr;

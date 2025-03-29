@@ -10,23 +10,7 @@ void elf_build_meta_info(const addr_t elf_addr, const uint32_t segment_idx, ELF6
 
     /* Read ELF type, skip metadata magic number */
     const uint32_t elf_type_magic = *(const uint32_t *)(p_segment_hdr->phy_addr + sizeof(K_ELF_CHECK_METADATA_MAGIC));
-
-    if (elf_type_magic == ELF_FILE_BOOT_MAGIC)
-    {
-        *p_elf_type = ELF64_FILE_BOOT;
-    }
-    else if (elf_type_magic == ELF_FILE_KERNEL_MAGIC)
-    {
-        *p_elf_type = ELF64_FILE_KERNEL;
-    }
-    else if (elf_type_magic == ELF_FILE_USER_MAGIC)
-    {
-        *p_elf_type = ELF64_FILE_USER;
-    }
-    else
-    {
-        *p_elf_type = ELF64_FILE_UNKNOWN;
-    }
+    *p_elf_type                   = elf_build_convert_magic_to_type(elf_type_magic);
 
     /* Read metadata information */
     const ELF64_metadata_t *p_metadata = (const ELF64_metadata_t *)(p_segment_hdr->phy_addr + sizeof(K_ELF_CHECK_METADATA_MAGIC) + sizeof(ELF64_file_magic_t));
