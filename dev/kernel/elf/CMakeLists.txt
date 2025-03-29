@@ -27,6 +27,7 @@ set(ELF_BUILD_SOURCES
     # Add the path to each source file here
     ${ELF_BUILD_DIR}/src/elf_build_meta_info.c
     ${ELF_BUILD_DIR}/src/elf_build_segment_info.c
+    ${ELF_BUILD_DIR}/src/elf_build_convert_magic_to_type.c
 )
 
 set(ELF_BUILD_HEADERS
@@ -43,6 +44,7 @@ set(ELF_INFO_DIR
 set(ELF_INFO_SOURCES
     # Add the path to each source file here
     ${ELF_INFO_DIR}/src/elf_info_get_entry_point.c
+    ${ELF_INFO_DIR}/src/elf_info_get_type.c
     ${ELF_INFO_DIR}/src/elf_info_get_nb_segments.c
 )
 

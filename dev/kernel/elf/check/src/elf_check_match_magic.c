@@ -4,8 +4,8 @@
 
 bool_t elf_check_match_magic(const addr_t elf_addr)
 {
-    const ELF64_elf_hdr_t *p_header = (const ELF64_elf_hdr_t *)elf_addr;
-    const uint32_t magic            = *(const uint32_t *)p_header->ident;
+    const ELF64_elf_hdr_t *p_elf_header = (const ELF64_elf_hdr_t *)elf_addr;
+    const uint32_t magic                = *(const uint32_t *)p_elf_header->ident;
 
     return (magic == K_ELF_CHECK_MAGIC);
 }

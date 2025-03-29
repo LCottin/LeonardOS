@@ -2,17 +2,6 @@
 #define __ELF_BUILD_PRV_H__
 
 /**********************************************************************
- * @brief Magic numbers for 64-bit ELF files.
- **********************************************************************/
-typedef enum
-{
-    ELF_FILE_BOOT_MAGIC   = 0x544F4F42U, /* "BOOT" in little endian */
-    ELF_FILE_KERNEL_MAGIC = 0x4E52454BU, /* "KERN" in little endian */
-    ELF_FILE_USER_MAGIC   = 0x52455355U, /* "USER" in little endian */
-} ELF64_file_magic_t;
-
-
-/**********************************************************************
  * @brief Metadata tags for ELF segments.
  **********************************************************************/
 typedef enum
