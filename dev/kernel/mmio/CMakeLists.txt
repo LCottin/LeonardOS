@@ -10,7 +10,7 @@ set(MMIO_IO64_SOURCES
     ${MMIO_IO64_DIR}/src/mmio_io64.c
 )
 
-set (MMIO_IO64_HEADERS
+set(MMIO_IO64_HEADERS
     ${MMIO_IO64_DIR}/include
 )
 
@@ -26,7 +26,7 @@ set(MMIO_IO32_SOURCES
     ${MMIO_IO32_DIR}/src/mmio_io32.c
 )
 
-set (MMIO_IO32_HEADERS
+set(MMIO_IO32_HEADERS
     ${MMIO_IO32_DIR}/include
 )
 
@@ -42,7 +42,7 @@ set(MMIO_IO16_SOURCES
     ${MMIO_IO16_DIR}/src/mmio_io16.c
 )
 
-set (MMIO_IO16_HEADERS
+set(MMIO_IO16_HEADERS
     ${MMIO_IO16_DIR}/include
 )
 
@@ -58,14 +58,14 @@ set(MMIO_IO8_SOURCES
     ${MMIO_IO8_DIR}/src/mmio_io8.c
 )
 
-set (MMIO_IO8_HEADERS
+set(MMIO_IO8_HEADERS
     ${MMIO_IO8_DIR}/include
 )
 
 # ==============================================================================
 # Create library kernel target for MMIO
 # ==============================================================================
-set (LIB_NAME_KRN ${MMIO_LIB_NAME}_krn)
+set(LIB_NAME_KRN ${MMIO_LIB_NAME}_krn)
 add_library(${LIB_NAME_KRN}
     STATIC
         # Add the path to each source file here

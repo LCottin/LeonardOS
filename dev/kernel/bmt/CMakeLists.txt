@@ -11,7 +11,7 @@ set(BMT_CTX_SOURCES
     ${BMT_CTX_DIR}/src/bmt_ctx_init.c
 )
 
-set (BMT_CTX_HEADERS
+set(BMT_CTX_HEADERS
     ${BMT_CTX_DIR}/include
 )
 
@@ -29,7 +29,7 @@ set(BMT_BUILD_SOURCES
     ${BMT_BUILD_DIR}/src/bmt_build_table.c
 )
 
-set (BMT_BUILD_HEADERS
+set(BMT_BUILD_HEADERS
     ${BMT_BUILD_DIR}/include
 )
 
@@ -47,14 +47,14 @@ set(BMT_INFO_SOURCES
     ${BMT_INFO_DIR}/src/bmt_info_print_table.c
 )
 
-set (BMT_INFO_HEADERS
+set(BMT_INFO_HEADERS
     ${BMT_INFO_DIR}/include
 )
 
 # ==============================================================================
 # Create library kernel target for BMT
 # ==============================================================================
-set (LIB_NAME_KRN ${BMT_LIB_NAME}_krn)
+set(LIB_NAME_KRN ${BMT_LIB_NAME}_krn)
 add_library(${LIB_NAME_KRN}
     STATIC
         # Add the path to each source file here

@@ -10,7 +10,7 @@ set(CLOCK_CTX_SOURCES
     ${CLOCK_CTX_DIR}/src/clock_data.c
 )
 
-set (CLOCK_CTX_HEADERS
+set(CLOCK_CTX_HEADERS
     ${CLOCK_CTX_DIR}/include
 )
 
@@ -28,7 +28,7 @@ set(CLOCK_INFO_SOURCES
     ${CLOCK_INFO_DIR}/src/clock_info_get_time.c
 )
 
-set (CLOCK_INFO_HEADERS
+set(CLOCK_INFO_HEADERS
     ${CLOCK_INFO_DIR}/include
 )
 
@@ -44,14 +44,14 @@ set(CLOCK_INIT_SOURCES
     ${CLOCK_INIT_DIR}/src/clock_init.c
 )
 
-set (CLOCK_INIT_HEADERS
+set(CLOCK_INIT_HEADERS
     ${CLOCK_INIT_DIR}/include
 )
 
 # ==============================================================================
 # Create library kernel target for CLOCK
 # ==============================================================================
-set (LIB_NAME_KRN ${CLOCK_LIB_NAME}_krn)
+set(LIB_NAME_KRN ${CLOCK_LIB_NAME}_krn)
 add_library(${LIB_NAME_KRN}
     STATIC
         # Add the path to each source file here

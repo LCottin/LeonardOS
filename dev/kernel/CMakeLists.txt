@@ -1,5 +1,5 @@
 # Compile each component and library
-set (COMPONENTS_DIR
+set(COMPONENTS_DIR
     # Add the path to each component here
     "elf"
     "libuser"

@@ -10,14 +10,14 @@ set(CORE_MAIN_SOURCES
     ${CORE_MAIN_DIR}/src/core_main.c
 )
 
-set (CORE_MAIN_HEADERS
+set(CORE_MAIN_HEADERS
     ${CORE_MAIN_DIR}/include
 )
 
 # ==============================================================================
 # Create library kernel target for CORE
 # ==============================================================================
-set (LIB_NAME_KRN ${CORE_LIB_NAME}_krn)
+set(LIB_NAME_KRN ${CORE_LIB_NAME}_krn)
 add_library(${LIB_NAME_KRN}
     STATIC
         # Add the path to each source file here
