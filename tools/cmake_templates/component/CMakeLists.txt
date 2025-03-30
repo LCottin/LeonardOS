@@ -4,7 +4,7 @@
 set (LIB_NAME_KRN ${COMPONENT_LIB_NAME}_krn)
 add_library(${LIB_NAME_KRN}
     STATIC
-        # Add the path to each source file here
+        # Add the path to each source directory here
 )
 
 # ==============================================================================
@@ -33,7 +33,7 @@ target_link_libraries(${LIB_NAME_KRN}
 set (LIB_NAME_USR ${COMPONENT_LIB_NAME}_usr)
 add_library(${LIB_NAME_USR}
     STATIC
-        # Add the path to each source file here
+        # Add the path to each source directory here
 )
 
 # ==============================================================================

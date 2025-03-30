@@ -159,6 +159,7 @@ class SubComponent(Component):
             template_lines = [line.replace("part", self._subcomponent_name.lower()) for line in template_lines]
 
             marker_header = "# Add the path to each header directory here"
+            marker_source = "# Add the path to each source directory here"
             for i, line in enumerate(template_lines):
 
                 if marker_header in line:
@@ -166,7 +167,12 @@ class SubComponent(Component):
                     new_line += f"{self._component_name.upper()}_{self._subcomponent_name.upper()}_HEADERS"
                     new_line += "}\n"
                     template_lines.insert(i + 1, new_line)
-                    break
+
+                elif marker_source in line:
+                    new_line = "        ${"
+                    new_line += f"{self._component_name.upper()}_{self._subcomponent_name.upper()}_SOURCES"
+                    new_line += "}\n"
+                    template_lines.insert(i + 1, new_line)
 
             with open(component_cmake_file, "w") as f:
                 f.writelines(template_lines)
