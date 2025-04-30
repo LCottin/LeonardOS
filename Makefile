@@ -8,6 +8,7 @@ BIN_DIR         = $(BUILD_DIR)/bin
 BOOT_ELF        = $(BIN_DIR)/boot_bin/boot_bin.elf
 CORE_ELF        = $(BIN_DIR)/core_bin/core_bin.elf
 HELLO_WORLD_ELF = $(BIN_DIR)/hello_world/hello_world.elf
+COUNT_DOWN_ELF  = $(BIN_DIR)/count_down/count_down.elf
 LEONARD_OS_IMG  = $(BIN_DIR)/LeonardOS.img
 DEBUG_SCRIPT    = $(DEBUG_DIR)/run_debug.gdb
 
@@ -65,6 +66,7 @@ image: build
 	@dd if=/dev/zero          of=$(LEONARD_OS_IMG) bs=512 count=32768
 	@dd if=$(CORE_ELF)        of=$(LEONARD_OS_IMG) bs=1   seek=5242880 conv=notrunc
 	@dd if=$(HELLO_WORLD_ELF) of=$(LEONARD_OS_IMG) bs=1   seek=7340032 conv=notrunc
+	@dd if=$(COUNT_DOWN_ELF)  of=$(LEONARD_OS_IMG) bs=1   seek=7471104 conv=notrunc
 
 # Configure the project (run CMake if necessary)
 .PHONY: prepare

@@ -14,4 +14,13 @@
 void user_print_string(const char_t *str);
 
 
+/**********************************************************************
+ * @brief Gets the current time.
+ *
+ * @param None.
+ * @return time_t The current time.
+ **********************************************************************/
+time_t user_get_time(void);
+
+
 #endif /* __LIBUSER_USR_H__ */
