@@ -1,7 +1,8 @@
 #include "syscall_krn.h"
 #include "printer_krn.h"
+#include "clock_krn.h"
 
-void syscall_handler(const syscall_numbers_t number, cptr_t arg1, cptr_t arg2)
+void syscall_handler(const syscall_numbers_t number, cptr_t arg1, cptr_t arg2, ptr_t ret)
 {
     switch (number)
     {
@@ -20,6 +21,12 @@ void syscall_handler(const syscall_numbers_t number, cptr_t arg1, cptr_t arg2)
         case SYSCALL_PRINT_ADDR:
         {
             printer_print_address(*(const addr_t *)arg1);
+            break;
+        }
+
+        case SYSCALL_GET_TIME:
+        {
+            *(time_t *)ret = clock_info_get_time();
             break;
         }
 

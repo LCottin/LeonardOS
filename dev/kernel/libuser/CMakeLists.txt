@@ -8,6 +8,7 @@ set(LIBUSER_HANDLER_DIR
 set(LIBUSER_HANDLER_SOURCES
     # Add the path to each source file here
     ${LIBUSER_HANDLER_DIR}/src/libuser_get_time.c
+    ${LIBUSER_HANDLER_DIR}/src/libuser_print_string.c
 )
 
 set(LIBUSER_HANDLER_HEADERS
