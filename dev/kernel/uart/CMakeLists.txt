@@ -10,14 +10,14 @@ set(UART_WRITE_SOURCES
     ${UART_WRITE_DIR}/src/uart_write.c
 )
 
-set (UART_WRITE_HEADERS
+set(UART_WRITE_HEADERS
     ${UART_WRITE_DIR}/include
 )
 
 # ==============================================================================
 # Create library kernel target for UART
 # ==============================================================================
-set (LIB_NAME_KRN ${UART_LIB_NAME}_krn)
+set(LIB_NAME_KRN ${UART_LIB_NAME}_krn)
 add_library(${LIB_NAME_KRN}
     STATIC
         # Add the path to each source file here

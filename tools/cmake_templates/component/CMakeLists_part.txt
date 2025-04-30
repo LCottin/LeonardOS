@@ -9,7 +9,7 @@ set(COMPONENT_PART_SOURCES
     # Add the path to each source file here
 )
 
-set (COMPONENT_PART_HEADERS
+set(COMPONENT_PART_HEADERS
     ${COMPONENT_PART_DIR}/include
 )
 

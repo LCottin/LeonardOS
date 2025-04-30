@@ -11,7 +11,7 @@ set(BOOT_PRINT_SOURCES
     ${BOOT_PRINT_DIR}/src/boot_print_msg.S
 )
 
-set (BOOT_PRINT_HEADERS
+set(BOOT_PRINT_HEADERS
     ${BOOT_PRINT_DIR}/include
 )
 
@@ -27,7 +27,7 @@ set(BOOT_MEMORY_SOURCES
     ${BOOT_MEMORY_DIR}/src/boot_memory_parse.S
 )
 
-set (BOOT_MEMORY_HEADERS
+set(BOOT_MEMORY_HEADERS
     ${BOOT_MEMORY_DIR}/include
 )
 
@@ -43,14 +43,14 @@ set(BOOT_MAIN_SOURCES
     ${BOOT_MAIN_DIR}/src/boot_main.S
 )
 
-set (BOOT_MAIN_HEADERS
+set(BOOT_MAIN_HEADERS
     ${BOOT_MAIN_DIR}/include
 )
 
 # ==============================================================================
 # Create library kernel target for BOOT
 # ==============================================================================
-set (LIB_NAME_KRN ${BOOT_LIB_NAME}_krn)
+set(LIB_NAME_KRN ${BOOT_LIB_NAME}_krn)
 add_library(${LIB_NAME_KRN}
     STATIC
         # Add the path to each source file here

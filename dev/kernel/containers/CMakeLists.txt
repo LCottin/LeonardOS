@@ -9,7 +9,7 @@ set(CONTAINERS_LINKED_CHAIN_SOURCES
     # Add the path to each source file here
 )
 
-set (CONTAINERS_LINKED_CHAIN_HEADERS
+set(CONTAINERS_LINKED_CHAIN_HEADERS
     ${CONTAINERS_LINKED_CHAIN_DIR}/include
 )
 
@@ -25,14 +25,14 @@ set(CONTAINERS_FIFO_SOURCES
     ${CONTAINERS_FIFO_DIR}/src/containers_fifo.c
 )
 
-set (CONTAINERS_FIFO_HEADERS
+set(CONTAINERS_FIFO_HEADERS
     ${CONTAINERS_FIFO_DIR}/include
 )
 
 # ==============================================================================
 # Create library kernel target for CONTAINERS
 # ==============================================================================
-set (LIB_NAME_KRN ${CONTAINERS_LIB_NAME}_krn)
+set(LIB_NAME_KRN ${CONTAINERS_LIB_NAME}_krn)
 add_library(${LIB_NAME_KRN}
     STATIC
         # Add the path to each source file here
@@ -67,7 +67,7 @@ target_link_libraries(${LIB_NAME_KRN}
 # ==============================================================================
 # Create library user target for CONTAINERS
 # ==============================================================================
-set (LIB_NAME_USR ${CONTAINERS_LIB_NAME}_usr)
+set(LIB_NAME_USR ${CONTAINERS_LIB_NAME}_usr)
 add_library(${LIB_NAME_USR}
     STATIC
         # Add the path to each source file here

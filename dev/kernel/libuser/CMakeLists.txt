@@ -10,14 +10,14 @@ set(LIBUSER_HANDLER_SOURCES
     ${LIBUSER_HANDLER_DIR}/src/libuser_usr.c
 )
 
-set (LIBUSER_HANDLER_HEADERS
+set(LIBUSER_HANDLER_HEADERS
     ${LIBUSER_HANDLER_DIR}/include
 )
 
 # ==============================================================================
 # Create library user target for LIBUSER
 # ==============================================================================
-set (LIB_NAME_USR ${LIBUSER_LIB_NAME}_usr)
+set(LIB_NAME_USR ${LIBUSER_LIB_NAME}_usr)
 add_library(${LIB_NAME_USR}
     STATIC
         # Add the path to each source file here

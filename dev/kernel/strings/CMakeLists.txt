@@ -10,7 +10,7 @@ set(STRINGS_UTILS_SOURCES
     ${STRINGS_UTILS_DIR}/src/strings_utils.c
 )
 
-set (STRINGS_UTILS_HEADERS
+set(STRINGS_UTILS_HEADERS
     ${STRINGS_UTILS_DIR}/include
 )
 
@@ -26,14 +26,14 @@ set(STRINGS_OPS_SOURCES
     ${STRINGS_OPS_DIR}/src/strings_ops.c
 )
 
-set (STRINGS_OPS_HEADERS
+set(STRINGS_OPS_HEADERS
     ${STRINGS_OPS_DIR}/include
 )
 
 # ==============================================================================
 # Create library kernel target for STRINGS
 # ==============================================================================
-set (LIB_NAME_KRN ${STRINGS_LIB_NAME}_krn)
+set(LIB_NAME_KRN ${STRINGS_LIB_NAME}_krn)
 add_library(${LIB_NAME_KRN}
     STATIC
         # Add the path to each source file here
@@ -67,7 +67,7 @@ target_link_libraries(${LIB_NAME_KRN}
 # ==============================================================================
 # Create library user target for STRINGS
 # ==============================================================================
-set (LIB_NAME_USR ${STRINGS_LIB_NAME}_usr)
+set(LIB_NAME_USR ${STRINGS_LIB_NAME}_usr)
 add_library(${LIB_NAME_USR}
     STATIC
         # Add the path to each source file here

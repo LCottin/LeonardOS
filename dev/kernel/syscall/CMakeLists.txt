@@ -10,14 +10,14 @@ set(SYSCALL_HANDLER_SOURCES
     ${SYSCALL_HANDLER_DIR}/src/syscall_handler.c
 )
 
-set (SYSCALL_HANDLER_HEADERS
+set(SYSCALL_HANDLER_HEADERS
     ${SYSCALL_HANDLER_DIR}/include
 )
 
 # ==============================================================================
 # Create library kernel target for SYSCALL
 # ==============================================================================
-set (LIB_NAME_KRN ${SYSCALL_LIB_NAME}_krn)
+set(LIB_NAME_KRN ${SYSCALL_LIB_NAME}_krn)
 add_library(${LIB_NAME_KRN}
     STATIC
         # Add the path to each source file here
@@ -50,7 +50,7 @@ target_link_libraries(${LIB_NAME_KRN}
 # ==============================================================================
 # Create library kernuserel target for SYSCALL
 # ==============================================================================
-set (LIB_NAME_USR ${SYSCALL_LIB_NAME}_usr)
+set(LIB_NAME_USR ${SYSCALL_LIB_NAME}_usr)
 add_library(${LIB_NAME_USR}
     STATIC
         # Add the path to each source file here

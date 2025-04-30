@@ -128,7 +128,7 @@ class Component:
 
             for i, line in enumerate(lines):
                 if line.strip() == "# Define library names for dependencies":
-                    lines.insert(i + 1, f"set ({self._component_name.upper()}_LIB_NAME    \"_{self._component_name.lower()}\")\n")
+                    lines.insert(i + 1, f"set({self._component_name.upper()}_LIB_NAME    \"_{self._component_name.lower()}\")\n")
                     break
 
             with open(self._DEV_CMAKE_FILE, "w") as f:
