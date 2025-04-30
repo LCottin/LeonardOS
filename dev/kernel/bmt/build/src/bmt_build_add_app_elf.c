@@ -4,7 +4,7 @@
 
 bool_t bmt_build_add_app_elf(const addr_t elf_addr)
 {
-    bool_t elf_added = FALSE;
+    bool_t elf_added;
 
     if (g_p_bmt_ctx_table->apps_count < K_BMT_MAX_APP_BINARIES)
     {

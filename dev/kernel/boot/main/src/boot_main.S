@@ -45,7 +45,8 @@ _boot_main_entry:
     boot_main_jump_to_kernel:
         ldr     x0, =K_BOOT_MAIN_BRANCH_KERNEL          /* Address of message */
         bl      boot_print_msg                          /* Print message */
-        mov     sp, x0                                  /* Set stack pointer */
+        mov     sp, x20                                 /* Set stack pointer */
+        ldr     x0, =__bmt_start                        /* Load BMT start address */
         br      x19                                     /* Jump to kernel entry point */
 
 done:

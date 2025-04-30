@@ -39,6 +39,7 @@ typedef enum
 /* Maximum value for types */
 #define NULL       0
 #define NULL_ADDR  0
+#define NULL_PTR   0
 #define INT8_MAX   0x7F
 #define UINT8_MAX  0xFF
 #define INT16_MAX  0x7FFF

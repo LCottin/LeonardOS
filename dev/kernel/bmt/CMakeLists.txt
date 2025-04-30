@@ -26,7 +26,7 @@ set(BMT_BUILD_SOURCES
     # Add the path to each source file here
     ${BMT_BUILD_DIR}/src/bmt_build_add_elf.c
     ${BMT_BUILD_DIR}/src/bmt_build_add_app_elf.c
-    ${BMT_BUILD_DIR}/src/bmt_build_add_kern_elf.c
+    ${BMT_BUILD_DIR}/src/bmt_build_add_krn_elf.c
     ${BMT_BUILD_DIR}/src/bmt_build_copy_binaries.c
     ${BMT_BUILD_DIR}/src/bmt_build_load_segment.c
     ${BMT_BUILD_DIR}/src/bmt_build_table.c

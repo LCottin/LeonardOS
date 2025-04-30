@@ -1,4 +1,5 @@
 # Define library names for dependencies
+set(SCHEDULER_LIB_NAME    "_scheduler")
 set(PCB_LIB_NAME           "_pcb")
 set(LIBUSER_LIB_NAME       "_libuser")
 set(TYPES_LIB_NAME         "_types")
