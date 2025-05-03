@@ -1,4 +1,5 @@
 # Define library names for dependencies
+set (PRINTER_LIB_NAME       "_printer")
 set (LIBUSER_LIB_NAME       "_libuser")
 set (TYPES_LIB_NAME         "_types")
 set (ELF_LIB_NAME           "_elf")
@@ -11,7 +12,6 @@ set (MEMORY_OPS_LIB_NAME    "_memory_ops")
 set (STRINGS_LIB_NAME       "_strings")
 set (CONTAINERS_LIB_NAME    "_containers")
 set (UART_LIB_NAME          "_uart")
-set (SERIAL_LIB_NAME        "_serial")
 set (MMIO_LIB_NAME          "_mmio")
 set (FPU_LIB_NAME           "_fpu")
 set (CORE_LIB_NAME          "_core")

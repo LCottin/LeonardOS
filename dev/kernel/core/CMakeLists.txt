@@ -43,7 +43,7 @@ target_link_libraries(${LIB_NAME_KRN}
     PRIVATE "-Wl,--whole-archive"
         # Add the path to library of other folder here
         ${TYPES_LIB_NAME}_krn
-        ${SERIAL_LIB_NAME}_krn
+        ${PRINTER_LIB_NAME}_krn
         ${STRINGS_LIB_NAME}_krn
         ${MEMORY_LIB_NAME}_krn
         ${MEMORY_OPS_LIB_NAME}_krn

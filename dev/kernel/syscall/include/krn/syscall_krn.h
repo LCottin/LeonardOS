@@ -12,6 +12,8 @@
 typedef enum
 {
     SYSCALL_PRINT_STRING = 0, /* System call to print a string */
+    SYSCALL_PRINT_INT    = 1, /* System call to print an integer */
+    SYSCALL_PRINT_ADDR   = 2, /* System call to print an address */
 
     SYSCALL_TOTAL            /* Total number of system calls */
 } syscall_numbers_t;
@@ -25,10 +27,11 @@ typedef enum
  * system call function.
  *
  * @param number The system call number.
- * @param arg The argument for the system call.
+ * @param arg1 The first argument for the system call.
+ * @param arg2 The second argument for the system call.
  * @return None.
  **********************************************************************/
-extern void syscall_handler(const syscall_numbers_t number, cptr_t arg);
+extern void syscall_handler(const syscall_numbers_t number, cptr_t arg1, cptr_t arg2);
 
 
 #endif /* __SYSCALL_KRN_H__ */
