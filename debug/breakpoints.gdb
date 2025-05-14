@@ -1,1 +1,2 @@
 # break boot_jump_to_kernel
+break elf_info_get_entry_point

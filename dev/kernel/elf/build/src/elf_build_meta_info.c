@@ -5,6 +5,7 @@
 
 void elf_build_meta_info(const addr_t elf_addr, const uint32_t segment_idx, ELF64_memory_info_t *p_memory_info, ELF64_file_type_t *p_elf_type)
 {
+    /* Extract ELF header and segment header */
     const ELF64_elf_hdr_t *p_elf_header      = (const ELF64_elf_hdr_t *)elf_addr;
     const ELF64_segment_hdr_t *p_segment_hdr = (const ELF64_segment_hdr_t *)(elf_addr + p_elf_header->segm_hdr_off + segment_idx * p_elf_header->segm_hdr_ent_size);
 

@@ -16,7 +16,6 @@ void scheduler_init(void)
 
         if (state == PCB_STATE_NEW)
         {
-
             // faire un accesseur
             g_scheduler_ctx_table.scheduler_tasks_id[g_scheduler_ctx_table.scheduler_nb_tasks] = idx;
             g_scheduler_ctx_table.scheduler_nb_tasks++;

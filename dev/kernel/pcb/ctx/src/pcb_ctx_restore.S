@@ -14,7 +14,7 @@ pcb_ctx_restore:
 
     pcb_ctx_restore_callee_save_sp:
         ldr x1, [x0, #96]           /* Get stack pointer in PCB */
-        mov x1, sp                  /* Restore current stack pointer */
+        mov sp, x1                  /* Restore current stack pointer */
 
     pcb_ctx_restore_done:
         br      lr                    /* Return from subroutine */

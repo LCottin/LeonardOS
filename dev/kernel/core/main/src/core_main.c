@@ -38,7 +38,7 @@ void _core_main_entry(const addr_t bmt_start_addr)
     serial_print_string(string_utils_itoa((int32_t)clock_info_get_time(), str2, 10U));
     serial_print_string(" ns\n");
 
-    serial_print_string("[KERN] Launching application ... \n");
+    serial_print_string("[KERN] Launching scheduling ... \n");
 
     /* Launch application scheduling */
     scheduler_run();

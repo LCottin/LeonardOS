@@ -129,5 +129,7 @@ target_link_libraries(${LIB_NAME_KRN}
         ${MEMORY_OPS_LIB_NAME}_usr
         ${MEMORY_LIB_NAME}_krn
         ${BMT_LIB_NAME}_krn
+        # ${SERIAL_LIB_NAME}_krn
+        ${STRINGS_LIB_NAME}_krn
     "-Wl,--no-whole-archive"
 )

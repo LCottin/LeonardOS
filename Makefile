@@ -64,7 +64,7 @@ image: build
 	@rm -f $(LEONARD_OS_IMG)
 	@dd if=/dev/zero          of=$(LEONARD_OS_IMG) bs=512 count=32768
 	@dd if=$(CORE_ELF)        of=$(LEONARD_OS_IMG) bs=1   seek=5242880 conv=notrunc
-	@dd if=$(HELLO_WORLD_ELF) of=$(LEONARD_OS_IMG) bs=1   seek=6291456 conv=notrunc
+	@dd if=$(HELLO_WORLD_ELF) of=$(LEONARD_OS_IMG) bs=1   seek=7340032 conv=notrunc
 
 # Configure the project (run CMake if necessary)
 .PHONY: prepare
