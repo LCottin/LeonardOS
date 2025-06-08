@@ -7,7 +7,7 @@
 #include "elf_krn.h"
 #include "strings_utils_usr.h"
 
-bool_t pcb_init(const addr_t bmt_start_addr)
+bool_t pcb_init()
 {
     bool_t init_ok;
 
@@ -26,8 +26,7 @@ bool_t pcb_init(const addr_t bmt_start_addr)
     if (g_pcb_ctx_table.pcb_apps_ctx != NULL_PTR)
     {
         /* Initialize the PCB context table */
-        const bmt_ctx_table_t *p_bmt_table = (const bmt_ctx_table_t *)bmt_start_addr;
-        g_pcb_ctx_table.pcb_apps_count     = p_bmt_table->apps_count; // faire un accesseur sur le bmt
+        g_pcb_ctx_table.pcb_apps_count = bmt_info_get_app_count();
 
         for (uint32_t i = 0; i < g_pcb_ctx_table.pcb_apps_count; i++)
         {

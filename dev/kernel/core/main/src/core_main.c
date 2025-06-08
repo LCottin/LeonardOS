@@ -18,7 +18,7 @@ void _core_main_entry(const addr_t bmt_start_addr)
     serial_print_string(str);
 
     bmt_ctx_init_kernel(bmt_start_addr);
-    pcb_init(bmt_start_addr);
+    pcb_init();
     scheduler_init();
     memory_init_heap();
     fpu_init();

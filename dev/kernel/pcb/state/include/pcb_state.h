@@ -25,4 +25,47 @@ typedef struct
 } pcb_state_registers_t;
 
 
+/**********************************************************************
+ * @brief Enumeration of PCB registers.
+ **********************************************************************/
+typedef enum
+{
+    PCB_STATE_REGISTER_R19,      /* Register r19 */
+    PCB_STATE_REGISTER_R20,      /* Register r20 */
+    PCB_STATE_REGISTER_R21,      /* Register r21 */
+    PCB_STATE_REGISTER_R22,      /* Register r22 */
+    PCB_STATE_REGISTER_R23,      /* Register r23 */
+    PCB_STATE_REGISTER_R24,      /* Register r24 */
+    PCB_STATE_REGISTER_R25,      /* Register r25 */
+    PCB_STATE_REGISTER_R26,      /* Register r26 */
+    PCB_STATE_REGISTER_R27,      /* Register r27 */
+    PCB_STATE_REGISTER_R28,      /* Register r28 */
+    PCB_STATE_REGISTER_SP,       /* Stack pointer (r29) */
+    PCB_STATE_REGISTER_LR,       /* Link register (r30) */
+    PCB_STATE_REGISTER_PC,       /* Program counter */
+    PCB_STATE_REGISTER_CPSR      /* Current program status register */
+} pcb_state_registers_e;
+
+
+/**********************************************************************
+ * @brief Set the state of a given task id
+ *
+ * @param task_id The ID of the task to set the state for.
+ * @param new_state The new state to set for the task.
+ * @return None.
+ **********************************************************************/
+extern void pcb_state_set_state(const uint32_t task_id, const pcb_states_t new_state);
+
+
+/**********************************************************************
+ * @brief Set the register value of a given task id
+ *
+ * @param task_id The ID of the task to set the state for.
+ * @param reg_id The register ID to set.
+ * @param new_value The new value to set for the register.
+ * @return None.
+ **********************************************************************/
+extern void pcb_state_set_register(const uint32_t task_id, const pcb_state_registers_e reg_id, const reg_t new_value);
+
+
 #endif /* __PCB_STATE_H__ */

@@ -5,23 +5,6 @@
 #include "bmt_krn.h"
 
 /**********************************************************************
- * @brief Structure of scheduler context.
- **********************************************************************/
-typedef struct
-{
-    uint32_t scheduler_tasks_id[K_BMT_MAX_APP_BINARIES];
-    uint32_t scheduler_current_task_id;
-    uint32_t scheduler_nb_tasks;
-} scheduler_ctx_table_t;
-
-
-/**********************************************************************
- * @brief Global structure to store scheduled tasks.
- **********************************************************************/
-extern scheduler_ctx_table_t g_scheduler_ctx_table;
-
-
-/**********************************************************************
  * @brief Get the next task to be scheduled.
  *
  * @param None.
@@ -46,6 +29,24 @@ extern uint32_t scheduler_ctx_get_current_task(void);
  * @return None.
  **********************************************************************/
 extern void scheduler_ctx_set_current_task(const uint32_t task_id);
+
+
+/**********************************************************************
+ * @brief Initialize the scheduler context.
+ *
+ * @param None.
+ * @return None.
+ **********************************************************************/
+extern void scheduler_ctx_init(void);
+
+
+/**********************************************************************
+ * @brief Add a new task to the scheduler context.
+ *
+ * @param task_idx The index of the task to be added.
+ * @return None.
+ **********************************************************************/
+extern void scheduler_ctx_add_task(const uint32_t task_idx);
 
 
 #endif /* __SCHEDULER_CTX_H__ */

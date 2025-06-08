@@ -65,6 +65,8 @@ set(PCB_STATE_SOURCES
     # Add the path to each source file here
     ${PCB_STATE_DIR}/src/pcb_state_set_apps_ready.c
     ${PCB_STATE_DIR}/src/pcb_state_get_state.c
+    ${PCB_STATE_DIR}/src/pcb_state_set_state.c
+    ${PCB_STATE_DIR}/src/pcb_state_set_register.c
 )
 
 set(PCB_STATE_HEADERS
