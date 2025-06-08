@@ -6,6 +6,7 @@
 #include "fpu_krn.h"
 #include "clock_krn.h"
 #include "core_main_prv.h"
+#include "pcb_krn.h"
 #include "bmt_krn.h"
 
 void _core_main_entry(const addr_t bmt_start_addr)
@@ -16,6 +17,7 @@ void _core_main_entry(const addr_t bmt_start_addr)
     serial_print_string(str);
 
     bmt_ctx_init_kernel(bmt_start_addr);
+    pcb_init(bmt_start_addr);
 
     char_t *ptr_alloc = (char_t *)memory_alloc_and_init(sizeof(char_t) * 64, 0);
     if (ptr_alloc != NULL)
