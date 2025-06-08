@@ -97,4 +97,13 @@ extern addr_t bmt_info_get_app_stack_top(const uint32_t app_id);
 extern void bmt_ctx_init(void);
 
 
+/**********************************************************************
+ * @brief Initializes the bmt context in kernel binary.
+ *
+ * @param bmt_start_addr The start address of the bmt context.
+ * @return None.
+ **********************************************************************/
+extern void bmt_ctx_init_kernel(const addr_t bmt_start_addr);
+
+
 #endif /* __BMT_KRN_H__ */

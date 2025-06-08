@@ -6,17 +6,16 @@
 #include "fpu_krn.h"
 #include "clock_krn.h"
 #include "core_main_prv.h"
+#include "bmt_krn.h"
 
-void _core_main_entry(void)
+void _core_main_entry(const addr_t bmt_start_addr)
 {
-    memory_init_heap();
-    fpu_init();
-    clock_init();
-
     const char_t str[64] = "\n[KERN] Hello World!\n";
     char_t str2[64];
 
     serial_print_string(str);
+
+    bmt_ctx_init_kernel(bmt_start_addr);
 
     char_t *ptr_alloc = (char_t *)memory_alloc_and_init(sizeof(char_t) * 64, 0);
     if (ptr_alloc != NULL)

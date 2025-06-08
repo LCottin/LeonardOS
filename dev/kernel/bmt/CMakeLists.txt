@@ -9,6 +9,7 @@ set(BMT_CTX_SOURCES
     # Add the path to each source file here
     ${BMT_CTX_DIR}/src/bmt_ctx_data.c
     ${BMT_CTX_DIR}/src/bmt_ctx_init.c
+    ${BMT_CTX_DIR}/src/bmt_ctx_init_kernel.c
 )
 
 set(BMT_CTX_HEADERS

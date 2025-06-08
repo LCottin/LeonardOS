@@ -49,5 +49,7 @@ target_link_libraries(${LIB_NAME_KRN}
         ${MEMORY_OPS_LIB_NAME}_krn
         ${FPU_LIB_NAME}_krn
         ${CLOCK_LIB_NAME}_krn
+        ${BMT_LIB_NAME}_krn
+        ${ELF_LIB_NAME}_krn
     "-Wl,--no-whole-archive"
 )

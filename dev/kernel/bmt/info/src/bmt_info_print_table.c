@@ -27,7 +27,6 @@ void bmt_info_print_table(void)
 
     serial_print_string("    Kernel compatibility status: ");
     serial_print_string(g_p_bmt_ctx_table->krn_bin.is_compatible ? "Compatible\n" : "Incompatible\n");
-    serial_print_string("\n");
 
     serial_print_string("    Kernel stack top:            0x");
     serial_print_string(string_utils_itoa((int32_t)g_p_bmt_ctx_table->krn_bin.memory_info.stack_top, str, 16));
@@ -47,6 +46,12 @@ void bmt_info_print_table(void)
     serial_print_string("    Kernel heap size:            ");
     serial_print_string(string_utils_itoa((int32_t)g_p_bmt_ctx_table->krn_bin.memory_info.heap_size, str, 16));
     memory_ops_set(str, 0, 32);
+    serial_print_string("\n\n");
+
+    serial_print_string("App binary information:\n");
+    serial_print_string("    App binary count: ");
+    serial_print_string(string_utils_itoa((int32_t)g_p_bmt_ctx_table->apps_count, str, 16));
+    memory_ops_set(str, 0, 32);
     serial_print_string("\n");
 
     /* Loop through all the applications in the bmt table */
@@ -54,13 +59,16 @@ void bmt_info_print_table(void)
     {
         const ELF64_binary_info_t *p_app_bin = &g_p_bmt_ctx_table->apps_bin[idx];
 
-        serial_print_string("\nApplication binary information:\n");
+        serial_print_string("\nApplication binary information ");
+        serial_print_string(string_utils_itoa((int32_t)idx, str, 10));
+        memory_ops_set(str, 0, 32);
+        serial_print_string(":\n");
         serial_print_string("    Application binary ID:            ");
-        serial_print_string(string_utils_itoa((int32_t)idx, str, 16));
+        serial_print_string(string_utils_itoa((int32_t)idx, str, 10));
         memory_ops_set(str, 0, 32);
         serial_print_string("\n");
 
-        serial_print_string("    Application entry point:          ");
+        serial_print_string("    Application entry point:          0x");
         serial_print_string(string_utils_itoa((int32_t)p_app_bin->entry_point, str, 16));
         memory_ops_set(str, 0, 32);
         serial_print_string("\n");
@@ -70,13 +78,8 @@ void bmt_info_print_table(void)
         memory_ops_set(str, 0, 32);
         serial_print_string("\n");
 
-        serial_print_string("    Application load address:         0x");
-        serial_print_string(string_utils_itoa((int32_t)p_app_bin->load_address, str, 16));
-        memory_ops_set(str, 0, 32);
-        serial_print_string("\n");
-
         serial_print_string("    Application segments count:       ");
-        serial_print_string(string_utils_itoa((int32_t)p_app_bin->segments_count, str, 16));
+        serial_print_string(string_utils_itoa((int32_t)p_app_bin->segments_count, str, 10));
         memory_ops_set(str, 0, 32);
         serial_print_string("\n");
 
@@ -105,4 +108,6 @@ void bmt_info_print_table(void)
 
         serial_print_string("\n\n");
     }
+
+    serial_print_string("\n");
 }
