@@ -3,7 +3,8 @@
 
 uint32_t scheduler_ctx_get_next_task(void)
 {
-    // todo update en fonction de l'état des taches dans pcb
+    // TODO: Implement a more sophisticated algorithm to select the next task based on priority and readiness.
+    // For now, we simply return the next task in the round-robin fashion.
     uint32_t current_task_id = scheduler_ctx_get_current_task();
     uint32_t next_task_id    = (current_task_id + 1) % g_scheduler_ctx_table.scheduler_nb_tasks;
 

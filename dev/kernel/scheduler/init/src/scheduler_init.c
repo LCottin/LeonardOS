@@ -5,7 +5,7 @@
 
 void scheduler_init(void)
 {
-    memory_ops_set(&g_scheduler_ctx_table, 0, sizeof(g_scheduler_ctx_table));
+    scheduler_ctx_init();
 
     const uint32_t nb_task = pcb_ctx_get_count();
 
@@ -16,9 +16,11 @@ void scheduler_init(void)
 
         if (state == PCB_STATE_NEW)
         {
-            // faire un accesseur
-            g_scheduler_ctx_table.scheduler_tasks_id[g_scheduler_ctx_table.scheduler_nb_tasks] = idx;
-            g_scheduler_ctx_table.scheduler_nb_tasks++;
+            scheduler_ctx_add_task(idx);
+        }
+        else
+        {
+            /* Task is not new, not added to context */
         }
     }
 }

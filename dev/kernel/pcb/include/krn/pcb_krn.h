@@ -21,10 +21,10 @@ typedef enum
 /**********************************************************************
  * @brief Initialize the PCB module.
  *
- * @param bmt_start_addr The start address of the BMT table.
+ * @param None.
  * @return bool_t Returns TRUE if the initialization was successful, FALSE otherwise.
  **********************************************************************/
-extern bool_t pcb_init(const addr_t bmt_start_addr);
+extern bool_t pcb_init(void);
 
 
 /**********************************************************************

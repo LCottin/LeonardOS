@@ -59,6 +59,8 @@ set(SCHEDULER_CTX_SOURCES
     ${SCHEDULER_CTX_DIR}/src/scheduler_ctx_get_current_task.c
     ${SCHEDULER_CTX_DIR}/src/scheduler_ctx_get_next_task.c
     ${SCHEDULER_CTX_DIR}/src/scheduler_ctx_set_current_task.c
+    ${SCHEDULER_CTX_DIR}/src/scheduler_ctx_add_task.c
+    ${SCHEDULER_CTX_DIR}/src/scheduler_ctx_init.c
 )
 
 set(SCHEDULER_CTX_HEADERS
