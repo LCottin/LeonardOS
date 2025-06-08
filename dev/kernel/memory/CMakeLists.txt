@@ -10,14 +10,14 @@ set(MEMORY_ALLOC_SOURCES
     ${MEMORY_ALLOC_DIR}/src/memory_alloc.c
 )
 
-set (MEMORY_ALLOC_HEADERS
+set(MEMORY_ALLOC_HEADERS
     ${MEMORY_ALLOC_DIR}/include
 )
 
 # ==============================================================================
 # Create library kernel target for MEMORY
 # ==============================================================================
-set (LIB_NAME_KRN ${MEMORY_LIB_NAME}_krn)
+set(LIB_NAME_KRN ${MEMORY_LIB_NAME}_krn)
 add_library(${LIB_NAME_KRN}
     STATIC
         # Add the path to each source file here
@@ -50,7 +50,7 @@ target_link_libraries(${LIB_NAME_KRN}
 # ==============================================================================
 # Create library user target for MEMORY
 # ==============================================================================
-set (LIB_NAME_USR ${MEMORY_LIB_NAME}_usr)
+set(LIB_NAME_USR ${MEMORY_LIB_NAME}_usr)
 add_library(${LIB_NAME_USR}
     STATIC
         # Add the path to each source file here

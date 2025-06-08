@@ -12,7 +12,7 @@ set(ELF_CHECK_SOURCES
     ${ELF_CHECK_DIR}/src/elf_check_match_magic.c
 )
 
-set (ELF_CHECK_HEADERS
+set(ELF_CHECK_HEADERS
     ${ELF_CHECK_DIR}/include
 )
 
@@ -27,9 +27,10 @@ set(ELF_BUILD_SOURCES
     # Add the path to each source file here
     ${ELF_BUILD_DIR}/src/elf_build_meta_info.c
     ${ELF_BUILD_DIR}/src/elf_build_segment_info.c
+    ${ELF_BUILD_DIR}/src/elf_build_convert_magic_to_type.c
 )
 
-set (ELF_BUILD_HEADERS
+set(ELF_BUILD_HEADERS
     ${ELF_BUILD_DIR}/include
 )
 
@@ -43,17 +44,18 @@ set(ELF_INFO_DIR
 set(ELF_INFO_SOURCES
     # Add the path to each source file here
     ${ELF_INFO_DIR}/src/elf_info_get_entry_point.c
+    ${ELF_INFO_DIR}/src/elf_info_get_type.c
     ${ELF_INFO_DIR}/src/elf_info_get_nb_segments.c
 )
 
-set (ELF_INFO_HEADERS
+set(ELF_INFO_HEADERS
     ${ELF_INFO_DIR}/include
 )
 
 # ==============================================================================
 # Create library kernel target for ELF
 # ==============================================================================
-set (LIB_NAME_KRN ${ELF_LIB_NAME}_krn)
+set(LIB_NAME_KRN ${ELF_LIB_NAME}_krn)
 add_library(${LIB_NAME_KRN}
     STATIC
         # Add the path to each source file here

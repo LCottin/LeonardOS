@@ -1,7 +1,7 @@
 # ==============================================================================
 # Create library kernel target for TYPES
 # ==============================================================================
-set (LIB_NAME_KRN ${TYPES_LIB_NAME}_krn)
+set(LIB_NAME_KRN ${TYPES_LIB_NAME}_krn)
 add_library(${LIB_NAME_KRN}
     INTERFACE
 )
@@ -18,7 +18,7 @@ target_include_directories(${LIB_NAME_KRN}
 # ==============================================================================
 # Create library user target for TYPES
 # ==============================================================================
-set (LIB_NAME_USR ${TYPES_LIB_NAME}_usr)
+set(LIB_NAME_USR ${TYPES_LIB_NAME}_usr)
 add_library(${LIB_NAME_USR}
     INTERFACE
 )

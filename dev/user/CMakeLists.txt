@@ -1,5 +1,5 @@
 # Compile each application
-set (APPLICATION_DIR
+set(APPLICATION_DIR
     # Add the path to each application here
     "hello_world"
 )

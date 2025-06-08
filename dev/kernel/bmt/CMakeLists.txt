@@ -9,9 +9,10 @@ set(BMT_CTX_SOURCES
     # Add the path to each source file here
     ${BMT_CTX_DIR}/src/bmt_ctx_data.c
     ${BMT_CTX_DIR}/src/bmt_ctx_init.c
+    ${BMT_CTX_DIR}/src/bmt_ctx_init_kernel.c
 )
 
-set (BMT_CTX_HEADERS
+set(BMT_CTX_HEADERS
     ${BMT_CTX_DIR}/include
 )
 
@@ -25,11 +26,14 @@ set(BMT_BUILD_DIR
 set(BMT_BUILD_SOURCES
     # Add the path to each source file here
     ${BMT_BUILD_DIR}/src/bmt_build_add_elf.c
+    ${BMT_BUILD_DIR}/src/bmt_build_add_app_elf.c
+    ${BMT_BUILD_DIR}/src/bmt_build_add_krn_elf.c
     ${BMT_BUILD_DIR}/src/bmt_build_copy_binaries.c
+    ${BMT_BUILD_DIR}/src/bmt_build_load_segment.c
     ${BMT_BUILD_DIR}/src/bmt_build_table.c
 )
 
-set (BMT_BUILD_HEADERS
+set(BMT_BUILD_HEADERS
     ${BMT_BUILD_DIR}/include
 )
 
@@ -44,17 +48,19 @@ set(BMT_INFO_SOURCES
     # Add the path to each source file here
     ${BMT_INFO_DIR}/src/bmt_info_get_kernel_entry.c
     ${BMT_INFO_DIR}/src/bmt_info_get_kernel_stack_top.c
+    ${BMT_INFO_DIR}/src/bmt_info_get_app_entry.c
+    ${BMT_INFO_DIR}/src/bmt_info_get_app_stack_top.c
     ${BMT_INFO_DIR}/src/bmt_info_print_table.c
 )
 
-set (BMT_INFO_HEADERS
+set(BMT_INFO_HEADERS
     ${BMT_INFO_DIR}/include
 )
 
 # ==============================================================================
 # Create library kernel target for BMT
 # ==============================================================================
-set (LIB_NAME_KRN ${BMT_LIB_NAME}_krn)
+set(LIB_NAME_KRN ${BMT_LIB_NAME}_krn)
 add_library(${LIB_NAME_KRN}
     STATIC
         # Add the path to each source file here

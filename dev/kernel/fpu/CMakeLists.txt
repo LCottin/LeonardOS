@@ -10,14 +10,14 @@ set(FPU_INIT_SOURCES
     ${FPU_INIT_DIR}/src/fpu_init.s
 )
 
-set (FPU_INIT_HEADERS
+set(FPU_INIT_HEADERS
     ${FPU_INIT_DIR}/include
 )
 
 # ==============================================================================
 # Create library kernel target for FPU
 # ==============================================================================
-set (LIB_NAME_KRN ${FPU_LIB_NAME}_krn)
+set(LIB_NAME_KRN ${FPU_LIB_NAME}_krn)
 add_library(${LIB_NAME_KRN}
     STATIC
         # Add the path to each source file here

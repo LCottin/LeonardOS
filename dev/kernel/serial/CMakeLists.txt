@@ -10,14 +10,14 @@ set(SERIAL_PRINT_SOURCES
     ${SERIAL_PRINT_DIR}/src/serial_print.c
 )
 
-set (SERIAL_PRINT_HEADERS
+set(SERIAL_PRINT_HEADERS
     ${SERIAL_PRINT_DIR}/include
 )
 
 # ==============================================================================
 # Create library kernel target for SERIAL
 # ==============================================================================
-set (LIB_NAME_KRN ${SERIAL_LIB_NAME}_krn)
+set(LIB_NAME_KRN ${SERIAL_LIB_NAME}_krn)
 add_library(${LIB_NAME_KRN}
     STATIC
         # Add the path to each source file here

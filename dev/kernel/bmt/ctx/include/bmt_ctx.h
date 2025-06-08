@@ -3,23 +3,7 @@
 
 #include "types_usr.h"
 #include "elf_krn.h"
-
-/**********************************************************************
- * @brief Maximum number of ELF binaries in the bmt table.
- **********************************************************************/
-#define K_BMT_CTX_MAX_ELF_BINARIES 5U
-
-
-/***********************************************************************
- * @brief Structure to hold the bmt table.
- **********************************************************************/
-typedef struct
-{
-    ELF64_binary_info_t binaries[K_BMT_CTX_MAX_ELF_BINARIES];   /* ELF binary data */
-    uint32_t            binaries_count;                         /* Number of ELF binaries */
-    uint8_t             padding[4];                             /* Padding */
-} bmt_ctx_table_t;
-
+#include "bmt_krn.h"
 
 /**********************************************************************
  * @brief Global pointer to the bmt table.

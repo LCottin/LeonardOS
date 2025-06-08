@@ -35,6 +35,8 @@ boot_parse_memory:
         b       boot_parse_memory_loop                      /* Resume loop */
 
     boot_parse_memory_match:
+        stp     x9,  x10, [sp, #-16]!                       /* Save x9 and x10 on stack */
+        stp     x11, x12, [sp, #-16]!                       /* Save x11 and x12 on stack */
         ldr     x0, =K_BOOT_PARSE_MEMORY_MSG_ELF_FOUND      /* Load message address */
         bl      boot_print_msg                              /* Print message */
 
@@ -42,10 +44,9 @@ boot_parse_memory:
         bl      boot_print_addr                             /* Print address */
 
         boot_parse_memory_save_working_registers:
-            stp     x9,  x10, [sp, #-16]!                   /* Save x9 and x10 on stack */
-            stp     x11, x12, [sp, #-16]!                   /* Save x11 and x12 on stack */
 
-        bl      bmt_build_add_elf                                 /* Add ELF address to BMT table */
+            mov     x0, x9                                  /* Load ELF address */
+            bl      bmt_build_add_elf                       /* Add ELF address to BMT table */
 
         boot_parse_memory_restore_working_registers:
             ldp     x11, x12, [sp], #16                     /* Restore x11 and x12 from stack */
@@ -64,7 +65,7 @@ boot_parse_memory:
 .section .rodata
 
 K_BOOT_PARSE_MEMORY_MSG_ELF_FOUND:
-    .asciz "\n[BOOT]   Found ELF at address: "
+    .asciz "\n[BOOT]   Found ELF at address: 0x"
 
 K_BOOT_PARSE_MEMORY_MSG_START_PARSING:
     .asciz "\n[BOOT] Parsing memory for ELF ... "

@@ -27,6 +27,7 @@ typedef int8_t   char_t;
 typedef int8_t   byte_t;
 typedef uint64_t addr_t;
 typedef int64_t  time_t;
+typedef uint64_t reg_t;
 
 /* Boolean type */
 typedef enum
@@ -38,6 +39,7 @@ typedef enum
 /* Maximum value for types */
 #define NULL       0
 #define NULL_ADDR  0
+#define NULL_PTR   0
 #define INT8_MAX   0x7F
 #define UINT8_MAX  0xFF
 #define INT16_MAX  0x7FFF

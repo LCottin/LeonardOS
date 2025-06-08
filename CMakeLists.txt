@@ -38,6 +38,7 @@ set(COMMON_COMPILATION_FLAG
         -g                              \
         -march=armv8-a                  \
         -mtune=cortex-a53               \
+        -mlittle-endian                 \
         -Wnested-externs                \
         -Wmissing-prototypes            \
         -Wpointer-arith                 \

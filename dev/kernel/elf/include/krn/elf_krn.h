@@ -36,11 +36,11 @@ typedef struct
     addr_t   hdr_addr;                        /* Segment header address */
     addr_t   virt_addr;                       /* Virtual address */
     addr_t   phy_addr;                        /* Physical address */
-    uint32_t flags;                           /* Segment permissions (R, W, X) */
+    addr_t   file_offset;                     /* Offset in file */
     uint32_t type;                            /* Segment type */
     size_t   mem_size;                        /* Size in memory */
     size_t   file_size;                       /* Size in file */
-    addr_t   file_offset;                     /* Offset in file */
+    uint8_t  padding[4];                      /* Padding */
 } ELF64_custom_segment_t;
 
 
@@ -93,6 +93,15 @@ bool_t elf_check_match_magic(const addr_t elf_addr);
  * @return addr_t The entry point address of the ELF binary.
  **********************************************************************/
 addr_t elf_info_get_entry_point(const addr_t elf_addr);
+
+
+/**********************************************************************
+ * @brief Retrieves the load type of an ELF binary.
+ *
+ * @param elf_addr The address of the ELF binary in memory.
+ * @return ELF64_file_type_t The type of the ELF binary.
+ **********************************************************************/
+ELF64_file_type_t elf_info_get_type(const addr_t elf_addr);
 
 
 /**********************************************************************

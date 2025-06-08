@@ -5,10 +5,4 @@
 void hello_world_entry(void)
 {
     user_print_string("[USER] Hello world from user !\n");
-
-    /* Endless loop */
-    while (TRUE)
-    {
-
-    }
 }

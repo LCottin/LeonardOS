@@ -18,9 +18,11 @@ class Component:
         self._component_dir  = ""
         self._verbosity      = verbosity
 
-        self._COMPONENT_ROOT_DIR            = os.path.join(os.getcwd(), "dev/kernel")
-        self._CMAKE_COMPONENT_TEMPLATES_DIR = "./tools/cmake_templates/component"
+        self._DEV_ROOT_DIR                  = os.path.join(os.getcwd(), "dev")
+        self._DEV_CMAKE_FILE                = os.path.join(self._DEV_ROOT_DIR, "CMakeLists.txt")
+        self._COMPONENT_ROOT_DIR            = os.path.join(self._DEV_ROOT_DIR, "kernel")
         self._KERNEL_CMAKE_FILE             = os.path.join(self._COMPONENT_ROOT_DIR, "CMakeLists.txt")
+        self._CMAKE_COMPONENT_TEMPLATES_DIR = "./tools/cmake_templates/component"
 
         if self._verbosity:
             print(f"Component root directory: {self._COMPONENT_ROOT_DIR}")
@@ -119,6 +121,24 @@ class Component:
 
         except FileNotFoundError:
             logging.error(f"Kernel CMake file not found at {self._KERNEL_CMAKE_FILE}.")
+
+        try:
+            with open(self._DEV_CMAKE_FILE, "r") as f:
+                lines = f.readlines()
+
+            for i, line in enumerate(lines):
+                if line.strip() == "# Define library names for dependencies":
+                    lines.insert(i + 1, f"set({self._component_name.upper()}_LIB_NAME    \"_{self._component_name.lower()}\")\n")
+                    break
+
+            with open(self._DEV_CMAKE_FILE, "w") as f:
+                f.writelines(lines)
+
+            if self._verbosity:
+                logging.info(f"Added {self._component_name} to the dev CMake file.")
+
+        except FileNotFoundError:
+            logging.error(f"Dev CMake file not found at {self._DEV_CMAKE_FILE}.")
 
 
     def setup_component(self, component_name: str) -> None:
