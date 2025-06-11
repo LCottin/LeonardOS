@@ -11,7 +11,7 @@ _boot_main_entry:
 
     boot_main_print_hello:
         ldr     x0, =K_BOOT_MAIN_HELLO_MSG              /* Address of message  */
-        bl      boot_print_msg                          /* Print message */
+        bl      printer_print_string                    /* Print message */
 
     /* Initialize BMT */
     bl      bmt_ctx_init                                /* Initialize BMT */
@@ -21,18 +21,18 @@ _boot_main_entry:
 
     /* Build BMT table from ELF found */
     boot_main_build_table:
-        ldr     x0, =K_BOOT_MAIN_BUILD_bmt_MSG          /* Address of message */
-        bl      boot_print_msg                          /* Print message */
+        ldr     x0, =K_BOOT_MAIN_BUILD_BMT_MSG          /* Address of message */
+        bl      printer_print_string                    /* Print message */
         bl      bmt_build_table                         /* Build BMT table */
         bl      bmt_info_print_table                    /* Print BMT table */
 
     /* Load binaries into RAM */
     boot_main_copy_binaries:
         ldr     x0, =K_BOOT_MAIN_COPY_BINARIES_MSG      /* Address of message */
-        bl      boot_print_msg                          /* Print message */
+        bl      printer_print_string                    /* Print message */
         bl      bmt_build_copy_binaries                 /* Copy binaries to RAM */
         ldr     x0, =K_BOOT_MAIN_DONE_MSG               /* Address of message */
-        bl      boot_print_msg                          /* Print message */
+        bl      printer_print_string                    /* Print message */
 
     /* Get kernel entry point and stack pointer */
     boot_main_get_kernel_info:
@@ -43,8 +43,10 @@ _boot_main_entry:
 
     /* Jump to kernel entry point */
     boot_main_jump_to_kernel:
+        stp     x19, x20, [sp, #-16]!                   /* Save x19 and x20 on stack */
         ldr     x0, =K_BOOT_MAIN_BRANCH_KERNEL          /* Address of message */
-        bl      boot_print_msg                          /* Print message */
+        bl      printer_print_string                    /* Print message */
+        ldp     x19, x20, [sp], #16                     /* Restore x19 and x20 from stack */
         mov     sp, x20                                 /* Set stack pointer */
         ldr     x0, =__bmt_start                        /* Load BMT start address */
         br      x19                                     /* Jump to kernel entry point */
@@ -58,7 +60,7 @@ done:
 K_BOOT_MAIN_HELLO_MSG:
     .asciz "\n[BOOT] Hello World!\n"
 
-K_BOOT_MAIN_BUILD_bmt_MSG:
+K_BOOT_MAIN_BUILD_BMT_MSG:
     .asciz "[BOOT] Building BMT table...\n"
 
 K_BOOT_MAIN_COPY_BINARIES_MSG:
