@@ -93,7 +93,7 @@ target_link_libraries(${LIB_NAME_KRN}
         ${TYPES_LIB_NAME}_krn
         ${ELF_LIB_NAME}_krn
         ${MEMORY_OPS_LIB_NAME}_krn
-        ${SERIAL_LIB_NAME}_krn
+        ${PRINTER_LIB_NAME}_krn
         ${STRINGS_LIB_NAME}_krn
     "-Wl,--no-whole-archive"
 )
