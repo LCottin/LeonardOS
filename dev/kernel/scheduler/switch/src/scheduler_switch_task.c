@@ -1,7 +1,6 @@
 #include "scheduler_switch.h"
 #include "scheduler_ctx.h"
 #include "pcb_krn.h"
-#include "serial_krn.h"
 #include "strings_utils_usr.h"
 #include "memory_ops_usr.h"
 

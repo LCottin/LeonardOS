@@ -1,6 +1,6 @@
 #include "strings_utils_usr.h"
 
-char_t *string_utils_itoa(const int32_t num, char_t *str, const int32_t base)
+char_t *string_utils_itoa(const int32_t num, char_t *str, const uint32_t base)
 {
     char_t *str_to_return;
 
@@ -31,7 +31,7 @@ char_t *string_utils_itoa(const int32_t num, char_t *str, const int32_t base)
         /* Process digit to convert to string */
         do
         {
-            int32_t remainder = number % base;
+            uint32_t remainder = (uint32_t)number % base;
             str[length++] = (remainder > 9) ? (char_t)((remainder - 10) + (int32_t)'a') : (char_t)(remainder + (int32_t)'0');
             number /= base;
         } while (number != 0);
