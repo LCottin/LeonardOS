@@ -1,21 +1,4 @@
 # ==============================================================================
-# Create source and header for PRINT
-# ==============================================================================
-set(BOOT_PRINT_DIR
-    ${CMAKE_CURRENT_SOURCE_DIR}/print
-)
-
-set(BOOT_PRINT_SOURCES
-    # Add the path to each source file here
-    ${BOOT_PRINT_DIR}/src/boot_print_addr.S
-    ${BOOT_PRINT_DIR}/src/boot_print_msg.S
-)
-
-set(BOOT_PRINT_HEADERS
-    ${BOOT_PRINT_DIR}/include
-)
-
-# ==============================================================================
 # Create source and header for MEMORY
 # ==============================================================================
 set(BOOT_MEMORY_DIR
@@ -54,7 +37,6 @@ set(LIB_NAME_KRN ${BOOT_LIB_NAME}_krn)
 add_library(${LIB_NAME_KRN}
     STATIC
         # Add the path to each source file here
-        ${BOOT_PRINT_SOURCES}
         ${BOOT_MEMORY_SOURCES}
         ${BOOT_MAIN_SOURCES}
 )
@@ -65,7 +47,6 @@ add_library(${LIB_NAME_KRN}
 target_include_directories(${LIB_NAME_KRN}
     PRIVATE
         # Add the path to each header directory here
-        ${BOOT_PRINT_HEADERS}
         ${BOOT_MEMORY_HEADERS}
         ${BOOT_MAIN_HEADERS}
     PUBLIC
@@ -81,5 +62,6 @@ target_link_libraries(${LIB_NAME_KRN}
         # Add the path to library of other folder here
         ${TYPES_LIB_NAME}_krn
         ${BMT_LIB_NAME}_krn
+        ${PRINTER_LIB_NAME}_krn
     "-Wl,--no-whole-archive"
 )

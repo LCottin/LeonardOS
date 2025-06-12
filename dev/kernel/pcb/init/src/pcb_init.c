@@ -1,6 +1,6 @@
 #include "pcb_krn.h"
 #include "pcb_ctx.h"
-#include "serial_krn.h"
+#include "printer_krn.h"
 #include "memory_krn.h"
 #include "memory_ops_usr.h"
 #include "bmt_krn.h"
@@ -11,7 +11,7 @@ bool_t pcb_init()
 {
     bool_t init_ok;
 
-    serial_print_string("[KERN] PCB driver initialization ...\n");
+    printer_print_string("[KERN] PCB driver initialization ...\n");
 
     memory_ops_set(&g_pcb_ctx_table, 0, sizeof(g_pcb_ctx_table));
     g_pcb_ctx_table.pcb_krn_ctx.ident.id         = 0;
@@ -35,23 +35,14 @@ bool_t pcb_init()
             g_pcb_ctx_table.pcb_apps_ctx[i].control.priority = i;
             g_pcb_ctx_table.pcb_apps_ctx[i].registers.pc     = bmt_info_get_app_entry(i);
             g_pcb_ctx_table.pcb_apps_ctx[i].registers.sp     = bmt_info_get_app_stack_top(i);
-
-            char str[32];
-            serial_print_string("[KERN] PCB context app entry: ");
-            serial_print_string(string_utils_itoa((int32_t)g_pcb_ctx_table.pcb_apps_ctx[i].registers.pc, str, 10U));
-            serial_print_string(" \n");
-            memory_ops_set(str, 0, 32);
-            serial_print_string("[KERN] PCB context app stack: ");
-            serial_print_string(string_utils_itoa((int32_t)g_pcb_ctx_table.pcb_apps_ctx[i].registers.sp, str, 10U));
-            serial_print_string(" \n");
         }
 
-        serial_print_string("[KERN] PCB driver initialization done.\n");
+        printer_print_string("[KERN] PCB driver initialization done.\n");
         init_ok = TRUE;
     }
     else
     {
-        serial_print_string("[KERN] PCB driver initialization failed: PCB context allocation failed.\n");
+        printer_print_string("[KERN] PCB driver initialization failed: PCB context allocation failed.\n");
         init_ok = FALSE;
     }
 

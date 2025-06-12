@@ -1,6 +1,7 @@
 # Compile each component and library
 set(COMPONENTS_DIR
     # Add the path to each component here
+    "printer"
     "scheduler"
     "pcb"
     "elf"
@@ -15,7 +16,6 @@ set(COMPONENTS_DIR
     "containers"
     "types"
     "uart"
-    "serial"
     "mmio"
     "fpu"
     "core"
