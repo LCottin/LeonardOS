@@ -15,9 +15,9 @@ extern void clock_init(void);
 
 
 /**********************************************************************
- * @brief Gets the current time.
+ * @brief Gets the current time in ns.
  *
- * This function returns the current time since the system started.
+ * This function returns the current time in ns since the system started.
  *
  * @return The current time.
  **********************************************************************/

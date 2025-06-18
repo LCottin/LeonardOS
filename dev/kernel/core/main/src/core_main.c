@@ -22,7 +22,6 @@ void _core_main_entry(const addr_t bmt_start_addr)
     scheduler_init();
     memory_init_heap();
     fpu_init();
-    clock_init();
 
     char_t *ptr_alloc = (char_t *)memory_alloc_and_init(sizeof(char_t) * 64, 0);
     if (ptr_alloc != NULL)
