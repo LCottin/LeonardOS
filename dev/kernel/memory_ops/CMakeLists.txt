@@ -75,7 +75,8 @@ target_include_directories(${LIB_NAME_USR}
 target_link_libraries(${LIB_NAME_USR}
     PRIVATE "-Wl,--whole-archive"
         # Add the path to library of other folder here
-        ${TYPES_LIB_NAME}_usr
         ${MEMORY_LIB_NAME}_krn
+    PUBLIC
+        ${TYPES_LIB_NAME}_usr
     "-Wl,--no-whole-archive"
 )

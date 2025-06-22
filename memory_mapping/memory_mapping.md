@@ -27,6 +27,12 @@ The following table shows the memory mapping of the OS.
 |                        |                 | Code        | 0x00702000   | 0x00008000 | 0x00709fff  |   Executable code and read only data |
 |                        |                 | Data        | 0x0070a000   | 0x00008000 | 0x00711fff  |   Initialized and uninitialized data |
 |------------------------|-----------------|-------------|--------------|------------|-------------|--------------------------------------|
+| APP_2 (ROM)            | elf             |             |              |            |             | App elf                              |
+|                        |                 | Header      | 0x00720000   | 0x00001000 | 0x00720fff  |   ELF header                         |
+|                        |                 | Metadata    | 0x00721000   | 0x00001000 | 0x00721fff  |   Store binary symbols               |
+|                        |                 | Code        | 0x00722000   | 0x00008000 | 0x00729fff  |   Executable code and read only data |
+|                        |                 | Data        | 0x0072a000   | 0x00008000 | 0x00731fff  |   Initialized and uninitialized data |
+|------------------------|-----------------|-------------|--------------|------------|-------------|--------------------------------------|
 | UART Registers         | io              |             |              |            |             | UART device for serial I/O           |
 |                        |                 | Registers   | 0x09000000   | 0x00010000 | 0x0900ffff  |   UART registers to print messages   |
 |------------------------|-----------------|-------------|--------------|------------|-------------|--------------------------------------|
@@ -42,12 +48,19 @@ The following table shows the memory mapping of the OS.
 |                        |                 | Guard       | 0x45110000   | 0x00010000 | 0x4511ffff  |   Protection against stack overflow  |
 |                        |                 | Heap        | 0x45120000   | 0x00010000 | 0x4512ffff  |   Heap                               |
 |------------------------|-----------------|-------------|--------------|------------|-------------|--------------------------------------|
-| App (RAM)              | loaded          |             |              |            |             | App loaded in ram                    |
+| APP_1 (RAM)            | loaded          |             |              |            |             | App loaded in ram                    |
 |                        |                 | Code        | 0x45200000   | 0x00008000 | 0x45207fff  |   Executable code and read only data |
 |                        |                 | Data        | 0x45208000   | 0x00008000 | 0x4520ffff  |   Initialized and uninitialized data |
 |                        |                 | Stack       | 0x45210000   | 0x00001000 | 0x45210fff  |   Stack                              |
 |                        |                 | Guard       | 0x45211000   | 0x00001000 | 0x45211fff  |   Protection against stack overflow  |
 |                        |                 | Heap        | 0x45212000   | 0x00001000 | 0x45212fff  |   Heap                               |
+|------------------------|-----------------|-------------|--------------|------------|-------------|--------------------------------------|
+| APP_2 (RAM)            | loaded          |             |              |            |             | App loaded in ram                    |
+|                        |                 | Code        | 0x45300000   | 0x00008000 | 0x45307fff  |   Executable code and read only data |
+|                        |                 | Data        | 0x45308000   | 0x00008000 | 0x4530ffff  |   Initialized and uninitialized data |
+|                        |                 | Stack       | 0x45310000   | 0x00001000 | 0x45310fff  |   Stack                              |
+|                        |                 | Guard       | 0x45311000   | 0x00001000 | 0x45311fff  |   Protection against stack overflow  |
+|                        |                 | Heap        | 0x45312000   | 0x00001000 | 0x45312fff  |   Heap                               |
 |------------------------|-----------------|-------------|--------------|------------|-------------|--------------------------------------|
 | BMT                    | global variable |             |              |            |             | Binary Metadata Table                |
 |                        |                 | BMT         | 0x4f000000   | 0x00010000 | 0x4f00ffff  |   Binary Metadata Table Address      |

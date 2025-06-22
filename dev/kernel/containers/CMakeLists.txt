@@ -91,7 +91,7 @@ target_include_directories(${LIB_NAME_USR}
 # Add library user dependencies
 # ==============================================================================
 target_link_libraries(${LIB_NAME_USR}
-    PRIVATE "-Wl,--whole-archive"
+    PUBLIC "-Wl,--whole-archive"
         # Add the path to library of other folder here
         ${TYPES_LIB_NAME}_usr
         ${MEMORY_OPS_LIB_NAME}_usr

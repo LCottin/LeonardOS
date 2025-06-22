@@ -2,6 +2,7 @@
 set(APPLICATION_DIR
     # Add the path to each application here
     "hello_world"
+    "count_down"
 )
 
 foreach (APPLICATION_DIR ${APPLICATION_DIR})
