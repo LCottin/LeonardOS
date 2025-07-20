@@ -39,7 +39,7 @@ set(SCHEDULER_SWITCH_DIR
 
 set(SCHEDULER_SWITCH_SOURCES
     # Add the path to each source file here
-    ${SCHEDULER_SWITCH_DIR}/src/scheduler_switch_task.c
+    ${SCHEDULER_SWITCH_DIR}/src/scheduler_switch_task.S
 )
 
 set(SCHEDULER_SWITCH_HEADERS

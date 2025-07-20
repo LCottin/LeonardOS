@@ -14,6 +14,7 @@ void scheduler_run(void)
 
     while (TRUE)
     {
+        printer_print_string("\n[KERN] Switching application ...\n\n");
         scheduler_switch_task(FALSE);
     }
 }
