@@ -17,9 +17,10 @@ extern void pcb_ctx_save(pcb_state_registers_t *pcb_state_registers);
  * @brief Restore the context of any task.
  *
  * @param pcb_state_registers Pointer to the PCB state registers structure.
+ * @param return_addr Address to return to after restoring the context.
  * @return None.
  **********************************************************************/
-extern void pcb_ctx_restore(const pcb_state_registers_t *pcb_state_registers);
+extern void pcb_ctx_restore(const pcb_state_registers_t *pcb_state_registers, const addr_t return_addr);
 
 
 #endif /* __PCB_CTX_PRV_H__ */

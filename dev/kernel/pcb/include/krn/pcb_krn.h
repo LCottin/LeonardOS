@@ -64,9 +64,10 @@ extern void pcb_ctx_app_save(const uint32_t task_id);
  * @brief Restore the application context.
  *
  * @param task_id The ID of the task to restore the context for.
+ * @param is_first_run Indicates if this is the first run of the task.
  * @return None.
  **********************************************************************/
-extern void pcb_ctx_app_restore(const uint32_t task_id);
+extern void pcb_ctx_app_restore(const uint32_t task_id, const bool_t is_first_run);
 
 
 /**********************************************************************

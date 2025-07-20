@@ -23,13 +23,13 @@ set(PCB_CTX_DIR
 
 set(PCB_CTX_SOURCES
     # Add the path to each source file here
-    ${PCB_CTX_DIR}/src/pcb_ctx_app_restore.c
+    ${PCB_CTX_DIR}/src/pcb_ctx_app_restore.S
     ${PCB_CTX_DIR}/src/pcb_ctx_app_save.c
     ${PCB_CTX_DIR}/src/pcb_ctx_app_update.c
     ${PCB_CTX_DIR}/src/pcb_ctx_data.c
     ${PCB_CTX_DIR}/src/pcb_ctx_get_count.c
     ${PCB_CTX_DIR}/src/pcb_ctx_get_app_entry.c
-    ${PCB_CTX_DIR}/src/pcb_ctx_krn_restore.c
+    ${PCB_CTX_DIR}/src/pcb_ctx_krn_restore.S
     ${PCB_CTX_DIR}/src/pcb_ctx_krn_save.c
     ${PCB_CTX_DIR}/src/pcb_ctx_restore.S
     ${PCB_CTX_DIR}/src/pcb_ctx_save.S
