@@ -12,3 +12,6 @@ source debug/breakpoints.gdb
 
 # Enable source code view
 focus cmd
+
+# Show registers layout
+layout regs
