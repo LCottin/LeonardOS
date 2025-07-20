@@ -8,8 +8,6 @@ set(COMPONENTS_DIR
     "libuser"
     "syscall"
     "boot"
-    "boot_bin"
-    "core_bin"
     "memory"
     "memory_ops"
     "strings"
@@ -23,6 +21,17 @@ set(COMPONENTS_DIR
     "bmt"
 )
 
+set (BINARY_DIR
+    "boot_bin"
+    "core_bin"
+)
+
+# Set the libraries directory
 foreach (COMPONENT_DIR ${COMPONENTS_DIR})
     add_subdirectory(${KERNEL_DIR}/${COMPONENT_DIR})
+endforeach()
+
+# Set the binaries directory
+foreach (BINARY_DIR ${BINARY_DIR})
+    add_subdirectory(${KERNEL_DIR}/${BINARY_DIR})
 endforeach()
