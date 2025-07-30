@@ -31,7 +31,7 @@ char_t *strings_utils_utoa(const printer_base_t base, const uint64_t value, char
             str[str_length] = '\0';
 
             /* Reverse string to get correct order */
-            string_utils_reverse(str, str_length);
+            strings_utils_reverse(str, str_length);
         }
     }
 

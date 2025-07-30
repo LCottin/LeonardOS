@@ -7,11 +7,14 @@ g_current_task:
     .word 0
 
 .section .text
-.global scheduler_switch_task
-.type scheduler_switch_task, %function
+.global  scheduler_switch_task
+.type    scheduler_switch_task, %function
 
 scheduler_switch_task:
 
+    mov x0, xzr
+    br x0
+    
     scheduler_switch_task_save_lr:
         sub sp, sp, #16                                     /* Allocate space on the stack */
         str lr, [sp, #0]                                    /* Save the link register (return address) on the stack */

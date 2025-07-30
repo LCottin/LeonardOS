@@ -66,7 +66,7 @@ boot_parse_memory:
 .section .rodata
 
 K_BOOT_PARSE_MEMORY_MSG_ELF_FOUND:
-    .asciz "\n[BOOT]   Found ELF at address: 0x"
+    .asciz "\n[BOOT]   Found ELF at address: "
 
 K_BOOT_PARSE_MEMORY_MSG_START_PARSING:
     .asciz "\n[BOOT] Parsing memory for ELF ... "

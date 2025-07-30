@@ -1,4 +1,5 @@
 # Define library names for dependencies
+set (SEH_LIB_NAME           "_seh")
 set (PRINTER_LIB_NAME       "_printer")
 set (SCHEDULER_LIB_NAME     "_scheduler")
 set (PCB_LIB_NAME           "_pcb")

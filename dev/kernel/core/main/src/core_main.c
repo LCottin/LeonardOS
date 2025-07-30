@@ -9,14 +9,13 @@
 #include "pcb_krn.h"
 #include "scheduler_krn.h"
 #include "bmt_krn.h"
+#include "seh_krn.h"
 
 void _core_main_entry(const addr_t bmt_start_addr)
 {
-    const char_t str[64] = "\n[KERN] Hello World!\n";
-    char_t str2[64];
+    printer_print_string("\n[KERN] Hello World!\n");
 
-    printer_print_string(str);
-
+    seh_ctx_init();
     bmt_ctx_init_kernel(bmt_start_addr);
     pcb_init();
     scheduler_init();
@@ -24,7 +23,7 @@ void _core_main_entry(const addr_t bmt_start_addr)
     fpu_init();
 
     char_t *ptr_alloc = (char_t *)memory_alloc_and_init(sizeof(char_t) * 64, 0);
-    if (ptr_alloc != NULL)
+    if (ptr_alloc != NULL_PTR)
     {
         memory_ops_copy(ptr_alloc, "[KERN] Hello World from allocated buffer!\n", 64);
         printer_print_string(ptr_alloc);
@@ -36,7 +35,7 @@ void _core_main_entry(const addr_t bmt_start_addr)
     }
 
     printer_print_string("[KERN] Current elapsed time since startup: ");
-    printer_print_string(string_utils_itoa((int32_t)clock_info_get_time(), str2, 10U));
+    printer_print_long_signed(clock_info_get_time(),PRINTER_BASE_DECIMAL);
     printer_print_string(" ns\n");
 
     printer_print_string("[KERN] Launching scheduling ... \n");

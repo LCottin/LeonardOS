@@ -1,6 +1,6 @@
 #include "strings_utils_usr.h"
 
-void string_utils_reverse(char_t *str, const size_t length)
+void strings_utils_reverse(char_t *str, const size_t length)
 {
     if (length > 0)
     {

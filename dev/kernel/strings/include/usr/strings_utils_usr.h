@@ -12,7 +12,7 @@
  *
  * @return None.
  **********************************************************************/
-extern void string_utils_reverse(char_t *str, const size_t length);
+extern void strings_utils_reverse(char_t *str, const size_t length);
 
 
 /**********************************************************************
