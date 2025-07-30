@@ -7,7 +7,11 @@ set(STRINGS_UTILS_DIR
 
 set(STRINGS_UTILS_SOURCES
     # Add the path to each source file here
-    ${STRINGS_UTILS_DIR}/src/strings_utils.c
+    ${STRINGS_UTILS_DIR}/src/strings_utils_get_base_prefix.c
+    ${STRINGS_UTILS_DIR}/src/strings_utils_itoa.c
+    ${STRINGS_UTILS_DIR}/src/strings_utils_reverse.c
+    ${STRINGS_UTILS_DIR}/src/strings_utils_utoa_raw.c
+    ${STRINGS_UTILS_DIR}/src/strings_utils_utoa.c
 )
 
 set(STRINGS_UTILS_HEADERS
@@ -61,6 +65,7 @@ target_link_libraries(${LIB_NAME_KRN}
     PRIVATE "-Wl,--whole-archive"
         # Add the path to library of other folder here
         ${TYPES_LIB_NAME}_krn
+        ${PRINTER_LIB_NAME}_usr
     "-Wl,--no-whole-archive"
 )
 
@@ -95,5 +100,6 @@ target_link_libraries(${LIB_NAME_USR}
     PUBLIC "-Wl,--whole-archive"
         # Add the path to library of other folder here
         ${TYPES_LIB_NAME}_usr
+        ${PRINTER_LIB_NAME}_usr
     "-Wl,--no-whole-archive"
 )
