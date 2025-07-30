@@ -15,14 +15,47 @@ extern void printer_print_string(const char_t *str);
 
 
 /**********************************************************************
- * @brief Print an integer in a specified base.
+ * @brief Print a signed integer in a specified base.
  *
  * @param value The integer value to be printed.
- * @param base  The base for the integer representation (e.g., 10 for decimal, 16 for hexadecimal).
+ * @param base  The base for the integer representation.
  *
  * @return None.
  **********************************************************************/
-extern void printer_print_int(const int32_t value, const printer_base_t base);
+extern void printer_print_signed(const int32_t value, const printer_base_t base);
+
+
+/**********************************************************************
+ * @brief Print an unsigned integer in a specified base.
+ *
+ * @param value The integer value to be printed.
+ * @param base  The base for the integer representation.
+ *
+ * @return None.
+ **********************************************************************/
+extern void printer_print_unsigned(const uint32_t value, const printer_base_t base);
+
+
+/**********************************************************************
+ * @brief Print a long signed integer in a specified base.
+ *
+ * @param value The integer value to be printed.
+ * @param base  The base for the integer representation.
+ *
+ * @return None.
+ **********************************************************************/
+extern void printer_print_long_signed(const int64_t value, const printer_base_t base);
+
+
+/**********************************************************************
+ * @brief Print a long unsigned integer in a specified base.
+ *
+ * @param value The integer value to be printed.
+ * @param base  The base for the integer representation.
+ *
+ * @return None.
+ **********************************************************************/
+extern void printer_print_long_unsigned(const uint64_t value, const printer_base_t base);
 
 
 /**********************************************************************
