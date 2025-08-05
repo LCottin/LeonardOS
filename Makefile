@@ -4,11 +4,18 @@ DEBUG_DIR = debug
 TOOLS_DIR = tools
 VERBOSE?=0
 
-BIN_DIR         = $(BUILD_DIR)/bin
-BOOT_ELF        = $(BIN_DIR)/boot_bin/boot_bin.elf
-CORE_ELF        = $(BIN_DIR)/core_bin/core_bin.elf
-HELLO_WORLD_ELF = $(BIN_DIR)/hello_world/hello_world.elf
-COUNT_DOWN_ELF  = $(BIN_DIR)/count_down/count_down.elf
+# Binary names
+BOOT_ELF_NAME        = boot_bin.elf
+CORE_ELF_NAME        = core_bin.elf
+HELLO_WORLD_ELF_NAME = hello_world.elf
+COUNT_DOWN_ELF_NAME  = count_down.elf
+
+BIN_DIR             = $(BUILD_DIR)/bin
+BOOT_ELF_DIR        = $(BIN_DIR)/boot_bin/$(BOOT_ELF_NAME)
+CORE_ELF_DIR        = $(BIN_DIR)/core_bin/$(CORE_ELF_NAME)
+HELLO_WORLD_ELF_DIR = $(BIN_DIR)/hello_world/$(HELLO_WORLD_ELF_NAME)
+COUNT_DOWN_ELF_DIR  = $(BIN_DIR)/count_down/$(COUNT_DOWN_ELF_NAME)
+
 LEONARD_OS_IMG  = $(BIN_DIR)/LeonardOS.img
 DEBUG_SCRIPT    = $(DEBUG_DIR)/run_debug.gdb
 
@@ -18,10 +25,6 @@ SCRIPTS_DIR = $(TOOLS_DIR)/scripts
 .PHONY: install
 install:
 	./install_dependencies.bash
-
-# Run all the commands
-.PHONY: all
-all: clean build
 
 # Create a new component
 .PHONY: component
@@ -47,9 +50,27 @@ application:
 	@echo "Creating new application ..."
 	@python3 $(SCRIPTS_DIR)/Application.py $(VERBOSE)
 
-# Create the build directory, configure, and build the project
-.PHONY: build
-build: prepare
+# Create the build directory, configure, and build core binary
+.PHONY: build_core
+build_core: prepare
+	@echo "Building core ..."
+	@$(MAKE) -C $(BUILD_DIR) --no-print-directory $(CORE_ELF_NAME)
+
+# Create the build directory, configure, and build boot binary
+.PHONY: build_boot
+build_boot: prepare
+	@echo "Building boot ..."
+	@$(MAKE) -C $(BUILD_DIR) --no-print-directory $(BOOT_ELF_NAME)
+
+# Create the build directory, configure, and build application binaries
+.PHONY: build_app
+build_app: prepare
+	@echo "Building applications ..."
+	@$(MAKE) -C $(BUILD_DIR) --no-print-directory applications
+
+# Create the build directory, configure, and build all binaries
+.PHONY: build_all
+build_all: prepare
 	@echo "Building project ..."
 	@$(MAKE) -C $(BUILD_DIR) --no-print-directory
 
@@ -57,16 +78,16 @@ build: prepare
 .PHONY: rebuild
 rebuild:
 	@make clean
-	@make build
+	@make build_all
 
 # Create the image file for the OS
 .PHONY: image
-image: build
+image: build_all
 	@rm -f $(LEONARD_OS_IMG)
-	@dd if=/dev/zero          of=$(LEONARD_OS_IMG) bs=512 count=32768
-	@dd if=$(CORE_ELF)        of=$(LEONARD_OS_IMG) bs=1   seek=5242880 conv=notrunc
-	@dd if=$(HELLO_WORLD_ELF) of=$(LEONARD_OS_IMG) bs=1   seek=7340032 conv=notrunc
-	@dd if=$(COUNT_DOWN_ELF)  of=$(LEONARD_OS_IMG) bs=1   seek=7471104 conv=notrunc
+	@dd if=/dev/zero              of=$(LEONARD_OS_IMG) bs=512 count=32768
+	@dd if=$(CORE_ELF_DIR)        of=$(LEONARD_OS_IMG) bs=1   seek=5242880 conv=notrunc
+	@dd if=$(HELLO_WORLD_ELF_DIR) of=$(LEONARD_OS_IMG) bs=1   seek=7340032 conv=notrunc
+	@dd if=$(COUNT_DOWN_ELF_DIR)  of=$(LEONARD_OS_IMG) bs=1   seek=7471104 conv=notrunc
 
 # Configure the project (run CMake if necessary)
 .PHONY: prepare
@@ -103,7 +124,7 @@ debug:
 		exit 1; \
 	fi
 	@aarch64-none-elf-gdb 			\
-		-ex "file $(BOOT_ELF)" 		\
+		-ex "file $(BOOT_ELF_DIR)"	\
 		-ex "source $(DEBUG_SCRIPT)"
 
 # Run the OS using QEMU in debug mode
@@ -118,7 +139,7 @@ run_debug:
 	-m 512M 													\
 	-cpu cortex-a53 											\
 	-nographic 													\
-	-kernel $(BOOT_ELF) 										\
+	-kernel $(BOOT_ELF_DIR)										\
 	-serial mon:stdio											\
 	-device loader,file=$(LEONARD_OS_IMG),addr=0x0				\
 	-no-reboot 													\
@@ -141,7 +162,7 @@ run_el1:
 		-m 512M														\
 		-cpu cortex-a53												\
 		-nographic													\
-		-kernel $(BOOT_ELF)											\
+		-kernel $(BOOT_ELF_DIR)										\
 		-serial mon:stdio 											\
 		-device loader,file=$(LEONARD_OS_IMG),addr=0x0				\
 		-no-reboot &
@@ -158,7 +179,7 @@ run_el2:
 		-m 512M														\
 		-cpu cortex-a53												\
 		-nographic													\
-		-kernel $(BOOT_ELF)											\
+		-kernel $(BOOT_ELF_DIR)										\
 		-serial mon:stdio 											\
 		-device loader,file=$(LEONARD_OS_IMG),addr=0x0				\
 		-no-reboot													\
@@ -176,7 +197,7 @@ run_el3:
 		-m 512M														\
 		-cpu cortex-a53												\
 		-nographic													\
-		-kernel $(BOOT_ELF)											\
+		-kernel $(BOOT_ELF_DIR)										\
 		-serial mon:stdio 											\
 		-device loader,file=$(LEONARD_OS_IMG),addr=0x0				\
 		-no-reboot													\
