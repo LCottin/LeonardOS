@@ -11,10 +11,13 @@
  **********************************************************************/
 typedef enum
 {
-    SYSCALL_PRINT_STRING = 0, /* System call to print a string */
-    SYSCALL_PRINT_INT    = 1, /* System call to print an integer */
-    SYSCALL_PRINT_ADDR   = 2, /* System call to print an address */
-    SYSCALL_GET_TIME     = 3, /* System call to get time */
+    SYSCALL_PRINT_STRING,   /* System call to print a string */
+    SYSCALL_PRINT_INT,      /* System call to print an integer */
+    SYSCALL_PRINT_UINT,     /* System call to print an unsigned integer */
+    SYSCALL_PRINT_LONG,     /* System call to print a long integer */
+    SYSCALL_PRINT_ULONG,    /* System call to print an unsigned long integer */
+    SYSCALL_PRINT_ADDR,     /* System call to print an address */
+    SYSCALL_GET_TIME,       /* System call to get time */
 
     SYSCALL_TOTAL            /* Total number of system calls */
 } syscall_numbers_t;
