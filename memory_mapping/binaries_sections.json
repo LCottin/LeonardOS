@@ -144,6 +144,18 @@
         ]
     },
 
+    "IVT (RAM)":
+    {
+        "name"     	: "IVT",
+        "base_address" : "0x4F020000",
+        "type"     	: "global variable",
+        "description"  : "Interrupt Vector Table",
+        "sections":
+        [
+            {"name": "IVT", "size": "0x10000", "description": "Interrupt Vector Table Address"}
+        ]
+    },
+
     "UART Registers":
     {
         "name"         : "UART Registers",

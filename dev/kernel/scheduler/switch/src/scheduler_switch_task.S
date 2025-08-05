@@ -7,8 +7,8 @@ g_current_task:
     .word 0
 
 .section .text
-.global scheduler_switch_task
-.type scheduler_switch_task, %function
+.global  scheduler_switch_task
+.type    scheduler_switch_task, %function
 
 scheduler_switch_task:
 
