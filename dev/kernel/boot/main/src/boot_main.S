@@ -9,6 +9,9 @@ _boot_main_entry:
         and     x10, x10, #0xFFFFFFFFFFFFFFF0           /* Align to 16 bytes */
         mov     sp, x10
 
+    boot_main_init_exceptions:
+        bl      seh_ctx_init                            /* Initialize SEH (System Events Handler) */
+
     boot_main_print_hello:
         ldr     x0, =K_BOOT_MAIN_HELLO_MSG              /* Address of message  */
         bl      printer_print_string                    /* Print message */
