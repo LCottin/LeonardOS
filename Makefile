@@ -1,25 +1,43 @@
 # Compiler and build settings
-BUILD_DIR = build
-DEBUG_DIR = debug
-TOOLS_DIR = tools
+ROOT_DIR  = $(shell pwd)
+BUILD_DIR = $(ROOT_DIR)/build
+DEBUG_DIR = $(ROOT_DIR)/debug
+TOOLS_DIR = $(ROOT_DIR)/tools
+TESTS_DIR = $(ROOT_DIR)/tests
 VERBOSE?=0
 
 # Binary names
-BOOT_ELF_NAME        = boot_bin.elf
-CORE_ELF_NAME        = core_bin.elf
-HELLO_WORLD_ELF_NAME = hello_world.elf
-COUNT_DOWN_ELF_NAME  = count_down.elf
+BOOT_ELF_NAME        = boot_bin
+CORE_ELF_NAME        = core_bin
+HELLO_WORLD_ELF_NAME = hello_world
+COUNT_DOWN_ELF_NAME  = count_down
 
-BIN_DIR             = $(BUILD_DIR)/bin
-BOOT_ELF_DIR        = $(BIN_DIR)/boot_bin/$(BOOT_ELF_NAME)
-CORE_ELF_DIR        = $(BIN_DIR)/core_bin/$(CORE_ELF_NAME)
-HELLO_WORLD_ELF_DIR = $(BIN_DIR)/hello_world/$(HELLO_WORLD_ELF_NAME)
-COUNT_DOWN_ELF_DIR  = $(BIN_DIR)/count_down/$(COUNT_DOWN_ELF_NAME)
+BIN_DEV_DIR         = $(BUILD_DIR)/bin/dev
+BIN_TESTS_DIR       = $(BUILD_DIR)/bin/tests
+BOOT_ELF_DIR        = $(BIN_DEV_DIR)/$(BOOT_ELF_NAME)/$(BOOT_ELF_NAME).elf
+CORE_ELF_DIR        = $(BIN_DEV_DIR)/$(CORE_ELF_NAME)/$(CORE_ELF_NAME).elf
+HELLO_WORLD_ELF_DIR = $(BIN_DEV_DIR)/$(HELLO_WORLD_ELF_NAME)/$(HELLO_WORLD_ELF_NAME).elf
+COUNT_DOWN_ELF_DIR  = $(BIN_DEV_DIR)/$(COUNT_DOWN_ELF_NAME)/$(COUNT_DOWN_ELF_NAME).elf
 
-LEONARD_OS_IMG  = $(BIN_DIR)/LeonardOS.img
+PRE_OS_IMG      = $(BUILD_DIR)/bin/preOS.img
+LEONARD_OS_IMG  = $(BIN_DEV_DIR)/LeonardOS.img
 DEBUG_SCRIPT    = $(DEBUG_DIR)/run_debug.gdb
 
-SCRIPTS_DIR = $(TOOLS_DIR)/scripts
+SCRIPTS_DIR         = $(TOOLS_DIR)/scripts
+TESTS_FRAMEWORk_DIR = $(TOOLS_DIR)/test_framework
+
+include Makefile.build
+include Makefile.run
+
+# Configure the project (run CMake if necessary)
+.PHONY: prepare
+prepare:
+	@echo "Configuring project ..."
+	@mkdir -p $(BUILD_DIR)
+	@cmake -S . -B $(BUILD_DIR)
+	@make memory_mapping
+	@rm -f $(PRE_OS_IMG)
+	@dd if=/dev/zero of=$(PRE_OS_IMG) bs=1024 count=16384
 
 # Install dependencies
 .PHONY: install
@@ -50,66 +68,6 @@ application:
 	@echo "Creating new application ..."
 	@python3 $(SCRIPTS_DIR)/Application.py $(VERBOSE)
 
-# Create the build directory, configure, and build core binary
-.PHONY: build_core
-build_core: prepare
-	@echo "Building core ..."
-	@$(MAKE) -C $(BUILD_DIR) --no-print-directory $(CORE_ELF_NAME)
-
-# Create the build directory, configure, and build boot binary
-.PHONY: build_boot
-build_boot: prepare
-	@echo "Building boot ..."
-	@$(MAKE) -C $(BUILD_DIR) --no-print-directory $(BOOT_ELF_NAME)
-
-# Create the build directory, configure, and build application binaries
-.PHONY: build_app
-build_app: prepare
-	@echo "Building applications ..."
-	@$(MAKE) -C $(BUILD_DIR) --no-print-directory applications
-
-# Create the build directory, configure, and build all binaries
-.PHONY: build_all
-build_all: prepare
-	@echo "Building project ..."
-	@$(MAKE) -C $(BUILD_DIR) --no-print-directory
-
-# Rebuild the project
-.PHONY: rebuild
-rebuild:
-	@make clean
-	@make build_all
-
-# Create the image file for the OS
-.PHONY: image
-image: build_all
-	@rm -f $(LEONARD_OS_IMG)
-	@dd if=/dev/zero              of=$(LEONARD_OS_IMG) bs=512 count=32768
-	@dd if=$(CORE_ELF_DIR)        of=$(LEONARD_OS_IMG) bs=1   seek=5242880 conv=notrunc
-	@dd if=$(HELLO_WORLD_ELF_DIR) of=$(LEONARD_OS_IMG) bs=1   seek=7340032 conv=notrunc
-	@dd if=$(COUNT_DOWN_ELF_DIR)  of=$(LEONARD_OS_IMG) bs=1   seek=7471104 conv=notrunc
-
-# Configure the project (run CMake if necessary)
-.PHONY: prepare
-prepare:
-	@echo "Configuring project ..."
-	@mkdir -p $(BUILD_DIR)
-	@cmake -S . -B $(BUILD_DIR)
-	@make memory_mapping
-
-# Clean only the compiled objects in the build directory
-.PHONY: clean
-clean:
-	@echo "Cleaning binaries ..."
-	@$(MAKE) -C $(BUILD_DIR) clean --no-print-directory
-	@rm -rf $(BIN_DIR)/*
-
-# Completely remove the build directory
-.PHONY: deep_clean
-deep_clean:
-	@echo "Removing build directory ..."
-	@rm -rf $(BUILD_DIR)/*
-
 # Generate the memory mapping
 .PHONY: memory_mapping
 memory_mapping:
@@ -126,83 +84,6 @@ debug:
 	@aarch64-none-elf-gdb 			\
 		-ex "file $(BOOT_ELF_DIR)"	\
 		-ex "source $(DEBUG_SCRIPT)"
-
-# Run the OS using QEMU in debug mode
-.PHONY: run_debug
-run_debug:
-	@if ! command -v qemu-system-aarch64 >/dev/null 2>&1; then \
-		echo "Error: qemu-system-aarch64 not found."; \
-		exit 1; \
-	fi
-	@qemu-system-aarch64 										\
-	-M virt 													\
-	-m 512M 													\
-	-cpu cortex-a53 											\
-	-nographic 													\
-	-kernel $(BOOT_ELF_DIR)										\
-	-serial mon:stdio											\
-	-device loader,file=$(LEONARD_OS_IMG),addr=0x0				\
-	-no-reboot 													\
-	-s -S -d int,unimp,guest_errors &							\
-
-# Run the OS using QEMU
-.PHONY: run
-run:
-	@make run_el1
-
-# Run the OS using QEMU in EL1
-.PHONY: run_el1
-run_el1:
-	@if ! command -v qemu-system-aarch64 >/dev/null 2>&1; then \
-		echo "Error: qemu-system-aarch64 not found."; \
-		exit 1; \
-	fi
-	@qemu-system-aarch64											\
-		-M virt														\
-		-m 512M														\
-		-cpu cortex-a53												\
-		-nographic													\
-		-kernel $(BOOT_ELF_DIR)										\
-		-serial mon:stdio 											\
-		-device loader,file=$(LEONARD_OS_IMG),addr=0x0				\
-		-no-reboot &
-
-# Run the OS using QEMU in EL2
-.PHONY: run_el2
-run_el2:
-	@if ! command -v qemu-system-aarch64 >/dev/null 2>&1; then \
-		echo "Error: qemu-system-aarch64 not found."; \
-		exit 1; \
-	fi
-	@qemu-system-aarch64											\
-		-M virt														\
-		-m 512M														\
-		-cpu cortex-a53												\
-		-nographic													\
-		-kernel $(BOOT_ELF_DIR)										\
-		-serial mon:stdio 											\
-		-device loader,file=$(LEONARD_OS_IMG),addr=0x0				\
-		-no-reboot													\
-		-machine virtualization=on &
-
-# Run the OS using QEMU in EL3
-.PHONY: run_el3
-run_el3:
-	@if ! command -v qemu-system-aarch64 >/dev/null 2>&1; then \
-		echo "Error: qemu-system-aarch64 not found."; \
-		exit 1; \
-	fi
-	@qemu-system-aarch64											\
-		-M virt														\
-		-m 512M														\
-		-cpu cortex-a53												\
-		-nographic													\
-		-kernel $(BOOT_ELF_DIR)										\
-		-serial mon:stdio 											\
-		-device loader,file=$(LEONARD_OS_IMG),addr=0x0				\
-		-no-reboot													\
-		-machine virtualization=on									\
-		-machine secure=on &
 
 # Kill all QEMU instances
 .PHONY: kill

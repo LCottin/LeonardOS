@@ -2,9 +2,9 @@
 # Set the output directory of the executable
 # ==============================================================================
 set(BIN_NAME "core_bin")
-SET(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${BIN_NAME})
+SET(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${BIN_DEV_DIR}/${BIN_NAME})
 
-set(DUMMY_SOURCE "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/dummy.c")
+set(DUMMY_SOURCE "${BIN_DEV_DIR}/dummy.c")
 file(WRITE ${DUMMY_SOURCE} "")
 
 # ==============================================================================
