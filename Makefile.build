@@ -1,0 +1,59 @@
+
+# Clean only the compiled objects in the build directory
+.PHONY: clean
+clean:
+	@echo "Cleaning binaries ..."
+	@$(MAKE) -C $(BUILD_DIR) clean --no-print-directory
+
+# Completely remove the build directory
+.PHONY: deep_clean
+deep_clean:
+	@echo "Removing build directory ..."
+	@rm -rf $(BUILD_DIR)/*
+
+# Create the build directory, configure, and build all binaries
+.PHONY: build_all
+build_all:
+	@echo "Building project ..."
+	@$(MAKE) -C $(BUILD_DIR) --no-print-directory
+
+# Create the build directory, configure, and build boot binary
+.PHONY: build_boot
+build_boot:
+	@echo "Building boot ..."
+	@$(MAKE) -C $(BUILD_DIR) --no-print-directory $(BOOT_ELF_NAME).elf
+
+# Create the build directory, configure, and build core binary
+.PHONY: build_core
+build_core:
+	@echo "Building core ..."
+	@$(MAKE) -C $(BUILD_DIR) --no-print-directory $(CORE_ELF_NAME).elf
+
+# Create the build directory, configure, and build application binaries
+.PHONY: build_app
+build_app:
+	@echo "Building applications ..."
+	@$(MAKE) -C $(BUILD_DIR) --no-print-directory applications
+
+# Create the build directory, configure, and build OS
+.PHONY: build_os
+build_os: prepare
+	@echo "Building the OS ..."
+	@make build_boot
+	@make build_core
+	@make build_app
+
+# Rebuild the project
+.PHONY: rebuild_os
+rebuild_os:
+	@make clean
+	@make build_os
+
+# Create the image file for the OS
+.PHONY: image
+image: build_all
+	@rm -f $(LEONARD_OS_IMG)
+	@cp $(PRE_OS_IMG) $(LEONARD_OS_IMG)
+	@dd if=$(CORE_ELF_DIR)        of=$(LEONARD_OS_IMG) bs=1   seek=5242880 conv=notrunc
+	@dd if=$(HELLO_WORLD_ELF_DIR) of=$(LEONARD_OS_IMG) bs=1   seek=7340032 conv=notrunc
+	@dd if=$(COUNT_DOWN_ELF_DIR)  of=$(LEONARD_OS_IMG) bs=1   seek=7471104 conv=notrunc

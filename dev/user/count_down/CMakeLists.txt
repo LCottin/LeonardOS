@@ -2,7 +2,7 @@
 # Set the output directory of the executable
 # ==============================================================================
 set(APP_NAME "count_down")
-SET(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${APP_NAME})
+SET(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${BIN_DEV_DIR}/${APP_NAME})
 
 # ==============================================================================
 # Linker script file path
