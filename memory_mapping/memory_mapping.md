@@ -68,3 +68,6 @@ The following table shows the memory mapping of the OS.
 | IVT                    | global variable |             |              |            |             | Interrupt Vector Table               |
 |                        |                 | IVT         | 0x4f020000   | 0x00010000 | 0x4f02ffff  |   Interrupt Vector Table Address     |
 |------------------------|-----------------|-------------|--------------|------------|-------------|--------------------------------------|
+| SCH                    | global variable |             |              |            |             | Scheduler Table                      |
+|                        |                 | SCH         | 0x4f040000   | 0x00010000 | 0x4f04ffff  |   Scheduler Table Address            |
+|------------------------|-----------------|-------------|--------------|------------|-------------|--------------------------------------|
