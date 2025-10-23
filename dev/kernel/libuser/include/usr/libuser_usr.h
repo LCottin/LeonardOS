@@ -56,4 +56,13 @@ extern time_t user_get_time(void);
 extern void user_sleep(const time_t time_ns);
 
 
+/**********************************************************************
+ * @brief Application yield.
+ *
+ * @param None.
+ * @return None.
+ **********************************************************************/
+extern void user_yield(void);
+
+
 #endif /* __LIBUSER_USR_H__ */

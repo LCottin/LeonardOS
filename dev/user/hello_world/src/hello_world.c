@@ -4,5 +4,9 @@
 
 void hello_world_entry(void)
 {
-    user_print_string("[USER] Hello world from user !\n");
+    while (TRUE)
+    {
+        user_print_string("[USER] Hello world from user !\n");
+        user_yield();
+    }
 }
