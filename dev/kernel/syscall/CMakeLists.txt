@@ -7,7 +7,8 @@ set(SYSCALL_HANDLER_DIR
 
 set(SYSCALL_HANDLER_SOURCES
     # Add the path to each source file here
-    ${SYSCALL_HANDLER_DIR}/src/syscall_handler.c
+    ${SYSCALL_HANDLER_DIR}/src/syscall_handler.S
+    ${SYSCALL_HANDLER_DIR}/src/syscall_manager.c
 )
 
 set(SYSCALL_HANDLER_HEADERS
@@ -45,6 +46,8 @@ target_link_libraries(${LIB_NAME_KRN}
         ${TYPES_LIB_NAME}_krn
         ${PRINTER_LIB_NAME}_krn
         ${CLOCK_LIB_NAME}_krn
+        ${SCHEDULER_LIB_NAME}_krn
+        ${PCB_LIB_NAME}_krn
     "-Wl,--no-whole-archive"
 )
 
@@ -78,6 +81,8 @@ target_link_libraries(${LIB_NAME_USR}
         # Add the path to library of other folder here
         ${PRINTER_LIB_NAME}_krn
         ${CLOCK_LIB_NAME}_krn
+        ${SCHEDULER_LIB_NAME}_krn
+        ${PCB_LIB_NAME}_krn
     PUBLIC
         ${TYPES_LIB_NAME}_usr
     "-Wl,--no-whole-archive"
