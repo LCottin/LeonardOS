@@ -14,11 +14,11 @@
  **********************************************************************/
 typedef struct
 {
+    pcb_state_registers_t registers;    /* PCB registers */
     pcb_ident_t           ident;        /* PCB identifier */
     pcb_states_t          state;        /* PCB state */
     pcb_control_t         control;      /* PCB control */
     uint8_t               padding[268]; /* Padding */
-    pcb_state_registers_t registers;    /* PCB registers */
 } pcb_ctx_bin_t;
 
 
@@ -27,10 +27,10 @@ typedef struct
  **********************************************************************/
 typedef struct
 {
-    pcb_ctx_bin_t  pcb_krn_ctx;     /* PCB kernel context */
-    pcb_ctx_bin_t *pcb_apps_ctx;    /* PCB context, dynamic allocation */
-    uint32_t       pcb_apps_count;  /* Number of PCB application contexts */
-    uint8_t        padding[4];      /* Padding */
+    pcb_ctx_bin_t  pcb_krn_ctx;                             /* PCB kernel context */
+    pcb_ctx_bin_t  pcb_apps_ctx[K_BMT_MAX_APP_BINARIES];    /* PCB applications contexts */
+    uint32_t       pcb_apps_count;                          /* Number of PCB application contexts */
+    uint8_t        padding[4];                              /* Padding */
 } pcb_ctx_table_t;
 
 
@@ -39,5 +39,6 @@ typedef struct
  **********************************************************************/
 extern pcb_ctx_table_t g_pcb_ctx_table;
 
+extern void pcb_ctx_save_addr(void);
 
 #endif /* __PCB_CTX_H__ */

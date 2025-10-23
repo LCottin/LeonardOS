@@ -23,16 +23,11 @@ set(PCB_CTX_DIR
 
 set(PCB_CTX_SOURCES
     # Add the path to each source file here
-    ${PCB_CTX_DIR}/src/pcb_ctx_app_restore.c
-    ${PCB_CTX_DIR}/src/pcb_ctx_app_save.c
-    ${PCB_CTX_DIR}/src/pcb_ctx_app_update.c
     ${PCB_CTX_DIR}/src/pcb_ctx_data.c
     ${PCB_CTX_DIR}/src/pcb_ctx_get_count.c
     ${PCB_CTX_DIR}/src/pcb_ctx_get_app_entry.c
-    ${PCB_CTX_DIR}/src/pcb_ctx_krn_restore.c
-    ${PCB_CTX_DIR}/src/pcb_ctx_krn_save.c
-    ${PCB_CTX_DIR}/src/pcb_ctx_restore.S
-    ${PCB_CTX_DIR}/src/pcb_ctx_save.S
+    ${PCB_CTX_DIR}/src/pcb_ctx_get_app_ctx.c
+    ${PCB_CTX_DIR}/src/pcb_ctx_get_krn_ctx.c
 )
 
 set(PCB_CTX_HEADERS
@@ -65,8 +60,6 @@ set(PCB_STATE_SOURCES
     # Add the path to each source file here
     ${PCB_STATE_DIR}/src/pcb_state_set_apps_ready.c
     ${PCB_STATE_DIR}/src/pcb_state_get_state.c
-    ${PCB_STATE_DIR}/src/pcb_state_set_state.c
-    ${PCB_STATE_DIR}/src/pcb_state_set_register.c
 )
 
 set(PCB_STATE_HEADERS
