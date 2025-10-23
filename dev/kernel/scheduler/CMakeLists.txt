@@ -39,7 +39,8 @@ set(SCHEDULER_SWITCH_DIR
 
 set(SCHEDULER_SWITCH_SOURCES
     # Add the path to each source file here
-    ${SCHEDULER_SWITCH_DIR}/src/scheduler_switch_task.S
+    ${SCHEDULER_SWITCH_DIR}/src/scheduler_switch_first_task.S
+    ${SCHEDULER_SWITCH_DIR}/src/scheduler_switch_next_task.S
 )
 
 set(SCHEDULER_SWITCH_HEADERS
@@ -58,9 +59,13 @@ set(SCHEDULER_CTX_SOURCES
     ${SCHEDULER_CTX_DIR}/src/scheduler_ctx_data.c
     ${SCHEDULER_CTX_DIR}/src/scheduler_ctx_get_current_task.c
     ${SCHEDULER_CTX_DIR}/src/scheduler_ctx_get_next_task.c
+    ${SCHEDULER_CTX_DIR}/src/scheduler_ctx_get_task_count.c
+    ${SCHEDULER_CTX_DIR}/src/scheduler_ctx_get_app_ctx.c
+    ${SCHEDULER_CTX_DIR}/src/scheduler_ctx_get_krn_ctx.c
     ${SCHEDULER_CTX_DIR}/src/scheduler_ctx_set_current_task.c
     ${SCHEDULER_CTX_DIR}/src/scheduler_ctx_add_task.c
     ${SCHEDULER_CTX_DIR}/src/scheduler_ctx_init.c
+    ${SCHEDULER_CTX_DIR}/src/scheduler_ctx_save_address.S
 )
 
 set(SCHEDULER_CTX_HEADERS

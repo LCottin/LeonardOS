@@ -3,9 +3,9 @@
 #include "pcb_krn.h"
 #include "memory_ops_usr.h"
 
-void scheduler_init(void)
+void scheduler_init(const addr_t sch_start_addr)
 {
-    scheduler_ctx_init();
+    scheduler_ctx_init(sch_start_addr);
 
     const uint32_t nb_task = pcb_ctx_get_count();
 
