@@ -7,8 +7,8 @@ set(CLOCK_INFO_DIR
 
 set(CLOCK_INFO_SOURCES
     # Add the path to each source file here
-    ${CLOCK_INFO_DIR}/src/clock_info_get_cycle_count.s
-    ${CLOCK_INFO_DIR}/src/clock_info_get_frequency.s
+    ${CLOCK_INFO_DIR}/src/clock_info_get_cycle_count.S
+    ${CLOCK_INFO_DIR}/src/clock_info_get_frequency.S
     ${CLOCK_INFO_DIR}/src/clock_info_get_time.c
 )
 

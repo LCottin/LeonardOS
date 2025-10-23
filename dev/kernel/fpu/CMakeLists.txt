@@ -7,7 +7,7 @@ set(FPU_INIT_DIR
 
 set(FPU_INIT_SOURCES
     # Add the path to each source file here
-    ${FPU_INIT_DIR}/src/fpu_init.s
+    ${FPU_INIT_DIR}/src/fpu_init.S
 )
 
 set(FPU_INIT_HEADERS
