@@ -15,7 +15,7 @@ deep_clean:
 .PHONY: build_all
 build_all:
 	@echo "Building project ..."
-	@$(MAKE) -C $(BUILD_DIR) --no-print-directory
+	@$(MAKE) -C $(BUILD_DIR) --no-print-directory $(BOOT_ELF_NAME).elf $(CORE_ELF_NAME).elf applications
 
 # Create the build directory, configure, and build boot binary
 .PHONY: build_boot

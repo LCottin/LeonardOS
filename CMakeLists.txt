@@ -76,8 +76,9 @@ set(CMAKE_AR aarch64-none-elf-ar)
 set(CMAKE_RANLIB aarch64-none-elf-ranlib)
 
 # Output directory for binaries
-set(BIN_DIR ${CMAKE_BINARY_DIR}/bin)
-set(BIN_DEV_DIR ${BIN_DIR}/dev)
+set(BIN_DIR      ${CMAKE_BINARY_DIR}/bin)
+set(BIN_DEV_DIR  ${BIN_DIR}/dev)
+set(BIN_TEST_DIR ${BIN_DIR}/test)
 
 # Find tool to convert elf to binary
 find_program(CMAKE_OBJCOPY aarch64-none-elf-objcopy REQUIRED)
@@ -92,7 +93,9 @@ project(${IMG_NAME} LANGUAGES ASM C)
     set (LIBUSER_LIB_NAME "_libuser")
 
     # Define directories
-    set(DEV_DIR ${CMAKE_SOURCE_DIR}/dev)
+    set(DEV_DIR   ${CMAKE_SOURCE_DIR}/dev)
+    set(TESTS_DIR ${CMAKE_SOURCE_DIR}/tests)
 
     # Call subdirectories cmake
     add_subdirectory(${DEV_DIR})
+    add_subdirectory(${TESTS_DIR})

@@ -1,0 +1,17 @@
+# Create the build directory, configure, and build all tests
+.PHONY: build_tests
+build_tests: prepare
+	@echo "Building tests ..."
+	@$(MAKE) -C $(BUILD_DIR) --no-print-directory tests
+
+# Create all test images
+.PHONY: image_tests
+image_tests: pre_image build_tests
+	@echo "Creating test image ..."
+	@python3 $(TESTS_FRAMEWORk_DIR)/build_image_tests.py $(TESTS_DIR)/tests_list.yaml $(BIN_TESTS_DIR) $(PRE_OS_IMG)
+
+# Run all test
+.PHONY: run_tests
+run_tests:
+	@echo "Running tests ..."
+	@python3 $(TESTS_FRAMEWORk_DIR)/run_tests.py $(TESTS_DIR)/tests_list.yaml $(BIN_TESTS_DIR) $(BOOT_ELF_DIR)

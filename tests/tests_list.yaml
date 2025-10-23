@@ -1,0 +1,20 @@
+tests_list:
+  - name: print_int
+    path: tests/print_int
+
+1 yaml par dossier de test sous la forme :
+
+# Declarative test configuration used by the host harness
+name: example_print_test
+binary: example_test.elf
+description: "Test printing and simple assertions"
+cases:
+  - name: print-basic
+    input: "Hello world"
+    expected: "Hello world"
+  - name: print-empty
+    input: ""
+    expected: ""
+
+puis le python parse les differents yaml.
+Les fichiers de tests ont leur input et expected dans le code source.

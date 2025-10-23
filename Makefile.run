@@ -36,7 +36,7 @@ run_el1:
 		-kernel $(BOOT_ELF_DIR)										\
 		-serial mon:stdio 											\
 		-device loader,file=$(LEONARD_OS_IMG),addr=0x0				\
-		-no-reboot &
+		-no-reboot 2>&1 | tee qemu.log &
 
 # Run the OS using QEMU in EL2
 .PHONY: run_el2

@@ -28,6 +28,7 @@ TESTS_FRAMEWORk_DIR = $(TOOLS_DIR)/test_framework
 
 include Makefile.build
 include Makefile.run
+include Makefile.test
 
 # Configure the project (run CMake if necessary)
 .PHONY: prepare
