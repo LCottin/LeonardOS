@@ -37,11 +37,7 @@ build_app:
 
 # Create the build directory, configure, and build OS
 .PHONY: build_os
-build_os: prepare
-	@echo "Building the OS ..."
-	@make build_boot
-	@make build_core
-	@make build_app
+build_os: prepare build_all
 
 # Rebuild the project
 .PHONY: rebuild_os

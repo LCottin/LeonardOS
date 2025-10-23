@@ -32,7 +32,7 @@ include Makefile.run
 # Configure the project (run CMake if necessary)
 .PHONY: prepare
 prepare:
-	@echo "Configuring project ..."
+	@echo "Configuring project in $(ROOT_DIR)..."
 	@mkdir -p $(BUILD_DIR)
 	@cmake -S . -B $(BUILD_DIR)
 	@make memory_mapping
