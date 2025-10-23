@@ -14,6 +14,7 @@ MEMORY
 
     RAM_BMT(rw)    : ORIGIN = 0x4F000000, LENGTH = 0x10000
     RAM_IVT(rx)    : ORIGIN = 0x4F020000, LENGTH = 0x10000
+    RAM_SCH(rw)    : ORIGIN = 0x4F040000, LENGTH = 0x10000
 }
 
 /* Define the sections and their placement in memory */
@@ -67,4 +68,14 @@ SECTIONS
         . = ALIGN(16);
         __ivt_end = .;
     } > RAM_IVT
+
+    /* SCH */
+    . = ORIGIN(RAM_SCH);
+    .ivt (NOLOAD):
+    {
+        __sch_start = .;
+        . = . + LENGTH(RAM_SCH);
+        . = ALIGN(16);
+        __sch_end = .;
+    } > RAM_SCH
 }

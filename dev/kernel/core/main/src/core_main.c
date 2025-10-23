@@ -11,14 +11,14 @@
 #include "bmt_krn.h"
 #include "seh_krn.h"
 
-void _core_main_entry(const addr_t bmt_start_addr)
+void _core_main_entry(const addr_t bmt_start_addr, const addr_t sch_start_addr)
 {
     printer_print_string("\n[KERN] Hello World!\n");
 
     seh_ctx_init();
     bmt_ctx_init_kernel(bmt_start_addr);
     pcb_init();
-    scheduler_init();
+    scheduler_init(sch_start_addr);
     memory_init_heap();
     fpu_init();
 
@@ -44,4 +44,9 @@ void _core_main_entry(const addr_t bmt_start_addr)
     scheduler_run();
 
     /* Not reached */
+    printer_print_string("[KERN] Scheduling ended ! Going infinite loop...\n");
+    while (TRUE)
+    {
+        ;
+    }
 }

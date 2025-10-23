@@ -51,7 +51,7 @@ _boot_main_entry:
     bl      bmt_ctx_init                                /* Initialize BMT */
 
     /* Parse memory to find all ELF */
-    bl      boot_parse_memory                           /* Parse memory to find all ELF */
+    bl      boot_memory_parse                           /* Parse memory to find all ELF */
 
     /* Build BMT table from ELF found */
     boot_main_build_table:
@@ -83,6 +83,7 @@ _boot_main_entry:
         ldp     x19, x20, [sp], #16                     /* Restore x19 and x20 from stack */
         mov     sp, x20                                 /* Set stack pointer */
         ldr     x0, =__bmt_start                        /* Load BMT start address */
+        ldr     x1, =__sch_start                        /* Load SCH start address */
         br      x19                                     /* Jump to kernel entry point */
 
 done:
