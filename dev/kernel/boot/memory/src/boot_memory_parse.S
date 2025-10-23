@@ -1,10 +1,10 @@
 .section .text
-.global  boot_parse_memory
-.type    boot_parse_memory, %function
+.global  boot_memory_parse
+.type    boot_memory_parse, %function
 
 #include "boot_memory_prv.h"
 
-boot_parse_memory:
+boot_memory_parse:
 
     stp lr, x30, [sp, #-16]!                                /* Save lr on stack */
 
@@ -12,14 +12,14 @@ boot_parse_memory:
     ldr     x10, =0x00FFFFFF                                /* End of ROM */
     ldr     x12, =K_BOOT_MEMORY_PAGE_SIZE                   /* Load page size */
 
-    ldr     x0, =K_BOOT_PARSE_MEMORY_MSG_START_PARSING      /* Load message address */
+    ldr     x0, =K_BOOT_MEMORY_PARSE_MSG_START_PARSING      /* Load message address */
     stp     x9,  x10, [sp, #-16]!                           /* Save x9 and x10 on stack */
     bl      printer_print_string                            /* Print message */
     ldp     x9,  x10, [sp], #16                             /* Restore x9 and x10 from stack */
 
-    boot_parse_memory_loop:
+    boot_memory_parse_loop:
         cmp     x9, x10                                     /* Ensure address is still in ROM region */
-        bge     boot_parse_memory_end                       /* Return if outside ROM region */
+        bge     boot_memory_parse_end                       /* Return if outside ROM region */
 
         mov     x0, x9                                      /* Load address to parse */
         stp     x9,  x10, [sp, #-16]!                       /* Save x9 and x10 on stack */
@@ -30,33 +30,33 @@ boot_parse_memory:
         ldp     x9,  x10, [sp], #16                         /* Restore x9 and x10 from stack */
 
         cmp     x0, #1                                      /* Check if ELF is valid */
-        beq     boot_parse_memory_match                     /* If match, call function to store address */
+        beq     boot_memory_parse_match                     /* If match, call function to store address */
 
-    boot_parse_memory_resume_loop:
+    boot_memory_parse_resume_loop:
         add     x9, x9, x12                                 /* Increase address to parse */
-        b       boot_parse_memory_loop                      /* Resume loop */
+        b       boot_memory_parse_loop                      /* Resume loop */
 
-    boot_parse_memory_match:
+    boot_memory_parse_match:
         mov     x19, x9                                     /* Store address of ELF in x19 */
         stp     x9,  x10, [sp, #-16]!                       /* Save x9 and x10 on stack */
         stp     x11, x12, [sp, #-16]!                       /* Save x11 and x12 on stack */
-        ldr     x0, =K_BOOT_PARSE_MEMORY_MSG_ELF_FOUND      /* Load message address */
+        ldr     x0, =K_BOOT_MEMORY_PARSE_MSG_ELF_FOUND      /* Load message address */
         bl      printer_print_string                        /* Print message */
 
         mov     x0, x19                                     /* Load ELF address */
         bl      printer_print_address                       /* Print address */
 
-    boot_parse_memory_save_elf:
+    boot_memory_parse_save_elf:
         mov     x0, x19                                      /* Load ELF address */
         bl      bmt_build_add_elf                           /* Add ELF address to BMT table */
 
-    boot_parse_memory_restore_working_registers:
+    boot_memory_parse_restore_working_registers:
         ldp     x11, x12, [sp], #16                         /* Restore x11 and x12 from stack */
         ldp     x9,  x10, [sp], #16                         /* Restore x9 and x10 from stack */
-        b       boot_parse_memory_resume_loop               /* Go to resume loop */
+        b       boot_memory_parse_resume_loop               /* Go to resume loop */
 
-    boot_parse_memory_end:
-        ldr     x0, =K_BOOT_PARSE_MEMORY_MSG_DONE_PARSING   /* Load message address */
+    boot_memory_parse_end:
+        ldr     x0, =K_BOOT_MEMORY_PARSE_MSG_DONE_PARSING   /* Load message address */
         bl      printer_print_string                        /* Print message */
 
         ldp     lr, x30, [sp], #16                          /* Restore lr from stack */
@@ -65,11 +65,11 @@ boot_parse_memory:
 /* Read-only data section */
 .section .rodata
 
-K_BOOT_PARSE_MEMORY_MSG_ELF_FOUND:
+K_BOOT_MEMORY_PARSE_MSG_ELF_FOUND:
     .asciz "\n[BOOT]   Found ELF at address: "
 
-K_BOOT_PARSE_MEMORY_MSG_START_PARSING:
+K_BOOT_MEMORY_PARSE_MSG_START_PARSING:
     .asciz "\n[BOOT] Parsing memory for ELF ... "
 
-K_BOOT_PARSE_MEMORY_MSG_DONE_PARSING:
+K_BOOT_MEMORY_PARSE_MSG_DONE_PARSING:
     .asciz "\n[BOOT] Done parsing memory for ELF\n\n"

@@ -156,6 +156,18 @@
         ]
     },
 
+    "SCH (RAM)":
+    {
+        "name"     	: "SCH",
+        "base_address" : "0x4F040000",
+        "type"     	: "global variable",
+        "description"  : "Scheduler Table",
+        "sections":
+        [
+            {"name": "SCH", "size": "0x10000", "description": "Scheduler Table Address"}
+        ]
+    },
+
     "UART Registers":
     {
         "name"         : "UART Registers",

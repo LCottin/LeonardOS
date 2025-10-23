@@ -4,12 +4,12 @@
 #include "types_usr.h"
 
 /**********************************************************************
- * @brief Switch the current task in the scheduler.
+ * @brief Switch to the first task in the scheduler.
  *
- * @param is_first_run Indicates if this is the first run of the scheduler.
+ * @param None.
  * @return None.
  **********************************************************************/
-extern void scheduler_switch_task(const bool_t is_first_run);
+extern void scheduler_switch_first_task(void);
 
 
 #endif /* __SCHEDULER_SWITCH_H__ */

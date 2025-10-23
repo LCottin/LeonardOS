@@ -14,15 +14,6 @@ extern uint32_t scheduler_ctx_get_next_task(void);
 
 
 /**********************************************************************
- * @brief Get the current task being executed.
- *
- * @param None.
- * @return uint32_t The ID of the current task.
- **********************************************************************/
-extern uint32_t scheduler_ctx_get_current_task(void);
-
-
-/**********************************************************************
  * @brief Set the current task being executed.
  *
  * @param task_id The ID of the task to be set as current.
@@ -34,10 +25,10 @@ extern void scheduler_ctx_set_current_task(const uint32_t task_id);
 /**********************************************************************
  * @brief Initialize the scheduler context.
  *
- * @param None.
+ * @param sch_start_addr The starting address for the scheduler context.
  * @return None.
  **********************************************************************/
-extern void scheduler_ctx_init(void);
+extern void scheduler_ctx_init(const addr_t sch_start_addr);
 
 
 /**********************************************************************
@@ -48,5 +39,8 @@ extern void scheduler_ctx_init(void);
  **********************************************************************/
 extern void scheduler_ctx_add_task(const uint32_t task_idx);
 
+
+extern addr_t scheduler_ctx_get_krn_ctx(void);
+extern addr_t scheduler_ctx_get_app_ctx(const uint32_t task_id);
 
 #endif /* __SCHEDULER_CTX_H__ */

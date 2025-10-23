@@ -8,13 +8,17 @@ void scheduler_run(void)
     /* Set all application to ready state */
     pcb_state_set_apps_ready();
 
-    /* Infinite loop until OS powers down */
-    printer_print_string("[KERN] Launching application ...\n\n");
-    scheduler_switch_task(TRUE);
+    const uint32_t app_count = scheduler_ctx_get_task_count();
 
-    while (TRUE)
+    if (app_count > 0)
     {
-        printer_print_string("\n[KERN] Switching application ...\n\n");
-        scheduler_switch_task(FALSE);
+        printer_print_string("[KERN] Launching application ...\n\n");
+        scheduler_switch_first_task();
+
+        /* Not reached, applications are running and shall not return */
+    }
+    else
+    {
+        printer_print_string("[KERN] No application to run.\n");
     }
 }

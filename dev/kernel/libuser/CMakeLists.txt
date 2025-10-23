@@ -27,6 +27,7 @@ set(LIBUSER_HANDLER_SOURCES
     ${LIBUSER_HANDLER_DIR}/src/libuser_print_string.c
     ${LIBUSER_HANDLER_DIR}/src/libuser_print_int.c
     ${LIBUSER_HANDLER_DIR}/src/libuser_print_addr.c
+    ${LIBUSER_HANDLER_DIR}/src/libuser_yield.c
 )
 
 set(LIBUSER_HANDLER_HEADERS
