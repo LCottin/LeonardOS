@@ -16,6 +16,12 @@ COPY ../tools/scripts/install_dependencies.bash /tmp/install_deps.sh
 # Make it executable
 RUN chmod +x /tmp/install_deps.sh
 
+# Create user and switch to it
+RUN useradd -m -s /bin/bash leonard && \
+    usermod -aG sudo leonard
+
+USER leonard
+
 # Run your script to install your toolchain, QEMU, etc.
 RUN /tmp/install_deps.sh
 
