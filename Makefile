@@ -42,7 +42,7 @@ prepare:
 # Install dependencies
 .PHONY: install
 install:
-	./install_dependencies.bash
+	$(SCRIPTS_DIR)/install_dependencies.bash
 
 # Create a new component
 .PHONY: component

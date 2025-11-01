@@ -5,10 +5,19 @@ FROM ubuntu:24.04
 RUN apt update && apt install -y \
     build-essential \
     cmake \
-    python3 \
     git \
-    vim \
-    && apt clean
+    python3 \
+    python3-pip \
+    wget \
+    curl \
+    ninja-build \
+    ca-certificates \
+    unzip \
+    xz-utils \
+    bash-completion \
+    textinfo \
+    sudo \
+    && rm -rf /var/lib/apt/lists/*
 
 # Copy your dependency install script into the image
 COPY ../tools/scripts/install_dependencies.bash /tmp/install_deps.sh
