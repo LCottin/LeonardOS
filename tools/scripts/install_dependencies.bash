@@ -84,6 +84,16 @@ main()
             ;;
     esac
 
+    wget https://ftp.gnu.org/gnu/binutils/binutils-2.41.tar.gz
+    tar -xzf binutils-2.41.tar.gz
+    mkdir -p build
+    cd build
+    ../binutils-2.41/configure --target=aarch64-none-elf --disable-werror --enable-gdb
+    make
+    sudo make install -j$(nproc)
+    cd ..
+    rm -rf build binutils-2.41 binutils-2.41.tar.gz
+
     echo "All dependencies installed successfully!"
 }
 
