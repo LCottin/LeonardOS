@@ -1,0 +1,8 @@
+{
+  "name": "LeonardOS Dev",
+  "build": {
+    "dockerfile": "Dockerfile",
+    "context": ".."
+  },
+  "workspaceFolder": "/workspace"
+}
