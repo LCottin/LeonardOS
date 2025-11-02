@@ -1,0 +1,41 @@
+# Use Ubuntu as a base (same behavior as WSL)
+FROM ubuntu:24.04
+
+# Install toolchain, build system, and QEMU
+RUN apt update && apt install -y \
+    build-essential \
+    cmake \
+    git \
+    python3 \
+    python3-pip \
+    wget \
+    curl \
+    ninja-build \
+    ca-certificates \
+    unzip \
+    xz-utils \
+    bash-completion \
+    textinfo \
+    sudo \
+    && rm -rf /var/lib/apt/lists/*
+
+# Copy your dependency install script into the image
+COPY ../tools/scripts/install_dependencies.bash /tmp/install_deps.sh
+
+# Make it executable
+RUN chmod +x /tmp/install_deps.sh
+
+# Create user and switch to it
+RUN useradd -m -s /bin/bash leonard && \
+    usermod -aG sudo leonard
+
+USER leonard
+
+# Run your script to install your toolchain, QEMU, etc.
+RUN /tmp/install_deps.sh
+
+# Default work directory when opening the container
+WORKDIR /workspace
+
+# You can define an entrypoint (optional)
+CMD ["/bin/bash"]

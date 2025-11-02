@@ -29,11 +29,11 @@ See [Coding standard](coding_standard.md).
 
 In order to compile, run and debug the project, you may need to install dependencies yourself:
  1. wget https://ftp.gnu.org/gnu/binutils/binutils-2.41.tar.gz
- 2. tar -xzf binutils-2.41.tar.gz
+ 2. sudo tar -xzf binutils-2.41.tar.gz
  3. mkdir build
  4. cd build
- 5. ../binutils-2.41/configure --target=aarch64-none-elf --disable-werror --enable-gdb
- 6. make
+ 5. sudo ../binutils-2.41/configure --target=aarch64-none-elf --disable-werror --enable-gdb
+ 6. sudo make
  7. sudo make install
 
 ## License
