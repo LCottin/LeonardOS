@@ -13,7 +13,10 @@ def main(input_file: str, output_file: str) -> None:
     memory_table.write_memory_map()
 
 if __name__ == "__main__":
-    input_file  = "memory_mapping/binaries_sections.json"
-    output_file = "memory_mapping/memory_mapping.md"
+    QEMU = {'input': "memory_mapping/binaries_sections_qemu.json", 'output': "memory_mapping/memory_mapping_qemu.md"}
+    RPI  = {'input': "memory_mapping/binaries_sections_rpi.json",  'output': "memory_mapping/memory_mapping_rpi.md"}
 
-    main(input_file, output_file)
+    # Generate memory mapping for both QEMU and Raspberry Pi configurations
+    configs = [QEMU, RPI]
+    for config in configs:
+        main(config['input'], config['output'])

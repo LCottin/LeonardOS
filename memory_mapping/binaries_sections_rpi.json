@@ -1,0 +1,156 @@
+{
+    "Bootloader (entry point)":
+    {
+        "name"         : "Bootloader (entry point)",
+        "base_address" : "0x00080000",
+        "type"         : "elf",
+        "description"  : "OS entry point",
+        "sections":
+        [
+            {"name": "Code",    "size": "0x80000", "description": "Executable code and read only data"},
+            {"name": "Data",    "size": "0x80000", "description": "Initialized and uninitialized data"},
+            {"name": "Stack",   "size": "0x10000", "description": "Stack"}
+        ]
+    },
+
+    "Kernel (ROM)":
+    {
+        "name"         : "Kernel (ROM)",
+        "base_address" : "0x00090000",
+        "type"         : "elf",
+        "description"  : "Kernel elf",
+        "sections":
+        [
+            {"name": "Header",   "size":  "0x1000", "description": "ELF header"},
+            {"name": "Metadata", "size": "0x10000", "description": "Store binary symbols"},
+            {"name": "Code",     "size": "0x80000", "description": "Executable code and read only data"},
+            {"name": "Data",     "size": "0x80000", "description": "Initialized and uninitialized data"}
+        ]
+    },
+
+    "APP_1 (ROM)":
+    {
+        "name"         : "APP_1 (ROM)",
+        "base_address" : "0x00300000",
+        "type"         : "elf",
+        "description"  : "App elf",
+        "sections":
+        [
+            {"name": "Header",   "size": "0x1000", "description": "ELF header"},
+            {"name": "Metadata", "size": "0x1000", "description": "Store binary symbols"},
+            {"name": "Code",     "size": "0x8000", "description": "Executable code and read only data"},
+            {"name": "Data",     "size": "0x8000", "description": "Initialized and uninitialized data"}
+        ]
+    },
+
+    "APP_2 (ROM)":
+    {
+        "name"         : "APP_2 (ROM)",
+        "base_address" : "0x00320000",
+        "type"         : "elf",
+        "description"  : "App elf",
+        "sections":
+        [
+            {"name": "Header",   "size": "0x1000", "description": "ELF header"},
+            {"name": "Metadata", "size": "0x1000", "description": "Store binary symbols"},
+            {"name": "Code",     "size": "0x8000", "description": "Executable code and read only data"},
+            {"name": "Data",     "size": "0x8000", "description": "Initialized and uninitialized data"}
+        ]
+    },
+
+    "Kernel (RAM)":
+    {
+        "name"         : "Kernel (RAM)",
+        "base_address" : "0x01000000",
+        "type"         : "loaded",
+        "description"  : "Kernel loaded in ram",
+        "sections":
+        [
+            {"name": "Code",    "size": "0x80000", "description": "Executable code and read only data"},
+            {"name": "Data",    "size": "0x80000", "description": "Initialized and uninitialized data"},
+            {"name": "Stack",   "size": "0x10000", "description": "Stack"},
+            {"name": "Guard",   "size": "0x10000", "description": "Protection against stack overflow"},
+            {"name": "Heap",    "size": "0x10000", "description": "Heap"}
+        ]
+    },
+
+    "APP_1 (RAM)":
+    {
+        "name"         : "APP_1 (RAM)",
+        "base_address" : "0x01200000",
+        "type"         : "loaded",
+        "description"  : "App loaded in ram",
+        "sections":
+        [
+            {"name": "Code",    "size": "0x8000", "description": "Executable code and read only data"},
+            {"name": "Data",    "size": "0x8000", "description": "Initialized and uninitialized data"},
+            {"name": "Stack",   "size": "0x1000", "description": "Stack"},
+            {"name": "Guard",   "size": "0x1000", "description": "Protection against stack overflow"},
+            {"name": "Heap",    "size": "0x1000", "description": "Heap"}
+        ]
+    },
+
+    "APP_2 (RAM)":
+    {
+        "name"         : "APP_2 (RAM)",
+        "base_address" : "0x01300000",
+        "type"         : "loaded",
+        "description"  : "App loaded in ram",
+        "sections":
+        [
+            {"name": "Code",    "size": "0x8000", "description": "Executable code and read only data"},
+            {"name": "Data",    "size": "0x8000", "description": "Initialized and uninitialized data"},
+            {"name": "Stack",   "size": "0x1000", "description": "Stack"},
+            {"name": "Guard",   "size": "0x1000", "description": "Protection against stack overflow"},
+            {"name": "Heap",    "size": "0x1000", "description": "Heap"}
+        ]
+    },
+
+    "BMT (RAM)":
+    {
+        "name"         : "BMT",
+        "base_address" : "0x00500000",
+        "type"         : "global variable",
+        "description"  : "Binary Metadata Table",
+        "sections":
+        [
+            {"name": "BMT", "size": "0x10000", "description": "Binary Metadata Table Address"}
+        ]
+    },
+
+    "IVT (RAM)":
+    {
+        "name"         : "IVT",
+        "base_address" : "0x00600000",
+        "type"         : "global variable",
+        "description"  : "Interrupt Vector Table",
+        "sections":
+        [
+            {"name": "IVT", "size": "0x10000", "description": "Interrupt Vector Table Address"}
+        ]
+    },
+
+    "SCH (RAM)":
+    {
+        "name"         : "SCH",
+        "base_address" : "0x00700000",
+        "type"         : "global variable",
+        "description"  : "Scheduler Table",
+        "sections":
+        [
+            {"name": "SCH", "size": "0x10000", "description": "Scheduler Table Address"}
+        ]
+    },
+
+    "UART":
+    {
+        "name"         : "UART",
+        "base_address" : "0x3F201000  ",
+        "type"         : "io",
+        "description"  : "UART device for serial I/O",
+        "sections":
+        [
+            {"name": "Registers", "size": "0x10000", "description": "UART registers to print messages"}
+        ]
+    }
+}
