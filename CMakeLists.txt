@@ -82,6 +82,12 @@ set(BIN_DEV_DIR ${BIN_DIR}/dev)
 # Find tool to convert elf to binary
 find_program(CMAKE_OBJCOPY aarch64-none-elf-objcopy REQUIRED)
 
+# Custom function to pass arguments to subdirectories
+function(add_subdirectory_target DIR TARGET)
+    set(TARGET ${TARGET} PARENT_SCOPE)
+    add_subdirectory(${DIR})
+endfunction()
+
 # Project name and version
 project(${IMG_NAME} LANGUAGES ASM C)
 

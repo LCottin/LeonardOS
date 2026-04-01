@@ -5,6 +5,8 @@ set(APPLICATION_DIR
     "count_down"
 )
 
+set(USER_LINKER_SECTIONS_SCRIPT_PATH "${USER_DIR}/linker_sections.ld")
+
 # Set the applications directory
 foreach (APPLICATION_DIR ${APPLICATION_DIR})
     add_subdirectory(${USER_DIR}/${APPLICATION_DIR})

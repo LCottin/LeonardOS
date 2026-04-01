@@ -27,6 +27,11 @@ set (BINARY_DIR
     "core_bin"
 )
 
+set (PLATFORMS
+    "qemu"
+    "rpi"
+)
+
 # Set the libraries directory
 foreach (COMPONENT_DIR ${COMPONENTS_DIR})
     add_subdirectory(${KERNEL_DIR}/${COMPONENT_DIR})

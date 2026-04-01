@@ -21,19 +21,22 @@ build_all:
 .PHONY: build_boot
 build_boot:
 	@echo "Building boot ..."
-	@$(MAKE) -C $(BUILD_DIR) --no-print-directory $(BOOT_ELF_NAME).elf
+	@$(MAKE) -C $(BUILD_DIR) --no-print-directory $(BOOT_ELF_NAME).elf TARGET=qemu
+	@$(MAKE) -C $(BUILD_DIR) --no-print-directory $(BOOT_ELF_NAME).elf TARGET=rpi
 
 # Create the build directory, configure, and build core binary
 .PHONY: build_core
 build_core:
 	@echo "Building core ..."
-	@$(MAKE) -C $(BUILD_DIR) --no-print-directory $(CORE_ELF_NAME).elf
+	@$(MAKE) -C $(BUILD_DIR) --no-print-directory $(CORE_ELF_NAME).elf -DTARGET=qemu
+	@$(MAKE) -C $(BUILD_DIR) --no-print-directory $(CORE_ELF_NAME).elf -DTARGET=rpi
 
 # Create the build directory, configure, and build application binaries
 .PHONY: build_app
 build_app:
 	@echo "Building applications ..."
-	@$(MAKE) -C $(BUILD_DIR) --no-print-directory applications
+	@$(MAKE) -C $(BUILD_DIR) --no-print-directory applications TARGET=qemu
+	@$(MAKE) -C $(BUILD_DIR) --no-print-directory applications TARGET=rpi
 
 # Create the build directory, configure, and build OS
 .PHONY: build_os
@@ -50,6 +53,6 @@ rebuild_os:
 image: build_all
 	@rm -f $(LEONARD_OS_IMG)
 	@cp $(PRE_OS_IMG) $(LEONARD_OS_IMG)
-	@dd if=$(CORE_ELF_DIR)        of=$(LEONARD_OS_IMG) bs=1   seek=5242880 conv=notrunc
-	@dd if=$(HELLO_WORLD_ELF_DIR) of=$(LEONARD_OS_IMG) bs=1   seek=7340032 conv=notrunc
-	@dd if=$(COUNT_DOWN_ELF_DIR)  of=$(LEONARD_OS_IMG) bs=1   seek=7471104 conv=notrunc
+	@dd if=$(CORE_ELF_DIR)        of=$(LEONARD_OS_IMG) bs=1 conv=notrunc seek=589824
+	@dd if=$(HELLO_WORLD_ELF_DIR) of=$(LEONARD_OS_IMG) bs=1 conv=notrunc seek=3145728
+	@dd if=$(COUNT_DOWN_ELF_DIR)  of=$(LEONARD_OS_IMG) bs=1 conv=notrunc seek=3276800

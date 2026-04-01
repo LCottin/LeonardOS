@@ -21,6 +21,7 @@ COUNT_DOWN_ELF_DIR  = $(BIN_DEV_DIR)/$(COUNT_DOWN_ELF_NAME)/$(COUNT_DOWN_ELF_NAM
 
 PRE_OS_IMG      = $(BUILD_DIR)/bin/preOS.img
 LEONARD_OS_IMG  = $(BIN_DEV_DIR)/LeonardOS.img
+RPI_OS_IMG      = $(BIN_DEV_DIR)/RPI.img
 DEBUG_SCRIPT    = $(DEBUG_DIR)/run_debug.gdb
 
 SCRIPTS_DIR         = $(TOOLS_DIR)/scripts
