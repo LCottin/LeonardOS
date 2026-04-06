@@ -2,6 +2,7 @@ import os
 import shutil
 import logging
 import sys
+from Architecture import Architecture
 
 logging.basicConfig(level=logging.INFO, format="%(levelname)s: %(message)s")
 
@@ -23,6 +24,9 @@ class Component:
         self._COMPONENT_ROOT_DIR            = os.path.join(self._DEV_ROOT_DIR, "kernel")
         self._KERNEL_CMAKE_FILE             = os.path.join(self._COMPONENT_ROOT_DIR, "CMakeLists.txt")
         self._CMAKE_COMPONENT_TEMPLATES_DIR = "./tools/cmake_templates/component"
+
+        self._placeholder_1   = "__GENVAR_NAME1__"
+        self._placeholder_2   = "__GENVAR_NAME2__"
 
         if self._verbosity:
             print(f"Component root directory: {self._COMPONENT_ROOT_DIR}")
@@ -50,11 +54,12 @@ class Component:
         self._component_dir  = os.path.join(self._COMPONENT_ROOT_DIR, self._component_name)
 
         os.mkdir(self._component_dir)
+        os.mkdir(self._component_dir + "/code")
 
         # Copy template files
-        shutil.copytree(os.path.join(self._CMAKE_COMPONENT_TEMPLATES_DIR, "include"),        os.path.join(self._component_dir, "include"))
-        shutil.copyfile(os.path.join(self._CMAKE_COMPONENT_TEMPLATES_DIR, "CMakeLists.txt"), os.path.join(self._component_dir, "CMakeLists.txt"))
-        shutil.copyfile(os.path.join(self._CMAKE_COMPONENT_TEMPLATES_DIR, "README.md"),      os.path.join(self._component_dir, "README.md"))
+        shutil.copytree(os.path.join(self._CMAKE_COMPONENT_TEMPLATES_DIR, "inc"),                 os.path.join(self._component_dir, "inc"))
+        shutil.copyfile(os.path.join(self._CMAKE_COMPONENT_TEMPLATES_DIR, "code/CMakeLists.txt"), os.path.join(self._component_dir, "code/CMakeLists.txt"))
+        shutil.copyfile(os.path.join(self._CMAKE_COMPONENT_TEMPLATES_DIR, "README.md"),           os.path.join(self._component_dir, "README.md"))
 
         if self._verbosity:
             logging.info(f"Created new component: {self._component_name}")
@@ -90,7 +95,14 @@ class Component:
                 with open(file_path, "r") as f:
                     content = f.read()
 
-                new_content = content.replace("component", self._component_name.lower()).replace("COMPONENT", self._component_name.upper())
+                    new_content = content.replace("component name",      self._placeholder_1)
+                    new_content = new_content.replace("(COMPONENT_NAME", self._placeholder_2)
+
+                    new_content = new_content.replace("component", self._component_name.lower())
+                    new_content = new_content.replace("COMPONENT", self._component_name.upper())
+
+                    new_content = new_content.replace(self._placeholder_1, "component name")
+                    new_content = new_content.replace(self._placeholder_2, "(COMPONENT_NAME")
 
                 with open(file_path, "w") as f:
                     f.write(new_content)
@@ -128,7 +140,7 @@ class Component:
 
             for i, line in enumerate(lines):
                 if line.strip() == "# Define library names for dependencies":
-                    lines.insert(i + 1, f"set({self._component_name.upper()}_LIB_NAME    \"_{self._component_name.lower()}\")\n")
+                    lines.insert(i + 1, f"set ({self._component_name.upper()}_LIB_NAME          \"_{self._component_name.lower()}\")\n")
                     break
 
             with open(self._DEV_CMAKE_FILE, "w") as f:
@@ -152,6 +164,10 @@ class Component:
             self.add_component_to_kernel_cmake()
 
             logging.info(f"Setup complete for component: {self._component_name}")
+
+            arch = Architecture(self._verbosity)
+            arch.generate()
+            arch.print_summary()
 
 
 if __name__ == "__main__":
