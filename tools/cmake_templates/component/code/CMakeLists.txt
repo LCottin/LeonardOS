@@ -1,4 +1,9 @@
 # ==============================================================================
+# Set the component name
+# ==============================================================================
+set(COMPONENT_NAME ${ARG})
+
+# ==============================================================================
 # Create library kernel target for COMPONENT
 # ==============================================================================
 set(LIB_NAME_KRN ${COMPONENT_LIB_NAME}_krn)
@@ -14,8 +19,8 @@ target_include_directories(${LIB_NAME_KRN}
     PRIVATE
         # Add the path to each header directory here
     PUBLIC
-        ${CMAKE_CURRENT_SOURCE_DIR}/include/krn     # Private headers for kernel implementation
-        ${CMAKE_CURRENT_SOURCE_DIR}/include/usr     # Public headers for user interface
+        ${COMPONENT_NAME}/inc/krn     # Private headers for kernel implementation
+        ${COMPONENT_NAME}/inc/usr     # Public headers for user interface
 )
 
 # ==============================================================================
@@ -42,9 +47,9 @@ add_library(${LIB_NAME_USR}
 target_include_directories(${LIB_NAME_USR}
     PRIVATE
         # Add the path to each header directory here
-        ${CMAKE_CURRENT_SOURCE_DIR}/include/krn     # Private headers for kernel implementation
+        ${COMPONENT_NAME}/inc/krn     # Private headers for kernel implementation
     PUBLIC
-        ${CMAKE_CURRENT_SOURCE_DIR}/include/usr     # Public headers for user interface
+        ${COMPONENT_NAME}/inc/usr     # Public headers for user interface
 )
 
 # ==============================================================================
