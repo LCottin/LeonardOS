@@ -80,7 +80,7 @@ ptr_t memory_alloc_and_init(const size_t size, const int8_t value)
     if (ptr != NULL)
     {
         /* Initialize memory with the given value */
-        memory_ops_set(ptr, value, size);
+        memory_ops_utils_set(ptr, value, size);
     }
 
     return ptr;

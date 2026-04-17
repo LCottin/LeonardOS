@@ -12,7 +12,9 @@ set(MEMORY_OPS_UTILS_DIR
 
 set(MEMORY_OPS_UTILS_SOURCES
     # Add the path to each source file here
-    ${MEMORY_OPS_UTILS_DIR}/src/memory_ops_utils.c
+    ${MEMORY_OPS_UTILS_DIR}/src/memory_ops_utils_cmp.c
+    ${MEMORY_OPS_UTILS_DIR}/src/memory_ops_utils_copy.c
+    ${MEMORY_OPS_UTILS_DIR}/src/memory_ops_utils_set.c
 )
 
 set(MEMORY_OPS_UTILS_HEADERS
@@ -69,8 +71,8 @@ target_include_directories(${LIB_NAME_USR}
     PRIVATE
         # Add the path to each header directory here
         ${MEMORY_OPS_UTILS_HEADERS}
-    PUBLIC
         ${COMPONENT_NAME}/inc/krn     # Private headers for kernel implementation
+    PUBLIC
         ${COMPONENT_NAME}/inc/usr     # Public headers for user interface
 )
 
