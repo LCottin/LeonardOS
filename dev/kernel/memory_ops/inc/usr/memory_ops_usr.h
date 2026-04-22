@@ -15,7 +15,7 @@
  *
  * @return Pointer to the destination memory area.
  **********************************************************************/
-extern ptr_t memory_ops_copy(ptr_t dest, cptr_t src, const size_t size);
+extern ptr_t memory_ops_utils_copy(ptr_t dest, cptr_t src, const size_t size);
 
 
 /**********************************************************************
@@ -31,7 +31,7 @@ extern ptr_t memory_ops_copy(ptr_t dest, cptr_t src, const size_t size);
  *
  * @return Pointer to the destination memory area.
  **********************************************************************/
-extern ptr_t memory_ops_set(ptr_t dest, const int32_t value, const size_t size);
+extern ptr_t memory_ops_utils_set(ptr_t dest, const int32_t value, const size_t size);
 
 
 /**********************************************************************
@@ -48,7 +48,7 @@ extern ptr_t memory_ops_set(ptr_t dest, const int32_t value, const size_t size);
  *         - A negative value if the first differing byte in src1 is less than the corresponding byte in src2
  *         - A positive value if the first differing byte in src1 is greater than the corresponding byte in src2
  **********************************************************************/
-extern int32_t memory_ops_cmp(cptr_t src1, cptr_t src2, const size_t size);
+extern int32_t memory_ops_utils_cmp(cptr_t src1, cptr_t src2, const size_t size);
 
 
 #endif /* __MEMORY_OPS_USR_H__ */

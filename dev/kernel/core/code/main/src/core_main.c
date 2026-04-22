@@ -25,7 +25,7 @@ void _core_main_entry(const addr_t bmt_start_addr, const addr_t sch_start_addr)
     char_t *ptr_alloc = (char_t *)memory_alloc_and_init(sizeof(char_t) * 64, 0);
     if (ptr_alloc != NULL_PTR)
     {
-        memory_ops_copy(ptr_alloc, "[KERN] Hello World from allocated buffer!\n", 64);
+        memory_ops_utils_copy(ptr_alloc, "[KERN] Hello World from allocated buffer!\n", 64);
         printer_print_string(ptr_alloc);
         memory_free(ptr_alloc);
     }

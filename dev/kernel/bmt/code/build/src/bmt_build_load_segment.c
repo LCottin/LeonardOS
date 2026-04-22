@@ -9,7 +9,7 @@ void bmt_build_load_segment(const addr_t bin_load_addr, const ELF64_custom_segme
     /* Copy the segment to the correct memory location */
     if ((p_segment->file_size > 0)  && (src_addr != dst_addr))
     {
-        memory_ops_copy((ptr_t)dst_addr, (cptr_t)src_addr, p_segment->file_size);
+        memory_ops_utils_copy((ptr_t)dst_addr, (cptr_t)src_addr, p_segment->file_size);
     }
     else
     {
@@ -19,7 +19,7 @@ void bmt_build_load_segment(const addr_t bin_load_addr, const ELF64_custom_segme
     /* Zero out the remaining memory if the memory size is larger than the file size */
     if (p_segment->mem_size > p_segment->file_size)
     {
-        memory_ops_set((ptr_t)(dst_addr + p_segment->file_size), 0, p_segment->mem_size - p_segment->file_size);
+        memory_ops_utils_set((ptr_t)(dst_addr + p_segment->file_size), 0, p_segment->mem_size - p_segment->file_size);
     }
     else
     {

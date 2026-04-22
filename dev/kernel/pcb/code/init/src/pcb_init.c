@@ -11,7 +11,7 @@ void pcb_init()
 {
     printer_print_string("[KERN] PCB driver initialization ...\n");
 
-    memory_ops_set(&g_pcb_ctx_table, 0, sizeof(g_pcb_ctx_table));
+    memory_ops_utils_set(&g_pcb_ctx_table, 0, sizeof(g_pcb_ctx_table));
 
     /* Initialize the PCB kernel context table */
     g_pcb_ctx_table.pcb_krn_ctx.ident.id         = 0;
