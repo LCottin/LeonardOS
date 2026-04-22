@@ -3,6 +3,7 @@ import shutil
 import logging
 import sys
 from Component import Component
+from Architecture import Architecture
 
 logging.basicConfig(level=logging.INFO, format="%(levelname)s: %(message)s")
 
@@ -53,12 +54,12 @@ class SubComponent(Component):
                 logging.error("Invalid sub-component name. Please enter a valid name.")
                 return False
 
-        if os.path.isdir(os.path.join(self._component_dir, subcomponent_name)):
+        if os.path.isdir(os.path.join(self._component_dir + "/code", subcomponent_name)):
             logging.error(f"Sub-component {subcomponent_name} already exists.")
             return False
 
         self._subcomponent_name = subcomponent_name
-        self._subcomponent_dir  = os.path.join(self._component_dir, subcomponent_name)
+        self._subcomponent_dir  = os.path.join(self._component_dir + "/code", subcomponent_name)
 
         return True
 
@@ -89,7 +90,7 @@ class SubComponent(Component):
         """
 
         # Copy template files
-        shutil.copytree(os.path.join(self._CMAKE_COMPONENT_TEMPLATES_DIR, "part"), os.path.join(self._component_dir, self._subcomponent_name))
+        shutil.copytree(os.path.join(self._CMAKE_COMPONENT_TEMPLATES_DIR, "code/part"), os.path.join(self._component_dir + "/code", self._subcomponent_name))
 
         if self._verbosity:
             logging.info(f"Created new sub-component: {self._subcomponent_name}")
@@ -102,7 +103,7 @@ class SubComponent(Component):
 
         for root, _, files in os.walk(self._subcomponent_dir):
             for file in files:
-                new_name = file.replace("component", self._component_name.lower()).replace("COMPONENT", self._component_name.upper())
+                new_name = file.replace("component", self._component_name.lower()).replace("(COMPONENT", "(" + self._component_name.upper())
                 new_name = new_name.replace("part", self._subcomponent_name.lower()).replace("PART", self._subcomponent_name.upper())
 
                 old_path = os.path.join(root, file)
@@ -120,12 +121,23 @@ class SubComponent(Component):
 
         for root, _, files in os.walk(self._component_dir):
             for file in files:
-                file_path = os.path.join(root, file)
+                file_path   = os.path.join(root, file)
+                new_content = ""
+
                 with open(file_path, "r") as f:
                     content = f.read()
 
-                new_content = content.replace("component", self._component_name.lower()).replace("COMPONENT", self._component_name.upper())
-                new_content = new_content.replace("part", self._subcomponent_name.lower()).replace("PART", self._subcomponent_name.upper())
+                    new_content = content.replace("component name",      self._placeholder_1)
+                    new_content = new_content.replace("(COMPONENT_NAME", self._placeholder_2)
+
+                    new_content = new_content.replace("component",     self._component_name.lower())
+                    new_content = new_content.replace("for COMPONENT", "for " + self._component_name.upper())
+                    new_content = new_content.replace("{COMPONENT",    "{" + self._component_name.upper())
+                    new_content = new_content.replace("part",          self._subcomponent_name.lower())
+                    new_content = new_content.replace("PART",          self._subcomponent_name.upper())
+
+                    new_content = new_content.replace(self._placeholder_1, "component name")
+                    new_content = new_content.replace(self._placeholder_2, "(COMPONENT_NAME")
 
                 with open(file_path, "w") as f:
                     f.write(new_content)
@@ -139,43 +151,58 @@ class SubComponent(Component):
         Add the new sub-component to the parent component's CMake file.
         """
 
-        component_cmake_file = os.path.join(self._component_dir, "CMakeLists.txt")
+        component_cmake_file = os.path.join(self._component_dir, "code/CMakeLists.txt")
+        comp  = self._component_name.upper()
+        sub   = self._subcomponent_name.upper()
+        sub_l = self._subcomponent_name.lower()
 
         try:
             with open(component_cmake_file, "r") as f:
-                lines = f.readlines()
+                existing_lines = f.readlines()
 
             with open(os.path.join(self._CMAKE_COMPONENT_TEMPLATES_DIR, "CMakeLists_part.txt"), "r") as f:
-                template_lines = f.readlines()
+                part_lines = f.readlines()
 
-            # Append existing component_cmake_file lines to template_lines
-            template_lines.extend(lines)
+            header_end = 0
+            for i, line in enumerate(existing_lines):
+                if "Create library kernel" in line:
+                    header_end = i - 2
+                    if header_end < len(existing_lines) and existing_lines[header_end].strip() == "":
+                        header_end += 1  # consume trailing blank line
+                    break
 
-            template_lines = [line.replace("COMPONENT", self._component_name.upper()) for line in template_lines]
-            template_lines = [line.replace("component", self._component_name.lower()) for line in template_lines]
-            template_lines = [line.replace("/PART", "/" + self._subcomponent_name) for line in template_lines]
-            template_lines = [line.replace("/part", "/" + self._subcomponent_name) for line in template_lines]
-            template_lines = [line.replace("PART", self._subcomponent_name.upper()) for line in template_lines]
-            template_lines = [line.replace("part", self._subcomponent_name.lower()) for line in template_lines]
+            header_lines = existing_lines[:header_end]  # verbatim, never modified
+            body_lines   = existing_lines[header_end:]  # library targets
+
+            substituted_part = []
+            for line in part_lines:
+
+                new_line = line.replace("component name",      self._placeholder_1)
+                new_line = new_line.replace("(COMPONENT_NAME", self._placeholder_2)
+
+                new_line = new_line.replace("COMPONENT_PART", f"{comp}_{sub}")
+                new_line = new_line.replace("PART",           sub)
+                new_line = new_line.replace("/part",          f"/{sub_l}")
+
+                new_line = new_line.replace(self._placeholder_1, "component name")
+                new_line = new_line.replace(self._placeholder_2, "(COMPONENT_NAME")
+
+                substituted_part.append(new_line)
 
             marker_header = "# Add the path to each header directory here"
             marker_source = "# Add the path to each source directory here"
-            for i, line in enumerate(template_lines):
-
+            injected_body = []
+            for line in body_lines:
+                injected_body.append(line)
                 if marker_header in line:
-                    new_line = "        ${"
-                    new_line += f"{self._component_name.upper()}_{self._subcomponent_name.upper()}_HEADERS"
-                    new_line += "}\n"
-                    template_lines.insert(i + 1, new_line)
-
+                    injected_body.append(f"        ${{{comp}_{sub}_HEADERS}}\n")
                 elif marker_source in line:
-                    new_line = "        ${"
-                    new_line += f"{self._component_name.upper()}_{self._subcomponent_name.upper()}_SOURCES"
-                    new_line += "}\n"
-                    template_lines.insert(i + 1, new_line)
+                    injected_body.append(f"        ${{{comp}_{sub}_SOURCES}}\n")
+
+            result = header_lines + substituted_part + injected_body
 
             with open(component_cmake_file, "w") as f:
-                f.writelines(template_lines)
+                f.writelines(result)
 
             if self._verbosity:
                 logging.info(f"Added {self._subcomponent_name} to the component CMake file.")
@@ -202,6 +229,10 @@ class SubComponent(Component):
                 self.replace_component_file_content()
                 self.add_subcomponent_to_component_cmake()
                 logging.info(f"Setup complete for sub-component: {self._subcomponent_name}")
+
+                arch = Architecture(self._verbosity)
+                arch.generate()
+                arch.print_summary()
 
 
 if __name__ == "__main__":

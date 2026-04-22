@@ -3,7 +3,6 @@ ROOT_DIR  = $(shell pwd)
 BUILD_DIR = $(ROOT_DIR)/build
 DEBUG_DIR = $(ROOT_DIR)/debug
 TOOLS_DIR = $(ROOT_DIR)/tools
-TESTS_DIR = $(ROOT_DIR)/tests
 VERBOSE?=0
 
 # Binary names
@@ -13,7 +12,7 @@ HELLO_WORLD_ELF_NAME = hello_world
 COUNT_DOWN_ELF_NAME  = count_down
 
 BIN_DEV_DIR         = $(BUILD_DIR)/bin/dev
-BIN_TESTS_DIR       = $(BUILD_DIR)/bin/tests
+BIN_TESTS_DIR       = $(BUILD_DIR)/bin/test
 BOOT_ELF_DIR        = $(BIN_DEV_DIR)/$(BOOT_ELF_NAME)/$(BOOT_ELF_NAME).elf
 CORE_ELF_DIR        = $(BIN_DEV_DIR)/$(CORE_ELF_NAME)/$(CORE_ELF_NAME).elf
 HELLO_WORLD_ELF_DIR = $(BIN_DEV_DIR)/$(HELLO_WORLD_ELF_NAME)/$(HELLO_WORLD_ELF_NAME).elf
@@ -26,8 +25,26 @@ DEBUG_SCRIPT    = $(DEBUG_DIR)/run_debug.gdb
 SCRIPTS_DIR         = $(TOOLS_DIR)/scripts
 TESTS_FRAMEWORk_DIR = $(TOOLS_DIR)/test_framework
 
+QEMU        := qemu-system-aarch64
+QEMU_GDB    := aarch64-none-elf-gdb
+QEMU_FLAGS  := -M virt          \
+               -m 512M          \
+               -cpu cortex-a53  \
+               -nographic       \
+               -serial mon:stdio\
+               -no-reboot
+
+TEST_ITEMS := memory_ops_utils_copy
+
 include Makefile.build
 include Makefile.run
+
+.PHONY: check_qemu
+check_qemu:
+	@if ! command -v $(QEMU) >/dev/null 2>&1; then \
+	    echo "Error: $(QEMU) not found."; \
+	    exit 1; \
+	fi
 
 # Configure the project (run CMake if necessary)
 .PHONY: prepare
@@ -77,11 +94,11 @@ memory_mapping:
 # Launch GDB to debug the system
 .PHONY: debug
 debug:
-	@if ! command -v aarch64-none-elf-gdb >/dev/null 2>&1; then \
-		echo "Error: aarch64-none-elf-gdb not found."; \
+	@if ! command -v $(QEMU_GDB) >/dev/null 2>&1; then \
+		echo "Error: $(QEMU_GDB) not found."; \
 		exit 1; \
 	fi
-	@aarch64-none-elf-gdb 			\
+	@$(QEMU_GDB) 			\
 		-ex "file $(BOOT_ELF_DIR)"	\
 		-ex "source $(DEBUG_SCRIPT)"
 
