@@ -1,11 +1,103 @@
 name: OS CI/CD Pipeline
 
 on:
-  workflow_dispatch:        # manual trigger from any branch
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+    inputs:
+      run_tests:
+        description: 'Run make run and analyze failures?'
+        required: true
+        default: 'true'
 
 jobs:
-  test:
+  # ─── Job 1: Build on every push to main ───────────────────────
+  main_build:
     runs-on: ubuntu-latest
-
+    if: github.event_name == 'push'
     steps:
-      - run: echo "test"    # sanity check to verify workflow is running
+      - name: Checkout code
+        uses: actions/checkout@v4.2.2
+        with:
+          submodules: recursive
+
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get upgrade -y
+          sudo make install
+
+      - name: Build OS
+        run: |
+          make deep_clean
+          make prepare
+          make build_all -j4
+          make image
+
+      - name: Run tests
+        run: make run_test 2>&1 | tee run.log   # ← capture logs
+
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v4.6.2
+        with:
+          name: os-image
+          path: build/bin/test/logs
+
+      - name: Upload run log
+        if: always()
+        uses: actions/upload-artifact@v4.6.2
+        with:
+          name: run-log
+          path: run.log
+
+  # ─── Job 2: Manual test run + failure analysis ─────────────────
+  branch_test_run:
+    runs-on: ubuntu-latest
+    if: github.event_name == 'workflow_dispatch'
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4.2.2
+        with:
+          submodules: recursive
+
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get upgrade -y
+          sudo make install
+
+      - name: Build OS
+        run: |
+          make deep_clean
+          make prepare
+          make build_all -j4
+          make image
+
+      - name: Run tests
+        id: run_tests
+        run: |
+          set +e                                 # don't stop on error
+          make run_test 2>&1 | tee run.log       # ← capture logs
+          echo "exit_code=$?" >> $GITHUB_OUTPUT  # ← save exit code
+
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v4.6.2
+        with:
+          name: os-image
+          path: build/bin/test/logs
+
+      - name: Analyze failures
+        if: always()
+        run: |
+          echo "=== Exit code: ${{ steps.run_tests.outputs.exit_code }} ==="
+          echo ""
+          echo "=== KO / Errors detected ==="
+          grep -iE "error|fault|panic|fail|KO|killed|exception" run.log || echo "No explicit errors found in log"
+
+      - name: Upload run log
+        if: always()
+        uses: actions/upload-artifact@v4.6.2
+        with:
+          name: run-log
+          path: run.log
