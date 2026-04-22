@@ -35,6 +35,13 @@ build_app:
 	@echo "Building applications ..."
 	@$(MAKE) -C $(BUILD_DIR) --no-print-directory applications
 
+
+# Create the build directory, configure, and build test binaries
+.PHONY: build_test
+build_test:
+	@echo "Building tests ..."
+	@$(MAKE) -C $(BUILD_DIR) --no-print-directory tests
+
 # Create the build directory, configure, and build OS
 .PHONY: build_os
 build_os: prepare
