@@ -45,22 +45,36 @@ run_el3:
 
 # Run the tests using QEMU
 .PHONY: run_test
-run_test:
-	@make check_qemu
-	@failed=0; \
+run_test: check_qemu
+	@mkdir -p $(TEST_LOG_DIR); \
+	failed=0; \
 	for item in $(TEST_ITEMS); do \
 		elf="$(BIN_TESTS_DIR)/$$item/$$item.elf"; \
-		echo ""; \
+		log="$(TEST_LOG_DIR)/$$item.tap"; \
 		echo "Running test: $$item"; \
-		output=$$(timeout 2s $(QEMU) $(QEMU_FLAGS) -kernel "$$elf" < /dev/null 2>/dev/null); \
-		echo "$$output"; \
-		if echo "$$output" | grep -q "^not ok"; then \
-			echo "FAIL: $$item"; \
+		output=$$(timeout 5s $(QEMU) $(QEMU_FLAGS) -kernel "$$elf" < /dev/null 2>/dev/null); \
+		echo "$$output" | tee "$$log"; \
+		if ! echo "$$output" | grep -q "^1\\.\\."; then \
+			echo "# CRASH or no output: $$item" | tee -a "$$log"; \
+			failed=$$((failed + 1)); \
+		elif echo "$$output" | grep -q "^not ok"; then \
+			echo "# FAIL: $$item" | tee -a "$$log"; \
 			failed=$$((failed + 1)); \
 		else \
-			echo "PASS: $$item"; \
+			echo "# PASS: $$item" | tee -a "$$log"; \
 		fi; \
+		echo "" | tee -a "$$log"; \
 	done; \
+	summary="$(TEST_LOG_DIR)/summary.tap"; \
+	{ \
+		echo "# Test run: $$(date)"; \
+		echo "# Results: $$failed failure(s) out of $(words $(TEST_ITEMS)) test(s)."; \
+		echo ""; \
+		for item in $(TEST_ITEMS); do \
+			cat "$(TEST_LOG_DIR)/$$item.tap"; \
+		done; \
+	} > "$$summary"; \
 	echo ""; \
-	echo "Results: $$failed failure(s) out of $(words $(ITEMS)) test(s)."; \
+	echo "Results: $$failed failure(s) out of $(words $(TEST_ITEMS)) test(s)."; \
+	echo "Full log: $$summary"; \
 	exit $$failed
