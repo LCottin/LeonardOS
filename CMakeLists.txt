@@ -23,7 +23,7 @@ message("-- OS: ${VAR_OS}")
 cmake_minimum_required(VERSION 3.13)
 
 # Set the target architecture
-set(CMAKE_SYSTEM_NAME Generic)
+set(CMAKE_SYSTEM_NAME      Generic)
 set(CMAKE_SYSTEM_PROCESSOR aarch64)
 
 # Specify the cross-compiler tools
@@ -76,8 +76,9 @@ set(CMAKE_AR aarch64-none-elf-ar)
 set(CMAKE_RANLIB aarch64-none-elf-ranlib)
 
 # Output directory for binaries
-set(BIN_DIR ${CMAKE_BINARY_DIR}/bin)
-set(BIN_DEV_DIR ${BIN_DIR}/dev)
+set(BIN_DIR      ${CMAKE_BINARY_DIR}/bin)
+set(BIN_DEV_DIR  ${BIN_DIR}/dev)
+set(BIN_TEST_DIR ${BIN_DIR}/test)
 
 # Find tool to convert elf to binary
 find_program(CMAKE_OBJCOPY aarch64-none-elf-objcopy REQUIRED)
@@ -85,6 +86,13 @@ find_program(CMAKE_OBJCOPY aarch64-none-elf-objcopy REQUIRED)
 # Custom function to pass arguments to subdirectories
 function(add_subdirectory_custom DIR ARG)
     set(ARG ${ARG} PARENT_SCOPE)
+    add_subdirectory(${DIR})
+endfunction()
+
+# Custom function to pass arguments to subdirectories
+function(add_subdirectory_custom_test DIR ARG1 ARG2)
+    set(ARG1 ${ARG1} PARENT_SCOPE)
+    set(ARG2 ${ARG2} PARENT_SCOPE)
     add_subdirectory(${DIR})
 endfunction()
 
