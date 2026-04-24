@@ -16,6 +16,14 @@
 
 
 /**********************************************************************
+ * @brief ELF segment permission flags (p_flags field).
+ **********************************************************************/
+#define K_ELF_PF_X               0x1U    /* Execute */
+#define K_ELF_PF_W               0x2U    /* Write   */
+#define K_ELF_PF_R               0x4U    /* Read    */
+
+
+/**********************************************************************
  * @brief ELF file types.
  **********************************************************************/
 typedef enum
@@ -38,9 +46,9 @@ typedef struct
     addr_t   phy_addr;                        /* Physical address */
     addr_t   file_offset;                     /* Offset in file */
     uint32_t type;                            /* Segment type */
+    uint32_t flags;                           /* Segment flags (PF_R / PF_W / PF_X) */
     size_t   mem_size;                        /* Size in memory */
     size_t   file_size;                       /* Size in file */
-    uint8_t  padding[4];                      /* Padding */
 } ELF64_custom_segment_t;
 
 
