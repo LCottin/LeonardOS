@@ -15,6 +15,7 @@ MEMORY
     RAM_BMT(rw)    : ORIGIN = 0x4F000000, LENGTH = 0x10000
     RAM_IVT(rx)    : ORIGIN = 0x4F020000, LENGTH = 0x10000
     RAM_SCH(rw)    : ORIGIN = 0x4F040000, LENGTH = 0x10000
+    RAM_MMU(rw)    : ORIGIN = 0x4F050000, LENGTH = 0x100000
 }
 
 /* Define the sections and their placement in memory */
@@ -78,4 +79,14 @@ SECTIONS
         . = ALIGN(16);
         __sch_end = .;
     } > RAM_SCH
+
+    /* MMU Page Frame Pool */
+    . = ORIGIN(RAM_MMU);
+    .page_pool (NOLOAD):
+    {
+        __page_pool_start = .;
+        . = . + LENGTH(RAM_MMU);
+        . = ALIGN(16);
+        __page_pool_end = .;
+    } > RAM_MMU
 }

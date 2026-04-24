@@ -92,18 +92,18 @@
         "description"  : "Kernel loaded in ram",
         "sections":
         [
-            {"name": "Code",    "size": "0x80000", "description": "Executable code and read only data"},
-            {"name": "Data",    "size": "0x80000", "description": "Initialized and uninitialized data"},
-            {"name": "Stack",   "size": "0x10000", "description": "Stack"},
-            {"name": "Guard",   "size": "0x10000", "description": "Protection against stack overflow"},
-            {"name": "Heap",    "size": "0x10000", "description": "Heap"}
+            {"name": "Code",    "size": "0x80000",  "description": "Executable code and read only data"},
+            {"name": "Data",    "size": "0x80000",  "description": "Initialized and uninitialized data"},
+            {"name": "Stack",   "size": "0x10000",  "description": "Stack"},
+            {"name": "Guard",   "size": "0x10000",  "description": "Protection against stack overflow"},
+            {"name": "Heap",    "size": "0x10000",  "description": "Heap"}
         ]
     },
 
     "APP_1 (RAM)":
     {
         "name"         : "APP_1 (RAM)",
-        "base_address" : "0x45200000",
+        "base_address" : "0x45300000",
         "type"         : "loaded",
         "description"  : "App loaded in ram",
         "sections":
@@ -119,7 +119,7 @@
     "APP_2 (RAM)":
     {
         "name"         : "APP_2 (RAM)",
-        "base_address" : "0x45300000",
+        "base_address" : "0x45400000",
         "type"         : "loaded",
         "description"  : "App loaded in ram",
         "sections":
@@ -165,6 +165,18 @@
         "sections":
         [
             {"name": "SCH", "size": "0x10000", "description": "Scheduler Table Address"}
+        ]
+    },
+
+    "MMU (RAM)":
+    {
+        "name"         : "MMU (RAM)",
+        "base_address" : "0x4F060000",
+        "type"         : "global variable",
+        "description"  : "Memory Management Unit",
+        "sections":
+        [
+            {"name": "MMU", "size": "0x100000", "description": "Memory Management Unit Address"}
         ]
     },
 

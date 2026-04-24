@@ -8,15 +8,15 @@ ENTRY(_core_main_entry)
 /* Define memory regions */
 MEMORY
 {
-    ROM_METADATA(r) : ORIGIN = 0x00501000, LENGTH = 0x1000
-    ROM_CODE(r)     : ORIGIN = 0x00502000, LENGTH = 0x20000
-    ROM_DATA(r)     : ORIGIN = 0x00582000, LENGTH = 0x10000
+    ROM_METADATA(r)    : ORIGIN = 0x00501000, LENGTH = 0x1000
+    ROM_CODE(r)        : ORIGIN = 0x00502000, LENGTH = 0x20000
+    ROM_DATA(r)        : ORIGIN = 0x00582000, LENGTH = 0x10000
 
-    RAM_CODE(rx)    : ORIGIN = 0x45000000, LENGTH = 0x80000
-    RAM_DATA(rw)    : ORIGIN = 0x45080000, LENGTH = 0x80000
-    RAM_STACK (rw)  : ORIGIN = 0x45100000, LENGTH = 0x10000
-    RAM_GUARD (r)   : ORIGIN = 0x45110000, LENGTH = 0x10000
-    RAM_HEAP (rw)   : ORIGIN = 0x45120000, LENGTH = 0x10000
+    RAM_CODE(rx)       : ORIGIN = 0x45000000, LENGTH = 0x80000
+    RAM_DATA(rw)       : ORIGIN = 0x45080000, LENGTH = 0x80000
+    RAM_STACK (rw)     : ORIGIN = 0x45100000, LENGTH = 0x10000
+    RAM_GUARD (r)      : ORIGIN = 0x45110000, LENGTH = 0x10000
+    RAM_HEAP (rw)      : ORIGIN = 0x45120000, LENGTH = 0x10000
 }
 
 /* Define the sections and their placement in memory */
@@ -52,8 +52,12 @@ SECTIONS
     . = ORIGIN(RAM_CODE);
     .code ALIGN(16):
     {
+        __text_start = .;
         *(.text*)        /* Code */
+        __text_end = .;
+        __rodata_start = .;
         *(.rodata*)      /* Read-only data */
+        __rodata_end = .;
         . = ALIGN(16);
     } > RAM_CODE AT > ROM_CODE
 
@@ -61,8 +65,12 @@ SECTIONS
     . = ORIGIN(RAM_DATA);
     .data ALIGN(16):
     {
+        __data_start = .;
         *(.data*)       /* Data */
+        __data_end = .;
+        __bss_start = .;
         *(.bss*)        /* BSS */
+        __bss_end = .;
         . = ALIGN(16);
     } > RAM_DATA AT > ROM_DATA
 
@@ -71,8 +79,10 @@ SECTIONS
     __stack_size = LENGTH(RAM_STACK);    /* Size of stack section */
     .stack (NOLOAD):
     {
+        __stack_start = .;
         . = . + LENGTH(RAM_STACK);
         . = ALIGN(16);
+        __stack_end = .;
         __stack_top = .;
     } > RAM_STACK
 
@@ -84,5 +94,6 @@ SECTIONS
         __heap_start = .;
         . = . + LENGTH(RAM_HEAP);
         . = ALIGN(16);
+        __heap_end = .;
     } > RAM_HEAP
 }

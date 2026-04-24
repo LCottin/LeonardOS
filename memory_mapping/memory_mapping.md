@@ -49,18 +49,18 @@ The following table shows the memory mapping of the OS.
 |                        |                 | Heap        | 0x45120000   | 0x00010000 | 0x4512ffff  |   Heap                               |
 |------------------------|-----------------|-------------|--------------|------------|-------------|--------------------------------------|
 | APP_1 (RAM)            | loaded          |             |              |            |             | App loaded in ram                    |
-|                        |                 | Code        | 0x45200000   | 0x00008000 | 0x45207fff  |   Executable code and read only data |
-|                        |                 | Data        | 0x45208000   | 0x00008000 | 0x4520ffff  |   Initialized and uninitialized data |
-|                        |                 | Stack       | 0x45210000   | 0x00001000 | 0x45210fff  |   Stack                              |
-|                        |                 | Guard       | 0x45211000   | 0x00001000 | 0x45211fff  |   Protection against stack overflow  |
-|                        |                 | Heap        | 0x45212000   | 0x00001000 | 0x45212fff  |   Heap                               |
-|------------------------|-----------------|-------------|--------------|------------|-------------|--------------------------------------|
-| APP_2 (RAM)            | loaded          |             |              |            |             | App loaded in ram                    |
 |                        |                 | Code        | 0x45300000   | 0x00008000 | 0x45307fff  |   Executable code and read only data |
 |                        |                 | Data        | 0x45308000   | 0x00008000 | 0x4530ffff  |   Initialized and uninitialized data |
 |                        |                 | Stack       | 0x45310000   | 0x00001000 | 0x45310fff  |   Stack                              |
 |                        |                 | Guard       | 0x45311000   | 0x00001000 | 0x45311fff  |   Protection against stack overflow  |
 |                        |                 | Heap        | 0x45312000   | 0x00001000 | 0x45312fff  |   Heap                               |
+|------------------------|-----------------|-------------|--------------|------------|-------------|--------------------------------------|
+| APP_2 (RAM)            | loaded          |             |              |            |             | App loaded in ram                    |
+|                        |                 | Code        | 0x45400000   | 0x00008000 | 0x45407fff  |   Executable code and read only data |
+|                        |                 | Data        | 0x45408000   | 0x00008000 | 0x4540ffff  |   Initialized and uninitialized data |
+|                        |                 | Stack       | 0x45410000   | 0x00001000 | 0x45410fff  |   Stack                              |
+|                        |                 | Guard       | 0x45411000   | 0x00001000 | 0x45411fff  |   Protection against stack overflow  |
+|                        |                 | Heap        | 0x45412000   | 0x00001000 | 0x45412fff  |   Heap                               |
 |------------------------|-----------------|-------------|--------------|------------|-------------|--------------------------------------|
 | BMT                    | global variable |             |              |            |             | Binary Metadata Table                |
 |                        |                 | BMT         | 0x4f000000   | 0x00010000 | 0x4f00ffff  |   Binary Metadata Table Address      |
@@ -70,4 +70,7 @@ The following table shows the memory mapping of the OS.
 |------------------------|-----------------|-------------|--------------|------------|-------------|--------------------------------------|
 | SCH                    | global variable |             |              |            |             | Scheduler Table                      |
 |                        |                 | SCH         | 0x4f040000   | 0x00010000 | 0x4f04ffff  |   Scheduler Table Address            |
+|------------------------|-----------------|-------------|--------------|------------|-------------|--------------------------------------|
+| MMU (RAM)              | global variable |             |              |            |             | Memory Management Unit               |
+|                        |                 | MMU         | 0x4f060000   | 0x00100000 | 0x4f15ffff  |   Memory Management Unit Address     |
 |------------------------|-----------------|-------------|--------------|------------|-------------|--------------------------------------|
