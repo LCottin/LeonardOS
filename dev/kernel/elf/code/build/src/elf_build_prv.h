@@ -1,6 +1,9 @@
 #ifndef __ELF_BUILD_PRV_H__
 #define __ELF_BUILD_PRV_H__
 
+#include "types_usr.h"
+#include "elf_krn.h"
+
 /**********************************************************************
  * @brief Metadata tags for ELF segments.
  **********************************************************************/
@@ -22,8 +25,8 @@ typedef enum
  **********************************************************************/
 typedef struct
 {
-    ELF64_metadata_tag_t tag;   /* Metadata tag */
-    uint32_t            data;   /* Metadata data */
+    ELF64_metadata_tag_t tag;    /* Metadata tag */
+    uint32_t             data;   /* Metadata data */
 } ELF64_metadata_t;
 
 
