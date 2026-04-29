@@ -36,6 +36,7 @@ set (BINARIES_DIR
 # Each entry is "source/path:bin_name" (colon-separated).
 set(TESTS_DIR
     "memory_ops/test/utils/copy:memory_ops_utils_copy"
+    "memory_ops/test/utils/set:memory_ops_utils_set"
 )
 
 # ==============================================================================
