@@ -36,7 +36,10 @@ QEMU_FLAGS  := -M virt          \
                -serial mon:stdio\
                -no-reboot
 
-TEST_ITEMS := memory_ops_utils_copy
+TEST_ITEMS := \
+	memory_ops_utils_copy 	\
+	memory_ops_utils_set 	\
+	memory_ops_utils_cmp
 
 include Makefile.build
 include Makefile.run

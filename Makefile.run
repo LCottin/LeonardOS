@@ -52,7 +52,7 @@ run_test: check_qemu
 		elf="$(BIN_TESTS_DIR)/$$item/$$item.elf"; \
 		log="$(TEST_LOG_DIR)/$$item.tap"; \
 		echo "Running test: $$item"; \
-		output=$$(timeout 5s $(QEMU) $(QEMU_FLAGS) -kernel "$$elf" < /dev/null 2>/dev/null); \
+		output=$$(timeout 2s $(QEMU) $(QEMU_FLAGS) -kernel "$$elf" < /dev/null 2>/dev/null); \
 		echo "$$output" | tee "$$log"; \
 		if ! echo "$$output" | grep -q "^1\\.\\."; then \
 			echo "# CRASH or no output: $$item" | tee -a "$$log"; \
