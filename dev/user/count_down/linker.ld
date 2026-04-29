@@ -54,11 +54,12 @@ SECTIONS
     {
         __text_start = .;
         *(.text*)        /* Code */
+        . = ALIGN(16);
         __text_end = .;
         __rodata_start = .;
         *(.rodata*)      /* Read-only data */
-        __rodata_end = .;
         . = ALIGN(16);
+        __rodata_end = .;
     } > RAM_CODE AT > ROM_CODE
 
     /* Writable Data + Uninitialized Data */
@@ -67,11 +68,12 @@ SECTIONS
     {
         __data_start = .;
         *(.data*)       /* Data */
+        . = ALIGN(16);
         __data_end = .;
         __bss_start = .;
         *(.bss*)        /* BSS */
-        __bss_end = .;
         . = ALIGN(16);
+        __bss_end = .;
     } > RAM_DATA AT > ROM_DATA
 
     /* Stack */

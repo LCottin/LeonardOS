@@ -168,10 +168,22 @@
         ]
     },
 
+    "MMU kernel EL0 (RAM)":
+    {
+        "name"         : "MMU kernel EL0",
+        "base_address" : "0x4F060000",
+        "type"         : "global variable",
+        "description"  : "Root page table for kernel EL0",
+        "sections":
+        [
+            {"name": "MMU kernel EL0", "size": "0x10000", "description": "Root page table for kernel EL0"}
+        ]
+    },
+
     "MMU (RAM)":
     {
-        "name"         : "MMU (RAM)",
-        "base_address" : "0x4F060000",
+        "name"         : "MMU",
+        "base_address" : "0x4F080000",
         "type"         : "global variable",
         "description"  : "Memory Management Unit",
         "sections":
