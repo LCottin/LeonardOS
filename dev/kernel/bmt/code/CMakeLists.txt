@@ -53,6 +53,7 @@ set(BMT_INFO_SOURCES
     # Add the path to each source file here
     ${BMT_INFO_DIR}/src/bmt_info_get_kernel_entry.c
     ${BMT_INFO_DIR}/src/bmt_info_get_kernel_stack_top.c
+    ${BMT_INFO_DIR}/src/bmt_info_get_ctx.c
     ${BMT_INFO_DIR}/src/bmt_info_get_app_entry.c
     ${BMT_INFO_DIR}/src/bmt_info_get_app_count.c
     ${BMT_INFO_DIR}/src/bmt_info_get_app_stack_top.c

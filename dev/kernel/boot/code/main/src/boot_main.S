@@ -68,6 +68,11 @@ _boot_main_entry:
         ldr     x0, =K_BOOT_MAIN_DONE_MSG               /* Address of message */
         bl      printer_print_string                    /* Print message */
 
+    /* Initialize MMU */
+    boot_main_init_mmu:
+        bl      bmt_info_get_ctx                        /* Get BMT context */
+        bl      mmu_init                                /* Initialize MMU */
+
     /* Get kernel entry point and stack pointer */
     boot_main_get_kernel_info:
         bl      bmt_info_get_kernel_entry               /* Get kernel entry point */

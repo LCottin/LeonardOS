@@ -115,4 +115,13 @@ extern void bmt_ctx_init_kernel(const addr_t bmt_start_addr);
 extern uint32_t bmt_info_get_app_count(void);
 
 
+/**********************************************************************
+ * @brief Return the bmt context.
+ *
+ * @param None.
+ * @return The bmt context.
+ **********************************************************************/
+extern addr_t bmt_info_get_ctx(void);
+
+
 #endif /* __BMT_KRN_H__ */

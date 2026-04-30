@@ -4,46 +4,73 @@
 set(COMPONENT_NAME ${ARG})
 
 # ==============================================================================
-# Create source and header for MEMORY
+# Create source and header for INIT
 # ==============================================================================
-set(BOOT_MEMORY_DIR
-    ${COMPONENT_NAME}/code/memory
+set(MMU_INIT_DIR
+    ${COMPONENT_NAME}/code/init
 )
 
-set(BOOT_MEMORY_SOURCES
+set(MMU_INIT_SOURCES
     # Add the path to each source file here
-    ${BOOT_MEMORY_DIR}/src/boot_memory_parse.S
+    ${MMU_INIT_DIR}/src/mmu_init.S
 )
 
-set(BOOT_MEMORY_HEADERS
-    ${BOOT_MEMORY_DIR}/inc
+set(MMU_INIT_HEADERS
+    ${MMU_INIT_DIR}/inc
 )
 
 # ==============================================================================
-# Create source and header for MAIN
+# Create source and header for MAP
 # ==============================================================================
-set(BOOT_MAIN_DIR
-    ${COMPONENT_NAME}/code/main
+set(MMU_MAP_DIR
+    ${COMPONENT_NAME}/code/map
 )
 
-set(BOOT_MAIN_SOURCES
+set(MMU_MAP_SOURCES
     # Add the path to each source file here
-    ${BOOT_MAIN_DIR}/src/boot_main.S
+    ${MMU_MAP_DIR}/src/mmu_map_all.c
+    ${MMU_MAP_DIR}/src/mmu_map_binary.c
+    ${MMU_MAP_DIR}/src/mmu_map_boot.c
+    ${MMU_MAP_DIR}/src/mmu_map_data.c
+    ${MMU_MAP_DIR}/src/mmu_map_get_alloc_table.c
+    ${MMU_MAP_DIR}/src/mmu_map_init_kernel_l0.c
+    ${MMU_MAP_DIR}/src/mmu_map_get_kernel_l0.c
+    ${MMU_MAP_DIR}/src/mmu_map_page.c
+    ${MMU_MAP_DIR}/src/mmu_map_region.c
 )
 
-set(BOOT_MAIN_HEADERS
-    ${COMPONENT_NAME}/inc
+set(MMU_MAP_HEADERS
+    ${MMU_MAP_DIR}/inc
 )
 
 # ==============================================================================
-# Create library kernel target for BOOT
+# Create source and header for PAGE
 # ==============================================================================
-set(LIB_NAME_KRN ${BOOT_LIB_NAME}_krn)
+set(MMU_PAGE_DIR
+    ${COMPONENT_NAME}/code/page
+)
+
+set(MMU_PAGE_SOURCES
+    # Add the path to each source file here
+    ${MMU_PAGE_DIR}/src/mmu_page_alloc.c
+    ${MMU_PAGE_DIR}/src/mmu_page_data.c
+    ${MMU_PAGE_DIR}/src/mmu_page_init.c
+)
+
+set(MMU_PAGE_HEADERS
+    ${MMU_PAGE_DIR}/inc
+)
+
+# ==============================================================================
+# Create library kernel target for MMU
+# ==============================================================================
+set(LIB_NAME_KRN ${MMU_LIB_NAME}_krn)
 add_library(${LIB_NAME_KRN}
     STATIC
         # Add the path to each source file here
-        ${BOOT_MEMORY_SOURCES}
-        ${BOOT_MAIN_SOURCES}
+        ${MMU_INIT_SOURCES}
+        ${MMU_MAP_SOURCES}
+        ${MMU_PAGE_SOURCES}
 )
 
 # ==============================================================================
@@ -52,11 +79,11 @@ add_library(${LIB_NAME_KRN}
 target_include_directories(${LIB_NAME_KRN}
     PRIVATE
         # Add the path to each header directory here
-        ${BOOT_MEMORY_HEADERS}
-        ${BOOT_MAIN_HEADERS}
+        ${MMU_INIT_HEADERS}
+        ${MMU_MAP_HEADERS}
+        ${MMU_PAGE_HEADERS}
     PUBLIC
         ${COMPONENT_NAME}/inc/krn     # Private headers for kernel implementation
-        ${COMPONENT_NAME}/inc/usr     # Public headers for user interface
 )
 
 # ==============================================================================
@@ -67,8 +94,7 @@ target_link_libraries(${LIB_NAME_KRN}
         # Add the path to library of other folder here
         ${TYPES_LIB_NAME}_krn
         ${BMT_LIB_NAME}_krn
-        ${PRINTER_LIB_NAME}_krn
-        ${SEH_LIB_NAME}_krn
-        ${MMU_LIB_NAME}_krn
+        ${ELF_LIB_NAME}_krn
+        ${MEMORY_OPS_LIB_NAME}_krn
     "-Wl,--no-whole-archive"
 )

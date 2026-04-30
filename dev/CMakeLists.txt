@@ -1,4 +1,5 @@
 # Define library names for dependencies
+set (MMU_LIB_NAME           "_mmu")
 set (SPEC_LIB_NAME          "_spec")
 set (SEH_LIB_NAME           "_seh")
 set (PRINTER_LIB_NAME       "_printer")
