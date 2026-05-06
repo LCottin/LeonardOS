@@ -1,4 +1,5 @@
 # Define library names for dependencies
+set (GIC_LIB_NAME           "_gic")
 set (SPEC_LIB_NAME          "_spec")
 set (SEH_LIB_NAME           "_seh")
 set (PRINTER_LIB_NAME       "_printer")
