@@ -61,7 +61,6 @@ target_include_directories(${LIB_NAME_KRN}
         ${SEH_CTX_HEADERS}
     PUBLIC
         ${COMPONENT_NAME}/inc/krn     # Private headers for kernel implementation
-        ${COMPONENT_NAME}/inc/usr     # Public headers for user interface
 )
 
 # ==============================================================================
