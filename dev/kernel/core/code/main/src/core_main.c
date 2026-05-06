@@ -10,11 +10,13 @@
 #include "scheduler_krn.h"
 #include "bmt_krn.h"
 #include "seh_krn.h"
+#include "irq_krn.h"
 
 void _core_main_entry(const addr_t bmt_start_addr, const addr_t sch_start_addr)
 {
     printer_print_string("\n[KERN] Hello World!\n");
 
+    irq_core_init();
     seh_ctx_init();
     bmt_ctx_init_kernel(bmt_start_addr);
     pcb_init();

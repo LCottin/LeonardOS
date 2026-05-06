@@ -58,5 +58,7 @@ target_link_libraries(${LIB_NAME_KRN}
         ${BMT_LIB_NAME}_krn
         ${ELF_LIB_NAME}_krn
         ${SEH_LIB_NAME}_krn
+        ${GIC_LIB_NAME}_krn
+        ${IRQ_LIB_NAME}_krn
     "-Wl,--no-whole-archive"
 )

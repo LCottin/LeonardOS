@@ -72,5 +72,6 @@ target_link_libraries(${LIB_NAME_KRN}
         ${TYPES_LIB_NAME}_krn
         ${PRINTER_LIB_NAME}_krn
         ${IRQ_LIB_NAME}_krn
+        ${GIC_LIB_NAME}_krn
     "-Wl,--no-whole-archive"
 )
