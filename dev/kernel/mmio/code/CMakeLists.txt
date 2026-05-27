@@ -28,7 +28,11 @@ set(MMIO_IO32_DIR
 
 set(MMIO_IO32_SOURCES
     # Add the path to each source file here
-    ${MMIO_IO32_DIR}/src/mmio_io32.c
+    ${MMIO_IO32_DIR}/src/mmio_io32_clear_bit.c
+    ${MMIO_IO32_DIR}/src/mmio_io32_read.c
+    ${MMIO_IO32_DIR}/src/mmio_io32_set_bit.c
+    ${MMIO_IO32_DIR}/src/mmio_io32_toggle_bit.c
+    ${MMIO_IO32_DIR}/src/mmio_io32_write.c
 )
 
 set(MMIO_IO32_HEADERS
