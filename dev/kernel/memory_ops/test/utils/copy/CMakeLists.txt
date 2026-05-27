@@ -8,7 +8,7 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${BIN_TEST_DIR}/${BIN_NAME})
 # ==============================================================================
 # Create executable target
 # ==============================================================================
-add_executable(${BIN_NAME}.elf ${BIN_PATH}/memory_ops_utils_copy.c)
+add_executable(${BIN_NAME}.elf ${BIN_PATH}/${BIN_NAME}.c)
 
 # ==============================================================================
 # Link with the component libraries
