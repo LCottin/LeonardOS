@@ -60,7 +60,11 @@ set(MMIO_IO8_DIR
 
 set(MMIO_IO8_SOURCES
     # Add the path to each source file here
-    ${MMIO_IO8_DIR}/src/mmio_io8.c
+    ${MMIO_IO8_DIR}/src/mmio_io8_clear_bit.c
+    ${MMIO_IO8_DIR}/src/mmio_io8_read.c
+    ${MMIO_IO8_DIR}/src/mmio_io8_set_bit.c
+    ${MMIO_IO8_DIR}/src/mmio_io8_toggle_bit.c
+    ${MMIO_IO8_DIR}/src/mmio_io8_write.c
 )
 
 set(MMIO_IO8_HEADERS
