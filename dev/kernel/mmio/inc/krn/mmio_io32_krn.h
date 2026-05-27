@@ -30,7 +30,7 @@ extern uint32_t mmio_io32_read(cptr_t addr);
  * @brief Sets a specific bit in an 32-bit memory-mapped I/O register.
  *
  * @param addr The memory address of the I/O register.
- * @param bit The bit position (0-7) to set.
+ * @param bit The bit position (0-31) to set.
  *
  * @return This function does not return a value.
  **********************************************************************/
@@ -41,7 +41,7 @@ extern void mmio_io32_set_bit(ptr_t addr, const uint32_t bit);
  * @brief Clears a specific bit in an 32-bit memory-mapped I/O register.
  *
  * @param addr The memory address of the I/O register.
- * @param bit The bit position (0-7) to clear.
+ * @param bit The bit position (0-31) to clear.
  *
  * @return This function does not return a value.
  **********************************************************************/
@@ -52,7 +52,7 @@ extern void mmio_io32_clear_bit(ptr_t addr, const uint32_t bit);
  * @brief Toggles a specific bit in an 32-bit memory-mapped I/O register.
  *
  * @param addr The memory address of the I/O register.
- * @param bit The bit position (0-7) to toggle.
+ * @param bit The bit position (0-31) to toggle.
  *
  * @return This function does not return a value.
  **********************************************************************/
