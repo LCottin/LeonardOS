@@ -44,7 +44,11 @@ set(MMIO_IO16_DIR
 
 set(MMIO_IO16_SOURCES
     # Add the path to each source file here
-    ${MMIO_IO16_DIR}/src/mmio_io16.c
+    ${MMIO_IO16_DIR}/src/mmio_io16_clear_bit.c
+    ${MMIO_IO16_DIR}/src/mmio_io16_read.c
+    ${MMIO_IO16_DIR}/src/mmio_io16_set_bit.c
+    ${MMIO_IO16_DIR}/src/mmio_io16_toggle_bit.c
+    ${MMIO_IO16_DIR}/src/mmio_io16_write.c
 )
 
 set(MMIO_IO16_HEADERS
