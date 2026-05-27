@@ -12,7 +12,11 @@ set(MMIO_IO64_DIR
 
 set(MMIO_IO64_SOURCES
     # Add the path to each source file here
-    ${MMIO_IO64_DIR}/src/mmio_io64.c
+    ${MMIO_IO64_DIR}/src/mmio_io64_clear_bit.c
+    ${MMIO_IO64_DIR}/src/mmio_io64_read.c
+    ${MMIO_IO64_DIR}/src/mmio_io64_set_bit.c
+    ${MMIO_IO64_DIR}/src/mmio_io64_toggle_bit.c
+    ${MMIO_IO64_DIR}/src/mmio_io64_write.c
 )
 
 set(MMIO_IO64_HEADERS
