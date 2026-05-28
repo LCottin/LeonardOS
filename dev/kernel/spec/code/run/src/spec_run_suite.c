@@ -5,7 +5,7 @@ void spec_run_suite(const char            *suite_name,
                     const spec_run_case_t *cases,
                     const size_t           count)
 {
-    spec_utils_print_string("\nTAP version 13\n1..");
+    spec_utils_print_string("TAP version 13\n1..");
     spec_utils_print_uint(count);
     spec_utils_print_string("\n# Running suite: ");
     spec_utils_print_string(suite_name);

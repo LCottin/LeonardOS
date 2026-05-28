@@ -63,6 +63,7 @@ run_test: check_qemu
 		else \
 			echo "# PASS: $$item" | tee -a "$$log"; \
 		fi; \
+		echo "# LOG: $$log" | tee -a "$$log"; \
 		echo "" | tee -a "$$log"; \
 	done; \
 	summary="$(TEST_LOG_DIR)/summary.tap"; \
