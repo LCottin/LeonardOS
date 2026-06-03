@@ -54,7 +54,7 @@ extern void spec_utils_print_string(const char_t *str);
  * @param number The unsigned integer to print.
  * @return None.
  **********************************************************************/
-extern void spec_utils_print_uint(const uint32_t number);
+extern void spec_utils_print_uint(const uint64_t number);
 
 
 #endif /* __SPEC_UTILS_KRN_H__ */

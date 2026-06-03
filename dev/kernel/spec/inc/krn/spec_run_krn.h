@@ -2,30 +2,30 @@
 #define __SPEC_RUN_KRN_H__
 
 #include "types_usr.h"
+#include "spec_assert_krn.h"
 
 /**********************************************************************
- * @brief Single unit-test case.
+ * @brief Test suite structure.
  **********************************************************************/
 typedef struct
 {
-    const char *name;            /* Human-readable label emitted in TAP output */
-    void      (*setup)(void);    /* Called before run(). Resets static stub pools. May be NULL. */
-    void      (*run)(void);      /* Exercises the unit under test (no assertions here). */
-    bool_t    (*check)(void);    /* Inspects state, returns true if passed, false otherwise. */
-} spec_run_case_t;
+    const char_t   *suite_name;                         /* Human-readable label emitted in TAP output */
+    const char_t   *(*tc_name)(const uint32_t idx);     /* NULL → index label */
+    void            (*setup)(const uint32_t idx);       /* Called before run(). Resets static stub pools. May be NULL. */
+    void            (*run)(const uint32_t idx);         /* Exercises the unit under test (no assertions here). */
+    void            (*check)(const uint32_t idx);       /* Inspects state */
+    size_t          tc_count;                           /* Number of test cases in the suite */
+    uint8_t         reserved[4];                        /* Reserved for future use */
+} spec_run_suite_t;
 
 
 /**********************************************************************
  * @brief Run every case in a suite and emit TAP 13 to stdout.
  *
- * @param suite_name Label printed as a TAP comment.
- * @param cases Array of cases descriptors.
- * @param count Number of elements in cases[].
+ * @param suite  The test suite to run.
  * @return None.
  **********************************************************************/
-extern void spec_run_suite(const char            *suite_name,
-                           const spec_run_case_t *cases,
-                           const size_t           count);
+extern void spec_run_suite(const spec_run_suite_t *suite);
 
 
 /**********************************************************************
