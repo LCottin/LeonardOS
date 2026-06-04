@@ -16,6 +16,7 @@ deep_clean:
 build_all:
 	@echo "Building project ..."
 	@$(MAKE) -C $(BUILD_DIR) --no-print-directory
+	@make image
 
 # Create the build directory, configure, and build boot binary
 .PHONY: build_boot
