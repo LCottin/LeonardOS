@@ -4,6 +4,33 @@
 set(COMPONENT_NAME ${ARG})
 
 # ==============================================================================
+# Create source and header for ASSERT
+# ==============================================================================
+set(SPEC_ASSERT_DIR
+    ${COMPONENT_NAME}/code/assert
+)
+
+set(SPEC_ASSERT_SOURCES
+    # Add the path to each source file here
+    ${SPEC_ASSERT_DIR}/src/spec_assert_data.c
+    ${SPEC_ASSERT_DIR}/src/spec_assert_get_count.c
+    ${SPEC_ASSERT_DIR}/src/spec_assert_get_failure.c
+    ${SPEC_ASSERT_DIR}/src/spec_assert_get_passed.c
+    ${SPEC_ASSERT_DIR}/src/spec_assert_record_equal_mem.c
+    ${SPEC_ASSERT_DIR}/src/spec_assert_record_equal_ptr.c
+    ${SPEC_ASSERT_DIR}/src/spec_assert_record_equal_u8.c
+    ${SPEC_ASSERT_DIR}/src/spec_assert_record_equal_u32.c
+    ${SPEC_ASSERT_DIR}/src/spec_assert_record_equal.c
+    ${SPEC_ASSERT_DIR}/src/spec_assert_record.c
+    ${SPEC_ASSERT_DIR}/src/spec_assert_reset.c
+)
+
+set(SPEC_ASSERT_HEADERS
+    ${SPEC_ASSERT_DIR}/inc
+)
+
+
+# ==============================================================================
 # Create source and header for UTILS
 # ==============================================================================
 set(SPEC_UTILS_DIR
@@ -47,6 +74,7 @@ set(LIB_NAME_KRN ${SPEC_LIB_NAME}_krn)
 add_library(${LIB_NAME_KRN}
     STATIC
         # Add the path to each source file here
+        ${SPEC_ASSERT_SOURCES}
         ${SPEC_UTILS_SOURCES}
         ${SPEC_RUN_SOURCES}
 )
@@ -56,6 +84,7 @@ add_library(${LIB_NAME_KRN}
 target_include_directories(${LIB_NAME_KRN}
     PRIVATE
         # Add the path to each header directory here
+        ${SPEC_ASSERT_HEADERS}
         ${SPEC_RUN_HEADERS}
         ${SPEC_UTILS_HEADERS}
     PUBLIC

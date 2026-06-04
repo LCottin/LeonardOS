@@ -1,7 +1,7 @@
 #include "spec_utils_krn.h"
 #include "spec_utils_prv.h"
 
-void spec_utils_print_uint(const uint32_t number)
+void spec_utils_print_uint(const uint64_t number)
 {
     char_t  buf[32];
     int32_t i = 0;
@@ -12,7 +12,7 @@ void spec_utils_print_uint(const uint32_t number)
     }
     else
     {
-        uint32_t num = number;
+        uint64_t num = number;
         while (num > 0U)
         {
             buf[i++] = (char)('0' + (num % 10U));
