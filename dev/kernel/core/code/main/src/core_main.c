@@ -10,12 +10,23 @@
 #include "scheduler_krn.h"
 #include "bmt_krn.h"
 #include "seh_krn.h"
+#include "irq_krn.h"
+#include "gic_krn.h"
+
+static void irq_handler_0(void)
+{
+    printer_print_string("[KERN] IRQ Handler called!\n");
+}
 
 void _core_main_entry(const addr_t bmt_start_addr, const addr_t sch_start_addr)
 {
     printer_print_string("\n[KERN] Hello World!\n");
 
+    irq_core_init();
     seh_ctx_init();
+    irq_core_register(0, &irq_handler_0);
+    gic_sgi_send(0);
+
     bmt_ctx_init_kernel(bmt_start_addr);
     pcb_init();
     scheduler_init(sch_start_addr);

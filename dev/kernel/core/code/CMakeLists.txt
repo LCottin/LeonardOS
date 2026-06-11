@@ -38,7 +38,6 @@ target_include_directories(${LIB_NAME_KRN}
         ${CORE_MAIN_HEADERS}
     PUBLIC
         ${COMPONENT_NAME}/inc/krn     # Private headers for kernel implementation
-        ${COMPONENT_NAME}/inc/usr     # Public headers for user interface
 )
 
 # ==============================================================================
@@ -59,5 +58,7 @@ target_link_libraries(${LIB_NAME_KRN}
         ${BMT_LIB_NAME}_krn
         ${ELF_LIB_NAME}_krn
         ${SEH_LIB_NAME}_krn
+        ${GIC_LIB_NAME}_krn
+        ${IRQ_LIB_NAME}_krn
     "-Wl,--no-whole-archive"
 )

@@ -29,11 +29,11 @@ TESTS_FRAMEWORk_DIR = $(TOOLS_DIR)/test_framework
 
 QEMU        := qemu-system-aarch64
 QEMU_GDB    := aarch64-none-elf-gdb
-QEMU_FLAGS  := -M virt          \
-               -m 512M          \
-               -cpu cortex-a53  \
-               -nographic       \
-               -serial mon:stdio\
+QEMU_FLAGS  := -M virt,gic-version=2 \
+               -m 512M               \
+               -cpu cortex-a53       \
+               -nographic            \
+               -serial mon:stdio     \
                -no-reboot
 
 TEST_ITEMS := \
@@ -60,6 +60,12 @@ prepare:
 	@make memory_mapping
 	@rm -f $(PRE_OS_IMG)
 	@dd if=/dev/zero of=$(PRE_OS_IMG) bs=1024 count=16384
+
+# Update the architecture tree
+.PHONY: architecture
+architecture:
+	@echo "Updating architecture tree ..."
+	@python3 $(SCRIPTS_DIR)/Architecture.py $(VERBOSE)
 
 # Install dependencies
 .PHONY: install
