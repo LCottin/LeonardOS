@@ -61,6 +61,12 @@ prepare:
 	@rm -f $(PRE_OS_IMG)
 	@dd if=/dev/zero of=$(PRE_OS_IMG) bs=1024 count=16384
 
+# Update the architecture tree
+.PHONY: architecture
+architecture:
+	@echo "Updating architecture tree ..."
+	@python3 $(SCRIPTS_DIR)/Architecture.py $(VERBOSE)
+
 # Install dependencies
 .PHONY: install
 install:
