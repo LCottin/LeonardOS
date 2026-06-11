@@ -71,5 +71,6 @@ target_link_libraries(${LIB_NAME_KRN}
         # Add the path to library of other folder here
         ${TYPES_LIB_NAME}_krn
         ${PRINTER_LIB_NAME}_krn
+        ${IRQ_LIB_NAME}_krn
     "-Wl,--no-whole-archive"
 )
