@@ -37,9 +37,10 @@ QEMU_FLAGS  := -M virt,gic-version=2 \
                -no-reboot
 
 TEST_ITEMS := \
-	memory_ops_utils_copy 	\
-	memory_ops_utils_set 	\
-	memory_ops_utils_cmp
+	memory_ops_utils_copy	\
+	memory_ops_utils_set	\
+	memory_ops_utils_cmp	\
+	mmio_io8_clear_bit		\
 
 include Makefile.build
 include Makefile.run

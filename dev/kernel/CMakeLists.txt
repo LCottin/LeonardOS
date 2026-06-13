@@ -40,6 +40,7 @@ set(TESTS_DIR
     "memory_ops/test/utils/copy:memory_ops_utils_copy"
     "memory_ops/test/utils/set:memory_ops_utils_set"
     "memory_ops/test/utils/cmp:memory_ops_utils_cmp"
+    "mmio/test/io8/clear_bit:mmio_io8_clear_bit"
 )
 
 # ==============================================================================
