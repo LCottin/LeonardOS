@@ -41,6 +41,7 @@ TEST_ITEMS := \
 	memory_ops_utils_set	\
 	memory_ops_utils_cmp	\
 	mmio_io8_clear_bit		\
+	mmio_io8_read			\
 
 include Makefile.build
 include Makefile.run
