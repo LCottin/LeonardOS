@@ -43,6 +43,7 @@ TEST_ITEMS := \
 	mmio_io8_clear_bit		\
 	mmio_io8_read			\
 	mmio_io8_set_bit		\
+	mmio_io8_toggle_bit		\
 
 include Makefile.build
 include Makefile.run

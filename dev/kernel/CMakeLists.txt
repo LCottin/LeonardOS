@@ -43,6 +43,7 @@ set(TESTS_DIR
     "mmio/test/io8/clear_bit:mmio_io8_clear_bit"
     "mmio/test/io8/read:mmio_io8_read"
     "mmio/test/io8/set_bit:mmio_io8_set_bit"
+    "mmio/test/io8/toggle_bit:mmio_io8_toggle_bit"
 )
 
 # ==============================================================================
