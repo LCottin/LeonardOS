@@ -55,6 +55,11 @@ set(TESTS_DIR
     "mmio/test/io32/set_bit:mmio_io32_set_bit"
     "mmio/test/io32/toggle_bit:mmio_io32_toggle_bit"
     "mmio/test/io32/write:mmio_io32_write"
+    "mmio/test/io64/clear_bit:mmio_io64_clear_bit"
+    "mmio/test/io64/read:mmio_io64_read"
+    "mmio/test/io64/set_bit:mmio_io64_set_bit"
+    "mmio/test/io64/toggle_bit:mmio_io64_toggle_bit"
+    "mmio/test/io64/write:mmio_io64_write"
 )
 
 # ==============================================================================
