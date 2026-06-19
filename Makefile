@@ -49,7 +49,12 @@ TEST_ITEMS := \
 	mmio_io16_read			\
 	mmio_io16_set_bit		\
 	mmio_io16_toggle_bit	\
-	mmio_io16_write
+	mmio_io16_write			\
+	mmio_io32_clear_bit		\
+	mmio_io32_read			\
+	mmio_io32_set_bit		\
+	mmio_io32_toggle_bit	\
+	mmio_io32_write
 
 include Makefile.build
 include Makefile.run
