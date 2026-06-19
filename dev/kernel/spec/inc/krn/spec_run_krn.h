@@ -12,8 +12,8 @@ typedef struct
     const char_t   *suite_name;                         /* Human-readable label emitted in TAP output */
     const char_t   *(*tc_name)(const uint32_t idx);     /* NULL → index label */
     void            (*setup)(const uint32_t idx);       /* Called before run(). Resets static stub pools. May be NULL. */
-    void            (*run)(const uint32_t idx);         /* Exercises the unit under test (no assertions here). */
-    void            (*check)(const uint32_t idx);       /* Inspects state */
+    void            (*run)(void);                       /* Exercises the unit under test (no assertions here). */
+    void            (*check)(void);                     /* Inspects state */
     size_t          tc_count;                           /* Number of test cases in the suite */
     uint8_t         reserved[4];                        /* Reserved for future use */
 } spec_run_suite_t;

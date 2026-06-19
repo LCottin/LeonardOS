@@ -77,4 +77,4 @@ run_test: check_qemu
 	echo ""; \
 	echo "Results: $$failed failure(s) out of $(words $(TEST_ITEMS)) test(s)."; \
 	echo "Full log: $$summary"; \
-	exit 0
+	exit $$failed

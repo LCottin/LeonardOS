@@ -30,6 +30,8 @@ set(CMAKE_SYSTEM_PROCESSOR aarch64)
 set(CMAKE_ASM_COMPILER clang)
 set(CMAKE_C_COMPILER   clang)
 
+set(CMAKE_TRY_COMPILE_TARGET_TYPE STATIC_LIBRARY)
+
 # Specify the flags for Clang
 set(COMMON_COMPILATION_FLAG
     "   -target aarch64-none-elf        \
@@ -97,7 +99,7 @@ function(add_subdirectory_custom_test DIR ARG1 ARG2)
 endfunction()
 
 # Project name and version
-project(${IMG_NAME} LANGUAGES ASM C)
+project(LeonardOS LANGUAGES ASM C)
 
     enable_language(ASM)
 

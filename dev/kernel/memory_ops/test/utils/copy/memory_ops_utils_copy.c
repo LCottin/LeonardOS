@@ -5,12 +5,13 @@
 #include "memory_ops_usr.h"
 #include "memory_ops_utils_copy_tc.h"
 
-static byte_t  s_buf1[BUFFER_SIZE];
-static byte_t  s_buf1_saved[BUFFER_SIZE];
-static byte_t  s_buf2[BUFFER_SIZE];
-static byte_t  s_buf2_saved[BUFFER_SIZE];
-static ptr_t   s_return_addr;
-static addr_t  s_buf2_addr_saved;
+static byte_t                     s_buf1[BUFFER_SIZE];
+static byte_t                     s_buf1_saved[BUFFER_SIZE];
+static byte_t                     s_buf2[BUFFER_SIZE];
+static byte_t                     s_buf2_saved[BUFFER_SIZE];
+static ptr_t                      s_return_addr;
+static addr_t                     s_buf2_addr_saved;
+static memory_ops_utils_copy_tc_t s_tc;
 
 const char_t *tc_name(const uint32_t idx)
 {
@@ -19,10 +20,11 @@ const char_t *tc_name(const uint32_t idx)
 
 void setup(const uint32_t idx)
 {
-    const memory_ops_utils_copy_tc_t *tc = &test_list[idx];
+    /* Set current test data */
+    spec_utils_memcpy(&s_tc, &test_list[idx], sizeof(s_tc));
 
-    spec_utils_memset(s_buf1, tc->input.fill1_byte, tc->input.buf1_size);
-    spec_utils_memset(s_buf2, tc->input.fill2_byte, tc->input.buf2_size);
+    spec_utils_memset(s_buf1, s_tc.input.fill1_byte, s_tc.input.buf1_size);
+    spec_utils_memset(s_buf2, s_tc.input.fill2_byte, s_tc.input.buf2_size);
 
     /* Save original buffer contents for later comparison */
     spec_utils_memcpy(s_buf1_saved, s_buf1, BUFFER_SIZE);
@@ -30,37 +32,33 @@ void setup(const uint32_t idx)
     s_buf2_addr_saved = (addr_t)s_buf2;
 }
 
-void run(const uint32_t idx)
+void run(void)
 {
-    const memory_ops_utils_copy_tc_t *tc = &test_list[idx];
-
-    s_return_addr = memory_ops_utils_copy(s_buf2 + tc->input.dest_offset, s_buf1 + tc->input.src_offset, tc->input.copy_size);
+    s_return_addr = memory_ops_utils_copy(s_buf2 + s_tc.input.dest_offset, s_buf1 + s_tc.input.src_offset, s_tc.input.copy_size);
 }
 
-void check(const uint32_t idx)
+void check(void)
 {
-    const memory_ops_utils_copy_tc_t *tc = &test_list[idx];
-
     /* Check service return address */
-    SPEC_EXPECT_EQ_PTR(s_return_addr, s_buf2 + tc->input.dest_offset);
+    SPEC_EXPECT_EQ_PTR(s_return_addr, s_buf2 + s_tc.input.dest_offset);
 
     /* Check that the buffer contents were copied correctly */
-    SPEC_EXPECT_EQ_MEM(s_buf2 + tc->input.dest_offset, s_buf1 + tc->input.src_offset, tc->input.copy_size);
+    SPEC_EXPECT_EQ_MEM(s_buf2 + s_tc.input.dest_offset, s_buf1 + s_tc.input.src_offset, s_tc.input.copy_size);
 
     /* Check that no byte were written beyond requested size */
-    if (tc->input.copy_size < BUFFER_SIZE)
+    if (s_tc.input.copy_size < BUFFER_SIZE)
     {
         SPEC_EXPECT_EQ_MEM(
-            &s_buf2[tc->input.copy_size + tc->input.dest_offset],
-            &s_buf2_saved[tc->input.copy_size + tc->input.dest_offset],
-            BUFFER_SIZE - tc->input.copy_size - tc->input.dest_offset);
+            &s_buf2[s_tc.input.copy_size + s_tc.input.dest_offset],
+            &s_buf2_saved[s_tc.input.copy_size + s_tc.input.dest_offset],
+            BUFFER_SIZE - s_tc.input.copy_size - s_tc.input.dest_offset);
     }
 
     /* Check that s_buf2 address was not modified */
     SPEC_EXPECT_EQ_PTR(s_buf2, s_buf2_addr_saved);
 
     /* Check that s_buf1 was not modified */
-    SPEC_EXPECT_EQ_MEM(s_buf1, s_buf1_saved, tc->input.buf1_size);
+    SPEC_EXPECT_EQ_MEM(s_buf1, s_buf1_saved, s_tc.input.buf1_size);
 }
 
 
