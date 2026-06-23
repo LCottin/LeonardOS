@@ -39,8 +39,8 @@ typedef struct
  ******************************************************************/
 extern const char  *tc_name(size_t idx);
 extern void         setup(const uint32_t idx);
-extern void         run(const uint32_t idx);
-extern void         check(const uint32_t idx);
+extern void         run(void);
+extern void         check(void);
 
 
 /******************************************************************

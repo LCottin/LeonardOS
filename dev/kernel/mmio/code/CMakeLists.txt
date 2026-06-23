@@ -12,7 +12,11 @@ set(MMIO_IO64_DIR
 
 set(MMIO_IO64_SOURCES
     # Add the path to each source file here
-    ${MMIO_IO64_DIR}/src/mmio_io64.c
+    ${MMIO_IO64_DIR}/src/mmio_io64_clear_bit.c
+    ${MMIO_IO64_DIR}/src/mmio_io64_read.c
+    ${MMIO_IO64_DIR}/src/mmio_io64_set_bit.c
+    ${MMIO_IO64_DIR}/src/mmio_io64_toggle_bit.c
+    ${MMIO_IO64_DIR}/src/mmio_io64_write.c
 )
 
 set(MMIO_IO64_HEADERS
@@ -28,7 +32,11 @@ set(MMIO_IO32_DIR
 
 set(MMIO_IO32_SOURCES
     # Add the path to each source file here
-    ${MMIO_IO32_DIR}/src/mmio_io32.c
+    ${MMIO_IO32_DIR}/src/mmio_io32_clear_bit.c
+    ${MMIO_IO32_DIR}/src/mmio_io32_read.c
+    ${MMIO_IO32_DIR}/src/mmio_io32_set_bit.c
+    ${MMIO_IO32_DIR}/src/mmio_io32_toggle_bit.c
+    ${MMIO_IO32_DIR}/src/mmio_io32_write.c
 )
 
 set(MMIO_IO32_HEADERS
@@ -44,7 +52,11 @@ set(MMIO_IO16_DIR
 
 set(MMIO_IO16_SOURCES
     # Add the path to each source file here
-    ${MMIO_IO16_DIR}/src/mmio_io16.c
+    ${MMIO_IO16_DIR}/src/mmio_io16_clear_bit.c
+    ${MMIO_IO16_DIR}/src/mmio_io16_read.c
+    ${MMIO_IO16_DIR}/src/mmio_io16_set_bit.c
+    ${MMIO_IO16_DIR}/src/mmio_io16_toggle_bit.c
+    ${MMIO_IO16_DIR}/src/mmio_io16_write.c
 )
 
 set(MMIO_IO16_HEADERS
@@ -60,7 +72,11 @@ set(MMIO_IO8_DIR
 
 set(MMIO_IO8_SOURCES
     # Add the path to each source file here
-    ${MMIO_IO8_DIR}/src/mmio_io8.c
+    ${MMIO_IO8_DIR}/src/mmio_io8_clear_bit.c
+    ${MMIO_IO8_DIR}/src/mmio_io8_read.c
+    ${MMIO_IO8_DIR}/src/mmio_io8_set_bit.c
+    ${MMIO_IO8_DIR}/src/mmio_io8_toggle_bit.c
+    ${MMIO_IO8_DIR}/src/mmio_io8_write.c
 )
 
 set(MMIO_IO8_HEADERS

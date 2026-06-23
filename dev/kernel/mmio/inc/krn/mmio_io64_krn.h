@@ -30,7 +30,7 @@ extern uint64_t mmio_io64_read(cptr_t addr);
  * @brief Sets a specific bit in an 64-bit memory-mapped I/O register.
  *
  * @param addr The memory address of the I/O register.
- * @param bit The bit position (0-7) to set.
+ * @param bit The bit position (0-63) to set.
  *
  * @return This function does not return a value.
  **********************************************************************/
@@ -41,7 +41,7 @@ extern void mmio_io64_set_bit(ptr_t addr, const uint64_t bit);
  * @brief Clears a specific bit in an 64-bit memory-mapped I/O register.
  *
  * @param addr The memory address of the I/O register.
- * @param bit The bit position (0-7) to clear.
+ * @param bit The bit position (0-63) to clear.
  *
  * @return This function does not return a value.
  **********************************************************************/
@@ -52,7 +52,7 @@ extern void mmio_io64_clear_bit(ptr_t addr, const uint64_t bit);
  * @brief Toggles a specific bit in an 64-bit memory-mapped I/O register.
  *
  * @param addr The memory address of the I/O register.
- * @param bit The bit position (0-7) to toggle.
+ * @param bit The bit position (0-63) to toggle.
  *
  * @return This function does not return a value.
  **********************************************************************/

@@ -35,13 +35,13 @@ void spec_run_suite(const spec_run_suite_t *suite)
         SPEC_EXPECT(suite->run != NULL_PTR, "Suite run() function is required");
         if (suite->run != NULL_PTR)
         {
-            suite->run(idx);
+            suite->run();
         }
 
         /* Inspect results */
         if (suite->check != NULL_PTR)
         {
-            suite->check(idx);
+            suite->check();
         }
 
         /* ── TAP result line ──────────────────────────────────── */

@@ -19,7 +19,9 @@ set(SPEC_ASSERT_SOURCES
     ${SPEC_ASSERT_DIR}/src/spec_assert_record_equal_mem.c
     ${SPEC_ASSERT_DIR}/src/spec_assert_record_equal_ptr.c
     ${SPEC_ASSERT_DIR}/src/spec_assert_record_equal_u8.c
+    ${SPEC_ASSERT_DIR}/src/spec_assert_record_equal_u16.c
     ${SPEC_ASSERT_DIR}/src/spec_assert_record_equal_u32.c
+    ${SPEC_ASSERT_DIR}/src/spec_assert_record_equal_u64.c
     ${SPEC_ASSERT_DIR}/src/spec_assert_record_equal.c
     ${SPEC_ASSERT_DIR}/src/spec_assert_record.c
     ${SPEC_ASSERT_DIR}/src/spec_assert_reset.c

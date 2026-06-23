@@ -28,7 +28,7 @@ jobs:
           sudo apt-get upgrade -y
           sudo make install
 
-      - name: Build OS
+      - name: Build binaries
         run: |
           make deep_clean
           make prepare
@@ -67,7 +67,7 @@ jobs:
           sudo apt-get upgrade -y
           sudo make install
 
-      - name: Build OS
+      - name: Build binaries
         run: |
           make deep_clean
           make prepare
