@@ -7,88 +7,30 @@ void bmt_info_print_table(void)
 {
     /* Print the kernel binary information */
     printer_print_string("Kernel binary information:\n");
-    printer_print_string("    Kernel entry point:          ");
-    printer_print_address(g_p_bmt_ctx_table->krn_bin.entry_point);
-    printer_print_string("\n");
-
-    printer_print_string("    Kernel load address:         ");
-    printer_print_address(g_p_bmt_ctx_table->krn_bin.load_address);
-    printer_print_string("\n");
-
-    printer_print_string("    Kernel segments count:       ");
-    printer_print_unsigned(g_p_bmt_ctx_table->krn_bin.segments_count, STRINGS_UTILS_BASE_DECIMAL);
-    printer_print_string("\n");
-
-    printer_print_string("    Kernel compatibility status: ");
-    printer_print_string(g_p_bmt_ctx_table->krn_bin.is_compatible ? "Compatible" : "Incompatible");
-    printer_print_string("\n");
-
-    printer_print_string("    Kernel stack top:            ");
-    printer_print_address(g_p_bmt_ctx_table->krn_bin.memory_info.stack_top);
-    printer_print_string("\n");
-
-    printer_print_string("    Kernel stack size:           ");
-    printer_print_unsigned(g_p_bmt_ctx_table->krn_bin.memory_info.stack_size, STRINGS_UTILS_BASE_HEXADECIMAL);
-    printer_print_string("\n");
-
-    printer_print_string("    Kernel heap start:           ");
-    printer_print_address(g_p_bmt_ctx_table->krn_bin.memory_info.heap_start);
-    printer_print_string("\n");
-
-    printer_print_string("    Kernel heap size:            ");
-    printer_print_unsigned(g_p_bmt_ctx_table->krn_bin.memory_info.heap_size, STRINGS_UTILS_BASE_HEXADECIMAL);
-    printer_print_string("\n\n");
-
-    printer_print_string("App binary information:\n");
-    printer_print_string("    App binary count: ");
-    printer_print_unsigned(g_p_bmt_ctx_table->apps_count, STRINGS_UTILS_BASE_DECIMAL);
-    printer_print_string("\n");
+    printer_print_formatted("    Kernel entry point:          %x\n",   g_p_bmt_ctx_table->krn_bin.entry_point);
+    printer_print_formatted("    Kernel load address:         %x\n",   g_p_bmt_ctx_table->krn_bin.load_address);
+    printer_print_formatted("    Kernel segments count:       %d\n",   g_p_bmt_ctx_table->krn_bin.segments_count);
+    printer_print_formatted("    Kernel compatibility status: %s\n",   g_p_bmt_ctx_table->krn_bin.is_compatible ? "Compatible" : "Incompatible");
+    printer_print_formatted("    Kernel stack top:            %x\n",   g_p_bmt_ctx_table->krn_bin.memory_info.stack_top);
+    printer_print_formatted("    Kernel stack size:           %x\n",   g_p_bmt_ctx_table->krn_bin.memory_info.stack_size);
+    printer_print_formatted("    Kernel heap start:           %x\n",   g_p_bmt_ctx_table->krn_bin.memory_info.heap_start);
+    printer_print_formatted("    Kernel heap size:            %x\n\n", g_p_bmt_ctx_table->krn_bin.memory_info.heap_size);
+    printer_print_formatted("App binary information:%d\n",             g_p_bmt_ctx_table->apps_count);
 
     /* Loop through all the applications in the bmt table */
     for (uint32_t idx = 0; idx < g_p_bmt_ctx_table->apps_count; idx++)
     {
         const ELF64_binary_info_t *p_app_bin = &g_p_bmt_ctx_table->apps_bin[idx];
 
-        printer_print_string("\nApplication binary information ");
-        printer_print_unsigned(idx, STRINGS_UTILS_BASE_DECIMAL);
-        printer_print_string(":\n");
-
-        printer_print_string("    Application binary ID:            ");
-        printer_print_unsigned(idx, STRINGS_UTILS_BASE_DECIMAL);
-        printer_print_string("\n");
-
-        printer_print_string("    Application entry point:          ");
-        printer_print_address(p_app_bin->entry_point);
-        printer_print_string("\n");
-
-        printer_print_string("    Application load address:         ");
-        printer_print_address(p_app_bin->load_address);
-        printer_print_string("\n");
-
-        printer_print_string("    Application segments count:       ");
-        printer_print_unsigned(p_app_bin->segments_count, STRINGS_UTILS_BASE_DECIMAL);
-        printer_print_string("\n");
-
-        printer_print_string("    Application compatibility status: ");
-        printer_print_string(p_app_bin->is_compatible ? "Compatible" : "Incompatible");
-        printer_print_string("\n");
-
-        printer_print_string("    Application stack top:            ");
-        printer_print_address(p_app_bin->memory_info.stack_top);
-        printer_print_string("\n");
-
-        printer_print_string("    Application stack size:           ");
-        printer_print_unsigned(p_app_bin->memory_info.stack_size, STRINGS_UTILS_BASE_HEXADECIMAL);
-        printer_print_string("\n");
-
-        printer_print_string("    Application heap start:           ");
-        printer_print_address(p_app_bin->memory_info.heap_start);
-        printer_print_string("\n");
-
-        printer_print_string("    Application heap size:            ");
-        printer_print_unsigned(p_app_bin->memory_info.heap_size, STRINGS_UTILS_BASE_HEXADECIMAL);
-
-        printer_print_string("\n\n");
+        printer_print_formatted("\nApplication binary ID: %d\n", idx);
+        printer_print_formatted("    Application entry point:          %x\n",   p_app_bin->entry_point);
+        printer_print_formatted("    Application load address:         %x\n",   p_app_bin->load_address);
+        printer_print_formatted("    Application segments count:       %x\n",   p_app_bin->segments_count);
+        printer_print_formatted("    Application compatibility status: %s\n",   p_app_bin->is_compatible ? "Compatible" : "Incompatible");
+        printer_print_formatted("    Application stack top:            %x\n",   p_app_bin->memory_info.stack_top);
+        printer_print_formatted("    Application stack size:           %x\n",   p_app_bin->memory_info.stack_size);
+        printer_print_formatted("    Application heap start:           %d\n",   p_app_bin->memory_info.heap_start);
+        printer_print_formatted("    Application heap size:            %x\n\n", p_app_bin->memory_info.heap_size);
     }
 
     printer_print_string("\n");
