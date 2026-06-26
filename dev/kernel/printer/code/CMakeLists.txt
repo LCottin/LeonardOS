@@ -49,6 +49,7 @@ set(LIB_NAME_KRN ${PRINTER_LIB_NAME}_krn)
 add_library(${LIB_NAME_KRN}
     STATIC
         # Add the path to each source file here
+        ${PRINTER_STREAM_SOURCES}
         ${PRINTER_PRINT_SOURCES}
 )
 

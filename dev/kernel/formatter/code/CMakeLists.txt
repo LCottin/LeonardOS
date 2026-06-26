@@ -4,50 +4,63 @@
 set(COMPONENT_NAME ${ARG})
 
 # ==============================================================================
-# Create source and header for UTILS
+# Create source and header for PARSE
 # ==============================================================================
-set(LIBUSER_UTILS_DIR
-    ${COMPONENT_NAME}/code/utils
+set(FORMATTER_PARSE_DIR
+    ${COMPONENT_NAME}/code/parse
 )
 
-set(LIBUSER_UTILS_SOURCES
+set(FORMATTER_PARSE_SOURCES
     # Add the path to each source file here
-    ${LIBUSER_UTILS_DIR}/src/user_sleep.c
+    ${FORMATTER_PARSE_DIR}/src/formatter_parse.c
 )
 
-set(LIBUSER_UTILS_HEADERS
-    ${LIBUSER_UTILS_DIR}/inc
-)
-
-# ==============================================================================
-# Create source and header for HANDLER
-# ==============================================================================
-set(LIBUSER_HANDLER_DIR
-    ${COMPONENT_NAME}/code/handler
-)
-
-set(LIBUSER_HANDLER_SOURCES
-    # Add the path to each source file here
-    ${LIBUSER_HANDLER_DIR}/src/libuser_get_time.c
-    ${LIBUSER_HANDLER_DIR}/src/libuser_print_string.c
-    ${LIBUSER_HANDLER_DIR}/src/libuser_print_int.c
-    ${LIBUSER_HANDLER_DIR}/src/libuser_print_addr.c
-    ${LIBUSER_HANDLER_DIR}/src/libuser_yield.c
-)
-
-set(LIBUSER_HANDLER_HEADERS
-    ${LIBUSER_HANDLER_DIR}/inc
+set(FORMATTER_PARSE_HEADERS
+    ${FORMATTER_PARSE_DIR}/inc
 )
 
 # ==============================================================================
-# Create library user target for LIBUSER
+# Create library kernel target for FORMATTER
 # ==============================================================================
-set(LIB_NAME_USR ${LIBUSER_LIB_NAME}_usr)
+set(LIB_NAME_KRN ${FORMATTER_LIB_NAME}_krn)
+add_library(${LIB_NAME_KRN}
+    STATIC
+        # Add the path to each source file here
+        ${FORMATTER_PARSE_SOURCES}
+)
+
+# ==============================================================================
+# Add include directories for the library kernel
+# ==============================================================================
+target_include_directories(${LIB_NAME_KRN}
+    PRIVATE
+        # Add the path to each header directory here
+        ${FORMATTER_PARSE_HEADERS}
+    PUBLIC
+        ${COMPONENT_NAME}/inc/krn     # Private headers for kernel implementation
+        ${COMPONENT_NAME}/inc/usr     # Public headers for user interface
+)
+
+# ==============================================================================
+# Add library dependencies
+# ==============================================================================
+target_link_libraries(${LIB_NAME_KRN}
+    PRIVATE "-Wl,--whole-archive"
+        # Add the path to library of other folder here
+        ${TYPES_LIB_NAME}_krn
+        ${STRINGS_LIB_NAME}_krn
+    "-Wl,--no-whole-archive"
+)
+
+
+# ==============================================================================
+# Create library kernel target for FORMATTER
+# ==============================================================================
+set(LIB_NAME_USR ${FORMATTER_LIB_NAME}_usr)
 add_library(${LIB_NAME_USR}
     STATIC
         # Add the path to each source file here
-        ${LIBUSER_UTILS_SOURCES}
-        ${LIBUSER_HANDLER_SOURCES}
+        ${FORMATTER_PARSE_SOURCES}
 )
 
 # ==============================================================================
@@ -56,25 +69,19 @@ add_library(${LIB_NAME_USR}
 target_include_directories(${LIB_NAME_USR}
     PRIVATE
         # Add the path to each header directory here
-        ${LIBUSER_UTILS_HEADERS}
-        ${LIBUSER_HANDLER_HEADERS}
+        ${FORMATTER_PARSE_HEADERS}
         ${COMPONENT_NAME}/inc/krn     # Private headers for kernel implementation
     PUBLIC
         ${COMPONENT_NAME}/inc/usr     # Public headers for user interface
 )
 
 # ==============================================================================
-# Add library user dependencies
+# Add library dependencies
 # ==============================================================================
 target_link_libraries(${LIB_NAME_USR}
     PRIVATE "-Wl,--whole-archive"
         # Add the path to library of other folder here
-        ${SYSCALL_LIB_NAME}_krn
-        ${MEMORY_LIB_NAME}_krn
-        ${FORMATTER_LIB_NAME}_krn
-    PUBLIC
         ${TYPES_LIB_NAME}_usr
         ${STRINGS_LIB_NAME}_usr
-        ${CLOCK_LIB_NAME}_usr
     "-Wl,--no-whole-archive"
 )
