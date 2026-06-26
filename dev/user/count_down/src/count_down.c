@@ -16,7 +16,7 @@ void count_down_entry(void)
         for (int32_t i = 0; i < count; i++)
         {
             user_print_string("[USER] ");
-            user_print_int(count - i, PRINTER_BASE_DECIMAL);
+            user_print_int(count - i, STRINGS_UTILS_BASE_DECIMAL);
             user_print_string("\n");
 
             /* Sleep for 1 second */

@@ -70,6 +70,7 @@ target_link_libraries(${LIB_NAME_KRN}
     PRIVATE "-Wl,--whole-archive"
         # Add the path to library of other folder here
         ${TYPES_LIB_NAME}_krn
+        ${STRINGS_LIB_NAME}_krn
         ${PRINTER_LIB_NAME}_krn
         ${IRQ_LIB_NAME}_krn
         ${GIC_LIB_NAME}_krn

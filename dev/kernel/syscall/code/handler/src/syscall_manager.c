@@ -16,7 +16,7 @@ void syscall_manager(const syscall_numbers_e syscall_number, cptr_t arg1, cptr_t
 
         case SYSCALL_PRINT_INT:
         {
-            printer_print_signed(*(const int32_t *)arg1, *(const printer_base_t *)arg2);
+            printer_print_signed(*(const int32_t *)arg1, *(const strings_utils_base_t *)arg2);
             break;
         }
 

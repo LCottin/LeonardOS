@@ -1,5 +1,5 @@
 #include "libuser_usr.h"
-#include "printer_usr.h"
+#include "strings_utils_usr.h"
 
 void user_sleep(const time_t time_ns)
 {

@@ -1,16 +1,16 @@
 #include "strings_utils_usr.h"
 #include "strings_utils_prv.h"
 
-char_t *strings_utils_utoa(const printer_base_t base, const uint64_t value, char_t *str)
+char_t *strings_utils_utoa(const strings_utils_base_t base, const uint64_t value, char_t *str)
 {
     if (str != NULL_PTR)
     {
         size_t str_length = 0;
 
-        if ((base != PRINTER_BASE_BINARY)      &&
-            (base != PRINTER_BASE_HEXADECIMAL) &&
-            (base != PRINTER_BASE_OCTAL)       &&
-            (base != PRINTER_BASE_DECIMAL))
+        if ((base != STRINGS_UTILS_BASE_BINARY)      &&
+            (base != STRINGS_UTILS_BASE_HEXADECIMAL) &&
+            (base != STRINGS_UTILS_BASE_OCTAL)       &&
+            (base != STRINGS_UTILS_BASE_DECIMAL))
         {
             str[str_length] = '\0';
         }

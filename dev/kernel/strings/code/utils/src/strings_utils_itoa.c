@@ -1,17 +1,16 @@
 #include "strings_utils_usr.h"
 #include "strings_utils_prv.h"
-#include "printer_usr.h"
 
-char_t *strings_utils_itoa(const printer_base_t base, const int64_t value, char_t *str)
+char_t *strings_utils_itoa(const strings_utils_base_t base, const int64_t value, char_t *str)
 {
     if (str != NULL_PTR)
     {
         size_t str_length = 0;
 
-        if ((base != PRINTER_BASE_BINARY)      &&
-            (base != PRINTER_BASE_HEXADECIMAL) &&
-            (base != PRINTER_BASE_OCTAL)       &&
-            (base != PRINTER_BASE_DECIMAL))
+        if ((base != STRINGS_UTILS_BASE_BINARY)      &&
+            (base != STRINGS_UTILS_BASE_HEXADECIMAL) &&
+            (base != STRINGS_UTILS_BASE_OCTAL)       &&
+            (base != STRINGS_UTILS_BASE_DECIMAL))
         {
             str[str_length] = '\0';
         }
@@ -23,7 +22,7 @@ char_t *strings_utils_itoa(const printer_base_t base, const int64_t value, char_
             size_t prefix_len = strings_utils_get_base_prefix(base, prefix);
 
             /* Get signedness and raw value for conversion */
-            if ((base == PRINTER_BASE_DECIMAL) && (value < 0))
+            if ((base == STRINGS_UTILS_BASE_DECIMAL) && (value < 0))
             {
                 is_value_negative = TRUE;
                 raw_value         = (uint64_t)(-(value + 1)) + 1;

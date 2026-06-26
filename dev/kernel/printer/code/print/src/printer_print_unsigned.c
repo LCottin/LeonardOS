@@ -1,7 +1,7 @@
 #include "printer_krn.h"
 #include "strings_utils_usr.h"
 
-void printer_print_unsigned(const uint32_t value, const printer_base_t base)
+void printer_print_unsigned(const uint32_t value, const strings_utils_base_t base)
 {
     char_t buffer[16];
 

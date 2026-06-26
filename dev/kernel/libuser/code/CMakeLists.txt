@@ -73,7 +73,7 @@ target_link_libraries(${LIB_NAME_USR}
         ${MEMORY_LIB_NAME}_krn
     PUBLIC
         ${TYPES_LIB_NAME}_usr
-        ${PRINTER_LIB_NAME}_usr
+        ${STRINGS_LIB_NAME}_usr
         ${CLOCK_LIB_NAME}_usr
     "-Wl,--no-whole-archive"
 )

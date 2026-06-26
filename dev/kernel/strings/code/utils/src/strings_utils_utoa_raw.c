@@ -1,6 +1,6 @@
 #include "strings_utils_prv.h"
 
-size_t strings_utils_utoa_raw(const printer_base_t base, const uint64_t value, char_t *str)
+size_t strings_utils_utoa_raw(const strings_utils_base_t base, const uint64_t value, char_t *str)
 {
     const char_t digits[64] = "0123456789abcdef";
     size_t length           = 0;

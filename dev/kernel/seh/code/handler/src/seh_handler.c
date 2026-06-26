@@ -18,7 +18,7 @@ void seh_handler(const reg_t reg_lr, const reg_t reg_esr, const seh_exception_ty
     printer_print_address(reg_lr);
 
     printer_print_string("\n\tException Syndrome Register: ");
-    printer_print_long_unsigned(reg_esr, PRINTER_BASE_HEXADECIMAL);
+    printer_print_long_unsigned(reg_esr, STRINGS_UTILS_BASE_HEXADECIMAL);
 
     // seh_handler_decode_esr(reg_esr);
 

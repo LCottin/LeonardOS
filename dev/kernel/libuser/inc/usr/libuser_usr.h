@@ -2,7 +2,7 @@
 #define __LIBUSER_USR_H__
 
 #include "types_usr.h"
-#include "printer_usr.h"
+#include "strings_utils_usr.h"
 
 /**********************************************************************
  * @brief Prints a string to the console.
@@ -24,7 +24,7 @@ extern void user_print_string(const char_t *str);
  * @param base Base for the number representation.
  * @return None.
  **********************************************************************/
-extern void user_print_int(const int32_t num, const printer_base_t base);
+extern void user_print_int(const int32_t num, const strings_utils_base_t base);
 
 
 /**********************************************************************
