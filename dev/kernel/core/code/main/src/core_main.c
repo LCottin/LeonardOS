@@ -45,10 +45,7 @@ void _core_main_entry(const addr_t bmt_start_addr, const addr_t sch_start_addr)
         printer_print_string("[KERN] Allocate memory failed\n");
     }
 
-    printer_print_string("[KERN] Current elapsed time since startup: ");
-    printer_print_long_signed(clock_info_get_time(),PRINTER_BASE_DECIMAL);
-    printer_print_string(" ns\n");
-
+    printer_print_formatted("[KERN] Current elapsed time since startup: %d\n", clock_info_get_time());
     printer_print_string("[KERN] Launching scheduling ... \n");
 
     /* Launch application scheduling */

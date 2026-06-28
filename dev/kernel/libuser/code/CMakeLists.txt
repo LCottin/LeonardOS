@@ -71,9 +71,10 @@ target_link_libraries(${LIB_NAME_USR}
         # Add the path to library of other folder here
         ${SYSCALL_LIB_NAME}_krn
         ${MEMORY_LIB_NAME}_krn
+        ${FORMATTER_LIB_NAME}_krn
     PUBLIC
         ${TYPES_LIB_NAME}_usr
-        ${PRINTER_LIB_NAME}_usr
+        ${STRINGS_LIB_NAME}_usr
         ${CLOCK_LIB_NAME}_usr
     "-Wl,--no-whole-archive"
 )

@@ -2,7 +2,7 @@
 #define __PRINTER_KRN_H__
 
 #include "types_usr.h"
-#include "printer_usr.h"
+#include "strings_utils_usr.h"
 
 /**********************************************************************
  * @brief Print a null-terminated string.
@@ -22,7 +22,7 @@ extern void printer_print_string(const char_t *str);
  *
  * @return None.
  **********************************************************************/
-extern void printer_print_signed(const int32_t value, const printer_base_t base);
+extern void printer_print_signed(const int32_t value, const strings_utils_base_t base);
 
 
 /**********************************************************************
@@ -33,7 +33,7 @@ extern void printer_print_signed(const int32_t value, const printer_base_t base)
  *
  * @return None.
  **********************************************************************/
-extern void printer_print_unsigned(const uint32_t value, const printer_base_t base);
+extern void printer_print_unsigned(const uint32_t value, const strings_utils_base_t base);
 
 
 /**********************************************************************
@@ -44,7 +44,7 @@ extern void printer_print_unsigned(const uint32_t value, const printer_base_t ba
  *
  * @return None.
  **********************************************************************/
-extern void printer_print_long_signed(const int64_t value, const printer_base_t base);
+extern void printer_print_long_signed(const int64_t value, const strings_utils_base_t base);
 
 
 /**********************************************************************
@@ -55,7 +55,7 @@ extern void printer_print_long_signed(const int64_t value, const printer_base_t 
  *
  * @return None.
  **********************************************************************/
-extern void printer_print_long_unsigned(const uint64_t value, const printer_base_t base);
+extern void printer_print_long_unsigned(const uint64_t value, const strings_utils_base_t base);
 
 
 /**********************************************************************
@@ -66,6 +66,27 @@ extern void printer_print_long_unsigned(const uint64_t value, const printer_base
  * @return None.
  **********************************************************************/
 extern void printer_print_address(const addr_t value);
+
+
+/**********************************************************************
+ * @brief Print a character.
+ *
+ * @param value The character to be printed.
+ *
+ * @return None.
+ **********************************************************************/
+extern void printer_print_char(const char_t c);
+
+
+/**********************************************************************
+ * @brief Print a formatted string.
+ *
+ * @param format String to print before being formatted.
+ * @param ... Arguments to format.
+ *
+ * @return None.
+ **********************************************************************/
+extern void printer_print_formatted(const char *format, ...);
 
 
 #endif /* __PRINTER_KRN_H__ */
