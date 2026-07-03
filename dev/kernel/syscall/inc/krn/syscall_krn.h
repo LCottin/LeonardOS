@@ -25,19 +25,59 @@ typedef enum
 
 
 /**********************************************************************
+ * @brief Buffer input structure for system calls.
+ *
+ * This structure defines the buffer used for passing data
+ * from user to kernel space during system calls.
+ **********************************************************************/
+typedef struct
+{
+    cptr_t        buffer;
+    const size_t  size;
+    const uint8_t reserved[4]; /* Reserved for future use or alignment */
+} syscall_input_buffer_t;
+
+
+/**********************************************************************
+ * @brief Buffer output structure for system calls.
+ *
+ * This structure defines the buffer used for passing data
+ * from kernel to user space during system calls.
+ **********************************************************************/
+typedef struct
+{
+    ptr_t        buffer;
+    size_t       size;
+    const uint8_t reserved[4]; /* Reserved for future use or alignment */
+} syscall_output_buffer_t;
+
+
+/**********************************************************************
+ * @brief Structure for system call requests.
+ *
+ * This structure defines the request format for system calls,
+ * including the system call ID, flags, and input/output buffers.
+ **********************************************************************/
+typedef struct
+{
+    syscall_numbers_e       syscall_id;
+    uint32_t                flags;
+    syscall_input_buffer_t  input;
+    syscall_output_buffer_t output;
+} syscall_request_t;
+
+
+/**********************************************************************
  * @brief Handles a system call.
  *
  * This function is the entry point for handling system calls. It takes
- * a system call number and an argument, switch back to the kernel mode
+ * a system call request structure, switch back to the kernel mode
  * to process the request, and then returns the result to the caller.
  *
- * @param syscall_number The system call number.
- * @param arg1 The first argument for the system call.
- * @param arg2 The second argument for the system call.
- * @param ret The return value of the system call.
+ * @param syscall__request The system call request structure
  * @return None.
  **********************************************************************/
-extern void syscall_handler(const syscall_numbers_e syscall_number, cptr_t arg1, cptr_t arg2, ptr_t ret);
+extern void syscall_handler(syscall_request_t *request);
 
 
 #endif /* __SYSCALL_KRN_H__ */
