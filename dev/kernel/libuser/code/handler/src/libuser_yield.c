@@ -3,5 +3,21 @@
 
 void user_yield(void)
 {
-    syscall_handler(SYSCALL_YIELD, NULL_PTR, NULL_PTR, NULL_PTR);
+    syscall_request_t request =
+    {
+        .syscall_id = SYSCALL_YIELD,
+        .flags      = 0,
+        .input =
+        {
+            .buffer = NULL_PTR,
+            .size = 0
+        },
+        .output =
+        {
+            .buffer = NULL_PTR,
+            .size = 0
+        }
+    };
+
+    syscall_handler(&request);
 }

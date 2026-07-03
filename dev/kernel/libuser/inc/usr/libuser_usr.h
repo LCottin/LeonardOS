@@ -41,10 +41,10 @@ extern void user_print_addr(const addr_t addr);
 /**********************************************************************
  * @brief Gets the current time in ns.
  *
- * @param None.
- * @return time_t The current time in nanoseconds since the system started.
+ * @param time Pointer to a time_t variable where the current time will be stored.
+ * @return None.
  **********************************************************************/
-extern time_t user_get_time(void);
+extern void user_get_time(time_t *time);
 
 
 /**********************************************************************
