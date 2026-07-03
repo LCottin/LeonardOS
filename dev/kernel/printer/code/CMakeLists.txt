@@ -35,7 +35,8 @@ set(PRINTER_STREAM_DIR
 
 set(PRINTER_STREAM_SOURCES
     # Add the path to each source file here
-    ${PRINTER_STREAM_DIR}/src/printer_stream_string.c
+    ${PRINTER_STREAM_DIR}/src/printer_stream_data.c
+    ${PRINTER_STREAM_DIR}/src/printer_stream_get.c
 )
 
 set(PRINTER_STREAM_HEADERS

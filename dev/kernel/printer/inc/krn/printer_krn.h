@@ -3,6 +3,7 @@
 
 #include "types_usr.h"
 #include "strings_utils_usr.h"
+#include "formatter_krn.h"
 
 /**********************************************************************
  * @brief Print a null-terminated string.
@@ -87,6 +88,15 @@ extern void printer_print_char(const char_t c);
  * @return None.
  **********************************************************************/
 extern void printer_print_formatted(const char *format, ...);
+
+
+/**********************************************************************
+ * @brief Returns the stream for printing formatted strings.
+ *
+ * @param None.
+ * @return Pointer to the formatter stream.
+ **********************************************************************/
+extern formatter_stream_t *print_stream_get(void);
 
 
 #endif /* __PRINTER_KRN_H__ */
