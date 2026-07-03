@@ -47,7 +47,7 @@ add_library(${LIB_NAME_KRN}
     STATIC
         # Add the path to each source file here
         ${STRINGS_UTILS_SOURCES}
-        ${STRINGS_SOURCES_SOURCES}
+        ${STRINGS_OPS_SOURCES}
 )
 
 # ==============================================================================
@@ -81,7 +81,7 @@ add_library(${LIB_NAME_USR}
     STATIC
         # Add the path to each source file here
         ${STRINGS_UTILS_SOURCES}
-        ${STRINGS_SOURCES_SOURCES}
+        ${STRINGS_OPS_SOURCES}
 )
 
 # ==============================================================================
