@@ -129,5 +129,6 @@ target_link_libraries(${LIB_NAME_KRN}
         ${MEMORY_LIB_NAME}_krn
         ${BMT_LIB_NAME}_krn
         ${STRINGS_LIB_NAME}_krn
+        ${FORMATTER_LIB_NAME}_krn
     "-Wl,--no-whole-archive"
 )

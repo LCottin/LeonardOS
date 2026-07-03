@@ -54,6 +54,7 @@ target_link_libraries(${LIB_NAME_KRN}
         ${CLOCK_LIB_NAME}_krn
         ${SCHEDULER_LIB_NAME}_krn
         ${PCB_LIB_NAME}_krn
+        ${FORMATTER_LIB_NAME}_krn
     "-Wl,--no-whole-archive"
 )
 
@@ -90,6 +91,7 @@ target_link_libraries(${LIB_NAME_USR}
         ${CLOCK_LIB_NAME}_krn
         ${SCHEDULER_LIB_NAME}_krn
         ${PCB_LIB_NAME}_krn
+        ${FORMATTER_LIB_NAME}_krn
     PUBLIC
         ${TYPES_LIB_NAME}_usr
     "-Wl,--no-whole-archive"

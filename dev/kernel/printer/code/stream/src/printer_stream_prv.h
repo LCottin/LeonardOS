@@ -1,5 +1,5 @@
-#ifndef __PRINTER_STREAM_H__
-#define __PRINTER_STREAM_H__
+#ifndef __PRINTER_STREAM_PRV_H__
+#define __PRINTER_STREAM_PRV_H__
 
 #include "formatter_krn.h"
 
@@ -9,4 +9,4 @@
 extern formatter_stream_t printer_stream_string;
 
 
-#endif /* __PRINTER_STREAM_H__ */
+#endif /* __PRINTER_STREAM_PRV_H__ */

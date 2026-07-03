@@ -1,13 +1,13 @@
 #include "printer_krn.h"
-#include "printer_stream.h"
 
 void printer_print_formatted(const char *format, ...)
 {
     va_list args;
+    formatter_stream_t *stream = print_stream_get();
 
     va_start(args, format);
 
-    formatter_parse(&printer_stream_string, format, args);
+    formatter_parse(stream, format, args);
 
     va_end(args);
 }

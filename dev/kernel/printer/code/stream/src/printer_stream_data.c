@@ -1,4 +1,4 @@
-#include "printer_stream.h"
+#include "printer_stream_prv.h"
 #include "printer_krn.h"
 
 formatter_stream_t printer_stream_string =
