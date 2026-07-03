@@ -60,5 +60,6 @@ target_link_libraries(${LIB_NAME_KRN}
         ${SEH_LIB_NAME}_krn
         ${GIC_LIB_NAME}_krn
         ${IRQ_LIB_NAME}_krn
+        ${FORMATTER_LIB_NAME}_krn
     "-Wl,--no-whole-archive"
 )
