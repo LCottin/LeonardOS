@@ -1,4 +1,5 @@
 # Define library names for dependencies
+set (STREAM_LIB_NAME        "_stream")
 set (FORMATTER_LIB_NAME     "_formatter")
 set (IRQ_LIB_NAME           "_irq")
 set (GIC_LIB_NAME           "_gic")

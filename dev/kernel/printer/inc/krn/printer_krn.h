@@ -3,7 +3,7 @@
 
 #include "types_usr.h"
 #include "strings_utils_usr.h"
-#include "formatter_krn.h"
+#include "stream_krn.h"
 
 /**********************************************************************
  * @brief Print a null-terminated string.

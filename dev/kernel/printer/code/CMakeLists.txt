@@ -77,5 +77,6 @@ target_link_libraries(${LIB_NAME_KRN}
         ${UART_LIB_NAME}_krn
         ${STRINGS_LIB_NAME}_krn
         ${FORMATTER_LIB_NAME}_krn
+        ${STREAM_LIB_NAME}_krn
     "-Wl,--no-whole-archive"
 )

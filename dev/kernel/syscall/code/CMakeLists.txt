@@ -56,6 +56,7 @@ target_link_libraries(${LIB_NAME_KRN}
         ${PCB_LIB_NAME}_krn
         ${FORMATTER_LIB_NAME}_krn
         ${MEMORY_OPS_LIB_NAME}_krn
+        ${STREAM_LIB_NAME}_krn
     "-Wl,--no-whole-archive"
 )
 
@@ -94,6 +95,7 @@ target_link_libraries(${LIB_NAME_USR}
         ${PCB_LIB_NAME}_krn
         ${FORMATTER_LIB_NAME}_krn
         ${MEMORY_OPS_LIB_NAME}_krn
+        ${STREAM_LIB_NAME}_krn
     PUBLIC
         ${TYPES_LIB_NAME}_usr
     "-Wl,--no-whole-archive"
