@@ -65,4 +65,14 @@ extern void user_sleep(const time_t time_ns);
 extern void user_yield(void);
 
 
+/**********************************************************************
+ * @brief Prints a formatted string to the console.
+ *
+ * @param format Pointer to the format string.
+ * @param ... Additional arguments for formatting.
+ * @return None.
+ **********************************************************************/
+extern void user_print_formatted(const char_t *format, ...);
+
+
 #endif /* __LIBUSER_USR_H__ */
