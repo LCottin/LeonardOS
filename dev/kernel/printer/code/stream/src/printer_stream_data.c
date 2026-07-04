@@ -1,8 +1,9 @@
 #include "printer_stream_prv.h"
 #include "printer_krn.h"
 
-formatter_stream_t printer_stream_string =
+stream_t printer_stream =
 {
-    .write_char = &printer_print_char,
+    .write_byte = &printer_stream_print_byte,
+    .reset      = NULL_PTR,
     .context    = NULL_PTR,
 };
