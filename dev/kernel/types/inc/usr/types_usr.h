@@ -44,10 +44,12 @@ typedef enum
 #define UINT8_MAX  0xFF
 #define INT16_MAX  0x7FFF
 #define UINT16_MAX 0xFFFF
-#define INT32_MAX  0x7FFFFFFF
-#define UINT32_MAX 0xFFFFFFFFU
-#define INT64_MAX  0x7FFFFFFFFFFFFFFFLL
-#define UINT64_MAX 0xFFFFFFFFFFFFFFFFULL
+#define INT32_MIN  (int32_t)0x80000000
+#define INT32_MAX  (int32_t)0x7FFFFFFF
+#define UINT32_MAX (uint32_t)0xFFFFFFFFU
+#define INT64_MIN  (int64_t)0x8000000000000000LL
+#define INT64_MAX  (int64_t)0x7FFFFFFFFFFFFFFFLL
+#define UINT64_MAX (uint64_t)0xFFFFFFFFFFFFFFFFULL
 
 /* Builtins for argument parsing */
 typedef __builtin_va_list va_list;

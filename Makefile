@@ -59,7 +59,8 @@ TEST_ITEMS := \
 	mmio_io64_read			\
 	mmio_io64_set_bit		\
 	mmio_io64_toggle_bit	\
-	mmio_io64_write
+	mmio_io64_write			\
+	printer_print_string 	\
 
 include Makefile.build
 include Makefile.run
