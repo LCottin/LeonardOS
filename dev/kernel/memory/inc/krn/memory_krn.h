@@ -2,6 +2,7 @@
 #define __MEMORY_KRN_H__
 
 #include "types_usr.h"
+#include "stream_krn.h"
 
 /**********************************************************************
  * @brief Define memory alignment constraint
@@ -49,13 +50,25 @@ extern void memory_free(ptr_t ptr);
 /**********************************************************************
  * @brief Initializes the heap for memory allocation.
  *
- * This function initializes the heap for memory allocation. It should be called before any other memory allocation functions.
- * It does not return any value.
+ * This function initializes the heap for memory allocation.
+ * It should be called before any other memory allocation functions.
  *
  * @param None.
  * @return None.
  **********************************************************************/
 extern void memory_init_heap(void);
+
+
+/**********************************************************************
+ * @brief Retrieves a formatter stream for memory operations.
+ *
+ * This function returns a pointer to the structure that can
+ * be used for formatted output operations.
+ *
+ * @param None.
+ * @return A pointer to a stream_t structure for memory operations.
+ **********************************************************************/
+extern stream_t *memory_stream_get(void);
 
 
 #endif /* __MEMORY_KRN_H__ */
