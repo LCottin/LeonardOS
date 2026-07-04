@@ -1,7 +1,7 @@
 #include "formatter_krn.h"
 #include "strings_utils_usr.h"
 
-void formatter_parse(const formatter_stream_t *stream, const char_t *format, va_list args)
+void formatter_parse(stream_t *stream, const char_t *format, va_list args)
 {
     while (*format)
     {
@@ -14,7 +14,7 @@ void formatter_parse(const formatter_stream_t *stream, const char_t *format, va_
                 case 'c':
                 {
                     const char_t c = (char_t)va_arg(args, int32_t);
-                    stream->write_char(c);
+                    stream->write_byte(c, stream);
                     break;
                 }
 
@@ -25,7 +25,7 @@ void formatter_parse(const formatter_stream_t *stream, const char_t *format, va_
 
                     while (*str)
                     {
-                        stream->write_char(*str++);
+                        stream->write_byte(*str++, stream);
                     }
                     break;
                 }
@@ -39,7 +39,7 @@ void formatter_parse(const formatter_stream_t *stream, const char_t *format, va_
 
                     while (*str)
                     {
-                        stream->write_char(*str++);
+                        stream->write_byte(*str++, stream);
                     }
                     break;
                 }
@@ -53,7 +53,7 @@ void formatter_parse(const formatter_stream_t *stream, const char_t *format, va_
 
                     while (*str)
                     {
-                        stream->write_char(*str++);
+                        stream->write_byte(*str++, stream);
                     }
                     break;
                 }
@@ -68,22 +68,22 @@ void formatter_parse(const formatter_stream_t *stream, const char_t *format, va_
 
                     while (*str)
                     {
-                        stream->write_char(*str++);
+                        stream->write_byte(*str++, stream);
                     }
                     break;
                 }
 
                 default:
                 {
-                    stream->write_char('%');
-                    stream->write_char(*format);
+                    stream->write_byte('%', stream);
+                    stream->write_byte(*format, stream);
                     break;
                 }
             }
         }
         else
         {
-            stream->write_char(*format);
+            stream->write_byte(*format, stream);
         }
 
         format++;

@@ -13,7 +13,6 @@ set(PRINTER_PRINT_DIR
 set(PRINTER_PRINT_SOURCES
     # Add the path to each source file here
     ${PRINTER_PRINT_DIR}/src/printer_print_address.c
-    ${PRINTER_PRINT_DIR}/src/printer_print_char.c
     ${PRINTER_PRINT_DIR}/src/printer_print_formatted.c
     ${PRINTER_PRINT_DIR}/src/printer_print_signed.c
     ${PRINTER_PRINT_DIR}/src/printer_print_unsigned.c
@@ -37,6 +36,7 @@ set(PRINTER_STREAM_SOURCES
     # Add the path to each source file here
     ${PRINTER_STREAM_DIR}/src/printer_stream_data.c
     ${PRINTER_STREAM_DIR}/src/printer_stream_get.c
+    ${PRINTER_STREAM_DIR}/src/printer_stream_print_byte.c
 )
 
 set(PRINTER_STREAM_HEADERS
@@ -77,5 +77,6 @@ target_link_libraries(${LIB_NAME_KRN}
         ${UART_LIB_NAME}_krn
         ${STRINGS_LIB_NAME}_krn
         ${FORMATTER_LIB_NAME}_krn
+        ${STREAM_LIB_NAME}_krn
     "-Wl,--no-whole-archive"
 )

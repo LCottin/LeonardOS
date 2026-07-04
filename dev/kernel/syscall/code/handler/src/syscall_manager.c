@@ -1,34 +1,38 @@
 #include "syscall_krn.h"
+#include "syscall_types.h"
 #include "syscall_handler_prv.h"
 #include "scheduler_krn.h"
 #include "printer_krn.h"
 #include "clock_krn.h"
+#include "memory_ops_usr.h"
 
-void syscall_manager(const syscall_numbers_e syscall_number, cptr_t arg1, cptr_t arg2, ptr_t ret)
+void syscall_manager(syscall_request_t *request)
 {
-    switch (syscall_number)
+    switch (request->syscall_id)
     {
         case SYSCALL_PRINT_STRING:
         {
-            printer_print_string((const char_t *)arg1);
+            printer_print_string((const char_t *)request->input.buffer);
             break;
         }
 
         case SYSCALL_PRINT_INT:
         {
-            printer_print_signed(*(const int32_t *)arg1, *(const strings_utils_base_t *)arg2);
+            const syscall_print_int_t *args = (const syscall_print_int_t *)request->input.buffer;
+            printer_print_signed(args->value, args->base);
             break;
         }
 
         case SYSCALL_PRINT_ADDR:
         {
-            printer_print_address(*(const addr_t *)arg1);
+            printer_print_address(*(const addr_t *)request->input.buffer);
             break;
         }
 
         case SYSCALL_GET_TIME:
         {
-            *(time_t *)ret = clock_info_get_time();
+            const time_t time = clock_info_get_time();
+            memory_ops_utils_copy(request->output.buffer, &time, sizeof(time_t));
             break;
         }
 

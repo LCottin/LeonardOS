@@ -4,32 +4,22 @@
 
 syscall_handler:
 
+    syscall_handler_save_syscall_request_addr:
+        mov x19, x0                                         /* Save syscall request address in x19 */
+
     syscall_handler_save_return_address:
-        str    x30, [sp, #-8]!                              /* Save return address on stack */
-
-    syscall_handler_save_arguments:
-        mov      x9, x0                                     /* syscall number */
-        mov     x10, x1                                     /* arg1 */
-        mov     x11, x2                                     /* arg2 */
-        mov     x12, x3                                     /* ret pointer */
-
-        stp     x9, x10, [sp, #-16]!                        /* Save syscall number and arg1 on stack */
-        stp     x11, x12, [sp, #-16]!                       /* Save syscall arg2 and arg3 on stack */
+        str      x30, [sp, #-8]!                            /* Save return address on stack */
 
     syscall_handler_restore_scheduler_ctx:
-        ldr     x4, =g_p_scheduler_ctx_table                /* Load address of scheduler context table */
-        mrs     x5, tpidr_el1                               /* Read scheduler address from TPIDR_EL1 */
-        str     x5, [x4]                                    /* Restore scheduler context table */
+        ldr     x1, =g_p_scheduler_ctx_table                /* Load address of scheduler context table */
+        mrs     x2, tpidr_el1                               /* Read scheduler address from TPIDR_EL1 */
+        str     x2, [x1]                                    /* Restore scheduler context table */
 
     syscall_handler_get_task_id:
         bl      scheduler_ctx_get_current_task              /* Get current task ID */
 
     syscall_handler_get_app_ctx:
         bl      scheduler_ctx_get_app_ctx                   /* Get current task PCB context address */
-
-    syscall_handler_restore_args:
-        ldp     x11, x12, [sp], #16                          /* Restore syscall arg2 and arg3 from stack */
-        ldp     x9, x10, [sp], #16                           /* Restore syscall number and arg1 from stack */
 
     syscall_handler_save_app_ctx:
         stp     x19, x20, [x0, #0]                          /* Save x19 and x20 */
@@ -41,8 +31,11 @@ syscall_handler:
         mov      x1, sp                                     /* Load the current stack pointer */
         str      x1, [x0, #96]                              /* Save the stack pointer to the PCB context */
 
+    syscall_handler_restore_syscall_request_addr:
+        mov x2, x19                                         /* Restore syscall request address from x19 */
+
     syscall_handler_restore_kernel_ctx:
-        bl      scheduler_ctx_get_krn_ctx                   /* Get krnel PCB context address */
+        bl      scheduler_ctx_get_krn_ctx                   /* Get kernel PCB context address */
 
         ldp     x19, x20, [x0, #0]                          /* Restore x19 and x20 */
         ldp     x21, x22, [x0, #16]                         /* Restore x21 and x22 */
@@ -57,10 +50,7 @@ syscall_handler:
         str    x0, [sp, #-8]!                               /* Save kernel ctx address on stack */
 
     syscall_handler_call_manager:
-        mov     x0, x9                                      /* syscall number */
-        mov     x1, x10                                     /* arg1 */
-        mov     x2, x11                                     /* arg2 */
-        mov     x3, x12                                     /* ret pointer */
+        mov     x0, x2                                      /* Syscall request address */
         bl      syscall_manager
 
     syscall_handler_restore_kernel_ctx_addr:

@@ -1,9 +1,11 @@
 #include "printer_krn.h"
+#include "formatter_krn.h"
+#include "stream_krn.h"
 
 void printer_print_formatted(const char *format, ...)
 {
     va_list args;
-    formatter_stream_t *stream = print_stream_get();
+    stream_t *stream = printer_stream_get();
 
     va_start(args, format);
 

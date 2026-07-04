@@ -41,10 +41,10 @@ extern void user_print_addr(const addr_t addr);
 /**********************************************************************
  * @brief Gets the current time in ns.
  *
- * @param None.
- * @return time_t The current time in nanoseconds since the system started.
+ * @param time Pointer to a time_t variable where the current time will be stored.
+ * @return None.
  **********************************************************************/
-extern time_t user_get_time(void);
+extern void user_get_time(time_t *time);
 
 
 /**********************************************************************
@@ -63,6 +63,16 @@ extern void user_sleep(const time_t time_ns);
  * @return None.
  **********************************************************************/
 extern void user_yield(void);
+
+
+/**********************************************************************
+ * @brief Prints a formatted string to the console.
+ *
+ * @param format Pointer to the format string.
+ * @param ... Additional arguments for formatting.
+ * @return None.
+ **********************************************************************/
+extern void user_print_formatted(const char_t *format, ...);
 
 
 #endif /* __LIBUSER_USR_H__ */

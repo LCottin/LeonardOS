@@ -49,6 +49,7 @@ target_link_libraries(${LIB_NAME_KRN}
         # Add the path to library of other folder here
         ${TYPES_LIB_NAME}_krn
         ${STRINGS_LIB_NAME}_krn
+        ${STREAM_LIB_NAME}_krn
     "-Wl,--no-whole-archive"
 )
 
@@ -81,6 +82,8 @@ target_include_directories(${LIB_NAME_USR}
 target_link_libraries(${LIB_NAME_USR}
     PRIVATE "-Wl,--whole-archive"
         # Add the path to library of other folder here
+        ${STREAM_LIB_NAME}_krn
+    PUBLIC
         ${TYPES_LIB_NAME}_usr
         ${STRINGS_LIB_NAME}_usr
     "-Wl,--no-whole-archive"
