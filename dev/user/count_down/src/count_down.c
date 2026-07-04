@@ -23,7 +23,7 @@ void count_down_entry(void)
             user_sleep(K_CLOCK_1S_NS);
         }
 
-        user_print_string("[USER] Countdown finished!\n");
+        user_print_string("[USER] Countdown finished!\n\n");
 
         user_yield();
     }
