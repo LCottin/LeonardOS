@@ -4,6 +4,12 @@
 #include "types_usr.h"
 
 /**********************************************************************
+ *  @brief Converts a const string to a non-const string.
+ *********************************************************************/
+#define SPEC_UTILS_DECONST_STRING(str) ((char_t *)(addr_t)(str))
+
+
+/**********************************************************************
  * @brief Copies n bytes from memory area src to memory area dest.
  *
  * @param dest Pointer to the destination memory area.
