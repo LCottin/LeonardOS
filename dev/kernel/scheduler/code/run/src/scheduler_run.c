@@ -12,13 +12,13 @@ void scheduler_run(void)
 
     if (app_count > 0)
     {
-        printer_print_string("[KERN] Launching application ...\n\n");
+        printer_print_string("[KERN] Launching application ...\r\n\n");
         scheduler_switch_first_task();
 
         /* Not reached, applications are running and shall not return */
     }
     else
     {
-        printer_print_string("[KERN] No application to run.\n");
+        printer_print_string("[KERN] No application to run.\r\n");
     }
 }

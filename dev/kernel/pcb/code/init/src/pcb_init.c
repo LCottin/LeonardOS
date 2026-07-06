@@ -9,7 +9,7 @@
 
 void pcb_init()
 {
-    printer_print_string("[KERN] PCB driver initialization ...\n");
+    printer_print_string("[KERN] PCB driver initialization ...\r\n");
 
     memory_ops_utils_set(&g_pcb_ctx_table, 0, sizeof(g_pcb_ctx_table));
 
@@ -32,5 +32,5 @@ void pcb_init()
         g_pcb_ctx_table.pcb_apps_ctx[idx].registers.sp     = bmt_info_get_app_stack_top(idx);
     }
 
-    printer_print_string("[KERN] PCB driver initialization done.\n");
+    printer_print_string("[KERN] PCB driver initialization done.\r\n");
 }
