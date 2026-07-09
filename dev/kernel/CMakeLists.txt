@@ -63,6 +63,7 @@ set(TESTS_DIR
     "mmio/test/io64/toggle_bit:mmio_io64_toggle_bit"
     "mmio/test/io64/write:mmio_io64_write"
     "printer/test/print/print_string:printer_print_string"
+    "uart/test/write/write_byte:uart_write_byte"
 )
 
 # ==============================================================================

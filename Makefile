@@ -61,6 +61,7 @@ TEST_ITEMS := \
 	mmio_io64_toggle_bit	\
 	mmio_io64_write			\
 	printer_print_string 	\
+	uart_write_byte			\
 
 include Makefile.build
 include Makefile.run
