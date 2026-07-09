@@ -29,7 +29,7 @@ set(UART_READ_DIR
 set(UART_READ_SOURCES
     # Add the path to each source file here
     ${UART_READ_DIR}/src/uart_is_available.c
-    ${UART_READ_DIR}/src/uart_read.c
+    ${UART_READ_DIR}/src/uart_read_byte.c
 )
 
 set(UART_READ_HEADERS
@@ -45,7 +45,7 @@ set(UART_WRITE_DIR
 
 set(UART_WRITE_SOURCES
     # Add the path to each source file here
-    ${UART_WRITE_DIR}/src/uart_write.c
+    ${UART_WRITE_DIR}/src/uart_write_byte.c
 )
 
 set(UART_WRITE_HEADERS

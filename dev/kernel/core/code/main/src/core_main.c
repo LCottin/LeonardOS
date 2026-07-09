@@ -12,19 +12,28 @@
 #include "seh_krn.h"
 #include "irq_krn.h"
 #include "gic_krn.h"
+#include "uart_krn.h"
 
 static void irq_handler_0(void)
 {
-    printer_print_string("[KERN] IRQ Handler called!\n");
+    printer_print_string("[KERN] IRQ Handler called!\r\n");
+}
+
+static void irq_handler_33(void)
+{
+    printer_print_string("[KERN] IRQ UART called!\r\n");
+    uart_write_byte(uart_read_byte());
 }
 
 void _core_main_entry(const addr_t bmt_start_addr, const addr_t sch_start_addr)
 {
-    printer_print_string("\n[KERN] Hello World!\n");
+    uart_ctx_init();
+    printer_print_string("\r\n[KERN] Hello World!\r\n");
 
     irq_core_init();
     seh_ctx_init();
     irq_core_register(0, &irq_handler_0);
+    irq_core_register(33, &irq_handler_33);
     gic_sgi_send(0);
 
     bmt_ctx_init_kernel(bmt_start_addr);
