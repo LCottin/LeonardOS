@@ -1,6 +1,7 @@
 # Define each component
 set(COMPONENTS_DIR
     # Add the path to each component here
+    "console"
     "formatter"
     "irq"
     "gic"
