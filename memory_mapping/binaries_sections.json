@@ -70,6 +70,21 @@
         ]
     },
 
+    "APP_3 (ROM)":
+    {
+        "name"         : "APP_3 (ROM)",
+        "base_address" : "0x00740000",
+        "type"         : "elf",
+        "description"  : "App elf",
+        "sections":
+        [
+            {"name": "Header",   "size": "0x1000", "description": "ELF header"},
+            {"name": "Metadata", "size": "0x1000", "description": "Store binary symbols"},
+            {"name": "Code",     "size": "0x8000", "description": "Executable code and read only data"},
+            {"name": "Data",     "size": "0x8000", "description": "Initialized and uninitialized data"}
+        ]
+    },
+
     "Bootloader (RAM)":
     {
         "name"         : "Bootloader (RAM)",
@@ -120,6 +135,22 @@
     {
         "name"         : "APP_2 (RAM)",
         "base_address" : "0x45300000",
+        "type"         : "loaded",
+        "description"  : "App loaded in ram",
+        "sections":
+        [
+            {"name": "Code",    "size": "0x8000", "description": "Executable code and read only data"},
+            {"name": "Data",    "size": "0x8000", "description": "Initialized and uninitialized data"},
+            {"name": "Stack",   "size": "0x1000", "description": "Stack"},
+            {"name": "Guard",   "size": "0x1000", "description": "Protection against stack overflow"},
+            {"name": "Heap",    "size": "0x1000", "description": "Heap"}
+        ]
+    },
+
+    "APP_3 (RAM)":
+    {
+        "name"         : "APP_3 (RAM)",
+        "base_address" : "0x45400000",
         "type"         : "loaded",
         "description"  : "App loaded in ram",
         "sections":
