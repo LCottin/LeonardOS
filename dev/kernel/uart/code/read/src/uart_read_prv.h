@@ -17,13 +17,4 @@
 #define K_UART_FIFO_EMPTY_MASK (1 << 4U)
 
 
-/**********************************************************************
- * @brief This function checks if the UART has data available to read.
- *
- * @param None.
- * @return TRUE if data is available, FALSE otherwise.
- **********************************************************************/
-extern bool_t uart_is_available(void);
-
-
 #endif /* __UART_READ_PRV_H__ */

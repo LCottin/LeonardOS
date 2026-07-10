@@ -28,7 +28,6 @@ set(UART_READ_DIR
 
 set(UART_READ_SOURCES
     # Add the path to each source file here
-    ${UART_READ_DIR}/src/uart_is_available.c
     ${UART_READ_DIR}/src/uart_read_byte.c
 )
 
