@@ -16,6 +16,7 @@ set(SPEC_ASSERT_SOURCES
     ${SPEC_ASSERT_DIR}/src/spec_assert_get_count.c
     ${SPEC_ASSERT_DIR}/src/spec_assert_get_failure.c
     ${SPEC_ASSERT_DIR}/src/spec_assert_get_passed.c
+    ${SPEC_ASSERT_DIR}/src/spec_assert_record_equal_char.c
     ${SPEC_ASSERT_DIR}/src/spec_assert_record_equal_mem.c
     ${SPEC_ASSERT_DIR}/src/spec_assert_record_equal_ptr.c
     ${SPEC_ASSERT_DIR}/src/spec_assert_record_equal_u8.c
