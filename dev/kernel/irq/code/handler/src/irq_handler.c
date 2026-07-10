@@ -16,4 +16,3 @@ void irq_handler(void)
 
     gic_cpu_eoi(id);
 }
-

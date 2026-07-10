@@ -5,11 +5,11 @@
 
 void spec_run_suite(const spec_run_suite_t *suite)
 {
-    spec_utils_print_string("\nTAP version 13\n1..");
+    spec_utils_print_string("\r\nTAP version 13\r\n1..");
     spec_utils_print_uint(suite->tc_count);
-    spec_utils_print_string("\n# Running suite: ");
+    spec_utils_print_string("\r\n# Running suite: ");
     spec_utils_print_string(suite->suite_name);
-    spec_utils_print_string("\n");
+    spec_utils_print_string("\r\n");
 
     uint32_t failed = 0;
 
@@ -48,11 +48,11 @@ void spec_run_suite(const spec_run_suite_t *suite)
 
         if (spec_assert_get_passed() == TRUE)
         {
-            spec_utils_print_string("OK\n");
+            spec_utils_print_string("OK\r\n");
         }
         else
         {
-            spec_utils_print_string("NOK\n");
+            spec_utils_print_string("NOK\r\n");
             failed++;
         }
 
@@ -84,14 +84,14 @@ void spec_run_suite(const spec_run_suite_t *suite)
                 spec_utils_print_string(fail->desc);
             }
 
-            spec_utils_print_string("\n");
+            spec_utils_print_string("\r\n");
         }
     }
 
     /* Summary comment */
-    spec_utils_print_string("# End of suite\n# ");
+    spec_utils_print_string("# End of suite\r\n# ");
     spec_utils_print_uint(suite->tc_count - failed);
     spec_utils_print_string("/");
     spec_utils_print_uint(suite->tc_count);
-    spec_utils_print_string(" passed\n");
+    spec_utils_print_string(" passed\r\n");
 }

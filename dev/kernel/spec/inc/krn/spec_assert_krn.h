@@ -53,12 +53,13 @@ extern void spec_assert_record(const bool_t cond, const char_t *file, const int3
  * @param line   The source line where the assertion occurred.
  * @return None.
  **********************************************************************/
-extern void spec_assert_record_equal_u8 (const uint8_t  got, const uint8_t  exp,                    const char_t *file, const int32_t line);
-extern void spec_assert_record_equal_u16(const uint16_t got, const uint16_t exp,                    const char_t *file, const int32_t line);
-extern void spec_assert_record_equal_u32(const uint32_t got, const uint32_t exp,                    const char_t *file, const int32_t line);
-extern void spec_assert_record_equal_u64(const uint64_t got, const uint64_t exp,                    const char_t *file, const int32_t line);
-extern void spec_assert_record_equal_ptr(cptr_t         got, cptr_t         exp,                    const char_t *file, const int32_t line);
-extern void spec_assert_record_equal_mem(cptr_t         got, cptr_t         exp, const size_t size, const char_t *file, const int32_t line);
+extern void spec_assert_record_equal_char(const char_t   got, const char_t   exp,                    const char_t *file, const int32_t line);
+extern void spec_assert_record_equal_u8  (const uint8_t  got, const uint8_t  exp,                    const char_t *file, const int32_t line);
+extern void spec_assert_record_equal_u16 (const uint16_t got, const uint16_t exp,                    const char_t *file, const int32_t line);
+extern void spec_assert_record_equal_u32 (const uint32_t got, const uint32_t exp,                    const char_t *file, const int32_t line);
+extern void spec_assert_record_equal_u64 (const uint64_t got, const uint64_t exp,                    const char_t *file, const int32_t line);
+extern void spec_assert_record_equal_ptr (cptr_t         got, cptr_t         exp,                    const char_t *file, const int32_t line);
+extern void spec_assert_record_equal_mem (cptr_t         got, cptr_t         exp, const size_t size, const char_t *file, const int32_t line);
 
 
 /**********************************************************************
@@ -102,6 +103,9 @@ extern const spec_assert_failure_t *spec_assert_get_failure(const size_t idx);
 #define SPEC_EXPECT(cond, desc) \
     spec_assert_record((bool_t)(cond), __FILE__, __LINE__, (desc))
 
+#define SPEC_EXPECT_EQ_CHAR(got, exp) \
+    spec_assert_record_equal_char((char_t)(got), (char_t)(exp), __FILE__, __LINE__)
+
 #define SPEC_EXPECT_EQ_U8(got, exp) \
     spec_assert_record_equal_u8((uint8_t)(got), (uint8_t)(exp), __FILE__, __LINE__)
 
@@ -115,10 +119,10 @@ extern const spec_assert_failure_t *spec_assert_get_failure(const size_t idx);
     spec_assert_record_equal_u64((uint64_t)(got), (uint64_t)(exp), __FILE__, __LINE__)
 
 #define SPEC_EXPECT_EQ_PTR(got, exp) \
-    spec_assert_record_equal_ptr((ptr_t)(got), (ptr_t)(exp), __FILE__, __LINE__)
+    spec_assert_record_equal_ptr((cptr_t)(got), (cptr_t)(exp), __FILE__, __LINE__)
 
 #define SPEC_EXPECT_EQ_MEM(got, exp, size) \
-    spec_assert_record_equal_mem((ptr_t)(got), (ptr_t)(exp), (size), __FILE__, __LINE__)
+    spec_assert_record_equal_mem((cptr_t)(got), (cptr_t)(exp), (size), __FILE__, __LINE__)
 
 #define SPEC_ASSERT_UNUSED(expr) \
     (void)(expr) /* silence unused parameter warning */

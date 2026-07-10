@@ -10,20 +10,20 @@ void count_down_entry(void)
 
     while (TRUE)
     {
-        user_print_string("[USER] Starting countdown...\n");
+        user_print_string("[USER] Starting countdown...\r\n");
 
         /* Countdown loop */
         for (int32_t i = 0; i < count; i++)
         {
             user_print_string("[USER] ");
             user_print_int(count - i, STRINGS_UTILS_BASE_DECIMAL);
-            user_print_string("\n");
+            user_print_string("\r\n");
 
             /* Sleep for 1 second */
             user_sleep(K_CLOCK_1S_NS);
         }
 
-        user_print_string("[USER] Countdown finished!\n\n");
+        user_print_string("[USER] Countdown finished!\r\n\n");
 
         user_yield();
     }

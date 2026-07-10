@@ -44,11 +44,11 @@ const printer_print_string_tc_t test_list[] =
         .name  = "TC-PRINT-STRING-004 - Print string with special characters",
         .input =
         {
-            .str = SPEC_UTILS_DECONST_STRING("Line1\nLine2\tTabbed"),
+            .str = SPEC_UTILS_DECONST_STRING("Line1\r\nLine2\tTabbed"),
         },
         .output =
         {
-            .nb_call_uart = 18U,
+            .nb_call_uart = 19U,
         }
     },
 };
