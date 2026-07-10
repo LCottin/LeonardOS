@@ -53,12 +53,29 @@ set(UART_WRITE_HEADERS
 )
 
 # ==============================================================================
+# Create source and header for IRQ
+# ==============================================================================
+set(UART_IRQ_DIR
+    ${COMPONENT_NAME}/code/irq
+)
+
+set(UART_IRQ_SOURCES
+    # Add the path to each source file here
+    ${UART_IRQ_DIR}/src/uart_irq_rx.c
+)
+
+set(UART_IRQ_HEADERS
+    ${UART_IRQ_DIR}/inc
+)
+
+# ==============================================================================
 # Create library kernel target for UART
 # ==============================================================================
 set(LIB_NAME_KRN ${UART_LIB_NAME}_krn)
 add_library(${LIB_NAME_KRN}
     STATIC
         # Add the path to each source file here
+        ${UART_IRQ_SOURCES}
         ${UART_CTX_SOURCES}
         ${UART_READ_SOURCES}
         ${UART_WRITE_SOURCES}
@@ -70,6 +87,7 @@ add_library(${LIB_NAME_KRN}
 target_include_directories(${LIB_NAME_KRN}
     PRIVATE
         # Add the path to each header directory here
+        ${UART_IRQ_HEADERS}
         ${UART_CTX_HEADERS}
         ${UART_READ_HEADERS}
         ${UART_WRITE_HEADERS}
@@ -85,5 +103,7 @@ target_link_libraries(${LIB_NAME_KRN}
         # Add the path to library of other folder here
         ${TYPES_LIB_NAME}_krn
         ${MMIO_LIB_NAME}_krn
+        ${IRQ_LIB_NAME}_krn
+        ${CONSOLE_LIB_NAME}_krn
     "-Wl,--no-whole-archive"
 )
