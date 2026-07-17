@@ -65,3 +65,4 @@ image: build_os
 	@dd if=$(CORE_ELF_DIR)        of=$(LEONARD_OS_IMG) bs=1   seek=5242880 conv=notrunc
 	@dd if=$(HELLO_WORLD_ELF_DIR) of=$(LEONARD_OS_IMG) bs=1   seek=7340032 conv=notrunc
 	@dd if=$(COUNT_DOWN_ELF_DIR)  of=$(LEONARD_OS_IMG) bs=1   seek=7471104 conv=notrunc
+	@dd if=$(SHELL_ELF_DIR)       of=$(LEONARD_OS_IMG) bs=1   seek=7602176 conv=notrunc
