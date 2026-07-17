@@ -75,9 +75,9 @@ target_link_libraries(${LIB_NAME_USR}
         ${FORMATTER_LIB_NAME}_krn
         ${STREAM_LIB_NAME}_krn
         ${PRINTER_LIB_NAME}_krn
+        ${CLOCK_LIB_NAME}_krn
     PUBLIC
         ${TYPES_LIB_NAME}_usr
         ${STRINGS_LIB_NAME}_usr
-        ${CLOCK_LIB_NAME}_usr
     "-Wl,--no-whole-archive"
 )

@@ -1,7 +1,6 @@
 #include "count_down.h"
 #include "types_usr.h"
 #include "libuser_usr.h"
-#include "clock_usr.h"
 
 void count_down_entry(void)
 {
