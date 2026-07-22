@@ -66,12 +66,11 @@ target_include_directories(${LIB_NAME_KRN}
 # Add library kernel dependencies
 # ==============================================================================
 target_link_libraries(${LIB_NAME_KRN}
-    PRIVATE "-Wl,--whole-archive"
+    PRIVATE
         # Add the path to library of other folder here
         ${TYPES_LIB_NAME}_krn
         ${MEMORY_OPS_LIB_NAME}_krn
         ${STREAM_LIB_NAME}_krn
-    "-Wl,--no-whole-archive"
 )
 
 # ==============================================================================
@@ -102,11 +101,10 @@ target_include_directories(${LIB_NAME_USR}
 # Add library user dependencies
 # ==============================================================================
 target_link_libraries(${LIB_NAME_USR}
-    PRIVATE "-Wl,--whole-archive"
+    PRIVATE
         # Add the path to library of other folder here
         ${STREAM_LIB_NAME}_krn
     PUBLIC
         ${TYPES_LIB_NAME}_usr
         ${MEMORY_OPS_LIB_NAME}_usr
-    "-Wl,--no-whole-archive"
 )
