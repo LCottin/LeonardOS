@@ -11,7 +11,6 @@ typedef enum
     SEH_EXCEPTION_FIQ,
     SEH_EXCEPTION_IRQ,
     SEH_EXCEPTION_SERR,
-    SEH_EXCEPTION_SYNC,
     SEH_EXCEPTION_NB,
 } seh_exception_type_t;
 

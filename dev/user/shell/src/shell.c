@@ -5,10 +5,13 @@
 
 void shell_entry(void)
 {
-    static int32_t cpt = 0;
     while (TRUE)
     {
-        user_print_formatted("[SHELL] Hello world n°%d from shell !\r\n", cpt++);
+        user_print_string("[SHELL]: ");
+        const char c = user_console_get();
+        user_print_char(c);
+
+        user_print_string("\r\n");
         user_yield();
     }
 }

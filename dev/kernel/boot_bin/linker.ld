@@ -64,7 +64,7 @@ SECTIONS
     .ivt (NOLOAD):
     {
         __ivt_start = .;
-        *(ivt*)             /* IVT (Interrupt Vector Table) */
+        *(.ivt*)             /* IVT (Interrupt Vector Table) */
         . = ALIGN(16);
         __ivt_end = .;
     } > RAM_IVT

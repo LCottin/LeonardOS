@@ -4,6 +4,16 @@
 #include "types_usr.h"
 #include "strings_utils_usr.h"
 
+
+/**********************************************************************
+ * @brief Constant from sleep service
+ **********************************************************************/
+#define K_CLOCK_1NS_NS  1LL
+#define K_CLOCK_1US_NS  1000LL
+#define K_CLOCK_1MS_NS  1000000LL
+#define K_CLOCK_1S_NS   1000000000LL
+
+
 /**********************************************************************
  * @brief Prints a string to the console.
  *
@@ -36,6 +46,17 @@ extern void user_print_int(const int32_t num, const strings_utils_base_t base);
  * @return None.
  **********************************************************************/
 extern void user_print_addr(const addr_t addr);
+
+
+/**********************************************************************
+ * @brief Prints a char to the console.
+ *
+ * This function uses a system call to print a char to the console.
+ *
+ * @param c char to be printed.
+ * @return None.
+ **********************************************************************/
+extern void user_print_char(const char_t c);
 
 
 /**********************************************************************
@@ -73,6 +94,24 @@ extern void user_yield(void);
  * @return None.
  **********************************************************************/
 extern void user_print_formatted(const char_t *format, ...);
+
+
+/**********************************************************************
+ * @brief Get the next char in console buffer
+ *
+ * @param None.
+ * @return Oldest char in console buffer.
+ **********************************************************************/
+extern char_t user_console_get(void);
+
+
+/**********************************************************************
+ * @brief Request to execute a command.
+ *
+ * @param cmd Command to execute in string format.
+ * @return None.
+ **********************************************************************/
+extern void user_execute_cmd(const char_t *cmd);
 
 
 #endif /* __LIBUSER_USR_H__ */

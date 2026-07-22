@@ -28,8 +28,11 @@ set(LIBUSER_HANDLER_DIR
 
 set(LIBUSER_HANDLER_SOURCES
     # Add the path to each source file here
+    ${LIBUSER_HANDLER_DIR}/src/libuser_console_get.c
+    ${LIBUSER_HANDLER_DIR}/src/libuser_execute_cmd.c
     ${LIBUSER_HANDLER_DIR}/src/libuser_get_time.c
     ${LIBUSER_HANDLER_DIR}/src/libuser_print_addr.c
+    ${LIBUSER_HANDLER_DIR}/src/libuser_print_char.c
     ${LIBUSER_HANDLER_DIR}/src/libuser_print_formatted.c
     ${LIBUSER_HANDLER_DIR}/src/libuser_print_int.c
     ${LIBUSER_HANDLER_DIR}/src/libuser_print_string.c

@@ -19,5 +19,5 @@ void user_print_addr(const addr_t addr)
         }
     };
 
-    syscall_handler(&request);
+    syscall_handler_svc(&request);
 }

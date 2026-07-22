@@ -29,5 +29,5 @@ void user_print_formatted(const char_t *format, ...)
         }
     };
 
-    syscall_handler(&request);
+    syscall_handler_svc(&request);
 }

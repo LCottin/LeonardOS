@@ -60,6 +60,16 @@ extern void printer_print_long_unsigned(const uint64_t value, const strings_util
 
 
 /**********************************************************************
+ * @brief Print a char.
+ *
+ * @param c The char value to be printed.
+ *
+ * @return None.
+ **********************************************************************/
+extern void printer_print_char(const char_t c);
+
+
+/**********************************************************************
  * @brief Print an address.
  *
  * @param value The address value to be printed.

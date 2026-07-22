@@ -19,5 +19,5 @@ void user_yield(void)
         }
     };
 
-    syscall_handler(&request);
+    syscall_handler_svc(&request);
 }

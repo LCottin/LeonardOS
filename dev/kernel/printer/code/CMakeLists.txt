@@ -13,6 +13,7 @@ set(PRINTER_PRINT_DIR
 set(PRINTER_PRINT_SOURCES
     # Add the path to each source file here
     ${PRINTER_PRINT_DIR}/src/printer_print_address.c
+    ${PRINTER_PRINT_DIR}/src/printer_print_char.c
     ${PRINTER_PRINT_DIR}/src/printer_print_formatted.c
     ${PRINTER_PRINT_DIR}/src/printer_print_signed.c
     ${PRINTER_PRINT_DIR}/src/printer_print_unsigned.c

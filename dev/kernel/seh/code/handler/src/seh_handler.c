@@ -6,7 +6,6 @@ static const char_t *g_seh_exception_messages[SEH_EXCEPTION_NB] =
     [SEH_EXCEPTION_FIQ]  = "FIQ exception",
     [SEH_EXCEPTION_IRQ]  = "IRQ exception",
     [SEH_EXCEPTION_SERR] = "SError exception",
-    [SEH_EXCEPTION_SYNC] = "Sync exception"
 };
 
 void seh_handler(const reg_t reg_lr, const reg_t reg_esr, const seh_exception_type_t exception_type)

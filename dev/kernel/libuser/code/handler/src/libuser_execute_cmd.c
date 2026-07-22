@@ -2,21 +2,21 @@
 #include "syscall_krn.h"
 #include "strings_ops_usr.h"
 
-void user_print_string(const char_t *str)
+void user_execute_cmd(const char_t *cmd)
 {
     syscall_request_t request =
     {
-        .syscall_id = SYSCALL_PRINT_STRING,
+        .syscall_id = SYSCALL_EXECUTE_CMD,
         .flags      = 0,
         .input =
         {
-            .buffer = (cptr_t)str,
-            .size   = string_ops_len(str)
+            .buffer = cmd,
+            .size   = string_ops_len(cmd),
         },
         .output =
         {
             .buffer = NULL_PTR,
-            .size = 0
+            .size   = 0,
         }
     };
 

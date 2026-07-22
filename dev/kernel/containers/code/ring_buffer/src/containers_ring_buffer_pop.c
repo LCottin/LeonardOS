@@ -1,7 +1,9 @@
 #include "containers_ring_buffer_usr.h"
+#include "printer_krn.h"
 
 ptr_t containers_ring_buffer_pop(ring_buffer_t *rb)
 {
+    printer_print_formatted("popping from buffer at %x\r\n", rb->buffer);
     const bool_t is_empty = containers_ring_buffer_is_empty(rb);
     ptr_t pop;
 
@@ -14,6 +16,7 @@ ptr_t containers_ring_buffer_pop(ring_buffer_t *rb)
     }
     else
     {
+        printer_print_string("buffer is empty\r\n");
         pop = NULL_PTR;
     }
 

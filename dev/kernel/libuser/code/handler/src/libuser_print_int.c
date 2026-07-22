@@ -27,5 +27,5 @@ void user_print_int(const int32_t num, const strings_utils_base_t base)
         }
     };
 
-    syscall_handler(&request);
+    syscall_handler_svc(&request);
 }

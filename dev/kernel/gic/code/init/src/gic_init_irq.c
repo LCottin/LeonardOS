@@ -4,6 +4,6 @@
 
 void gic_init_irq(const uint32_t id)
 {
-    gic_dist_route_to_cpu(id, 0x0);
+    gic_dist_route_to_cpu(id, 0x1);
     gic_dist_enable_irq(id);
 }
