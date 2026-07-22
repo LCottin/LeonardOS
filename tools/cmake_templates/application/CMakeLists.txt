@@ -54,7 +54,7 @@ target_link_libraries(${APP_NAME}.elf
 target_link_options(${APP_NAME}.elf
     PRIVATE
         "-T${LINKER_SCRIPT}"
-        "-Wl,-Map,${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${APP_NAME}.map"
+        "-Wl,--print-memory-usage,-Map,${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${APP_NAME}.map"
 )
 
 # ==============================================================================
