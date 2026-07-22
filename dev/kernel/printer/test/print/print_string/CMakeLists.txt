@@ -16,14 +16,13 @@ add_executable(${BIN_NAME}.elf
 # Link with the component libraries
 # ==============================================================================
 target_link_libraries(${BIN_NAME}.elf
-    PRIVATE "-Wl,--whole-archive"
+    PRIVATE
         # Add component libraries here
         ${TYPES_LIB_NAME}_krn
         ${SPEC_LIB_NAME}_krn
         ${PRINTER_LIB_NAME}_krn
         ${STRINGS_LIB_NAME}_krn
         ${STREAM_LIB_NAME}_krn
-    "-Wl,--no-whole-archive"
 )
 
 # ==============================================================================

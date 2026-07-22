@@ -30,11 +30,10 @@ target_include_directories(${BIN_NAME}.elf
 # Link with the component libraries
 # ==============================================================================
 target_link_libraries(${BIN_NAME}.elf
-    PRIVATE "-Wl,--whole-archive"
+    PRIVATE
         # Add component libraries here
         ${TYPES_LIB_NAME}_krn
         ${SPEC_LIB_NAME}_krn
-    "-Wl,--no-whole-archive"
 )
 
 # ==============================================================================

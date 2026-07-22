@@ -42,11 +42,10 @@ target_include_directories(${APP_NAME}.elf
 # Add library dependencies
 # ==============================================================================
 target_link_libraries(${APP_NAME}.elf
-    PRIVATE "-Wl,--whole-archive"
+    PRIVATE
         # Add the path to library of other folder here
         ${TYPES_LIB_NAME}_usr
         ${LIBUSER_LIB_NAME}_usr
-    "-Wl,--no-whole-archive"
 )
 
 # ==============================================================================
