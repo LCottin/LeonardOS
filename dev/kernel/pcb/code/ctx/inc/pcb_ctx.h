@@ -18,7 +18,7 @@ typedef struct
     pcb_ident_t           ident;        /* PCB identifier */
     pcb_states_t          state;        /* PCB state */
     pcb_control_t         control;      /* PCB control */
-    uint8_t               padding[268]; /* Padding */
+    uint8_t               padding[260]; /* Padding */
 } pcb_ctx_bin_t;
 
 

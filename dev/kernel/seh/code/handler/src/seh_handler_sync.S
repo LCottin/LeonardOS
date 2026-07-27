@@ -22,13 +22,8 @@ seh_handler_sync:
         stp     x28, x29, [sp, #-16]!                   /* Save x28 and x29 on the stack */
         str     x30,      [sp, #-8]!                    /* Save x30 on the stack */
 
-    seh_handler_sync_prepare_args:
-        mrs     x0, ELR_EL1                             /* Read the Exception Link Register (ELR) value */
-        mrs     x1, ESR_EL1                             /* Read the Exception Syndrome Register (ESR) value */
-        ldr     x2, =0x3                                /* Set the exception type */
-
     seh_handler_sync_call_handler:
-        bl  seh_handler
+        bl  syscall_handler
 
     seh_handler_sync_restore_all_regs:
         ldr     x30,      [sp], #8                      /* Restore x30 from the stack */
