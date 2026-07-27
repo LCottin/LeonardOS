@@ -1,23 +1,22 @@
 #include "libuser_usr.h"
 #include "syscall_krn.h"
-#include "strings_ops_usr.h"
 #include "libuser_handler_prv.h"
 
-void user_print_string(const char_t *str)
+void user_print_char(const char_t c)
 {
     syscall_request_t request =
     {
-        .syscall_id = SYSCALL_PRINT_STRING,
+        .syscall_id = SYSCALL_PRINT_CHAR,
         .flags      = 0,
         .input =
         {
-            .buffer = (cptr_t)str,
-            .size   = string_ops_len(str)
+            .buffer = &c,
+            .size   = sizeof(char_t)
         },
         .output =
         {
             .buffer = NULL_PTR,
-            .size = 0
+            .size   = 0
         }
     };
 

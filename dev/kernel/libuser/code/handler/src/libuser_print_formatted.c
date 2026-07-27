@@ -3,6 +3,7 @@
 #include "printer_krn.h"
 #include "formatter_krn.h"
 #include "strings_ops_usr.h"
+#include "libuser_handler_prv.h"
 
 void user_print_formatted(const char_t *format, ...)
 {
@@ -29,5 +30,5 @@ void user_print_formatted(const char_t *format, ...)
         }
     };
 
-    syscall_handler(&request);
+    libuser_launch_syscall(&request);
 }
