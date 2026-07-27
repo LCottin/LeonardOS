@@ -66,6 +66,7 @@ set(TESTS_DIR
     "printer/test/print/print_string:printer_print_string"
     "uart/test/write/write_byte:uart_write_byte"
     "uart/test/read/read_byte:uart_read_byte"
+    "uart/test/ctx/ctx_init:uart_ctx_init"
 )
 
 # ==============================================================================

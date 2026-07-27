@@ -65,6 +65,7 @@ TEST_ITEMS := \
 	printer_print_string 	\
 	uart_write_byte			\
 	uart_read_byte			\
+	uart_ctx_init			\
 
 include Makefile.build
 include Makefile.run
