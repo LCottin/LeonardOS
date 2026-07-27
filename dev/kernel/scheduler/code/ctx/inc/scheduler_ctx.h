@@ -41,6 +41,5 @@ extern void scheduler_ctx_add_task(const uint32_t task_idx);
 
 
 extern addr_t scheduler_ctx_get_krn_ctx(void);
-extern addr_t scheduler_ctx_get_app_ctx(const uint32_t task_id);
 
 #endif /* __SCHEDULER_CTX_H__ */
