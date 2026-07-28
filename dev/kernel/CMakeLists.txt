@@ -71,6 +71,11 @@ set(TESTS_DIR
     "containers/test/ring_buffer/is_empty:containers_ring_buffer_is_empty"
     "containers/test/ring_buffer/pop:containers_ring_buffer_pop"
     "containers/test/ring_buffer/push:containers_ring_buffer_push"
+    "console/test/buffer/is_empty:console_buffer_is_empty"
+    "console/test/buffer/pop:console_buffer_pop"
+    "console/test/buffer/push:console_buffer_push"
+    "console/test/ctx/ctx_init:console_ctx_init"
+    "console/test/irq/irq_rx:console_irq_rx"
 )
 
 # ==============================================================================

@@ -30,3 +30,8 @@ TEST_ITEMS := \
 	containers_ring_buffer_is_empty		\
 	containers_ring_buffer_pop			\
 	containers_ring_buffer_push			\
+	console_buffer_is_empty				\
+	console_buffer_pop					\
+	console_buffer_push					\
+	console_ctx_init					\
+	console_irq_rx						\
