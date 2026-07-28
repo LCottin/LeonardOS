@@ -35,3 +35,4 @@ TEST_ITEMS := \
 	console_buffer_push					\
 	console_ctx_init					\
 	console_irq_rx						\
+	syscall_manager						\

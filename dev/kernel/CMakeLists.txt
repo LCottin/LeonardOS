@@ -76,6 +76,7 @@ set(TESTS_DIR
     "console/test/buffer/push:console_buffer_push"
     "console/test/ctx/ctx_init:console_ctx_init"
     "console/test/irq/irq_rx:console_irq_rx"
+    "syscall/test/handler/syscall_manager:syscall_manager"
 )
 
 # ==============================================================================
