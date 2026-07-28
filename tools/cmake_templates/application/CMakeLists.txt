@@ -42,10 +42,9 @@ target_include_directories(${APP_NAME}.elf
 # Add library dependencies
 # ==============================================================================
 target_link_libraries(${APP_NAME}.elf
-    PRIVATE "-Wl,--whole-archive"
+    PRIVATE
         # Add the path to library of other folder here
         ${TYPES_LIB_NAME}
-    "-Wl,--no-whole-archive"
 )
 
 # ==============================================================================
@@ -54,7 +53,7 @@ target_link_libraries(${APP_NAME}.elf
 target_link_options(${APP_NAME}.elf
     PRIVATE
         "-T${LINKER_SCRIPT}"
-        "-Wl,-Map,${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${APP_NAME}.map"
+        "-Wl,--print-memory-usage,-Map,${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${APP_NAME}.map"
 )
 
 # ==============================================================================

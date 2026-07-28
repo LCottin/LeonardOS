@@ -46,7 +46,7 @@ target_include_directories(${LIB_NAME_KRN}
 # Add library kernel dependencies
 # ==============================================================================
 target_link_libraries(${LIB_NAME_KRN}
-    PRIVATE "-Wl,--whole-archive"
+    PRIVATE
         # Add the path to library of other folder here
         ${TYPES_LIB_NAME}_krn
         ${PRINTER_LIB_NAME}_krn
@@ -58,5 +58,4 @@ target_link_libraries(${LIB_NAME_KRN}
         ${MEMORY_OPS_LIB_NAME}_krn
         ${STREAM_LIB_NAME}_krn
         ${CONSOLE_LIB_NAME}_krn
-    "-Wl,--no-whole-archive"
 )

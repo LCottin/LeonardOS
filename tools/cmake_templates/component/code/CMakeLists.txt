@@ -27,10 +27,9 @@ target_include_directories(${LIB_NAME_KRN}
 # Add library dependencies
 # ==============================================================================
 target_link_libraries(${LIB_NAME_KRN}
-    PRIVATE "-Wl,--whole-archive"
+    PRIVATE
         # Add the path to library of other folder here
         ${TYPES_LIB_NAME}_krn
-    "-Wl,--no-whole-archive"
 )
 # ==============================================================================
 # Create library user target for COMPONENT
@@ -56,10 +55,9 @@ target_include_directories(${LIB_NAME_USR}
 # Add library user dependencies
 # ==============================================================================
 target_link_libraries(${LIB_NAME_USR}
-    PRIVATE "-Wl,--whole-archive"
+    PRIVATE
         # Add the path to library of other private folder here
     PUBLIC
         # Add the path to library of other public folder here
         ${TYPES_LIB_NAME}_usr
-    "-Wl,--no-whole-archive"
 )
