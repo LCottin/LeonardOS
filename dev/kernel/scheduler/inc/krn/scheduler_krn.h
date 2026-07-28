@@ -36,7 +36,7 @@ extern uint32_t scheduler_ctx_get_current_task(void);
  * @param None.
  * @return None.
  **********************************************************************/
-extern void scheduler_switch_next_task(void);
+extern addr_t scheduler_switch_next_task(void);
 
 
 /**********************************************************************
@@ -47,5 +47,7 @@ extern void scheduler_switch_next_task(void);
  **********************************************************************/
 extern uint32_t scheduler_ctx_get_task_count(void);
 
+
+extern addr_t scheduler_ctx_get_app_ctx(const uint32_t task_id);
 
 #endif /* __SCHEDULER_KRN_H__ */

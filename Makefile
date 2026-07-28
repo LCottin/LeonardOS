@@ -10,6 +10,7 @@ BOOT_ELF_NAME        = boot_bin
 CORE_ELF_NAME        = core_bin
 HELLO_WORLD_ELF_NAME = hello_world
 COUNT_DOWN_ELF_NAME  = count_down
+SHELL_ELF_NAME       = shell
 
 BIN_DEV_DIR         = $(BUILD_DIR)/bin/dev
 BIN_TESTS_DIR       = $(BUILD_DIR)/bin/test
@@ -17,6 +18,7 @@ BOOT_ELF_DIR        = $(BIN_DEV_DIR)/$(BOOT_ELF_NAME)/$(BOOT_ELF_NAME).elf
 CORE_ELF_DIR        = $(BIN_DEV_DIR)/$(CORE_ELF_NAME)/$(CORE_ELF_NAME).elf
 HELLO_WORLD_ELF_DIR = $(BIN_DEV_DIR)/$(HELLO_WORLD_ELF_NAME)/$(HELLO_WORLD_ELF_NAME).elf
 COUNT_DOWN_ELF_DIR  = $(BIN_DEV_DIR)/$(COUNT_DOWN_ELF_NAME)/$(COUNT_DOWN_ELF_NAME).elf
+SHELL_ELF_DIR       = $(BIN_DEV_DIR)/$(SHELL_ELF_NAME)/$(SHELL_ELF_NAME).elf
 
 TEST_LOG_DIR := $(BIN_TESTS_DIR)/logs
 
@@ -36,35 +38,8 @@ QEMU_FLAGS  := -M virt,gic-version=2 \
                -serial mon:stdio     \
                -no-reboot
 
-TEST_ITEMS := \
-	memory_ops_utils_copy	\
-	memory_ops_utils_set	\
-	memory_ops_utils_cmp	\
-	mmio_io8_clear_bit		\
-	mmio_io8_read			\
-	mmio_io8_set_bit		\
-	mmio_io8_toggle_bit		\
-	mmio_io8_write			\
-	mmio_io16_clear_bit		\
-	mmio_io16_read			\
-	mmio_io16_set_bit		\
-	mmio_io16_toggle_bit	\
-	mmio_io16_write			\
-	mmio_io32_clear_bit		\
-	mmio_io32_read			\
-	mmio_io32_set_bit		\
-	mmio_io32_toggle_bit	\
-	mmio_io32_write			\
-	mmio_io64_clear_bit		\
-	mmio_io64_read			\
-	mmio_io64_set_bit		\
-	mmio_io64_toggle_bit	\
-	mmio_io64_write			\
-	printer_print_string 	\
-	uart_write_byte			\
-	uart_read_byte			\
-
 include Makefile.build
+include Makefile.tests
 include Makefile.run
 
 .PHONY: check_qemu

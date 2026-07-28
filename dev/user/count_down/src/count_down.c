@@ -1,12 +1,11 @@
 #include "count_down.h"
 #include "types_usr.h"
 #include "libuser_usr.h"
-#include "clock_usr.h"
 
 void count_down_entry(void)
 {
     /* Initialize the countdown */
-    const int32_t count = 5;
+    const int32_t count = 3;
 
     while (TRUE)
     {

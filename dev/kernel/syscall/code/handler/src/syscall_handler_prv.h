@@ -12,7 +12,7 @@
  * @param syscall_request Pointer to the system call request structure.
  * @return None.
  **********************************************************************/
-extern void syscall_manager(syscall_request_t *request);
+extern reg_t syscall_manager(syscall_request_t *request);
 
 
 #endif /* __SYSCALL_HANDLER_PRV_H__ */

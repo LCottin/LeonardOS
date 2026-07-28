@@ -1,6 +1,7 @@
 # Define each component
 set(COMPONENTS_DIR
     # Add the path to each component here
+    "console"
     "formatter"
     "irq"
     "gic"
@@ -65,6 +66,17 @@ set(TESTS_DIR
     "printer/test/print/print_string:printer_print_string"
     "uart/test/write/write_byte:uart_write_byte"
     "uart/test/read/read_byte:uart_read_byte"
+    "uart/test/ctx/ctx_init:uart_ctx_init"
+    "containers/test/ring_buffer/init:containers_ring_buffer_init"
+    "containers/test/ring_buffer/is_empty:containers_ring_buffer_is_empty"
+    "containers/test/ring_buffer/pop:containers_ring_buffer_pop"
+    "containers/test/ring_buffer/push:containers_ring_buffer_push"
+    "console/test/buffer/is_empty:console_buffer_is_empty"
+    "console/test/buffer/pop:console_buffer_pop"
+    "console/test/buffer/push:console_buffer_push"
+    "console/test/ctx/ctx_init:console_ctx_init"
+    "console/test/irq/irq_rx:console_irq_rx"
+    "syscall/test/handler/syscall_manager:syscall_manager"
 )
 
 # ==============================================================================

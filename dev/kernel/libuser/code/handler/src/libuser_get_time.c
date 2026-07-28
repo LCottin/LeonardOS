@@ -1,5 +1,6 @@
 #include "libuser_usr.h"
 #include "syscall_krn.h"
+#include "libuser_handler_prv.h"
 
 void user_get_time(time_t *time)
 {
@@ -19,5 +20,5 @@ void user_get_time(time_t *time)
         }
     };
 
-    syscall_handler(&request);
+    libuser_launch_syscall(&request);
 }

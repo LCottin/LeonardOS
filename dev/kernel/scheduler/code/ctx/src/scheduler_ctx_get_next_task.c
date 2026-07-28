@@ -1,6 +1,7 @@
 #include "scheduler_krn.h"
 #include "scheduler_ctx.h"
 #include "scheduler_ctx_prv.h"
+#include "printer_krn.h"
 
 uint32_t scheduler_ctx_get_next_task(void)
 {

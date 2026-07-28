@@ -2,6 +2,7 @@
 #include "syscall_krn.h"
 #include "strings_utils_usr.h"
 #include "syscall_types.h"
+#include "libuser_handler_prv.h"
 
 void user_print_int(const int32_t num, const strings_utils_base_t base)
 {
@@ -27,5 +28,5 @@ void user_print_int(const int32_t num, const strings_utils_base_t base)
         }
     };
 
-    syscall_handler(&request);
+    libuser_launch_syscall(&request);
 }

@@ -1,6 +1,7 @@
 #include "libuser_usr.h"
 #include "syscall_krn.h"
 #include "strings_ops_usr.h"
+#include "libuser_handler_prv.h"
 
 void user_print_string(const char_t *str)
 {
@@ -20,5 +21,5 @@ void user_print_string(const char_t *str)
         }
     };
 
-    syscall_handler(&request);
+    libuser_launch_syscall(&request);
 }

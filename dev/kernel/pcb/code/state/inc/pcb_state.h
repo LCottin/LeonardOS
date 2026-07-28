@@ -8,21 +8,22 @@
  **********************************************************************/
 typedef struct
 {
-    volatile reg_t r19;     /* General purpose register callee-saved r19 */
-    volatile reg_t r20;     /* General purpose register callee-saved r20 */
-    volatile reg_t r21;     /* General purpose register callee-saved r21 */
-    volatile reg_t r22;     /* General purpose register callee-saved r22 */
-    volatile reg_t r23;     /* General purpose register callee-saved r23 */
-    volatile reg_t r24;     /* General purpose register callee-saved r24 */
-    volatile reg_t r25;     /* General purpose register callee-saved r25 */
-    volatile reg_t r26;     /* General purpose register callee-saved r26 */
-    volatile reg_t r27;     /* General purpose register callee-saved r27 */
-    volatile reg_t r28;     /* General purpose register callee-saved r28 */
-    volatile reg_t fp;      /* Frame pointer = x29 */
-    volatile reg_t lr;      /* Link register = x30 */
-    volatile reg_t sp;      /* Stack pointer */
-    volatile reg_t pc;      /* Program counter */
-    volatile reg_t cpsr;    /* Current program status register */
+    volatile reg_t r19;         /* General purpose register callee-saved r19 */
+    volatile reg_t r20;         /* General purpose register callee-saved r20 */
+    volatile reg_t r21;         /* General purpose register callee-saved r21 */
+    volatile reg_t r22;         /* General purpose register callee-saved r22 */
+    volatile reg_t r23;         /* General purpose register callee-saved r23 */
+    volatile reg_t r24;         /* General purpose register callee-saved r24 */
+    volatile reg_t r25;         /* General purpose register callee-saved r25 */
+    volatile reg_t r26;         /* General purpose register callee-saved r26 */
+    volatile reg_t r27;         /* General purpose register callee-saved r27 */
+    volatile reg_t r28;         /* General purpose register callee-saved r28 */
+    volatile reg_t fp;          /* Frame pointer = x29 */
+    volatile reg_t lr;          /* Link register = x30 */
+    volatile reg_t sp;          /* Stack pointer */
+    volatile reg_t pc;          /* Program counter */
+    volatile reg_t elr_el1;     /* Exception link register */
+    volatile reg_t spsr_el1;    /* Saved program status register */
 } pcb_state_registers_t;
 
 

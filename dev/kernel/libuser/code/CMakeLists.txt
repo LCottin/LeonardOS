@@ -28,8 +28,11 @@ set(LIBUSER_HANDLER_DIR
 
 set(LIBUSER_HANDLER_SOURCES
     # Add the path to each source file here
+    ${LIBUSER_HANDLER_DIR}/src/libuser_console_get.c
     ${LIBUSER_HANDLER_DIR}/src/libuser_get_time.c
+    ${LIBUSER_HANDLER_DIR}/src/libuser_launch_syscall.S
     ${LIBUSER_HANDLER_DIR}/src/libuser_print_addr.c
+    ${LIBUSER_HANDLER_DIR}/src/libuser_print_char.c
     ${LIBUSER_HANDLER_DIR}/src/libuser_print_formatted.c
     ${LIBUSER_HANDLER_DIR}/src/libuser_print_int.c
     ${LIBUSER_HANDLER_DIR}/src/libuser_print_string.c
@@ -75,9 +78,9 @@ target_link_libraries(${LIB_NAME_USR}
         ${FORMATTER_LIB_NAME}_krn
         ${STREAM_LIB_NAME}_krn
         ${PRINTER_LIB_NAME}_krn
+        ${CLOCK_LIB_NAME}_krn
     PUBLIC
         ${TYPES_LIB_NAME}_usr
         ${STRINGS_LIB_NAME}_usr
-        ${CLOCK_LIB_NAME}_usr
     "-Wl,--no-whole-archive"
 )

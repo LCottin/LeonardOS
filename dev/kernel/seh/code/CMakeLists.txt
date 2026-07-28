@@ -76,5 +76,6 @@ target_link_libraries(${LIB_NAME_KRN}
         ${GIC_LIB_NAME}_krn
         ${FORMATTER_LIB_NAME}_krn
         ${STREAM_LIB_NAME}_krn
+        ${SYSCALL_LIB_NAME}_krn
     "-Wl,--no-whole-archive"
 )

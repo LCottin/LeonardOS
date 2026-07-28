@@ -3,6 +3,7 @@
 #include "irq_handler_prv.h"
 #include "gic_krn.h"
 #include "types_usr.h"
+#include "printer_krn.h"
 
 void irq_handler(void)
 {
@@ -12,6 +13,10 @@ void irq_handler(void)
     if (handler != NULL_PTR)
     {
         handler();
+    }
+    else
+    {
+        printer_print_formatted("Handler for IRQ %d not found\r\n", id);
     }
 
     gic_cpu_eoi(id);

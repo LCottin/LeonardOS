@@ -1,5 +1,6 @@
 #include "libuser_usr.h"
 #include "syscall_krn.h"
+#include "libuser_handler_prv.h"
 
 void user_print_addr(const addr_t addr)
 {
@@ -19,5 +20,5 @@ void user_print_addr(const addr_t addr)
         }
     };
 
-    syscall_handler(&request);
+    libuser_launch_syscall(&request);
 }
