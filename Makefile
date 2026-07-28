@@ -38,36 +38,8 @@ QEMU_FLAGS  := -M virt,gic-version=2 \
                -serial mon:stdio     \
                -no-reboot
 
-TEST_ITEMS := \
-	memory_ops_utils_copy	\
-	memory_ops_utils_set	\
-	memory_ops_utils_cmp	\
-	mmio_io8_clear_bit		\
-	mmio_io8_read			\
-	mmio_io8_set_bit		\
-	mmio_io8_toggle_bit		\
-	mmio_io8_write			\
-	mmio_io16_clear_bit		\
-	mmio_io16_read			\
-	mmio_io16_set_bit		\
-	mmio_io16_toggle_bit	\
-	mmio_io16_write			\
-	mmio_io32_clear_bit		\
-	mmio_io32_read			\
-	mmio_io32_set_bit		\
-	mmio_io32_toggle_bit	\
-	mmio_io32_write			\
-	mmio_io64_clear_bit		\
-	mmio_io64_read			\
-	mmio_io64_set_bit		\
-	mmio_io64_toggle_bit	\
-	mmio_io64_write			\
-	printer_print_string 	\
-	uart_write_byte			\
-	uart_read_byte			\
-	uart_ctx_init			\
-
 include Makefile.build
+include Makefile.tests
 include Makefile.run
 
 .PHONY: check_qemu

@@ -67,6 +67,10 @@ set(TESTS_DIR
     "uart/test/write/write_byte:uart_write_byte"
     "uart/test/read/read_byte:uart_read_byte"
     "uart/test/ctx/ctx_init:uart_ctx_init"
+    "containers/test/ring_buffer/init:containers_ring_buffer_init"
+    "containers/test/ring_buffer/is_empty:containers_ring_buffer_is_empty"
+    "containers/test/ring_buffer/pop:containers_ring_buffer_pop"
+    "containers/test/ring_buffer/push:containers_ring_buffer_push"
 )
 
 # ==============================================================================
