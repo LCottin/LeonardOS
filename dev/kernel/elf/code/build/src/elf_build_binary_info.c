@@ -2,7 +2,7 @@
 #include "elf_build.h"
 #include "elf_build_prv.h"
 
-void elf_build_segment_info(const addr_t elf_addr, ELF64_binary_info_t *p_bin_info)
+void elf_build_binary_info(const addr_t elf_addr, ELF64_binary_info_t *p_bin_info)
 {
     const ELF64_elf_hdr_t *p_elf_header = (const ELF64_elf_hdr_t *)elf_addr;
 

@@ -127,7 +127,7 @@ uint32_t elf_info_get_nb_segments(const addr_t elf_addr);
 
 
 /**********************************************************************
- * @brief Fills a custom segment structure with information from an ELF segment.
+ * @brief Fills a binary structure with information from an ELF.
  *
  * This function extracts information from an ELF segment header and fills a custom
  * segment structure with the relevant data.
@@ -136,7 +136,7 @@ uint32_t elf_info_get_nb_segments(const addr_t elf_addr);
  * @param p_bin_info Pointer to the binary information structure to fill.
  * @return None.
  **********************************************************************/
-void elf_build_segment_info(const addr_t elf_addr, ELF64_binary_info_t *p_bin_info);
+void elf_build_binary_info(const addr_t elf_addr, ELF64_binary_info_t *p_bin_info);
 
 
 /**********************************************************************

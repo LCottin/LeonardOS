@@ -31,7 +31,7 @@ set(ELF_BUILD_DIR
 set(ELF_BUILD_SOURCES
     # Add the path to each source file here
     ${ELF_BUILD_DIR}/src/elf_build_meta_info.c
-    ${ELF_BUILD_DIR}/src/elf_build_segment_info.c
+    ${ELF_BUILD_DIR}/src/elf_build_binary_info.c
     ${ELF_BUILD_DIR}/src/elf_build_convert_magic_to_type.c
 )
 
