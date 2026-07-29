@@ -18,6 +18,7 @@ set(APP_DIR
 
 set(APP_SOURCES
     ${APP_DIR}/src/count_down.c
+    ${APP_DIR}/src/count_down_data.c
 )
 
 set(APP_HEADERS

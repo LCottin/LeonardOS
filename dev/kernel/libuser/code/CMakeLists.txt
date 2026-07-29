@@ -82,4 +82,5 @@ target_link_libraries(${LIB_NAME_USR}
     PUBLIC
         ${TYPES_LIB_NAME}_usr
         ${STRINGS_LIB_NAME}_usr
+        ${METADATA_LIB_NAME}_usr
 )

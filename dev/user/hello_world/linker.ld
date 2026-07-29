@@ -26,12 +26,7 @@ SECTIONS
     . = ORIGIN(ROM_METADATA);
     .metadata ALIGN(16):
     {
-        /* METADATA in string format */
-        BYTE(0x4D) BYTE(0x45) BYTE(0x54) BYTE(0x41)
-        BYTE(0x44) BYTE(0x41) BYTE(0x54) BYTE(0x41)
-
-        /* Type of binary in string format (USER for example) */
-        BYTE(0x55) BYTE(0x53) BYTE(0x45) BYTE(0x52)
+        *(.metadata*)       /* Code */
 
         /* Tag = 0x01, Data = Stack top address */
         LONG(0x01); LONG(ABSOLUTE(__stack_top));

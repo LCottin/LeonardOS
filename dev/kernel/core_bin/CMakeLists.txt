@@ -4,9 +4,6 @@
 set(BIN_NAME "core_bin")
 SET(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${BIN_DEV_DIR}/${BIN_NAME})
 
-set(DUMMY_SOURCE "${BIN_DEV_DIR}/dummy.c")
-file(WRITE ${DUMMY_SOURCE} "")
-
 # ==============================================================================
 # Linker script file path
 # ==============================================================================
@@ -15,7 +12,7 @@ set(LINKER_SCRIPT ${CMAKE_CURRENT_SOURCE_DIR}/linker.ld)
 # ==============================================================================
 # Create executable target
 # ==============================================================================
-add_executable(${BIN_NAME}.elf ${DUMMY_SOURCE})
+add_executable(${BIN_NAME}.elf ${BIN_NAME}.c)
 
 # ==============================================================================
 # Link with the component libraries
@@ -24,6 +21,8 @@ target_link_libraries(${BIN_NAME}.elf
     PRIVATE
         # Add component libraries here
         ${CORE_LIB_NAME}_krn
+        ${METADATA_LIB_NAME}_usr
+        ${TYPES_LIB_NAME}_usr
 )
 
 # ==============================================================================

@@ -8,7 +8,7 @@ ENTRY(_core_main_entry)
 /* Define memory regions */
 MEMORY
 {
-    ROM_METADATA(r) : ORIGIN = 0x00501000, LENGTH = 0x1000
+    ROM_METADATA(r) : ORIGIN = 0x00501000, LENGTH = 0x01000
     ROM_CODE(r)     : ORIGIN = 0x00502000, LENGTH = 0x20000
     ROM_DATA(r)     : ORIGIN = 0x00582000, LENGTH = 0x10000
 
@@ -26,12 +26,7 @@ SECTIONS
     . = ORIGIN(ROM_METADATA);
     .metadata ALIGN(16):
     {
-        /* METADATA in string format */
-        BYTE(0x4D) BYTE(0x45) BYTE(0x54) BYTE(0x41)
-        BYTE(0x44) BYTE(0x41) BYTE(0x54) BYTE(0x41)
-
-        /* KERN in string format */
-        BYTE(0x4B) BYTE(0x45) BYTE(0x52) BYTE(0x4E)
+        *(.metadata*)       /* Code */
 
         /* Tag = 0x01, Data = Stack top address */
         LONG(0x01); LONG(ABSOLUTE(__stack_top));

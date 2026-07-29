@@ -8,9 +8,9 @@ syscall_handler:
         mov x19, x0                                          /* Save syscall request address in x19 */
 
     syscall_handler_save_on_stack:
-        mrs     x1, ELR_EL1                                 /* Read the Exception Link Register (ELR) value */
-        mrs     x2, SPSR_EL1                                /* Read the SPSR value */
-        stp     x1, x2, [sp, #-16]!                         /* Save ELR and SPSR on stack */
+        mrs     x1, ELR_EL1                                  /* Read the Exception Link Register (ELR) value */
+        mrs     x2, SPSR_EL1                                 /* Read the SPSR value */
+        stp     x1, x2, [sp, #-16]!                          /* Save ELR and SPSR on stack */
 
         stp     x19, x20, [sp, #-16]!                        /* Save x19 and x20 on stack */
         stp     x21, x22, [sp, #-16]!                        /* Save x21 and x22 on stack */
@@ -29,13 +29,13 @@ syscall_handler:
         bl      scheduler_ctx_get_app_ctx                   /* Get current task PCB context address */
 
     syscall_handler_save_app_ctx:
-        ldp     x29, x30, [sp], #16                        /* Restore x29 and x30 from stack */
-        ldp     x27, x28, [sp], #16                        /* Restore x27 and x28 from stack */
-        ldp     x25, x26, [sp], #16                        /* Restore x25 and x26 from stack */
-        ldp     x23, x24, [sp], #16                        /* Restore x23 and x24 from stack */
-        ldp     x21, x22, [sp], #16                        /* Restore x21 and x22 from stack */
-        ldp     x19, x20, [sp], #16                        /* Restore x19 and x20 from stack */
-        ldp      x1,  x2, [sp], #16                        /* Restore ELR and SPSR from stack */
+        ldp     x29, x30, [sp], #16                         /* Restore x29 and x30 from stack */
+        ldp     x27, x28, [sp], #16                         /* Restore x27 and x28 from stack */
+        ldp     x25, x26, [sp], #16                         /* Restore x25 and x26 from stack */
+        ldp     x23, x24, [sp], #16                         /* Restore x23 and x24 from stack */
+        ldp     x21, x22, [sp], #16                         /* Restore x21 and x22 from stack */
+        ldp     x19, x20, [sp], #16                         /* Restore x19 and x20 from stack */
+        ldp      x1,  x2, [sp], #16                         /* Restore ELR and SPSR from stack */
 
         stp     x19, x20, [x0, #0]                          /* Save x19 and x20 */
         stp     x21, x22, [x0, #16]                         /* Save x21 and x22 */
