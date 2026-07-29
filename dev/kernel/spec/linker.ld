@@ -32,6 +32,6 @@ SECTIONS
     {
         . = . + LENGTH(RAM_STACK);
         . = ALIGN(16);
-        __stack_end = .;
+        __stack_top = .;
     } > RAM_STACK
 }

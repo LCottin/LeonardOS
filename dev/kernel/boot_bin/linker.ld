@@ -19,7 +19,6 @@ MEMORY
 /* Define the sections and their placement in memory */
 SECTIONS
 {
-
     /* Code + Read-Only Data */
     . = ORIGIN(RAM_CODE);
     .code ALIGN(16):
@@ -40,12 +39,12 @@ SECTIONS
 
     /* Stack */
     . = ORIGIN(RAM_STACK);
+    __stack_size = LENGTH(RAM_STACK);    /* Size of stack section */
     .stack (NOLOAD):
     {
-        __stack_start = .;
         . = . + LENGTH(RAM_STACK);
         . = ALIGN(16);
-        __stack_end = .;
+        __stack_top = .;
     } > RAM_STACK
 
     /* BMT */
