@@ -1,4 +1,5 @@
 # Define library names for dependencies
+set (METADATA_LIB_NAME      "_metadata")
 set (CONSOLE_LIB_NAME       "_console")
 set (STREAM_LIB_NAME        "_stream")
 set (FORMATTER_LIB_NAME     "_formatter")
