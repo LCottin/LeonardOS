@@ -9,8 +9,19 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${BIN_TEST_DIR}/${BIN_NAME})
 # Create executable target
 # ==============================================================================
 add_executable(${BIN_NAME}.elf
+    ${KERNEL_DIR}/uart/code/ctx/src/uart_ctx_init.c
     ${BIN_PATH}/uart_ctx_init.c
     ${BIN_PATH}/uart_ctx_init_tc.c)
+
+# ==============================================================================
+# Add include directories needed by the real source file under test
+# ==============================================================================
+target_include_directories(${BIN_NAME}.elf
+    PRIVATE
+        ${KERNEL_DIR}/uart/inc/krn
+        ${KERNEL_DIR}/uart/code/ctx/inc
+        ${KERNEL_DIR}/mmio/inc/krn
+)
 
 # ==============================================================================
 # Link with the component libraries
@@ -20,7 +31,6 @@ target_link_libraries(${BIN_NAME}.elf
         # Add component libraries here
         ${TYPES_LIB_NAME}_krn
         ${SPEC_LIB_NAME}_krn
-        ${UART_LIB_NAME}_krn
 )
 
 # ==============================================================================

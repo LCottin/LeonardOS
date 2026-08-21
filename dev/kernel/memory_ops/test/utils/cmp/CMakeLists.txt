@@ -9,8 +9,17 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${BIN_TEST_DIR}/${BIN_NAME})
 # Create executable target
 # ==============================================================================
 add_executable(${BIN_NAME}.elf
+    ${KERNEL_DIR}/memory_ops/code/utils/src/memory_ops_utils_cmp.c
     ${BIN_PATH}/memory_ops_utils_cmp.c
     ${BIN_PATH}/memory_ops_utils_cmp_tc.c)
+
+# ==============================================================================
+# Add include directories needed by the real source file under test
+# ==============================================================================
+target_include_directories(${BIN_NAME}.elf
+    PRIVATE
+        ${KERNEL_DIR}/memory_ops/inc/usr
+)
 
 # ==============================================================================
 # Link with the component libraries
@@ -20,7 +29,6 @@ target_link_libraries(${BIN_NAME}.elf
         # Add component libraries here
         ${TYPES_LIB_NAME}_krn
         ${SPEC_LIB_NAME}_krn
-        ${MEMORY_OPS_LIB_NAME}_krn
 )
 
 # ==============================================================================
