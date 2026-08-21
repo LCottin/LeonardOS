@@ -9,8 +9,17 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${BIN_TEST_DIR}/${BIN_NAME})
 # Create executable target
 # ==============================================================================
 add_executable(${BIN_NAME}.elf
+    ${KERNEL_DIR}/mmio/code/io32/src/mmio_io32_clear_bit.c
     ${BIN_PATH}/mmio_io32_clear_bit.c
     ${BIN_PATH}/mmio_io32_clear_bit_tc.c)
+
+# ==============================================================================
+# Add include directories needed by the real source file under test
+# ==============================================================================
+target_include_directories(${BIN_NAME}.elf
+    PRIVATE
+        ${KERNEL_DIR}/mmio/inc/krn
+)
 
 # ==============================================================================
 # Link with the component libraries
@@ -20,7 +29,6 @@ target_link_libraries(${BIN_NAME}.elf
         # Add component libraries here
         ${TYPES_LIB_NAME}_krn
         ${SPEC_LIB_NAME}_krn
-        ${MMIO_LIB_NAME}_krn
 )
 
 # ==============================================================================
