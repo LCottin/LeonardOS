@@ -9,8 +9,17 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${BIN_TEST_DIR}/${BIN_NAME})
 # Create executable target
 # ==============================================================================
 add_executable(${BIN_NAME}.elf
+    ${KERNEL_DIR}/containers/code/ring_buffer/src/containers_ring_buffer_is_empty.c
     ${BIN_PATH}/containers_ring_buffer_is_empty.c
     ${BIN_PATH}/containers_ring_buffer_is_empty_tc.c)
+
+# ==============================================================================
+# Add include directories needed by the real source file under test
+# ==============================================================================
+target_include_directories(${BIN_NAME}.elf
+    PRIVATE
+        ${KERNEL_DIR}/containers/inc/usr
+)
 
 # ==============================================================================
 # Link with the component libraries
@@ -20,7 +29,6 @@ target_link_libraries(${BIN_NAME}.elf
         # Add component libraries here
         ${TYPES_LIB_NAME}_krn
         ${SPEC_LIB_NAME}_krn
-        ${CONTAINERS_LIB_NAME}_krn
 )
 
 # ==============================================================================
