@@ -9,8 +9,20 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${BIN_TEST_DIR}/${BIN_NAME})
 # Create executable target
 # ==============================================================================
 add_executable(${BIN_NAME}.elf
+    ${KERNEL_DIR}/printer/code/print/src/printer_print_string.c
     ${BIN_PATH}/printer_print_string.c
     ${BIN_PATH}/printer_print_string_tc.c)
+
+# ==============================================================================
+# Add include directories needed by the real source file under test
+# ==============================================================================
+target_include_directories(${BIN_NAME}.elf
+    PRIVATE
+        ${KERNEL_DIR}/printer/inc/krn
+        ${KERNEL_DIR}/strings/inc/usr
+        ${KERNEL_DIR}/stream/inc/krn
+        ${KERNEL_DIR}/uart/inc/krn
+)
 
 # ==============================================================================
 # Link with the component libraries
@@ -20,9 +32,6 @@ target_link_libraries(${BIN_NAME}.elf
         # Add component libraries here
         ${TYPES_LIB_NAME}_krn
         ${SPEC_LIB_NAME}_krn
-        ${PRINTER_LIB_NAME}_krn
-        ${STRINGS_LIB_NAME}_krn
-        ${STREAM_LIB_NAME}_krn
 )
 
 # ==============================================================================
