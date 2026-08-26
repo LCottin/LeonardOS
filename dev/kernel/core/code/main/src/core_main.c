@@ -14,6 +14,7 @@
 #include "gic_krn.h"
 #include "uart_krn.h"
 #include "console_krn.h"
+#include "seh_krn.h"
 
 static void irq_handler_0(void)
 {
@@ -23,6 +24,7 @@ static void irq_handler_0(void)
 
 void _core_main_entry(const addr_t bmt_start_addr, const addr_t sch_start_addr)
 {
+    seh_ctx_init();
     irq_core_init();
     uart_ctx_init();
     console_ctx_init();

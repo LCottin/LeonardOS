@@ -54,6 +54,7 @@ SECTIONS
     {
         *(.text*)        /* Code */
         *(.rodata*)      /* Read-only data */
+        *(.ivt*)         /* IVT (Interrupt Vector Table) */
         . = ALIGN(16);
     } > RAM_CODE AT > ROM_CODE
 
