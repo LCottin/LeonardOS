@@ -175,22 +175,10 @@
         ]
     },
 
-    "IVT (RAM)":
-    {
-        "name"     	: "IVT",
-        "base_address" : "0x4F020000",
-        "type"     	: "global variable",
-        "description"  : "Interrupt Vector Table",
-        "sections":
-        [
-            {"name": "IVT", "size": "0x10000", "description": "Interrupt Vector Table Address"}
-        ]
-    },
-
     "SCH (RAM)":
     {
         "name"     	: "SCH",
-        "base_address" : "0x4F040000",
+        "base_address" : "0x4F010000",
         "type"     	: "global variable",
         "description"  : "Scheduler Table",
         "sections":
