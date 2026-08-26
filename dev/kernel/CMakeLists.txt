@@ -30,6 +30,7 @@ set(LIBRARIES_DIR
     # Add the path to each library here
     "types"
     "stream"
+    "metadata"
 )
 
 # Define each binary

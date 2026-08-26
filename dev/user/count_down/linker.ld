@@ -26,24 +26,19 @@ SECTIONS
     . = ORIGIN(ROM_METADATA);
     .metadata ALIGN(16):
     {
-        /* METADATA in string format */
-        BYTE(0x4D) BYTE(0x45) BYTE(0x54) BYTE(0x41)
-        BYTE(0x44) BYTE(0x41) BYTE(0x54) BYTE(0x41)
+        *(.metadata*)       /* Code */
 
-        /* Type of binary in string format (USER for example) */
-        BYTE(0x55) BYTE(0x53) BYTE(0x45) BYTE(0x52)
+        /* Tag = 0x00, Data = Stack top address */
+        LONG(0x00); LONG(ABSOLUTE(__stack_top));
 
-        /* Tag = 0x01, Data = Stack top address */
-        LONG(0x01); LONG(ABSOLUTE(__stack_top));
+        /* Tag = 0x01, Data = Stack size */
+        LONG(0x01); LONG(ABSOLUTE(__stack_size));
 
-        /* Tag = 0x02, Data = Stack size */
-        LONG(0x02); LONG(ABSOLUTE(__stack_size));
+        /* Tag = 0x02, Data = Heap start address */
+        LONG(0x02); LONG(ABSOLUTE(__heap_start));
 
-        /* Tag = 0x03, Data = Heap start address */
-        LONG(0x03); LONG(ABSOLUTE(__heap_start));
-
-        /* Tag = 0x04, Data = Heap size */
-        LONG(0x04); LONG(ABSOLUTE(__heap_size));
+        /* Tag = 0x03, Data = Heap size */
+        LONG(0x03); LONG(ABSOLUTE(__heap_size));
 
         . = ALIGN(16);  /* Ensure alignment after .metadata section */
     } > ROM_METADATA

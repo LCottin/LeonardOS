@@ -57,7 +57,6 @@ target_link_libraries(${LIB_NAME_KRN}
         ${SCHEDULER_LIB_NAME}_krn
         ${BMT_LIB_NAME}_krn
         ${ELF_LIB_NAME}_krn
-        ${SEH_LIB_NAME}_krn
         ${GIC_LIB_NAME}_krn
         ${IRQ_LIB_NAME}_krn
         ${FORMATTER_LIB_NAME}_krn
@@ -65,4 +64,5 @@ target_link_libraries(${LIB_NAME_KRN}
         ${UART_LIB_NAME}_krn
         ${CONSOLE_LIB_NAME}_krn
         ${SEH_LIB_NAME}_krn
+        ${METADATA_LIB_NAME}_usr
 )

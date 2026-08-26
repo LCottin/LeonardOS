@@ -17,7 +17,7 @@ void bmt_build_table()
         g_p_bmt_ctx_table->krn_bin.entry_point = elf_info_get_entry_point(krn_addr);
 
         /* Fill segment information */
-        elf_build_segment_info(krn_addr, &g_p_bmt_ctx_table->krn_bin);
+        elf_build_binary_info(krn_addr, &g_p_bmt_ctx_table->krn_bin);
     }
     else
     {
@@ -38,7 +38,7 @@ void bmt_build_table()
             g_p_bmt_ctx_table->apps_bin[app_idx].entry_point = elf_info_get_entry_point(app_addr);
 
             /* Fill segment information */
-            elf_build_segment_info(app_addr, &g_p_bmt_ctx_table->apps_bin[app_idx]);
+            elf_build_binary_info(app_addr, &g_p_bmt_ctx_table->apps_bin[app_idx]);
         }
         else
         {

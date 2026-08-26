@@ -31,8 +31,7 @@ set(ELF_BUILD_DIR
 set(ELF_BUILD_SOURCES
     # Add the path to each source file here
     ${ELF_BUILD_DIR}/src/elf_build_meta_info.c
-    ${ELF_BUILD_DIR}/src/elf_build_segment_info.c
-    ${ELF_BUILD_DIR}/src/elf_build_convert_magic_to_type.c
+    ${ELF_BUILD_DIR}/src/elf_build_binary_info.c
 )
 
 set(ELF_BUILD_HEADERS
@@ -89,4 +88,6 @@ target_link_libraries(${LIB_NAME_KRN}
     PRIVATE
         # Add the path to library of other folder here
         ${TYPES_LIB_NAME}_krn
+        ${METADATA_LIB_NAME}_usr
+        ${MEMORY_OPS_LIB_NAME}_usr
 )

@@ -36,7 +36,7 @@ _boot_main_entry:
         mov     x29, xzr
 
     boot_main_set_stack_pointer:
-        ldr     x10, =__stack_end
+        ldr     x10, =__stack_top
         and     x10, x10, #0xFFFFFFFFFFFFFFF0           /* Align to 16 bytes */
         mov     sp, x10
 

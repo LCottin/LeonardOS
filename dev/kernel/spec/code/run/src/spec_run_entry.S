@@ -37,7 +37,7 @@ __spec_run_entry:
         mov     x29, xzr
 
     spec_run_set_stack_pointer:
-        ldr     x0, =__stack_end
+        ldr     x0, =__stack_top
         and     x0, x0, #0xFFFFFFFFFFFFFFF0           /* Align to 16 bytes */
         mov     sp, x0
 

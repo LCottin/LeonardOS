@@ -6,7 +6,7 @@
 /**********************************************************************
  * @brief The start address of the stack.
  **********************************************************************/
-extern addr_t __stack_end;
+extern addr_t __stack_top;
 
 
 #endif /* __BOOT_MAIN_PRV_H__ */

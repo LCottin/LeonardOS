@@ -18,6 +18,7 @@ set(APP_DIR
 
 set(APP_SOURCES
     ${APP_DIR}/src/hello_world.c
+    ${APP_DIR}/src/hello_world_data.c
 )
 
 set(APP_HEADERS

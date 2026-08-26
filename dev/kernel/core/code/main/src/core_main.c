@@ -9,7 +9,6 @@
 #include "pcb_krn.h"
 #include "scheduler_krn.h"
 #include "bmt_krn.h"
-#include "seh_krn.h"
 #include "irq_krn.h"
 #include "gic_krn.h"
 #include "uart_krn.h"
@@ -29,8 +28,6 @@ void _core_main_entry(const addr_t bmt_start_addr, const addr_t sch_start_addr)
     uart_ctx_init();
     console_ctx_init();
     printer_print_string("\r\n[KERN] Hello World!\r\n");
-
-    seh_ctx_init();
 
     irq_core_register(0, &irq_handler_0);
     gic_sgi_send(0);
