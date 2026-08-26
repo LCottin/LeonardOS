@@ -1,5 +1,5 @@
 #include "elf_krn.h"
-#include "elf_check.h"
+#include "elf_check_prv.h"
 #include "elf_build.h"
 
 bool_t elf_check_match_magic(const addr_t elf_addr)

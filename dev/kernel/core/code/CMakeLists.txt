@@ -64,4 +64,5 @@ target_link_libraries(${LIB_NAME_KRN}
         ${UART_LIB_NAME}_krn
         ${CONSOLE_LIB_NAME}_krn
         ${SEH_LIB_NAME}_krn
+        ${METADATA_LIB_NAME}_usr
 )

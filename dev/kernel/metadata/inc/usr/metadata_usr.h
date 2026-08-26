@@ -11,6 +11,42 @@
 
 
 /**********************************************************************
+ * @brief Metadata tags memory information.
+ **********************************************************************/
+typedef enum
+{
+    K_ELF_METADATA_STACK_TOP,       /* Stack start address */
+    K_ELF_METADATA_STACK_SIZE,      /* Stack stop address */
+    K_ELF_METADATA_HEAP_START,      /* Heap start address */
+    K_ELF_METADATA_HEAP_SIZE,       /* Heap stop address */
+    K_ELF_METADATA_NB_ENTRIES
+} metadata_tag_t;
+
+
+/**********************************************************************
+ * @brief Metadata structure memory information
+ * @warning This structure is not filled but binary but by the linker
+ **********************************************************************/
+typedef struct __attribute__((packed))
+{
+    metadata_tag_t tag;         /* Metadata tag */
+    uint32_t       data;        /* Metadata memory information */
+} metadata_memory_data_t;
+
+
+/**********************************************************************
+ * @brief Structure to hold memory information about a binary.
+ **********************************************************************/
+typedef struct
+{
+    addr_t stack_top;                         /* Stack top address */
+    addr_t heap_start;                        /* Heap start address */
+    size_t stack_size;                        /* Stack size */
+    size_t heap_size;                         /* Heap size */
+} metadata_memory_info_t;
+
+
+/**********************************************************************
  * @brief Metadata for binary type.
  **********************************************************************/
 typedef enum
