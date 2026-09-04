@@ -45,8 +45,8 @@ target_include_directories(${APP_NAME}.elf
 target_link_libraries(${APP_NAME}.elf
     PRIVATE
         # Add the path to library of other folder here
-        ${TYPES_LIB_NAME}_usr
-        ${LIBUSER_LIB_NAME}_usr
+        arch.lib_types
+        libraries.lib_libuser
 )
 
 # ==============================================================================

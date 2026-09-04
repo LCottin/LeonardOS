@@ -1,35 +1,7 @@
-# Define library names for dependencies
-set (METADATA_LIB_NAME      "_metadata")
-set (CONSOLE_LIB_NAME       "_console")
-set (STREAM_LIB_NAME        "_stream")
-set (FORMATTER_LIB_NAME     "_formatter")
-set (IRQ_LIB_NAME           "_irq")
-set (GIC_LIB_NAME           "_gic")
-set (SPEC_LIB_NAME          "_spec")
-set (SEH_LIB_NAME           "_seh")
-set (PRINTER_LIB_NAME       "_printer")
-set (SCHEDULER_LIB_NAME     "_scheduler")
-set (PCB_LIB_NAME           "_pcb")
-set (ELF_LIB_NAME           "_elf")
-set (SYSCALL_LIB_NAME       "_syscall")
-set (BOOT_LIB_NAME          "_boot")
-set (BOOT_BIN_LIB_NAME      "_boot_bin")
-set (CORE_BIN_LIB_NAME      "_core_bin")
-set (MEMORY_LIB_NAME        "_memory")
-set (MEMORY_OPS_LIB_NAME    "_memory_ops")
-set (STRINGS_LIB_NAME       "_strings")
-set (CONTAINERS_LIB_NAME    "_containers")
-set (UART_LIB_NAME          "_uart")
-set (MMIO_LIB_NAME          "_mmio")
-set (FPU_LIB_NAME           "_fpu")
-set (CORE_LIB_NAME          "_core")
-set (CLOCK_LIB_NAME         "_clock")
-set (BMT_LIB_NAME           "_bmt")
-
-# Define directories
+# Build kernel space
 set(KERNEL_DIR ${DEV_DIR}/kernel)
-set(USER_DIR   ${DEV_DIR}/user)
-
-# Call subdirectories cmake
 add_subdirectory(${KERNEL_DIR})
+
+# Build user space
+set(USER_DIR   ${DEV_DIR}/user)
 add_subdirectory(${USER_DIR})
