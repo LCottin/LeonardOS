@@ -7,90 +7,89 @@ set(LIB_NAME ${LIB_NAME})
 # ==============================================================================
 # Create source and header for ASSERT
 # ==============================================================================
-set(SPEC_ASSERT_DIR
+set(TEST_ASSERT_DIR
     ${LIB_PATH}/code/assert
 )
 
-set(SPEC_ASSERT_SOURCES
+set(TEST_ASSERT_SOURCES
     # Add the path to each source file here
-    ${SPEC_ASSERT_DIR}/src/spec_assert_data.c
-    ${SPEC_ASSERT_DIR}/src/spec_assert_get_count.c
-    ${SPEC_ASSERT_DIR}/src/spec_assert_get_failure.c
-    ${SPEC_ASSERT_DIR}/src/spec_assert_get_passed.c
-    ${SPEC_ASSERT_DIR}/src/spec_assert_record_equal_char.c
-    ${SPEC_ASSERT_DIR}/src/spec_assert_record_equal_mem.c
-    ${SPEC_ASSERT_DIR}/src/spec_assert_record_equal_ptr.c
-    ${SPEC_ASSERT_DIR}/src/spec_assert_record_equal_u8.c
-    ${SPEC_ASSERT_DIR}/src/spec_assert_record_equal_u16.c
-    ${SPEC_ASSERT_DIR}/src/spec_assert_record_equal_u32.c
-    ${SPEC_ASSERT_DIR}/src/spec_assert_record_equal_u64.c
-    ${SPEC_ASSERT_DIR}/src/spec_assert_record_equal.c
-    ${SPEC_ASSERT_DIR}/src/spec_assert_record.c
-    ${SPEC_ASSERT_DIR}/src/spec_assert_reset.c
+    ${TEST_ASSERT_DIR}/src/spec_assert_data.c
+    ${TEST_ASSERT_DIR}/src/spec_assert_get_count.c
+    ${TEST_ASSERT_DIR}/src/spec_assert_get_failure.c
+    ${TEST_ASSERT_DIR}/src/spec_assert_get_passed.c
+    ${TEST_ASSERT_DIR}/src/spec_assert_record_equal_char.c
+    ${TEST_ASSERT_DIR}/src/spec_assert_record_equal_mem.c
+    ${TEST_ASSERT_DIR}/src/spec_assert_record_equal_ptr.c
+    ${TEST_ASSERT_DIR}/src/spec_assert_record_equal_u8.c
+    ${TEST_ASSERT_DIR}/src/spec_assert_record_equal_u16.c
+    ${TEST_ASSERT_DIR}/src/spec_assert_record_equal_u32.c
+    ${TEST_ASSERT_DIR}/src/spec_assert_record_equal_u64.c
+    ${TEST_ASSERT_DIR}/src/spec_assert_record_equal.c
+    ${TEST_ASSERT_DIR}/src/spec_assert_record.c
+    ${TEST_ASSERT_DIR}/src/spec_assert_reset.c
 )
 
-set(SPEC_ASSERT_HEADERS
-    ${SPEC_ASSERT_DIR}/inc
+set(TEST_ASSERT_HEADERS
+    ${TEST_ASSERT_DIR}/inc
 )
 
 
 # ==============================================================================
 # Create source and header for UTILS
 # ==============================================================================
-set(SPEC_UTILS_DIR
+set(TEST_UTILS_DIR
     ${LIB_PATH}/code/utils
 )
 
-set(SPEC_UTILS_SOURCES
+set(TEST_UTILS_SOURCES
     # Add the path to each source file here
-    ${SPEC_UTILS_DIR}/src/spec_utils_memcmp.c
-    ${SPEC_UTILS_DIR}/src/spec_utils_memcpy.c
-    ${SPEC_UTILS_DIR}/src/spec_utils_memset.c
-    ${SPEC_UTILS_DIR}/src/spec_utils_print_string.c
-    ${SPEC_UTILS_DIR}/src/spec_utils_print_uint.c
+    ${TEST_UTILS_DIR}/src/spec_utils_memcmp.c
+    ${TEST_UTILS_DIR}/src/spec_utils_memcpy.c
+    ${TEST_UTILS_DIR}/src/spec_utils_memset.c
+    ${TEST_UTILS_DIR}/src/spec_utils_print_string.c
+    ${TEST_UTILS_DIR}/src/spec_utils_print_uint.c
 )
 
-set(SPEC_UTILS_HEADERS
-    ${SPEC_UTILS_DIR}/inc
+set(TEST_UTILS_HEADERS
+    ${TEST_UTILS_DIR}/inc
 )
 
 # ==============================================================================
 # Create source and header for RUN
 # ==============================================================================
-set(SPEC_RUN_DIR
+set(TEST_RUN_DIR
     ${LIB_PATH}/code/run
 )
 
-set(SPEC_RUN_SOURCES
+set(TEST_RUN_SOURCES
     # Add the path to each source file here
-    ${SPEC_RUN_DIR}/src/spec_run_entry.S
-    ${SPEC_RUN_DIR}/src/spec_run_suite.c
+    ${TEST_RUN_DIR}/src/spec_run_entry.S
+    ${TEST_RUN_DIR}/src/spec_run_suite.c
 )
 
-set(SPEC_RUN_HEADERS
-    ${SPEC_RUN_DIR}/inc
+set(TEST_RUN_HEADERS
+    ${TEST_RUN_DIR}/inc
 )
 
 # ==============================================================================
-# Create library target for SPEC
+# Create library target for TEST
 # ==============================================================================
-set(LIB_NAME_KRN ${SPEC_LIB_NAME}_krn)
-add_library(${LIB_NAME_KRN}
+add_library(${LIB_NAME}
     STATIC
         # Add the path to each source file here
-        ${SPEC_ASSERT_SOURCES}
-        ${SPEC_UTILS_SOURCES}
-        ${SPEC_RUN_SOURCES}
+        ${TEST_ASSERT_SOURCES}
+        ${TEST_UTILS_SOURCES}
+        ${TEST_RUN_SOURCES}
 )
 # ==============================================================================
 # Add include directories for the library
 # ==============================================================================
-target_include_directories(${LIB_NAME_KRN}
+target_include_directories(${LIB_NAME}
     PRIVATE
         # Add the path to each header directory here
-        ${SPEC_ASSERT_HEADERS}
-        ${SPEC_RUN_HEADERS}
-        ${SPEC_UTILS_HEADERS}
+        ${TEST_ASSERT_HEADERS}
+        ${TEST_RUN_HEADERS}
+        ${TEST_UTILS_HEADERS}
     PUBLIC
         ${LIB_PATH}/inc/krn     # Private headers for kernel implementation
 )
@@ -98,7 +97,7 @@ target_include_directories(${LIB_NAME_KRN}
 # ==============================================================================
 # Add library dependencies
 # ==============================================================================
-target_link_libraries(${LIB_NAME_KRN}
+target_link_libraries(${LIB_NAME}
     PRIVATE
         # Add the path to library of other folder here
         arch.lib_types

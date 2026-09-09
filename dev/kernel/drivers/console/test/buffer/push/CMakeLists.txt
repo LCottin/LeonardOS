@@ -1,46 +1,46 @@
 # ==============================================================================
 # Set the output directory of the library
 # ==============================================================================
-set(BIN_PATH ${ARG1})
-set(BIN_NAME ${ARG2})
+set(SRC_PATH ${SRC_PATH})
+set(TEST_NAME ${TEST_NAME})
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${BIN_TEST_DIR}/${BIN_NAME})
 
 # ==============================================================================
 # Create executable target
 # ==============================================================================
-add_executable(${BIN_NAME}.elf
-    ${KERNEL_DIR}/console/code/buffer/src/console_buffer_push.c
-    ${BIN_PATH}/console_buffer_push.c
-    ${BIN_PATH}/console_buffer_push_tc.c)
+add_executable(${TEST_NAME}.elf
+    ${DRIVERS_PATH}/console/code/buffer/src/console_buffer_push.c
+    ${SRC_PATH}/console_buffer_push.c
+    ${SRC_PATH}/console_buffer_push_tc.c)
 
 # ==============================================================================
 # Add include directories needed by the real source file under test
 # ==============================================================================
-target_include_directories(${BIN_NAME}.elf
+target_include_directories(${TEST_NAME}.elf
     PRIVATE
-        ${KERNEL_DIR}/console/code/ctx/inc
-        ${KERNEL_DIR}/console/code/ctx/src
-        ${KERNEL_DIR}/console/inc/krn
-        ${KERNEL_DIR}/containers/inc/usr
+        ${DRIVERS_PATH}/console/code/ctx/inc
+        ${DRIVERS_PATH}/console/code/ctx/src
+        ${DRIVERS_PATH}/console/inc/krn
+        ${LIBRARIES_PATH}/containers/inc/usr
 )
 
 # ==============================================================================
 # Link with the component libraries
 # ==============================================================================
-target_link_libraries(${BIN_NAME}.elf
+target_link_libraries(${TEST_NAME}.elf
     PRIVATE
         # Add component libraries here
         arch.lib_types
-        ${SPEC_LIB_NAME}_krn
+        libraries.lib_test
 )
 
 # ==============================================================================
 # Set custom linker options, including the generation of the .map file
 # ==============================================================================
-target_link_options(${BIN_NAME}.elf
+target_link_options(${TEST_NAME}.elf
     PRIVATE
         "-T${TEST_LINKER_SCRIPT}"
-        "-Wl,-Map,${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${BIN_NAME}.map"
+        "-Wl,-Map,${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${TEST_NAME}.map"
 )
 
 # ==============================================================================
@@ -48,12 +48,12 @@ target_link_options(${BIN_NAME}.elf
 # ==============================================================================
 add_custom_command(
     TARGET
-    ${BIN_NAME}.elf
+    ${TEST_NAME}.elf
     POST_BUILD
 
     # Generate .elf.stripped file
-    COMMAND ${CMAKE_OBJCOPY} --strip-all $<TARGET_FILE:${BIN_NAME}.elf> ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${BIN_NAME}.elf.stripped
+    COMMAND ${CMAKE_OBJCOPY} --strip-all $<TARGET_FILE:${TEST_NAME}.elf> ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${TEST_NAME}.elf.stripped
 
     # Generate .bin file
-    COMMAND ${CMAKE_OBJCOPY} -O binary $<TARGET_FILE:${BIN_NAME}.elf> ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${BIN_NAME}.bin
+    COMMAND ${CMAKE_OBJCOPY} -O binary $<TARGET_FILE:${TEST_NAME}.elf> ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${BIN_NAME}.bin
 )

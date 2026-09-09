@@ -1,51 +1,51 @@
 # ==============================================================================
 # Set the output directory of the library
 # ==============================================================================
-set(BIN_PATH ${ARG1})
-set(BIN_NAME ${ARG2})
+set(SRC_PATH ${SRC_PATH})
+set(TEST_NAME ${TEST_NAME})
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${BIN_TEST_DIR}/${BIN_NAME})
 
 # ==============================================================================
 # Create executable target
 # ==============================================================================
-add_executable(${BIN_NAME}.elf
-    ${KERNEL_DIR}/syscall/code/handler/src/syscall_manager.c
-    ${BIN_PATH}/syscall_manager.c
-    ${BIN_PATH}/syscall_manager_tc.c)
+add_executable(${TEST_NAME}.elf
+    ${SYSTEM_PATH}/syscall/code/handler/src/syscall_manager.c
+    ${SRC_PATH}/syscall_manager.c
+    ${SRC_PATH}/syscall_manager_tc.c)
 
 # ==============================================================================
 # Add include directories needed by the real source file under test
 # ==============================================================================
-target_include_directories(${BIN_NAME}.elf
+target_include_directories(${TEST_NAME}.elf
     PRIVATE
-        ${KERNEL_DIR}/syscall/inc/krn
-        ${KERNEL_DIR}/syscall/code/handler/src
-        ${KERNEL_DIR}/printer/inc/krn
-        ${KERNEL_DIR}/strings/inc/usr
-        ${KERNEL_DIR}/stream/inc/krn
-        ${KERNEL_DIR}/scheduler/inc/krn
-        ${KERNEL_DIR}/clock/inc/krn
-        ${KERNEL_DIR}/memory_ops/inc/usr
-        ${KERNEL_DIR}/console/inc/krn
+        ${SYSTEM_PATH}/syscall/inc/krn
+        ${SYSTEM_PATH}/syscall/code/handler/src
+        ${SYSTEM_PATH}/printer/inc/krn
+        ${LIBRARIES_PATH}/strings/inc/usr
+        ${LIBRARIES_PATH}/stream/inc/krn
+        ${SYSTEM_PATH}/scheduler/inc/krn
+        ${SYSTEM_PATH}/clock/inc/krn
+        ${MEMORY_PATH}/tools/inc/usr
+        ${DRIVERS_PATH}/console/inc/krn
 )
 
 # ==============================================================================
 # Link with the component libraries
 # ==============================================================================
-target_link_libraries(${BIN_NAME}.elf
+target_link_libraries(${TEST_NAME}.elf
     PRIVATE
         # Add component libraries here
         arch.lib_types
-        ${SPEC_LIB_NAME}_krn
+        libraries.lib_test
 )
 
 # ==============================================================================
 # Set custom linker options, including the generation of the .map file
 # ==============================================================================
-target_link_options(${BIN_NAME}.elf
+target_link_options(${TEST_NAME}.elf
     PRIVATE
         "-T${TEST_LINKER_SCRIPT}"
-        "-Wl,-Map,${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${BIN_NAME}.map"
+        "-Wl,-Map,${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${TEST_NAME}.map"
 )
 
 # ==============================================================================
@@ -53,12 +53,12 @@ target_link_options(${BIN_NAME}.elf
 # ==============================================================================
 add_custom_command(
     TARGET
-    ${BIN_NAME}.elf
+    ${TEST_NAME}.elf
     POST_BUILD
 
     # Generate .elf.stripped file
-    COMMAND ${CMAKE_OBJCOPY} --strip-all $<TARGET_FILE:${BIN_NAME}.elf> ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${BIN_NAME}.elf.stripped
+    COMMAND ${CMAKE_OBJCOPY} --strip-all $<TARGET_FILE:${TEST_NAME}.elf> ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${TEST_NAME}.elf.stripped
 
     # Generate .bin file
-    COMMAND ${CMAKE_OBJCOPY} -O binary $<TARGET_FILE:${BIN_NAME}.elf> ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${BIN_NAME}.bin
+    COMMAND ${CMAKE_OBJCOPY} -O binary $<TARGET_FILE:${TEST_NAME}.elf> ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${BIN_NAME}.bin
 )

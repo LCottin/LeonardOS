@@ -32,3 +32,6 @@ add_subdirectory(${PLATFORM_PATH})
 set(SYSTEM_PREFIX "system")
 set(SYSTEM_PATH   ${KERNEL_DIR}/system)
 add_subdirectory(${SYSTEM_PATH})
+
+### Build tests ###
+include(tests.cmake)
