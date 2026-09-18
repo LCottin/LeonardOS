@@ -99,4 +99,13 @@ extern void printer_print_formatted(const char *format, ...);
 extern stream_t *printer_stream_get(void);
 
 
+/**********************************************************************
+ * @brief Prints LeonardOS logo to the console.
+ *
+ * @param None.
+ * @return None.
+ **********************************************************************/
+extern void printer_print_logo(void);
+
+
 #endif /* __PRINTER_KRN_H__ */

@@ -16,6 +16,7 @@ set(PRINTER_PRINT_SOURCES
     ${PRINTER_PRINT_DIR}/src/printer_print_address.c
     ${PRINTER_PRINT_DIR}/src/printer_print_char.c
     ${PRINTER_PRINT_DIR}/src/printer_print_formatted.c
+    ${PRINTER_PRINT_DIR}/src/printer_print_logo.c
     ${PRINTER_PRINT_DIR}/src/printer_print_signed.c
     ${PRINTER_PRINT_DIR}/src/printer_print_unsigned.c
     ${PRINTER_PRINT_DIR}/src/printer_print_long_signed.c
