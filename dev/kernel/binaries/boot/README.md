@@ -1,1 +1,1 @@
-# This element intends to boot the OS.
+# Generation of binary boot_bin

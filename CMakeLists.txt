@@ -102,7 +102,9 @@ function(build_arch ARCH_PATH ARCH_NAME)
 endfunction()
 
 # Custom function to build a binary
-function(build_binary BIN_PATH)
+function(build_binary BIN_PATH BIN_NAME)
+    set(BIN_PATH ${BIN_PATH} PARENT_SCOPE)
+    set(BIN_NAME ${BIN_NAME} PARENT_SCOPE)
     add_subdirectory(${BIN_PATH})
 endfunction()
 

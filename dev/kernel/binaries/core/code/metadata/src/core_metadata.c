@@ -1,7 +1,7 @@
 #include "metadata_usr.h"
 
 __attribute__((section(".metadata"), used))
-static const metadata_t g_metadata =
+static const metadata_t g_core_metadata =
 {
     .header =
     {

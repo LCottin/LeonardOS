@@ -1,1 +1,1 @@
-# This element intends to provide the core of the OS.
+# Generation of binary core_bin
