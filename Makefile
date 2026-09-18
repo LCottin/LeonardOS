@@ -1,8 +1,9 @@
 # Compiler and build settings
-ROOT_DIR  = $(shell pwd)
-BUILD_DIR = $(ROOT_DIR)/build
-DEBUG_DIR = $(ROOT_DIR)/debug
-TOOLS_DIR = $(ROOT_DIR)/tools
+ROOT_DIR      = $(shell pwd)
+BUILD_DIR     = $(ROOT_DIR)/build
+BUILD_BIN_DIR = $(BUILD_DIR)/bin
+DEBUG_DIR     = $(ROOT_DIR)/debug
+TOOLS_DIR     = $(ROOT_DIR)/tools
 VERBOSE?=0
 
 # Binary names
@@ -12,8 +13,8 @@ HELLO_WORLD_ELF_NAME = hello_world
 COUNT_DOWN_ELF_NAME  = count_down
 SHELL_ELF_NAME       = shell
 
-BIN_DEV_DIR         = $(BUILD_DIR)/bin/dev
-BIN_TESTS_DIR       = $(BUILD_DIR)/bin/test
+BIN_DEV_DIR         = $(BUILD_BIN_DIR)/dev
+BIN_TESTS_DIR       = $(BUILD_BIN_DIR)/test
 BOOT_ELF_DIR        = $(BIN_DEV_DIR)/$(BOOT_ELF_NAME)/$(BOOT_ELF_NAME).elf
 CORE_ELF_DIR        = $(BIN_DEV_DIR)/$(CORE_ELF_NAME)/$(CORE_ELF_NAME).elf
 HELLO_WORLD_ELF_DIR = $(BIN_DEV_DIR)/$(HELLO_WORLD_ELF_NAME)/$(HELLO_WORLD_ELF_NAME).elf
@@ -53,8 +54,8 @@ check_qemu:
 .PHONY: prepare
 prepare:
 	@echo "Configuring project in $(ROOT_DIR)..."
-	@mkdir -p $(BUILD_DIR)
-	@cmake -S . -B $(BUILD_DIR)
+	@mkdir -p $(BUILD_BIN_DIR)
+	@cmake -S . -B $(BUILD_DIR) -DLEONARDOS_PTF=virt
 	@make memory_mapping
 	@rm -f $(PRE_OS_IMG)
 	@dd if=/dev/zero of=$(PRE_OS_IMG) bs=1024 count=16384

@@ -20,11 +20,35 @@ ENDIF(CMAKE_HOST_SYSTEM_NAME MATCHES "Linux")
 message("-- OS: ${VAR_OS}")
 
 # Minimum CMake version required
-cmake_minimum_required(VERSION 3.13)
+cmake_minimum_required(VERSION 3.15)
 
-# Set the target architecture
-set(CMAKE_SYSTEM_NAME      Generic)
-set(CMAKE_SYSTEM_PROCESSOR aarch64)
+# Set platform used for cross-compilation
+set(LEONARDOS_PTF "virt" CACHE STRING "Target platform")
+set_property(CACHE LEONARDOS_PTF PROPERTY STRINGS
+    "virt"
+)
+
+if (LEONARDOS_PTF STREQUAL "virt")
+    # Set the architecture and processor for cross-compilation
+    set(LEONARDOS_ARCH "aarch64")
+
+    set(CMAKE_SYSTEM_NAME      Generic)
+    set(CMAKE_SYSTEM_PROCESSOR ${LEONARDOS_ARCH})
+    set(CMAKE_LINKER           aarch64-none-elf-ld)
+    set(CMAKE_AR               aarch64-none-elf-ar)
+    set(CMAKE_RANLIB           aarch64-none-elf-ranlib)
+
+    find_program(CMAKE_OBJCOPY aarch64-none-elf-objcopy REQUIRED)
+
+    set(PTF_COMPILATION_FLAGS
+        "   -target aarch64-none-elf        \
+            -march=armv8-a                  \
+            -mtune=cortex-a53               \
+            -mlittle-endian"
+    )
+else()
+    message(FATAL_ERROR "Unsupported platform: ${LEONARDOS_PTF}")
+endif()
 
 # Specify the cross-compiler tools
 set(CMAKE_ASM_COMPILER clang)
@@ -33,14 +57,10 @@ set(CMAKE_C_COMPILER   clang)
 set(CMAKE_TRY_COMPILE_TARGET_TYPE STATIC_LIBRARY)
 
 # Specify the flags for Clang
-set(COMMON_COMPILATION_FLAG
-    "   -target aarch64-none-elf        \
-        -Wall                           \
+set(COMMON_COMPILATION_FLAGS
+    "   -Wall                           \
         -Wextra                         \
         -g                              \
-        -march=armv8-a                  \
-        -mtune=cortex-a53               \
-        -mlittle-endian                 \
         -mgeneral-regs-only             \
         -Wnested-externs                \
         -Wmissing-prototypes            \
@@ -56,10 +76,12 @@ set(COMMON_COMPILATION_FLAG
         -Wpadded"
 )
 set(CMAKE_ASM_FLAGS
-    "   ${COMMON_COMPILATION_FLAG}"
+    "   ${PTF_COMPILATION_FLAGS}        \
+        ${COMMON_COMPILATION_FLAGS}"
 )
 set(CMAKE_C_FLAGS
-    "   ${COMMON_COMPILATION_FLAG}      \
+    "   ${PTF_COMPILATION_FLAGS}        \
+        ${COMMON_COMPILATION_FLAGS}     \
         -std=c17                        \
         -ffreestanding                  \
         -nostdlib                       \
@@ -71,32 +93,54 @@ set(CMAKE_C_FLAGS
         -fno-delete-null-pointer-checks"
 )
 
-# Specify the linker
-set(CMAKE_LINKER aarch64-none-elf-ld)
-
-# Use the appropriate archiver and ranlib for ARM64
-set(CMAKE_AR aarch64-none-elf-ar)
-set(CMAKE_RANLIB aarch64-none-elf-ranlib)
-
-# Output directory for binaries
-set(BIN_DIR      ${CMAKE_BINARY_DIR}/bin)
-set(BIN_DEV_DIR  ${BIN_DIR}/dev)
-set(BIN_TEST_DIR ${BIN_DIR}/test)
-
-# Find tool to convert elf to binary
-find_program(CMAKE_OBJCOPY aarch64-none-elf-objcopy REQUIRED)
-
-# Custom function to pass arguments to subdirectories
-function(add_subdirectory_custom DIR ARG)
-    set(ARG ${ARG} PARENT_SCOPE)
-    add_subdirectory(${DIR})
+# Custom function to build an architecture
+function(build_arch ARCH_PATH ARCH_NAME)
+    set(ARCH_PATH ${ARCH_PATH} PARENT_SCOPE)
+    set(ARCH_NAME ${ARCH_NAME} PARENT_SCOPE)
+    add_subdirectory(${ARCH_PATH})
 endfunction()
 
-# Custom function to pass arguments to subdirectories
-function(add_subdirectory_custom_test DIR ARG1 ARG2)
-    set(ARG1 ${ARG1} PARENT_SCOPE)
-    set(ARG2 ${ARG2} PARENT_SCOPE)
-    add_subdirectory(${DIR})
+# Custom function to build a binary
+function(build_binary BIN_PATH BIN_NAME)
+    set(BIN_PATH ${BIN_PATH} PARENT_SCOPE)
+    set(BIN_NAME ${BIN_NAME} PARENT_SCOPE)
+    add_subdirectory(${BIN_PATH})
+endfunction()
+
+# Custom function to build a driver
+function(build_driver DRV_PATH DRV_NAME)
+    set(DRV_PATH ${DRV_PATH} PARENT_SCOPE)
+    set(DRV_NAME ${DRV_NAME} PARENT_SCOPE)
+    add_subdirectory(${DRV_PATH})
+endfunction()
+
+# Custom function to build a library
+function(build_library LIB_PATH LIB_NAME)
+    set(LIB_PATH ${LIB_PATH} PARENT_SCOPE)
+    set(LIB_NAME ${LIB_NAME} PARENT_SCOPE)
+    add_subdirectory(${LIB_PATH})
+endfunction()
+
+# Custom function to build a memory module
+function(build_memory MEM_PATH MEM_NAME)
+    set(MEM_PATH ${MEM_PATH} PARENT_SCOPE)
+    set(MEM_NAME ${MEM_NAME} PARENT_SCOPE)
+    add_subdirectory(${MEM_PATH})
+endfunction()
+
+# Custom function to build a system
+function(build_system SYS_PATH SYS_NAME)
+    set(SYS_PATH ${SYS_PATH} PARENT_SCOPE)
+    set(SYS_NAME ${SYS_NAME} PARENT_SCOPE)
+    add_subdirectory(${SYS_PATH})
+endfunction()
+
+# Custom function to build a test binary
+function(build_test TEST_PATH SRC_PATH TEST_NAME)
+    set(TEST_PATH ${TEST_PATH} PARENT_SCOPE)
+    set(SRC_PATH  ${SRC_PATH}  PARENT_SCOPE)
+    set(TEST_NAME ${TEST_NAME} PARENT_SCOPE)
+    add_subdirectory(${TEST_PATH})
 endfunction()
 
 # Project name and version
@@ -104,9 +148,10 @@ project(LeonardOS LANGUAGES ASM C)
 
     enable_language(ASM)
 
-    # Define library names shared for test and OS
-    set (TYPES_LIB_NAME   "_types")
-    set (LIBUSER_LIB_NAME "_libuser")
+    # Output directory for binaries
+    set(BIN_DIR      ${CMAKE_BINARY_DIR}/bin)
+    set(BIN_DEV_DIR  ${BIN_DIR}/dev)
+    set(BIN_TEST_DIR ${BIN_DIR}/test)
 
     # Define directories
     set(DEV_DIR ${CMAKE_SOURCE_DIR}/dev)

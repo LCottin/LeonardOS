@@ -1,129 +1,32 @@
-# Define each component
-set(COMPONENTS_DIR
-    # Add the path to each component here
-    "console"
-    "formatter"
-    "irq"
-    "gic"
-    "seh"
-    "printer"
-    "scheduler"
-    "pcb"
-    "elf"
-    "libuser"
-    "syscall"
-    "boot"
-    "memory"
-    "memory_ops"
-    "strings"
-    "containers"
-    "uart"
-    "mmio"
-    "fpu"
-    "core"
-    "clock"
-    "bmt"
-)
+### Build arch ###
+set(ARCHITECTURE_PREFIX "arch")
+set(ARCHITECTURE_PATH   ${KERNEL_DIR}/arch)
+add_subdirectory(${ARCHITECTURE_PATH})
 
-# Define each library
-set(LIBRARIES_DIR
-    # Add the path to each library here
-    "types"
-    "stream"
-    "metadata"
-)
+### Build drivers ###
+set(DRIVERS_PREFIX "drivers")
+set(DRIVERS_PATH   ${KERNEL_DIR}/drivers)
+add_subdirectory(${DRIVERS_PATH})
 
-# Define each binary
-set (BINARIES_DIR
-    "boot_bin"
-    "core_bin"
-)
+### Build libraries ###
+set(LIBRARIES_PREFIX "libraries")
+set(LIBRARIES_PATH   ${KERNEL_DIR}/libraries)
+add_subdirectory(${LIBRARIES_PATH})
 
-# Each entry is "source/path:bin_name" (colon-separated).
-set(TESTS_DIR
-    "memory_ops/test/utils/copy:memory_ops_utils_copy"
-    "memory_ops/test/utils/set:memory_ops_utils_set"
-    "memory_ops/test/utils/cmp:memory_ops_utils_cmp"
-    "mmio/test/io8/clear_bit:mmio_io8_clear_bit"
-    "mmio/test/io8/read:mmio_io8_read"
-    "mmio/test/io8/set_bit:mmio_io8_set_bit"
-    "mmio/test/io8/toggle_bit:mmio_io8_toggle_bit"
-    "mmio/test/io8/write:mmio_io8_write"
-    "mmio/test/io16/clear_bit:mmio_io16_clear_bit"
-    "mmio/test/io16/read:mmio_io16_read"
-    "mmio/test/io16/set_bit:mmio_io16_set_bit"
-    "mmio/test/io16/toggle_bit:mmio_io16_toggle_bit"
-    "mmio/test/io16/write:mmio_io16_write"
-    "mmio/test/io32/clear_bit:mmio_io32_clear_bit"
-    "mmio/test/io32/read:mmio_io32_read"
-    "mmio/test/io32/set_bit:mmio_io32_set_bit"
-    "mmio/test/io32/toggle_bit:mmio_io32_toggle_bit"
-    "mmio/test/io32/write:mmio_io32_write"
-    "mmio/test/io64/clear_bit:mmio_io64_clear_bit"
-    "mmio/test/io64/read:mmio_io64_read"
-    "mmio/test/io64/set_bit:mmio_io64_set_bit"
-    "mmio/test/io64/toggle_bit:mmio_io64_toggle_bit"
-    "mmio/test/io64/write:mmio_io64_write"
-    "printer/test/print/print_string:printer_print_string"
-    "uart/test/write/write_byte:uart_write_byte"
-    "uart/test/read/read_byte:uart_read_byte"
-    "uart/test/ctx/ctx_init:uart_ctx_init"
-    "containers/test/ring_buffer/init:containers_ring_buffer_init"
-    "containers/test/ring_buffer/is_empty:containers_ring_buffer_is_empty"
-    "containers/test/ring_buffer/pop:containers_ring_buffer_pop"
-    "containers/test/ring_buffer/push:containers_ring_buffer_push"
-    "console/test/buffer/is_empty:console_buffer_is_empty"
-    "console/test/buffer/pop:console_buffer_pop"
-    "console/test/buffer/push:console_buffer_push"
-    "console/test/ctx/ctx_init:console_ctx_init"
-    "console/test/irq/irq_rx:console_irq_rx"
-    "syscall/test/handler/syscall_manager:syscall_manager"
-)
+### Build memory ###
+set(MEMORY_PREFIX "memory")
+set(MEMORY_PATH   ${KERNEL_DIR}/memory)
+add_subdirectory(${MEMORY_PATH})
 
-# ==============================================================================
-# Compile libraries
-# ==============================================================================
-foreach(LIBRARY_DIR ${LIBRARIES_DIR})
-    add_subdirectory_custom(${KERNEL_DIR}/${LIBRARY_DIR} ${CMAKE_CURRENT_SOURCE_DIR}/${LIBRARY_DIR})
-endforeach()
+### Build platform ###
+set(PLATFORM_PREFIX "platform")
+set(PLATFORM_PATH   ${KERNEL_DIR}/platform)
+add_subdirectory(${PLATFORM_PATH})
 
-# ==============================================================================
-# Compile components
-# ==============================================================================
-foreach(COMPONENT_DIR ${COMPONENTS_DIR})
-    add_subdirectory_custom(${KERNEL_DIR}/${COMPONENT_DIR}/code ${CMAKE_CURRENT_SOURCE_DIR}/${COMPONENT_DIR})
-endforeach()
+### Build system ###
+set(SYSTEM_PREFIX "system")
+set(SYSTEM_PATH   ${KERNEL_DIR}/system)
+add_subdirectory(${SYSTEM_PATH})
 
-# ==============================================================================
-# Compile binaries
-# ==============================================================================
-foreach(BINARY_DIR ${BINARIES_DIR})
-    add_subdirectory(${KERNEL_DIR}/${BINARY_DIR})
-endforeach()
-
-# ==============================================================================
-# Compile each test.
-# Split "source/path:bin_name" on the colon to get both parts independently.
-# ==============================================================================
-
-set(TEST_LINKER_SCRIPT ${KERNEL_DIR}/spec/linker.ld)
-add_subdirectory_custom(${KERNEL_DIR}/spec/code ${CMAKE_CURRENT_SOURCE_DIR}/spec)
-
-foreach(TEST_ENTRY ${TESTS_DIR})
-    string(REPLACE ":" ";" TEST_PARTS ${TEST_ENTRY})
-    list(GET TEST_PARTS 0 TEST_SRC_PATH)
-    list(GET TEST_PARTS 1 BIN_NAME)
-
-    # add_subdirectory_custom_test(relative_path, absolute_source_path, bin_name)
-    add_subdirectory_custom_test(${TEST_SRC_PATH} ${KERNEL_DIR}/${TEST_SRC_PATH} ${BIN_NAME})
-
-    set_property(GLOBAL APPEND PROPERTY ALL_TESTS ${BIN_NAME}.elf)
-endforeach()
-
-# ==============================================================================
-# Aggregate target: build every test with "cmake --build . --target tests"
-# ==============================================================================
-get_property(ALL_TESTS GLOBAL PROPERTY ALL_TESTS)
-if(ALL_TESTS)
-    add_custom_target(tests DEPENDS ${ALL_TESTS})
-endif()
+### Build tests ###
+include(tests.cmake)
