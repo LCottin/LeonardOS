@@ -22,32 +22,33 @@ message("-- OS: ${VAR_OS}")
 # Minimum CMake version required
 cmake_minimum_required(VERSION 3.15)
 
-# Set architecture used for cross-compilation
-set(LEONARDOS_ARCH aarch64 CACHE STRING "Target architecture")
-set_property(CACHE LEONARDOS_ARCH PROPERTY STRINGS
-    "aarch64"
+# Set platform used for cross-compilation
+set(LEONARDOS_PTF "virt" CACHE STRING "Target platform")
+set_property(CACHE LEONARDOS_PTF PROPERTY STRINGS
+    "virt"
 )
 
-if(LEONARDOS_ARCH STREQUAL "aarch64")
+if (LEONARDOS_PTF STREQUAL "virt")
     # Set the architecture and processor for cross-compilation
+    set(LEONARDOS_ARCH "aarch64")
+
     set(CMAKE_SYSTEM_NAME      Generic)
-    set(CMAKE_SYSTEM_PROCESSOR aarch64)
+    set(CMAKE_SYSTEM_PROCESSOR ${LEONARDOS_ARCH})
     set(CMAKE_LINKER           aarch64-none-elf-ld)
     set(CMAKE_AR               aarch64-none-elf-ar)
     set(CMAKE_RANLIB           aarch64-none-elf-ranlib)
 
     find_program(CMAKE_OBJCOPY aarch64-none-elf-objcopy REQUIRED)
-else()
-    message(
-        FATAL_ERROR
-        "Unsupported architecture: ${LEONARDOS_ARCH}")
-endif()
 
-# Set platform used for cross-compilation
-set(LEONARDOS_PTF "" CACHE STRING "Target platform")
-set_property(CACHE LEONARDOS_PTF PROPERTY STRINGS
-    ""
-)
+    set(PTF_COMPILATION_FLAGS
+        "   -target aarch64-none-elf        \
+            -march=armv8-a                  \
+            -mtune=cortex-a53               \
+            -mlittle-endian"
+    )
+else()
+    message(FATAL_ERROR "Unsupported platform: ${LEONARDOS_PTF}")
+endif()
 
 # Specify the cross-compiler tools
 set(CMAKE_ASM_COMPILER clang)
@@ -56,14 +57,10 @@ set(CMAKE_C_COMPILER   clang)
 set(CMAKE_TRY_COMPILE_TARGET_TYPE STATIC_LIBRARY)
 
 # Specify the flags for Clang
-set(COMMON_COMPILATION_FLAG
-    "   -target aarch64-none-elf        \
-        -Wall                           \
+set(COMMON_COMPILATION_FLAGS
+    "   -Wall                           \
         -Wextra                         \
         -g                              \
-        -march=armv8-a                  \
-        -mtune=cortex-a53               \
-        -mlittle-endian                 \
         -mgeneral-regs-only             \
         -Wnested-externs                \
         -Wmissing-prototypes            \
@@ -79,10 +76,12 @@ set(COMMON_COMPILATION_FLAG
         -Wpadded"
 )
 set(CMAKE_ASM_FLAGS
-    "   ${COMMON_COMPILATION_FLAG}"
+    "   ${PTF_COMPILATION_FLAGS}        \
+        ${COMMON_COMPILATION_FLAGS}"
 )
 set(CMAKE_C_FLAGS
-    "   ${COMMON_COMPILATION_FLAG}      \
+    "   ${PTF_COMPILATION_FLAGS}        \
+        ${COMMON_COMPILATION_FLAGS}     \
         -std=c17                        \
         -ffreestanding                  \
         -nostdlib                       \

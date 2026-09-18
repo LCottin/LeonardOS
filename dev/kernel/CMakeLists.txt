@@ -3,11 +3,6 @@ set(ARCHITECTURE_PREFIX "arch")
 set(ARCHITECTURE_PATH   ${KERNEL_DIR}/arch)
 add_subdirectory(${ARCHITECTURE_PATH})
 
-### Build binaries ###
-set(BINARIES_PREFIX "binaries")
-set(BINARIES_PATH   ${KERNEL_DIR}/binaries)
-add_subdirectory(${BINARIES_PATH})
-
 ### Build drivers ###
 set(DRIVERS_PREFIX "drivers")
 set(DRIVERS_PATH   ${KERNEL_DIR}/drivers)
@@ -25,7 +20,7 @@ add_subdirectory(${MEMORY_PATH})
 
 ### Build platform ###
 set(PLATFORM_PREFIX "platform")
-set(PLATFORM_PATH   ${KERNEL_DIR}/platform/${LEONARDOS_PTF})
+set(PLATFORM_PATH   ${KERNEL_DIR}/platform)
 add_subdirectory(${PLATFORM_PATH})
 
 ### Build system ###

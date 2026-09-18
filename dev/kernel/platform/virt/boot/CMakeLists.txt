@@ -36,6 +36,7 @@ set(BOOT_MAIN_DIR
 set(BOOT_MAIN_SOURCES
     # Add the path to each source file here
     ${BOOT_MAIN_DIR}/src/boot_main.c
+    ${BOOT_MAIN_DIR}/src/boot_entry.S
 )
 
 set(BOOT_MAIN_HEADERS
@@ -100,6 +101,7 @@ target_link_libraries(${BIN_NAME}.elf
 target_link_options(${BIN_NAME}.elf
     PRIVATE
         "-T${LINKER_SCRIPT}"
+        "-L${PLATFORM_PATH}/common"
         "-Wl,--print-memory-usage,-Map,${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${BIN_NAME}.map"
 )
 

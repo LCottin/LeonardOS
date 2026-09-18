@@ -14,7 +14,6 @@ set(ARCH_ENTRY_DIR
 set(ARCH_ENTRY_SOURCES
     # Add the path to each source file here
     ${ARCH_ENTRY_DIR}/src/arch_entry_launch_kernel.S
-    ${ARCH_ENTRY_DIR}/src/arch_entry.S
 )
 
 set(ARCH_ENTRY_HEADERS

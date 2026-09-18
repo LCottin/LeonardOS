@@ -1,14 +1,14 @@
-# Define binaries name
-set (BINARY_LIST
-    "core"
+# Define each platform
+set(PTF_LIST
     "boot"
+    "core"
 )
 
 # ==============================================================================
-# Compile system modules
+# Compile platforms
 # ==============================================================================
-foreach(BINARY_NAME ${BINARY_LIST})
+foreach(PTF_NAME ${PTF_LIST})
     build_binary(
-        ${BINARIES_PATH}/${BINARY_NAME}
-        ${BINARY_NAME}_bin)
+        ${PLATFORM_PATH}/${LEONARDOS_PTF}/${PTF_NAME}
+        ${PTF_NAME}_bin)
 endforeach()

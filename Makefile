@@ -55,7 +55,7 @@ check_qemu:
 prepare:
 	@echo "Configuring project in $(ROOT_DIR)..."
 	@mkdir -p $(BUILD_BIN_DIR)
-	@cmake -S . -B $(BUILD_DIR) -DLEONARDOS_ARCH=aarch64
+	@cmake -S . -B $(BUILD_DIR) -DLEONARDOS_PTF=virt
 	@make memory_mapping
 	@rm -f $(PRE_OS_IMG)
 	@dd if=/dev/zero of=$(PRE_OS_IMG) bs=1024 count=16384

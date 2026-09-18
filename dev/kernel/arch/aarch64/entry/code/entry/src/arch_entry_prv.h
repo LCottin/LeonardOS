@@ -6,7 +6,6 @@
 /**********************************************************************
  * @brief Symbols from linker script
  **********************************************************************/
-extern addr_t __stack_top;
 extern addr_t __bmt_start;
 extern addr_t __sch_start;
 

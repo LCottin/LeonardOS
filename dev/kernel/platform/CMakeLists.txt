@@ -1,12 +1,14 @@
-# Define each platform
-set(PTF_LIST
-)
+# Build common interface then build platform specific libraries
 
 # ==============================================================================
-# Compile platforms
+# Compile common interface library
 # ==============================================================================
-foreach(PTF_NAME ${PTF_LIST})
-    build_platform(
-        ${PLATFORM_PATH}/${PTF_NAME}
-        ${PLATFORM_PREFIX}.lib_${PTF_NAME})
-endforeach()
+# build_library(
+#     ${PLATFORM_PATH}/common
+#     ptf.lib_cmn)
+
+# ==============================================================================
+# Compile platform specific libraries
+# ==============================================================================
+add_subdirectory(${LEONARDOS_PTF})
+
