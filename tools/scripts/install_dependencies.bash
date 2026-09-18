@@ -1,10 +1,10 @@
 #!/bin/bash
 
 # Dependencies for Debian/Ubuntu
-declare -a DEBIAN_DEPENDENCIES=("clang" "llvm" "lld" build-essential" "gcc-aarch64-linux-gnu" "qemu-system-arm")
+declare -a DEBIAN_DEPENDENCIES=("clang" "llvm" "lld" "build-essential" "gcc-aarch64-linux-gnu" "qemu-system-arm")
 
 # Dependencies for Fedora
-declare -a FEDORA_DEPENDENCIES=("clang" "llvm" "lld" gcc-c++" "aarch64-linux-gnu-gcc" "qemu-system-arm")
+declare -a FEDORA_DEPENDENCIES=("clang" "llvm" "lld" "gcc-c++" "aarch64-linux-gnu-gcc" "qemu-system-arm")
 
 # Dependencies for macOS
 declare -a MACOS_DEPENDENCIES=("llvm" "lld" "gcc-arm-none-eabi" "qemu")
