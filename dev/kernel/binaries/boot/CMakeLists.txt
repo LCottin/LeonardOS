@@ -19,7 +19,7 @@ set(BOOT_MEMORY_DIR
 
 set(BOOT_MEMORY_SOURCES
     # Add the path to each source file here
-    ${BOOT_MEMORY_DIR}/src/boot_memory_parse.S
+    ${BOOT_MEMORY_DIR}/src/boot_memory_parse.c
 )
 
 set(BOOT_MEMORY_HEADERS
@@ -35,7 +35,7 @@ set(BOOT_MAIN_DIR
 
 set(BOOT_MAIN_SOURCES
     # Add the path to each source file here
-    ${BOOT_MAIN_DIR}/src/boot_main.S
+    ${BOOT_MAIN_DIR}/src/boot_main.c
 )
 
 set(BOOT_MAIN_HEADERS
@@ -68,14 +68,29 @@ add_executable(${BIN_NAME}.elf
 )
 
 # ==============================================================================
-# Add library kernel dependencies
+# Add binary include directories
+# ==============================================================================
+target_include_directories(${BIN_NAME}.elf
+    PRIVATE
+        ${BOOT_MEMORY_HEADERS}
+        ${BOOT_MAIN_HEADERS}
+        ${BOOT_METADATA_HEADERS}
+)
+
+# ==============================================================================
+# Add binary dependencies
 # ==============================================================================
 target_link_libraries(${BIN_NAME}.elf
     PRIVATE
         # Add the path to library of other folder here
+        arch.lib_cmn
+        arch.lib_entry
         arch.lib_types
         libraries.lib_metadata
+        libraries.lib_stream
+        libraries.lib_strings
         system.lib_bmt
+        system.lib_elf
         system.lib_printer
 )
 

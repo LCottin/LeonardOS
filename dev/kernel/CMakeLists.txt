@@ -1,6 +1,6 @@
 ### Build arch ###
 set(ARCHITECTURE_PREFIX "arch")
-set(ARCHITECTURE_PATH   ${KERNEL_DIR}/arch/${LEONARDOS_ARCH})
+set(ARCHITECTURE_PATH   ${KERNEL_DIR}/arch)
 add_subdirectory(${ARCHITECTURE_PATH})
 
 ### Build binaries ###

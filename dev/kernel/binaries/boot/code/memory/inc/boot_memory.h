@@ -1,8 +1,6 @@
 #ifndef __BOOT_MEMORY_H__
 #define __BOOT_MEMORY_H__
 
-#include "types_usr.h"
-
 /**********************************************************************
  * @brief Parses memory to find ELF binaries.
  *

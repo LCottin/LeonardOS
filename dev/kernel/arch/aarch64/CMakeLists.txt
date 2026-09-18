@@ -1,5 +1,6 @@
 # Define each architecture
 set(ARCH_LIST
+    "entry"
     "fpu"
     "irq"
     "seh"
@@ -7,7 +8,7 @@ set(ARCH_LIST
 
 # Build types library, library dependant on architecture
 build_library(
-    ${ARCHITECTURE_PATH}/types
+    ${ARCHITECTURE_PATH}/${LEONARDOS_ARCH}/types
     arch.lib_types)
 
 # ==============================================================================
@@ -15,6 +16,6 @@ build_library(
 # ==============================================================================
 foreach(ARCH_NAME ${ARCH_LIST})
     build_arch(
-        ${ARCHITECTURE_PATH}/${ARCH_NAME}
+        ${ARCHITECTURE_PATH}/${LEONARDOS_ARCH}/${ARCH_NAME}
         ${ARCHITECTURE_PREFIX}.lib_${ARCH_NAME})
 endforeach()

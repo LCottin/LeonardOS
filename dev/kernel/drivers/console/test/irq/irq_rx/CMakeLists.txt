@@ -30,6 +30,7 @@ target_link_libraries(${TEST_NAME}.elf
     PRIVATE
         # Add component libraries here
         arch.lib_types
+        arch.lib_irq
         libraries.lib_test
 )
 
