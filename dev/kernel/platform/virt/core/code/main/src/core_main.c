@@ -28,6 +28,7 @@ void _core_main_entry(const addr_t bmt_start_addr, const addr_t sch_start_addr)
     uart_ctx_init();
     console_ctx_init();
     printer_print_string("\r\n[KERN] Hello World!\r\n");
+    printer_print_logo();
 
     irq_core_register(0, &irq_handler_0);
     gic_sgi_send(0);
